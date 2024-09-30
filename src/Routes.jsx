@@ -124,6 +124,7 @@ import {
 import ProductDetails from 
 "./pages/In_House_Product/ProductDetail.jsx";
  import OrderDetails from "./pages/Order/OrderDeatiels.jsx"
+import InhouseProductUpdate from "./pages/In_House_Product/AddProduct/InhouseProductUpdate.jsx";
 
 function AllRoutes() {
 
@@ -180,7 +181,7 @@ function AllRoutes() {
                     element={<GenerateBarcode />}
                   />
                   <Route
-                    path="/inhouseproductlistproduct"
+                    path="/inhouseprod  uctlistproduct"
                     element={<InhouseProductBtn />}
                   />
                   <Route
@@ -209,6 +210,9 @@ function AllRoutes() {
                     path="/inhouseaddproduct"
                     element={<AddNewProductComponent />}
                   />
+                  <Route path="/product/:id" 
+                  element={<InhouseProductUpdate />} />
+
                   <Route path="/creview" element={<CustomerReviews />} />
                   <Route path="/customerlist" element={<CustomerList />} />
                   <Route

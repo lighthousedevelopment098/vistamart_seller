@@ -66,15 +66,15 @@ function App() {
               </main>
             </div>
           </>
-        ) : (
+         ) : (
           <Routes>
           <Route path="/login" element={<LoginPage />} />
           <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
-        )}
+        )} 
       </div>
     </Router>
   );
-}
+}``
 
 export default App;

@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 // API Endpoints
-const API_URL = 'http://localhost:3000/api/brands';
+const API_URL = 'https://lionfish-app-tdhk5.ondigitalocean.app/api/brands';
 
 // Fetch brands
 export const fetchBrands = createAsyncThunk(

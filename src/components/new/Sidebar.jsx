@@ -236,13 +236,13 @@ const Sidebar = ({ setComponent }) => {
         <span className="">Dashboard</span>
       </Link>
       {/* //POS------------------------- */}
-      <Link
+      {/* <Link
         to="/pos"
         className="block w-full text-left p-2 rounded hover:bg-[#52c970] text-white hover:text-white mb-3 "
         style={{ color: "white" }}
       >
         <MdShoppingBag className="inline-block mr-2" /> POS
-      </Link>
+      </Link> */}
       {/* order management */}
       <div className="mt-4">
         <small className="block text-gray-400 uppercase font-serif">

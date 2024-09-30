@@ -31,7 +31,7 @@ const Footer = () => {
             </Link>
           </div>
           <h1
-            className="bg-[#2ce7f5]  border rounded  text-[#3ac7ce]"
+            className="  border rounded  text-[#3ac7ce]"
             style={{ color: "#" }}
           >
             Software version:14:7

@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 const InHouseProductPage = () => {
   const { user } = useSelector(state => state.auth);
   const userId = user?._id || ''; // Fallback to an empty string if userId is undefined
-  console.log("user id ============", userId)
+  // console.log("user id ============", userId)
   return (
     <InHouseProductList
       initialTitle="Vendor All Products"

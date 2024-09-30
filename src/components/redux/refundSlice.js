@@ -8,7 +8,7 @@ import axios from 'axios';
 export const fetchRefundsForVendor = createAsyncThunk(
   'refund/fetchRefundsForVendor',
   async (vendorId) => {
-    const response = await axios.get(`http://localhost:3000/api/refunds/vendor/?vendorId=${vendorId}`);
+    const response = await axios.get(`https://lionfish-app-tdhk5.ondigitalocean.app/api/refunds/vendor/?vendorId=${vendorId}`);
     return response.data.docs;
   }
 );
@@ -19,7 +19,7 @@ export const fetchRefundsForVendorByStatus = createAsyncThunk(
   async ({ status }) => {
     const response = await 
     axios.get
-    (`http://localhost:3000/api/refunds/?status=${status}`);
+    (`https://lionfish-app-tdhk5.ondigitalocean.app/api/refunds/?status=${status}`);
     return response.data.docs;
   }
 );
@@ -28,7 +28,7 @@ export const fetchRefundsForVendorByStatus = createAsyncThunk(
 export const fetchRefundByIdForVendor = createAsyncThunk(
   'refund/fetchRefundByIdForVendor',
   async (refundId) => {
-    const response = await axios.get(`http://localhost:3000/api/refunds/${refundId}`);
+    const response = await axios.get(`https://lionfish-app-tdhk5.ondigitalocean.app/api/refunds/${refundId}`);
     return response.data.docs;
   }
 );
@@ -38,7 +38,7 @@ export const updateRefundStatus = createAsyncThunk(
   'refund/updateRefundStatus',
   async ({ refundId, status, statusReason }) => {
     const response = await axios.put(
-      `http://localhost:3000/api/refunds/${refundId}/status`,
+      `https://lionfish-app-tdhk5.ondigitalocean.app/api/refunds/${refundId}/status`,
       { status, statusReason }
     );
     return { refundId, status, statusReason };
@@ -50,7 +50,7 @@ export const updateRefundStatus = createAsyncThunk(
 export const deleteRefund = createAsyncThunk(
   'refund/deleteRefund',
   async (refundId) => {
-    await axios.delete(`http://localhost:3000/api/refunds/${refundId}`);
+    await axios.delete(`https://lionfish-app-tdhk5.ondigitalocean.app/api/refunds/${refundId}`);
     return refundId;
   }
 );
@@ -60,7 +60,7 @@ export const fetchRefundsWithFilters = createAsyncThunk(
   'refund/fetchRefundsWithFilters',
   async ({ vendorId, searchQuery, status, startDate, endDate }, { rejectWithValue }) => {
     try {
-      const response = await axios.get('http://localhost:3000/api/refunds/', {
+      const response = await axios.get('https://lionfish-app-tdhk5.ondigitalocean.app/api/refunds/', {
         params: { 
           vendorId, searchQuery, status, startDate, endDate 
         }
