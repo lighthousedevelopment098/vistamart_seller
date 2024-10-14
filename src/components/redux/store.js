@@ -37,7 +37,7 @@ const store = configureStore({
     refund: refundReducer,
     vendor: vendorReducer, // Add your vendor reducer here
     brand: brandReducer, // Add your brand reducer here
-    dealOfTheDay: dealOfTheDayReducer,
+    
   },
 });
 
