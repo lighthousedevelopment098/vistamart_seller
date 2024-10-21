@@ -121,10 +121,11 @@ import {
  VendorApprovedProductPage,
  VendorDeniedProductPage
 } from "./pages/In_House_Product/ProductManagmentComponent.jsx";// Adjust the import path as needed
-import ProductDetails from 
-"./pages/In_House_Product/ProductDetail.jsx";
+
  import OrderDetails from "./pages/Order/OrderDeatiels.jsx"
-import InhouseProductUpdate from "./pages/In_House_Product/AddProduct/InhouseProductUpdate.jsx";
+import AddNewProduct from "./pages/seller_product/add/addProduct/addProductForm.jsx";
+import ProductDetail from "./pages/seller_product/productDetail/ProductDetail.jsx";
+import InhouseProductUpdate from "./pages/seller_product/add/updateProduct/InhouseProductUpdate.jsx";
 
 function AllRoutes() {
 
@@ -145,7 +146,7 @@ function AllRoutes() {
                     path="/approvedproductlist"
                     element={<VendorApprovedProductPage />}
                   />
-                  <Route path="/products/:productId" element={<ProductDetails />} />
+                  <Route path="/products/:productId" element={<ProductDetail />} />
                   <Route path="/pos" element={<POS />} />
                   <Route path="/deniedproduct" element={<VendorDeniedProductPage />} />
                   {/* <Route path="/orderdetail/:id" element={<OrderDeatiels />} /> */}
@@ -186,7 +187,7 @@ function AllRoutes() {
                   />
                   <Route
                     path="/inhouseaddproduct"
-                    element={<MainHouseAddProduct />}
+                    element={<AddNewProduct />}
                   />
                   <Route path="/categories" element={<Categories />} />
                   <Route path="/categoryedit" element={<CategoryUpdate />} />
@@ -208,9 +209,9 @@ function AllRoutes() {
                   <Route path="/featuredeal" element={<FeatureDeal />} />
                   <Route
                     path="/inhouseaddproduct"
-                    element={<AddNewProductComponent />}
+                    element={<AddNewProduct />}
                   />
-                  <Route path="/product/:id" 
+                  <Route path="/product/:productId" 
                   element={<InhouseProductUpdate />} />
 
                   <Route path="/creview" element={<CustomerReviews />} />

@@ -1,250 +1,25 @@
-
-// import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-// import axios from 'axios';
-
-// // API Endpoints
-// const API_URL = 'https://lionfish-app-tdhk5.ondigitalocean.app/api/products/';
-
-// // Fetch products with dynamic query parameters
-// export const fetchProducts = createAsyncThunk(
-//   'product/fetchProducts',
-//   async (searchParams = {}, { rejectWithValue }) => {
-//     try {
-//       const response = await axios.get(API_URL, { params: searchParams });
-//       return response.data.doc; // Return the entire response data
-//     } catch (error) {
-//       return rejectWithValue(error.response?.data || error.message);
-//     }
-//   }
-// );
-
-// // Fetch product by ID
-// export const fetchProductById = createAsyncThunk(
-//   'product/fetchProductById',
-//   async (productId, { rejectWithValue }) => {
-//     try {
-//       const response = await axios.get(`${API_URL}/${productId}`);
-//       return response.data.doc; // Accessing product data from the `doc` field
-//     } catch (error) {
-//       return rejectWithValue(error.response?.data || error.message);
-//     }
-//   }
-// );
-
-// // Create product
-// export const createProduct = createAsyncThunk(
-//   'product/createProduct',
-//   async (productData, { rejectWithValue }) => {
-//     try {
-//       const response = await axios.post(API_URL, productData);
-//       return response.data.doc; // Ensure the response contains the created product
-//     } catch (error) {
-//       return rejectWithValue(error.response?.data || error.message);
-//     }
-//   }
-// );
-
-// // Update product
-// export const updateProduct = createAsyncThunk(
-//   'product/updateProduct',
-//   async ({ productId, productData }, { rejectWithValue }) => {
-//     try {
-//       const response = await axios.put(`${API_URL}/${productId}`, productData);
-//       return response.data.doc; // Ensure the response contains the updated product
-//     } catch (error) {
-//       return rejectWithValue(error.response?.data || error.message);
-//     }
-//   }
-// );
-
-// // Delete product
-// export const deleteProduct = createAsyncThunk(
-//   'product/deleteProduct',
-//   async (productId, { rejectWithValue }) => {
-//     try {
-//       await axios.delete(`${API_URL}/${productId}`);
-//       return productId;
-//     } catch (error) {
-//       return rejectWithValue(error.response?.data || error.message);
-//     }
-//   }
-// );
-
-// // Toggle featured status
-// export const toggleFeatured = createAsyncThunk(
-//   'product/toggleFeatured',
-//   async ({ productId, isFeatured }, { rejectWithValue }) => {
-//     try {
-//       const response = await axios.put(`${API_URL}/${productId}/feature`, { isFeatured });
-//       return response.data.doc; // Ensure the response contains the updated product
-//     } catch (error) {
-//       return rejectWithValue(error.response?.data || error.message);
-//     }
-//   }
-// );
-
-// // Update product status
-// export const updateProductStatus = createAsyncThunk(
-//   'product/updateProductStatus',
-//   async ({ productId, status }, { rejectWithValue }) => {
-//     try {
-//       const response = await axios.put(`${API_URL}/${productId}/status`, { status });
-//       return response.data.doc; // Ensure the response contains the updated product
-//     } catch (error) {
-//       return rejectWithValue(error.response?.data || error.message);
-//     }
-//   }
-// );
-
-// // Initial state
-// const initialState = {
-//   status: "", // Will store "success" or other status from the API response
-//   cached: false, // Will store the cached status
-//   results: 0, // Number of results returned
-//   products: [], // Array of product objects
-//   loading: false, // To indicate if data is being fetched
-//   error: null, 
-// };
-
-// // Create slice
-// const productSlice = createSlice({
-//   name: 'product',
-//   initialState,
-//   reducers: {},
-//   extraReducers: (builder) => {
-//     builder
-//       // Fetch products
-//       .addCase(fetchProducts.pending, (state) => {
-//         state.loading = true;
-//       })
-//       .addCase(fetchProducts.fulfilled, (state, action) => {
-//         state.loading = false;
-//         const { status, cached, results, doc } = action.payload;
-//         state.status = status || "";
-//         state.cached = cached || false;
-//         state.results = results || 0;
-//         state.products = doc || []; // Update with the product list
-//       })
-//       .addCase(fetchProducts.rejected, (state, action) => {
-//         state.loading = false;
-//         state.error = action.payload || action.error.message;
-//       })
-//       // Fetch product by ID
-//       .addCase(fetchProductById.pending, (state) => {
-//         state.loading = true;
-//       })
-//       .addCase(fetchProductById.fulfilled, (state, action) => {
-//         state.loading = false;
-//         state.currentProduct = action.payload;
-//       })
-//       .addCase(fetchProductById.rejected, (state, action) => {
-//         state.loading = false;
-//         state.error = action.payload || action.error.message;
-//       })
-//       // Create product
-//       .addCase(createProduct.pending, (state) => {
-//         state.loading = true;
-//       })
-//       .addCase(createProduct.fulfilled, (state, action) => {
-//         state.loading = false;
-//         state.products.push(action.payload);
-//       })
-//       .addCase(createProduct.rejected, (state, action) => {
-//         state.loading = false;
-//         state.error = action.payload || action.error.message;
-//       })
-//       // Update product
-//       .addCase(updateProduct.pending, (state) => {
-//         state.loading = true;
-//       })
-//       .addCase(updateProduct.fulfilled, (state, action) => {
-//         state.loading = false;
-//         const updatedProduct = action.payload;
-//         state.products = state.products.map((p) =>
-//           p._id === updatedProduct._id ? updatedProduct : p
-//         );
-//         if (state.currentProduct && state.currentProduct._id === updatedProduct._id) {
-//           state.currentProduct = updatedProduct;
-//         }
-//       })
-//       .addCase(updateProduct.rejected, (state, action) => {
-//         state.loading = false;
-//         state.error = action.payload || action.error.message;
-//       })
-//       // Delete product
-//       .addCase(deleteProduct.fulfilled, (state, action) => {
-//         const productId = action.payload;
-//         state.products = state.products.filter((p) => p._id !== productId);
-//         if (state.currentProduct && state.currentProduct._id === productId) {
-//           state.currentProduct = null;
-//         }
-//       })
-//       // Toggle featured status
-//       .addCase(toggleFeatured.pending, (state) => {
-//         state.loading = true;
-//       })
-//       .addCase(toggleFeatured.fulfilled, (state, action) => {
-//         state.loading = false;
-//         const updatedProduct = action.payload;
-//         state.products = state.products.map((p) =>
-//           p._id === updatedProduct._id ? updatedProduct : p
-//         );
-//         if (state.currentProduct && state.currentProduct._id === updatedProduct._id) {
-//           state.currentProduct = updatedProduct;
-//         }
-//       })
-//       .addCase(toggleFeatured.rejected, (state, action) => {
-//         state.loading = false;
-//         state.error = action.payload || action.error.message;
-//       })
-//       // Update product status
-//       .addCase(updateProductStatus.pending, (state) => {
-//         state.loading = true;
-//       })
-//       .addCase(updateProductStatus.fulfilled, (state, action) => {
-//         state.loading = false;
-//         const updatedProduct = action.payload;
-//         state.products = state.products.map((p) =>
-//           p._id === updatedProduct._id ? updatedProduct : p
-//         );
-//         if (state.currentProduct && state.currentProduct._id === updatedProduct._id) {
-//           state.currentProduct = updatedProduct;
-//         }
-//       })
-//       .addCase(updateProductStatus.rejected, (state, action) => {
-//         state.loading = false;
-//         state.error = action.payload || action.error.message;
-//       });
-//   },
-// });
-
-// export default productSlice.reducer;
-
-
-
+import { getAuthData } from '../../../utils/authHelper';
+import { ErrorMessage } from '../../../utils/ErrorMessage'; // Error handling utility
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
-import API_URL from "../../../ApiUrl"
+import apiConfig from '../../config/apiConfig';
+import axiosInstance from '../../../utils/axiosConfig';
 
-const getAuthToken = () => {
-  return localStorage.getItem('token'); 
-}
+// Use the admin endpoint for products
+const API_URL = `${apiConfig.seller}/products`;
 
 // Fetch products with dynamic query parameters
 export const fetchProducts = createAsyncThunk(
   'product/fetchProducts',
   async (searchParams = {}, { rejectWithValue }) => {
     try {
-      const token = getAuthToken(); // Get the token
-      const response = await axios.get(`${API_URL}products`, {
+      const { token } = getAuthData(); // Get the token for authorization
+      const response = await axiosInstance.get(`${API_URL}`, {
         params: searchParams,
         headers: {
-          Authorization: `Bearer ${token}` 
+          Authorization: `Bearer ${token}`
         }
       });
-      console.log("dumary data  data :", response);
       return response.data; // Return the entire response data
-      
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);
     }
@@ -256,13 +31,13 @@ export const fetchProductById = createAsyncThunk(
   'product/fetchProductById',
   async (productId, { rejectWithValue }) => {
     try {
-      const token = getAuthToken(); // Get the token
-      const response = await axios.get(`${API_URL}${productId}`, {
+      const { token } = getAuthData(); // Get the token for authorization
+      const response = await axiosInstance.get(`${API_URL}/${productId}`, {
         headers: {
-          Authorization: `Bearer ${token}` 
+          Authorization: `Bearer ${token}`
         }
       });
-      return response.data; // Accessing product data from the `doc` field
+      return response.data; // Accessing product data from the response
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);
     }
@@ -274,13 +49,13 @@ export const createProduct = createAsyncThunk(
   'product/createProduct',
   async (productData, { rejectWithValue }) => {
     try {
-      const token = getAuthToken(); // Get the token
-      const response = await axios.post(`${API_URL}products/`, productData, {
+      const { token } = getAuthData(); // Get the token for authorization
+      const response = await axiosInstance.post(`${API_URL}`, productData, {
         headers: {
-          Authorization: `Bearer ${token}` // Include token in the headers
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json', // or 'multipart/form-data' for file uploads
         }
       });
-      console.log("response-----", response)
       return response.data.doc; // Ensure the response contains the created product
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);
@@ -293,10 +68,10 @@ export const updateProduct = createAsyncThunk(
   'product/updateProduct',
   async ({ productId, productData }, { rejectWithValue }) => {
     try {
-      const token = getAuthToken(); // Get the token
-      const response = await axios.put(`${API_URL}${productId}`, productData, {
+      const { token } = getAuthData(); // Get the token for authorization
+      const response = await axiosInstance.put(`${API_URL}/${productId}`, productData, {
         headers: {
-          Authorization: `Bearer ${token}` // Include token in the headers
+          Authorization: `Bearer ${token}`
         }
       });
       return response.data.doc; // Ensure the response contains the updated product
@@ -311,13 +86,13 @@ export const deleteProduct = createAsyncThunk(
   'product/deleteProduct',
   async (productId, { rejectWithValue }) => {
     try {
-      const token = getAuthToken(); // Get the token
-      await axios.delete(`${API_URL}${productId}`, {
+      const { token } = getAuthData(); // Get the token for authorization
+      await axiosInstance.delete(`${API_URL}/${productId}`, {
         headers: {
-          Authorization: `Bearer ${token}` // Include token in the headers
+          Authorization: `Bearer ${token}`
         }
       });
-      return productId;
+      return productId; // Return the deleted product ID
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);
     }
@@ -329,10 +104,10 @@ export const toggleFeatured = createAsyncThunk(
   'product/toggleFeatured',
   async ({ productId, isFeatured }, { rejectWithValue }) => {
     try {
-      const token = getAuthToken(); // Get the token
-      const response = await axios.put(`${API_URL}${productId}/feature`, { isFeatured }, {
+      const { token } = getAuthData(); // Get the token for authorization
+      const response = await axiosInstance.put(`${API_URL}/${productId}/feature`, { isFeatured }, {
         headers: {
-          Authorization: `Bearer ${token}` // Include token in the headers
+          Authorization: `Bearer ${token}`
         }
       });
       return response.data.doc; // Ensure the response contains the updated product
@@ -347,10 +122,10 @@ export const updateProductStatus = createAsyncThunk(
   'product/updateProductStatus',
   async ({ productId, status }, { rejectWithValue }) => {
     try {
-      const token = getAuthToken(); // Get the token
-      const response = await axios.put(`${API_URL}${productId}/status`, { status }, {
+      const { token } = getAuthData(); // Get the token for authorization
+      const response = await axiosInstance.put(`${API_URL}/${productId}/status`, { status }, {
         headers: {
-          Authorization: `Bearer ${token}` // Include token in the headers
+          Authorization: `Bearer ${token}`
         }
       });
       return response.data.doc; // Ensure the response contains the updated product
@@ -367,7 +142,7 @@ const initialState = {
   results: 0, // Number of results returned
   products: [], // Array of product objects
   loading: false, // To indicate if data is being fetched
-  error: null, 
+  error: null,
 };
 
 // Create slice
@@ -482,5 +257,5 @@ const productSlice = createSlice({
   },
 });
 
-// Export the slice reducer
+// Default export of the slice reducer
 export default productSlice.reducer;

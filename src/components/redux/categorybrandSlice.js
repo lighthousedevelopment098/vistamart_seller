@@ -1,158 +1,17 @@
-
-
-// import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-// import axios from 'axios';
-
-// // Fetch categories
-// export const fetchCategories = createAsyncThunk(
-//   'category/fetchCategories',
-//   async () => {
-//     const response = await axios.get('http://localhost:3000/api/categories/');
-//     return response.data.docs || []; // Assuming response.data.docs contains the array of categories
-//   }
-// );
-
-// // Fetch brands
-// export const fetchBrands = createAsyncThunk(
-//   'category/fetchBrands',
-//   async () => {
-//     const response = await axios.get('http://localhost:3000/api/brands/');
-//     return response.data.docs || []; // Handle cases where response.data.docs might not be an array
-//   }
-// );
-
-// // Fetch colors
-// export const fetchColors = createAsyncThunk(
-//   'category/fetchColors',
-//   async () => {
-//     const response = await axios.get('http://localhost:3000/api/colors/');
-//     return response.data || []; // Assuming response.data.docs contains the array of colors
-//   }
-// );
-
-// export const fetchAttributes = createAsyncThunk('attributes/fetchAttributes', async () => {
-//   const response = await axios.get('http://localhost:3000/api/attributes/');
-//   return response.data;
-// });
-// // Fetch sub-categories by main category slug
-// export const fetchSubCategories = createAsyncThunk(
-//   'category/fetchSubCategories',
-//   async (mainCategorySlug) => {
-//     const response = await axios.get(`http://localhost:3000/api/sub-categories/main-category/${mainCategorySlug}`);
-//     return response.data.docs || [];  // Handle cases where response.data.docs.subCategories might not be an array
-//   }
-// );
-
-// // Fetch sub-sub-categories by sub-category slug
-// export const fetchSubSubCategories = createAsyncThunk(
-//   'category/fetchSubSubCategories',
-//   async (subCategorySlug) => {
-//     const response = await axios.get(`http://localhost:3000/api/sub-sub-categories/subcategory/${subCategorySlug}`);
-//     return response.data.docs || [];  // Handle cases where response.data.docs.subSubCategories might not be an array
-//   }
-// );
-
-// const initialState = {
-//   categories: [],
-//   brands: [],
-//   colors: [],
-//   attributes: [],
-//   subCategories: [],
-//   subSubCategories: [],
-//   loading: false,
-//   error: null,
-// };
-
-// const categorySlice = createSlice({
-//   name: 'category',
-//   initialState,
-//   reducers: {},
-//   extraReducers: (builder) => {
-//     builder
-//       // Fetch categories
-//       .addCase(fetchCategories.pending, (state) => {
-//         state.loading = true;
-//       })
-//       .addCase(fetchCategories.fulfilled, (state, action) => {
-//         state.loading = false;
-//         state.categories = action.payload; // Assuming payload is an array
-//       })
-//       .addCase(fetchCategories.rejected, (state, action) => {
-//         state.loading = false;
-//         state.error = action.error.message;
-//       })
-//       // Fetch brands
-//       .addCase(fetchBrands.pending, (state) => {
-//         state.loading = true;
-//       })
-//       .addCase(fetchBrands.fulfilled, (state, action) => {
-//         state.loading = false;
-//         state.brands = action.payload; // Assuming payload is an array
-//       })
-//       .addCase(fetchBrands.rejected, (state, action) => {
-//         state.loading = false;
-//         state.error = action.error.message;
-//       })
-//       // Fetch colors
-//       .addCase(fetchColors.pending, (state) => {
-//         state.loading = true;
-//       })
-//       .addCase(fetchColors.fulfilled, (state, action) => {
-//         state.loading = false;
-//         state.colors = action.payload; // Assuming payload is an array
-//       })
-//       .addCase(fetchColors.rejected, (state, action) => {
-//         state.loading = false;
-//         state.error = action.error.message;
-//       })
-//       .addCase(fetchAttributes.pending, (state) => {
-//         state.status = 'loading';
-//       })
-//       .addCase(fetchAttributes.fulfilled, (state, action) => {
-//         state.status = 'succeeded';
-//         state.attributes = action.payload;
-//       })
-//       .addCase(fetchAttributes.rejected, (state, action) => {
-//         state.status = 'failed';
-//         state.error = action.error.message;
-//       })
-//       // Fetch sub-categories
-//       .addCase(fetchSubCategories.pending, (state) => {
-//         state.loading = true;
-//       })
-//       .addCase(fetchSubCategories.fulfilled, (state, action) => {
-//         state.loading = false;
-//         state.subCategories = action.payload; // Assuming payload is an array
-//       })
-//       .addCase(fetchSubCategories.rejected, (state, action) => {
-//         state.loading = false;
-//         state.error = action.error.message;
-//       })
-//       // Fetch sub-sub-categories
-//       .addCase(fetchSubSubCategories.pending, (state) => {
-//         state.loading = true;
-//       })
-//       .addCase(fetchSubSubCategories.fulfilled, (state, action) => {
-//         state.loading = false;
-//         state.subSubCategories = action.payload; // Assuming payload is an array
-//       })
-//       .addCase(fetchSubSubCategories.rejected, (state, action) => {
-//         state.loading = false;
-//         state.error = action.error.message;
-//       });
-//   },
-// });
-
-// export default categorySlice.reducer;
-
-
-
+// Import necessary modules
+import { ErrorMessage } from '../../utils/ErrorMessage'; // Error handling utility
+import { getAuthData } from '../../utils/authHelper'; // Authentication token helper
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import apiConfig from '../config/apiConfig';
+import axiosInstance from '../../utils/axiosConfig';
 
-// Helper function to get the token
+// Use the admin endpoint for brands
+const API_URL = `${apiConfig.admin}`;
+
+// Helper function to make API calls with authorization
 const getAuthToken = () => {
-  return localStorage.getItem('token'); // Adjust the key name based on how your token is stored
+  const { token } = getAuthData(); // Use getAuthData to retrieve token
+  return token;
 };
 
 // Fetch categories
@@ -160,7 +19,7 @@ export const fetchCategories = createAsyncThunk(
   'category/fetchCategories',
   async () => {
     const token = getAuthToken();
-    const response = await axios.get('https://lionfish-app-tdhk5.ondigitalocean.app/api/categories/', {
+    const response = await axiosInstance.get(`${API_URL}/categories/`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -174,7 +33,7 @@ export const fetchBrands = createAsyncThunk(
   'category/fetchBrands',
   async () => {
     const token = getAuthToken();
-    const response = await axios.get('https://lionfish-app-tdhk5.ondigitalocean.app/api/brands/', {
+    const response = await axiosInstance.get(`${API_URL}/brands/`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -188,7 +47,7 @@ export const fetchColors = createAsyncThunk(
   'category/fetchColors',
   async () => {
     const token = getAuthToken();
-    const response = await axios.get('https://lionfish-app-tdhk5.ondigitalocean.app/api/colors/', {
+    const response = await axiosInstance.get(`${API_URL}/colors/`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -202,7 +61,7 @@ export const fetchAttributes = createAsyncThunk(
   'attributes/fetchAttributes',
   async () => {
     const token = getAuthToken();
-    const response = await axios.get('https://lionfish-app-tdhk5.ondigitalocean.app/api/attributes/', {
+    const response = await axiosInstance.get(`${API_URL}/attributes/`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -216,7 +75,7 @@ export const fetchSubCategories = createAsyncThunk(
   'category/fetchSubCategories',
   async (mainCategoryId) => {
     const token = getAuthToken();
-    const response = await axios.get(`https://lionfish-app-tdhk5.ondigitalocean.app/api/sub-categories?mainCategory=${mainCategoryId}`, {
+    const response = await axiosInstance.get(`${API_URL}/sub-categories?mainCategory=${mainCategoryId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -225,12 +84,13 @@ export const fetchSubCategories = createAsyncThunk(
   }
 );
 
+// Fetch sub-sub-categories
 export const fetchSubSubCategories = createAsyncThunk(
   'category/fetchSubSubCategories',
   async ({ mainCategoryId, subCategoryId }) => {
     try {
       const token = getAuthToken();
-      let url = 'https://lionfish-app-tdhk5.ondigitalocean.app/api/sub-sub-categories';
+      let url = `${API_URL}/sub-sub-categories`;
       const params = new URLSearchParams();
 
       if (mainCategoryId) {
@@ -244,14 +104,14 @@ export const fetchSubSubCategories = createAsyncThunk(
         url += `?${params.toString()}`;
       }
 
-      const response = await axios.get(url, {
+      const response = await axiosInstance.get(url, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
       return response.data || {}; // Return the full response object for status and pagination info
     } catch (error) {
-      throw new Error('Failed to fetch sub-sub-categories.');
+      throw new Error(ErrorMessage.FETCH_SUB_SUB_CATEGORIES); // Utilize the error message utility
     }
   }
 );
@@ -261,7 +121,7 @@ export const addSubSubCategory = createAsyncThunk(
   'category/addSubSubCategory',
   async (newSubSubCategory) => {
     const token = getAuthToken();
-    const response = await axios.post('https://lionfish-app-tdhk5.ondigitalocean.app/api/sub-sub-categories', newSubSubCategory, {
+    const response = await axiosInstance.post(`${API_URL}/sub-sub-categories`, newSubSubCategory, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -275,7 +135,7 @@ export const updateSubSubCategory = createAsyncThunk(
   'category/updateSubSubCategory',
   async ({ id, updatedData }) => {
     const token = getAuthToken();
-    const response = await axios.put(`https://lionfish-app-tdhk5.ondigitalocean.app/api/sub-sub-categories/${id}`, updatedData, {
+    const response = await axiosInstance.put(`${API_URL}/sub-sub-categories/${id}`, updatedData, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -289,7 +149,7 @@ export const deleteSubSubCategory = createAsyncThunk(
   'category/deleteSubSubCategory',
   async (id) => {
     const token = getAuthToken();
-    await axios.delete(`https://lionfish-app-tdhk5.ondigitalocean.app/api/sub-sub-categories/${id}`, {
+    await axiosInstance.delete(`${API_URL}/sub-sub-categories/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -297,8 +157,6 @@ export const deleteSubSubCategory = createAsyncThunk(
     return id; // Return the id of the deleted sub-sub-category
   }
 );
-
-
 
 const initialState = {
   categories: [],
@@ -428,7 +286,6 @@ const categorySlice = createSlice({
   },
 });
 
-
 // Export selectors for component use
 export const selectCategories = (state) => state.category.categories;
 export const selectBrands = (state) => state.category.brands;
@@ -436,6 +293,6 @@ export const selectColors = (state) => state.category.colors;
 export const selectAttributes = (state) => state.category.attributes;
 export const selectSubCategories = (state) => state.category.subCategories;
 export const selectSubSubCategories = (state) => state.category.subSubCategories;
+
+// Export the reducer
 export default categorySlice.reducer;
-
-
