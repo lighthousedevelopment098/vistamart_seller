@@ -1,6 +1,5 @@
 import React from 'react';
 // import { AiOutlineFileText } from 'react-icons/ai'; // Importing necessary icon from react-icons
-import './Couponupdate.css'
 const CouponUpdate = () => {
     const handleSubmit = (e) => {
         e.preventDefault();

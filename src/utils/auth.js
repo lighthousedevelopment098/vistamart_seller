@@ -1,11 +1,26 @@
-// utils/auth.js
-import { login } from '../components/redux/auth/authSlice';
+// // utils/auth.js
+// import { login } from '../components/redux/auth/authSlice';
+
+// export const checkAuth = (dispatch) => {
+//   const token = localStorage.getItem('token');
+//   const user = localStorage.getItem('user');
+//   if (token && user) {
+//     dispatch(login({ token, user: JSON.parse(user) }));
+//   }
+// };
+
+
+
+import { setAuthToken, checkAuth as checkAuthAction } from '../components/redux/auth/authSlice';
 
 export const checkAuth = (dispatch) => {
   const token = localStorage.getItem('token');
   const user = localStorage.getItem('user');
+
   if (token && user) {
-    dispatch(login({ token, user: JSON.parse(user) }));
+    // Dispatch actions to set the token and user in Redux state
+    dispatch(setAuthToken(token));
+    dispatch(checkAuthAction(JSON.parse(user)));
   }
 };
 

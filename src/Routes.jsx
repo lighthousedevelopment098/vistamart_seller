@@ -16,7 +16,6 @@ import SubCateggories from "./pages/Categoreis/SubCateggories";
 import Sub_Sub_Categories from "./pages/Categoreis/Sub_Sub_Categories";
 import AddNewBrand from "./pages/Brands/AddNew";
 import BulkImport from "./pages/In_House_Product/AddProduct/BulkImport/BulkImport";
-import Coupon from "./pages/OfferAndDeals/Coupon/Coupon";
 import FlashDeals from "./pages/OfferAndDeals/FlashDeal/FlashDeals";
 import DealOfTheDay from "./pages/OfferAndDeals/DealOfDay/DealOfDay";
 import FeatureDeal from "./pages/OfferAndDeals/FeatureDeal/FeatureDeal";
@@ -84,7 +83,7 @@ import GenerateBarcode from "./pages/In_House_Product/InHouseProductList/Generat
 import InhouseProductBtn from "./pages/In_House_Product/InHouseProductList/InhouseProductbutton/ProductBtn";
 import BannerUpdateForm from "./pages/faisal/BannerSetup/BannerSetupForm";
 import AddBannerForm from "./pages/faisal/BannerSetup/AddBanner";
-import CouponUpdate from "./pages/OfferAndDeals/Coupon/CouponUpdate";
+import CouponUpdate from "./pages/OfferAndDeals/Coupon/CouponUpdate.jsx";
 import AddNewProductComponent from "./pages/OfferAndDeals/FeatureDeal/AddDealProduct";
 import LimitedStockProductsList from "./pages/In_House_Product/InHouseProductList/LimitedProduct/LimitedProduct";
 import ProductGallery from "./pages/Health_Support/Product_Gallery";
@@ -126,6 +125,7 @@ import {
 import AddNewProduct from "./pages/seller_product/add/addProduct/addProductForm.jsx";
 import ProductDetail from "./pages/seller_product/productDetail/ProductDetail.jsx";
 import InhouseProductUpdate from "./pages/seller_product/add/updateProduct/InhouseProductUpdate.jsx";
+import Coupon from "./pages/OfferAndDeals/Coupon/Coupon.jsx";
 
 function AllRoutes() {
 
@@ -147,7 +147,7 @@ function AllRoutes() {
                     element={<VendorApprovedProductPage />}
                   />
                   <Route path="/products/:productId" element={<ProductDetail />} />
-                  <Route path="/pos" element={<POS />} />
+                  {/* <Route path="/pos" element={<POS />} /> */}
                   <Route path="/deniedproduct" element={<VendorDeniedProductPage />} />
                   {/* <Route path="/orderdetail/:id" element={<OrderDeatiels />} /> */}
                   <Route path="/" element={<WelcomePage />} />

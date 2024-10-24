@@ -74,7 +74,7 @@ console.log("brandid------------", brand)
         endDate: toDate || undefined,
         dateType: dateType || undefined,
         vendorId,
-        orderStatus: status
+        status: status
       }))
       .catch(err => console.error('Fetch orders failed', err));
     }
@@ -258,8 +258,8 @@ console.log("brandid------------", brand)
                         <td>{order.products.map(product => product.name).join(', ')}</td>
                         <td>{`${order.customer?.firstName || ''} ${order.customer?.lastName || ''}`}</td>
                         <td>{order.totalAmount}</td>
-                        <td className={`text-center ${getStatusClass(order.orderStatus)} p-2 rounded`}>
-                  {order.orderStatus}
+                        <td className={`text-center ${getStatusClass(order.status)} p-2 rounded`}>
+                  {order.status}
                         </td>
 
                         <td className="text-center">

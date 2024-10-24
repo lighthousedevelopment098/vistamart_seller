@@ -382,7 +382,7 @@ const OrderList = () => {
                         </select>
                       </td> */}
                       <td>
-                        {order.orderStatus}
+                        {order?.status}
                       </td>
                       <td>
                         <Link

@@ -5,7 +5,7 @@ const ActionButton = ({ to, onClick, icon: Icon, className, label }) => {
   return to ? (
     <Link
       to={to}
-      className={`btn border-[#009444] text-[#009444] hover:bg-[#009444] hover:text-white ${className}`}
+      className={`btn border-[#009444] text-[#009444] flex justify-center items-center gap-2 hover:bg-[#009444] hover:text-white ${className}`}
     >
       {Icon && <Icon className="" />} {/* If an icon is passed, render it */}
       {label}

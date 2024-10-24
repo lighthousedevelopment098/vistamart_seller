@@ -1,65 +1,90 @@
-import React, { useState, useEffect } from "react";
+
+import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
-import { FaMapLocation } from "react-icons/fa6";
 import { IoIosPrint } from "react-icons/io";
 import { IoPersonSharp } from "react-icons/io5";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
-import axios from 'axios';
-import { toast } from 'react-toastify';
-import { useParams } from 'react-router-dom';
+import { toast } from "react-toastify";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {  updateOrderStatus } 
-from '../../components/redux/orderSlice';
+import LoadingSpinner from "../../components/LoodingSpinner/LoadingSpinner";
+import { fetchOrderById } from "../../components/redux/orderSlice";
 
 const OrderDetails = () => {
   const { id } = useParams(); // Get the order ID from URL parameters
   const dispatch = useDispatch();
-  const [order, setOrder] = useState(null);
+
+  const { orders, status, error } = useSelector((state) => state.vendorOrder);
+ 
+    // console.log("order in component ------", orders)
   const [showModal, setShowModal] = useState(false);
   const [paymentStatus, setPaymentStatus] = useState(true);
+  const fallbackImage = "/image-place-holder.png"; // Replace with the path to your fallback image
+  
+  useEffect(() => {
+    dispatch(fetchOrderById(id)); // Fetch order details via Redux
+  }, [dispatch, id]);
 
   useEffect(() => {
-    // Fetch the order details from the backend
-    axios.get(`http://localhost:3000/api/orders/${id}`)
-      .then(response => {
-        setOrder(response.data.docs);
-      })
-      .catch(error => {
-        console.error("There was an error fetching the order details!", error);
-      });
-  }, [id]);
+    console.log('Order details:', orders); // Check if order data is populated
+  }, [orders]);
+  const printInvoice = () => {
+    window.print();
+  };
+
+
 
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
 
-  const handleUpdateStatus = (orderId, status) => {
-    dispatch(updateOrderStatus({ orderId, status }));
-    setOrder(prevOrder => ({ ...prevOrder, orderStatus: status }));
-    toast.success("Order status updated successfully!");
+  const handleUpdateStatus = async (orderId, status) => {
+    try {
+      await dispatch(updateOrderStatus({ orderId, status })).unwrap();
+      toast.success("Order status updated successfully!");
+    } catch (error) {
+      toast.error("Failed to update order status.");
+    }
   };
+
   const togglePaymentStatus = () => {
     setPaymentStatus(!paymentStatus);
   };
+  const order = orders.find((order) => order._id === id);
 
-  if (!order) {
-    return <div>Loading...</div>; // Display a loading state until data is fetched
+
+  // Check the loading state
+  if (status === 'loading') {
+    return <LoadingSpinner />;
+  }
+
+  // Check for errors
+  if (status === 'failed') {
+    return <div>Error fetching orders details: {error}</div>;
+  }
+ // Find the specific order based on the ID
+ // Find the specific order based on the ID
+ const Orders = orders.find((order) => order._id === id);
+ console.log("orderdtail====", Orders)
+ // Check if orders exists
+  if (!orders) {
+    return <div>No orders details found.</div>;
   }
 
   const {
     customer,
-    vendor,
+    vendors,
     products,
-    orderStatus,
+    
     totalAmount,
     paymentMethod,
     shippingAddress,
-    billingAddress
-  } = order;
-
+    billingAddress,
+  } = Orders;
+  // console.log("order status ====", Orders.orderStatus)
   return (
     <>
-      <div className="bg-[#F9F9FB] w-full px-4 md:px-12 py-8">
+      <div className="bg-[#F9F9FB] w-full px-4 py-8">
         <div className="flex items-center gap-2">
           <img
             src="https://6valley.6amtech.com/public/assets/back-end/img/all-orders.png"
@@ -74,8 +99,10 @@ const OrderDetails = () => {
           <div className="col-span-1 lg:col-span-4 bg-white rounded h-full border-gray-400 hover:shadow-md p-2">
             <div className="flex justify-between items-center">
               <div>
-                <h2 className="text-[1rem] font-bold pb-5">Order ID #{order._id}</h2>
-                <p>{new Date(order.createdAt).toLocaleString()}</p>
+                <h2 className="text-[1rem] font-bold pb-5">
+                  Order ID #{Orders.orderId}
+                </h2>
+                <p>{new Date(Orders.createdAt).toLocaleString()}</p>
               </div>
               <div className="flex items-center gap-2">
                 <div>
@@ -83,16 +110,23 @@ const OrderDetails = () => {
                     Show Product
                   </Button>
                 </div>
-                <button className="border rounded px-3 py-2 bg-[#A1CB46] flex items-center gap-2 text-white hover:bg-[#7e9f37]">
-                  <IoIosPrint /> Print Invoice
+                <button
+                  className="borders rounded px-3 py-2  bg-primary flex items-center gap-2 text-white hover:bg-primary-dark"
+                  onClick={printInvoice}
+                  style={{ color: "white" }}
+                >
+                  <IoIosPrint className="text-white" /> Print Invoice
                 </button>
               </div>
             </div>
             <div className="text-end pt-2">
               <h1>
                 Status :
-                <span className={`bg-green-100 font-bold p-1 rounded border text-green-500`}>
-                  {orderStatus}
+                <span
+                  className={`bg-green-100 font-bold p-1 rounded border text-primary`}
+                >
+                  {/* {console.log("orderStatus====", orderStatus)} */}
+                  {status}
                 </span>
               </h1>
               <h1 className="pt-3 text-md">
@@ -101,13 +135,16 @@ const OrderDetails = () => {
               </h1>
               <h1 className="pt-3 text-md">
                 Payment Status :
-                <span className={`font-bold text-green-500 ms-3`}>
+                <span className={`font-bold text-primary ms-3`}>
                   {paymentStatus ? "Paid" : "Unpaid"}
                 </span>
               </h1>
               <h1 className="pt-3 text-md">
-                Order verification code :
-                <span className="font-bold ms-3"> {order._id.substring(0, 6)}</span>
+                orders verification code :
+                <span className="font-bold ms-3">
+                  {" "}
+                  {Orders.orderId}
+                </span>
               </h1>
             </div>
             <div className="container p-4">
@@ -136,46 +173,59 @@ const OrderDetails = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {products.map((product, index) => (
-                      <tr className="hover:bg-gray-100" key={product._id}>
-                        <td className="px-4 py-2 text-center">{index + 1}</td>
-                        <td className="px-4 py-2 w-full">
-                          <div className="flex items-center whitespace-nowrap">
-                            <img
-                              src={`http://localhost:3000/${product.thumbnail}`} 
-                              alt={product.name}
-                              className="w-10 h-10 object-cover rounded mr-3"
-                            />
-                            <div>
-                              <div>{product.name}</div>
-                              <div>Qty : {/* {product.qty} */}</div>
-                              <div>
-                                Unit price : ${product.price.toFixed(2)} (Tax: {product.taxAmount}%)
-                              </div>
-                            </div>
-                          </div>
-                        </td>
-                        <td className="px-4 py-2 text-center">
-                          ${product.price.toFixed(2)}
-                        </td>
-                        <td className="px-4 py-2 text-center">
-                          ${product.taxAmount.toFixed(2)}
-                        </td>
-                        <td className="px-4 py-2 text-center">
-                          ${product.discountAmount.toFixed(2)}
-                        </td>
-                        <td className="px-4 py-2 text-center">
-                          ${(product.price + product.taxAmount).toFixed(2)}
-                        </td>
-                      </tr>
-                    ))}
+                  {(products && products.length > 0) ? (
+  products.map((product, index) => (
+    <tr className="hover:bg-gray-100" key={product._id}>
+      <td className="px-4 py-2 text-center">{index + 1}</td>
+      <td className="px-4 py-2 w-full">
+        <div className="flex items-center whitespace-nowrap">
+          <img
+            src={
+              product?.thumbnail || fallbackImage
+            }
+            alt={product?.name}
+            className="w-10 h-10 object-cover rounded mr-3"
+            onError={(e) => (e.target.src = fallbackImage)} // Fallback image if load fails
+          />
+          <div>
+            <div>{product?.name}</div>
+            <div>Qty: {product.qty}</div>
+            <div>
+              Unit price: ${product?.price} (Tax:{" "}
+              {product.taxAmount}%)
+            </div>
+          </div>
+        </div>
+      </td>
+      <td className="px-4 py-2 text-center">
+        ${product?.price}
+      </td>
+      <td className="px-4 py-2 text-center">
+        ${product.taxAmount}
+      </td>
+      <td className="px-4 py-2 text-center">
+        ${product.discountAmount}
+      </td>
+      <td className="px-4 py-2 text-center">
+        ${(product.price + product.taxAmount)}
+      </td>
+    </tr>
+  ))
+) : (
+  <tr>
+    <td colSpan="6" className="text-center py-4">
+      No products available
+    </td>
+  </tr>
+)}
+
                   </tbody>
                 </table>
               </div>
               <div className="mt-4">
                 <div className="flex justify-between border-t pt-2">
                   <span>Item price</span>
-                  <span>${totalAmount.toFixed(2)}</span>
+                  <span>${totalAmount}</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Item Discount</span>
@@ -183,7 +233,7 @@ const OrderDetails = () => {
                 </div>
                 <div className="flex justify-between">
                   <span>Sub Total</span>
-                  <span>${totalAmount.toFixed(2)}</span>
+                  <span>${totalAmount}</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Coupon discount</span>
@@ -199,14 +249,13 @@ const OrderDetails = () => {
                 </div>
                 <div className="flex justify-between font-bold border-t pt-2">
                   <span>Total</span>
-                  <span>${totalAmount.toFixed(2)}</span>
+                  <span>${totalAmount}</span>
                 </div>
               </div>
             </div>
           </div>
-        
 
-<div className="col-span-1 lg:col-span-2">
+          <div className="col-span-1 lg:col-span-2">
             <div className="px-4 py-3 bg-white rounded-xl shadow-md space-y-4">
               <div className="space-y-2">
                 <h2 className="text-xl font-semibold text-center">
@@ -218,25 +267,28 @@ const OrderDetails = () => {
                       Change Order Status
                     </span>
                     <select
-                     className="form-select mt-1 bg-white border border-gray-400 px-3 py-2 rounded block w-full"
-                     value={order.orderStatus}
-                          onChange={(e) => handleUpdateStatus(order._id, e.target.value)}
-                     >
-                    <option value="pending">Pending</option>
-                          <option value="confirmed">Confirmed</option>
-                          <option value="delivered">Delivered</option>
-                          <option value="canceled">Cancelled</option>
-                          <option value="packaging">Packaging</option>
-                          <option value="out_for_delivery">Out_for_delivery</option>
-                          <option value="failed_to_deliver">Failed_to_deliver</option>
-                          <option value="returned">Returned</option>
-
+                      className="form-select mt-1 bg-white borders border-gray-400 px-3 py-2 rounded block w-full"
+                      value={Orders.status}
+                      onChange={(e) =>
+                        handleUpdateStatus(Orders._id, e.target.value)
+                      }
+                    >
+                      <option value="pending">Pending</option>
+                      <option value="confirmed">Confirmed</option>
+                      <option value="delivered">Delivered</option>
+                      <option value="canceled">Cancelled</option>
+                      <option value="packaging">Packaging</option>
+                      <option value="out_for_delivery">Out_for_delivery</option>
+                      <option value="failed_to_deliver">
+                        Failed_to_deliver
+                      </option>
+                      <option value="returned">Returned</option>
                     </select>
                   </label>
                   <label className="mt-3 flex justify-between items-center bg-white border border-gray-400 px-3 py-2 rounded">
                     <span className="text-gray-700">Payment Status</span>
                     <div className="flex items-center mt-1">
-                      <span className="mr-2 text-[#A1CB46]">Paid</span>
+                      <span className="mr-2 text-primary">Paid</span>
                       <button
                         onClick={togglePaymentStatus}
                         className={`relative inline-flex items-center h-6 rounded-full w-11 focus:outline-none ${
@@ -268,10 +320,10 @@ const OrderDetails = () => {
                     />
                   </div>
                   <div className="pt-5">
-                    <p className="text-md font-medium">{customer.firstName}</p>
+                    <p className="text-md font-medium">{customer?.firstName}</p>
                     <p className="text-gray-500">17 Orders</p>
-                    <p className="text-gray-500">{customer.phoneNumber}</p>
-                    <p className="text-gray-500">{customer.email}</p>
+                    <p className="text-gray-500">{customer?.phoneNumber}</p>
+                    <p className="text-gray-500">{customer?.email}</p>
                   </div>
                 </div>
               </div>
@@ -282,15 +334,23 @@ const OrderDetails = () => {
                   <h2 className="text-md font-semibold flex gap-2">
                     <IoPersonSharp /> Shipping Address
                   </h2>
-                  <MdEdit className="text-[2rem] p-1 border hover:bg-green-700 hover:text-white rounded border-green-600 text-green-300" />
+                  <MdEdit className="text-[2rem] p-1 border hover:bg-primary-dark hover:text-white rounded border-primary bg-primary text-white" />
                 </div>
                 <div className="space-y-1">
-                  <p className="text-md font-medium">{customer.firstName}</p>
-                  <p className="text-gray-500">Contact: {customer.phoneNumber}</p>
-                  <p className="text-gray-500">Country: {shippingAddress.country}</p>
-                  <p className="text-gray-500">City: {shippingAddress.city}</p>
-                  <p className="text-gray-500">Zip Code: {shippingAddress.zipCode}</p>
-                  <p className="text-gray-500">address: {shippingAddress.address}</p>
+                  <p className="text-md font-medium">{customer?.firstName}</p>
+                  <p className="text-gray-500">
+                    Contact: {customer?.phoneNumber}
+                  </p>
+                  <p className="text-gray-500">
+                    Country: {shippingAddress?.country}
+                  </p>
+                  <p className="text-gray-500">City: {shippingAddress?.city}</p>
+                  <p className="text-gray-500">
+                    Zip Code: {shippingAddress?.zipCode}
+                  </p>
+                  <p className="text-gray-500">
+                    address: {shippingAddress?.address}
+                  </p>
                 </div>
               </div>
             </div>
@@ -300,100 +360,59 @@ const OrderDetails = () => {
                   <h2 className="text-md font-semibold flex gap-2">
                     <IoPersonSharp /> Billing Address
                   </h2>
-                  <MdEdit className="text-[2rem] p-1 border hover:bg-green-700 hover:text-white rounded border-green-600 text-green-300" />
+                  <MdEdit className="text-[2rem] p-1 border hover:bg-primary-dark hover:text-white rounded border-primary text-white bg-primary" />
                 </div>
                 <div className="space-y-1">
-                  <p className="text-md font-medium">Customer Name:{customer.firstName}</p>
-                  <p className="text-gray-500">Customer Email{customer.email}</p>
-                  <p className="text-gray-500">Country: {billingAddress.country}</p>
-                  <p className="text-gray-500">City: {billingAddress.city} </p>
-                  <p className="text-gray-500">Zip Code: {billingAddress.zipCode}</p>
-                  <p className="text-gray-500">Address: {billingAddress.address}</p>
+                  <p className="text-gray-500">
+                    Country: {billingAddress?.country}
+                  </p>
+                  <p className="text-gray-500">City: {billingAddress?.city} </p>
+                  <p className="text-gray-500">
+                    Zip Code: {billingAddress?.zipCode}
+                  </p>
+                  <p className="text-gray-500">
+                    Address: {billingAddress?.address}
+                  </p>
                 </div>
               </div>
             </div>
-            {/* <div className="px-4 py-3 bg-white rounded-xl shadow-md space-y-4 mt-5">
-              <div className="space-y-2">
-                <h2 className="text-xl font-semibold">Shop Information</h2>
-                <div className="space-y-1 flex justify-center gap-3">
-                 {console.log("vendor image", `http://localhost:3000/${vendor.logo}`)}
-                 {console.log("vendor image", `${vendor.firstName}`)}
-                  <img
-                    // src="https://6valley.6amtech.com/storage/app/public/shop/2022-04-21-6260f6e190f4c.png"
-                    src={`http://localhost:3000/${vendor.logo}`} 
-                    alt="shop logo"
-                    className="w-14 h-14 rounded"
-                  />
-                  <div>
-                    <p className="text-lg font-bold ">{vendor.shopName}</p>
-                    <p className="text-gray-500 pt-3">9 Orders Served</p>
-                    <p className="text-gray-500 ">{vendor.phoneNumber}</p>
-                    <p className="text-gray-500 flex justify-center gap-2">
-                      <FaMapMarkerAlt className="text-xl" />
-                      {vendor.address}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div> */}
 
             <div className="mt-8">
-          <h2 className="text-xl font-semibold mb-4">Vendor Information</h2>
-          {vendor.map((vendor, index) => (
-            <div key={index} className="mb-4 p-4 bg-white rounded shadow-md">
-              <h3 className="text-lg font-semibold">Name : {vendor.firstName}</h3>
-              <img
-                src={`http://localhost:3000/${vendor.logo}`}
-                alt={vendor.name}
-                className="w-16 h-16 object-cover rounded mb-2"
-              />
-              <div>
-                    <p className="text-lg font-bold "> Shop:{vendor.shopName}</p>
-                    <p className="text-gray-500 pt-3">Vendor Orders :9 Orders Served</p>
-                    <p className="text-gray-500 ">Vendor No:{vendor.phoneNumber}</p>
-                    <p className="text-gray-500 flex justify-center gap-2">
-                      <FaMapMarkerAlt className="text-xl" />
-                      {vendor.address}
-                    </p>
-                  </div>
+              <h2 className="text-xl font-semibold mb-4">Vendor Information</h2>
+              {vendors && vendors.length > 0 ? (
+  vendors.map((vendor, index) => (
+    <div key={index} className="mb-4 p-4 bg-white rounded shadow-md">
+      <h3 className="text-lg font-semibold">
+        Name: {vendor?.firstName || "N/A"}
+      </h3>
+      <img
+  src={vendor?.vendorImage || fallbackImage} // Use a logical OR to provide fallback
+  alt={vendor?.name || "N/A"}
+  className="w-16 h-16 object-cover rounded mb-2"
+/>
+
+
+      <div>
+        <p className="text-lg font-bold">Shop: {vendor?.shopName || "N/A"}</p>
+        <p className="text-gray-500 pt-3">Vendor Orders: 9 Orders Served</p>
+        <p className="text-gray-500">Vendor No: {vendor?.phoneNumber || "N/A"}</p>
+        <p className="text-gray-500 flex justify-center gap-2">
+          <FaMapMarkerAlt className="text-xl" />
+          {vendor?.address || "N/A"}
+        </p>
+      </div>
+    </div>
+  ))
+) : (
+  <p>No vendors available</p>
+)}
+
             </div>
-          ))}
-        </div>
           </div>
         </div>
-
-        {/* Product Details Modal */}
-        {/* <Modal show={showModal} onHide={handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>Product Details</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            {products.map((product) => (
-              <div key={product._id}>
-                <h5>{product.name}</h5>
-                <p>Price: ${product.price.toFixed(2)}</p>
-                <p>Quantity: {product.qty}</p>
-                <p>Tax: {product.taxAmount}%</p>
-                <p>Discount: ${product.discountAmount.toFixed(2)}</p>
-              </div>
-            ))}
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
-          </Modal.Footer>
-        </Modal> */}
       </div>
     </>
   );
 };
 
 export default OrderDetails;
-
-
-
-
-
-
-

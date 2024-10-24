@@ -1,29 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { FaGlobe, FaStar, FaTrash } from "react-icons/fa";
 import { AiOutlineFile, AiOutlineShoppingCart } from "react-icons/ai";
-import { Link, useParams } from "react-router-dom"; 
+import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-
+import ActionButton from "../../../components/ActionButton/Action";
+import ApiConfig from "../../../components/config/apiConfig";
 import {
   fetchProductById,
   updateProductStatus,
-} from '../../../components/redux/product/productSlice';
-import Swal from 'sweetalert2';
-import apiConfig from "../../../components/config/apiConfig";
-import ActionButton from "../../../components/ActionButton/Action";
+} from "../../../components/redux/product/productSlice";
+import Swal from "sweetalert2";
 
 const ProductDetail = () => {
   const { productId } = useParams();
   const dispatch = useDispatch();
-  
+
   const { loading, error, products } = useSelector((state) => state.product);
 
   useEffect(() => {
-    dispatch(fetchProductById({ productId }));
+    dispatch(fetchProductById(productId));
   }, [dispatch, productId]);
 
   const handleUpdateStatus = (id, currentStatus) => {
@@ -35,21 +33,21 @@ const ProductDetail = () => {
     } else {
       return; // No change needed if already rejected
     }
-    
+
     Swal.fire({
-      title: 'Are you sure?',
+      title: "Are you sure?",
       text: `Do you want to change the status to ${newStatus}?`,
-      icon: 'warning',
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonText: 'Yes, update it!',
-      cancelButtonText: 'No, cancel!',
+      confirmButtonText: "Yes, update it!",
+      cancelButtonText: "No, cancel!",
     }).then((result) => {
       if (result.isConfirmed) {
         dispatch(updateProductStatus({ productId: id, status: newStatus }))
           .then(() => toast.success(`Product status updated to ${newStatus}!`))
-          .catch(() => toast.error('Failed to update product status.'));
+          .catch(() => toast.error("Failed to update product status."));
       } else {
-        toast.info('Status update canceled.');
+        toast.info("Status update canceled.");
       }
     });
   };
@@ -60,7 +58,9 @@ const ProductDetail = () => {
   useEffect(() => {
     const fetchProductData = async () => {
       try {
-        const response = await axios.get(`${apiConfig.seller}/products/${productId}`);
+        console.log(productId);
+        const url = `${ApiConfig.seller}/products/${productId}`;
+        const response = await axios.get(url);
         if (response.status === 200) {
           setProductData(response.data.doc);
         } else {
@@ -78,7 +78,9 @@ const ProductDetail = () => {
 
   const handleDeleteReview = async (reviewId) => {
     try {
-      await axios.delete(`${ApiConfig.seller}/products/${productId}/reviews/${reviewId}`);
+      await axios.delete(
+        `${ApiConfig.seller}/products/${productId}/reviews/${reviewId}`
+      );
       setProductData((prevData) => ({
         ...prevData,
         reviews: prevData.reviews.filter((review) => review._id !== reviewId),
@@ -152,7 +154,7 @@ const ProductDetail = () => {
               </div>
               <div className="d-block flex-grow-1 w-max-md-100">
                 <div className="d-flex flex-wrap justify-content-between align-items-center">
-                <ul className="nav nav-tabs w-fit-content mb-2">
+                  <ul className="nav nav-tabs w-fit-content mb-2">
                     <li className="nav-item text-capitalize">
                       <a className="nav-link active" href="#">
                         English(EN)
@@ -162,51 +164,62 @@ const ProductDetail = () => {
                 </div>
                 <div className="d-flex flex-wrap align-items-center flex-sm-nowrap justify-content-between gap-3 min-h-50">
                   <div className="d-flex flex-wrap gap-2 align-items-center">
-                  {productData.images.map((imgUrl, index) => {
-  return (  // Add this return statement
-    <div
-      key={index}
-      className="aspect-1 float-left overflow-hidden d-block border rounded-lg position-relative"
-    >
-      <a
-        href={imgUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <img
-          width="50"
-          className="img-fit max-50"
-          alt={`Additional ${index}`}
-          src={imgUrl}
-        />
-      </a>
-    </div>
-  );
-})}
-
+                    {productData.images.map((imgUrl, index) => {
+                      return (
+                        // Add this return statement
+                        <div
+                          key={index}
+                          className="aspect-1 float-left overflow-hidden d-block border rounded-lg position-relative"
+                        >
+                          <a
+                            href={imgUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <img
+                              width="50"
+                              className="img-fit max-50"
+                              alt={`Additional ${index}`}
+                              src={imgUrl}
+                            />
+                          </a>
+                        </div>
+                      );
+                    })}
                   </div>
 
                   <span className="text-dark">
-                    {productData.reviews?.length} Reviews
+                    {productData.reviews?.length || 0} Reviews
                   </span>
-                  <div className="div">
-                    {/* <div className="flex flex-col gap-2 mt-4 md:mt-0">
+                  {/* <div className="div">
+                    <div className="flex flex-col gap-2 mt-4 md:mt-0">
                       <button
-                        className={`px-4 py-2 rounded ${productData.status === "pending" ? "bg-green-500" : productData.status === "approved" ? "bg-red-500" : "bg-gray-500"}`}
-                        style={{color:"white"}}
-                        onClick={() => handleUpdateStatus(productId, productData.status)}
+                        className={`px-4 py-2 rounded ${
+                          productData.status === "pending"
+                            ? "bg-green-500"
+                            : productData.status === "approved"
+                            ? "bg-red-500"
+                            : "bg-gray-500"
+                        }`}
+                        style={{ color: "white" }}
+                        onClick={() =>
+                          handleUpdateStatus(productId, productData.status)
+                        }
                       >
-                        {productData.status === "pending" ? "Activate" : productData.status === "approved" ? "Reject" : "Status Unchanged"}
-
+                        {productData.status === "pending"
+                          ? "Activate"
+                          : productData.status === "approved"
+                          ? "Reject"
+                          : "Status Unchanged"}
                       </button>
-                    </div> */}
-                  </div>
+                    </div>
+                  </div> */}
                 </div>
                 <div className="d-block mt-2">
                   <div className="lang-form flex flex-col" id="en-form">
                     <div className="d-flex">
                       <h2 className="mb-2 pb-1 text-gulf-blue">
-                        {productData.name}
+                        {productData?.name}
                       </h2>
                       <td className="px-2 py-1">Status:</td>
                       <td className="px-2 py-1">
@@ -246,23 +259,19 @@ const ProductDetail = () => {
               </div>
               <div className="border p-3 mobile-w-100 w-170">
                 <div className="d-flex flex-column mb-1">
-                  <h6 className="font-weight-normal text-capitalize">
-                    Brand:
-                  </h6>
-                  <h3 className="mb-0">{brand.name}</h3>
+                  <h6 className="font-weight-normal text-capitalize">Brand:</h6>
+                  <h3 className="mb-0">{brand?.name}</h3>
                 </div>
                 <div className="d-flex flex-column mb-1">
                   <h6 className="font-weight-normal text-capitalize">
                     Category:
                   </h6>
-                  <h3 className="mb-0">{category.name}</h3>
+                  <h3 className="mb-0">{category?.name}</h3>
                 </div>
               </div>
               <div className="border p-3 mobile-w-100 w-170">
                 <div className="d-flex flex-column mb-1">
-                  <h6 className="font-weight-normal text-capitalize">
-                    SKU:
-                  </h6>
+                  <h6 className="font-weight-normal text-capitalize">SKU:</h6>
                   <h3 className="mb-0">{sku}</h3>
                 </div>
                 <div className="d-flex flex-column mb-1">
@@ -274,9 +283,7 @@ const ProductDetail = () => {
               </div>
               <div className="border p-3 mobile-w-100 w-170">
                 <div className="d-flex flex-column mb-1">
-                  <h6 className="font-weight-normal text-capitalize">
-                    Price:
-                  </h6>
+                  <h6 className="font-weight-normal text-capitalize">Price:</h6>
                   <h3 className="mb-0">{price}</h3>
                 </div>
                 <div className="d-flex flex-column mb-1">
@@ -307,10 +314,7 @@ const ProductDetail = () => {
                 />
               </div>
             )} */}
-        
-        
           </div>
-          
         </div>
         <div className="row g-2 mt-3">
           <div className="col-md-6">
@@ -354,91 +358,88 @@ const ProductDetail = () => {
               </div>
             </div>
           </div>
-
-      
         </div>
         <div className="table-responsive col-md-12">
-            <div className="row g-2 mt-3">
-              <div className="table-responsive col-md-12">
-                <table className="table text-nowrap table-borderless">
-                  <thead className="thead-light">
-                    <tr>
-                      <th className="text-capitalize">Reviewer Name</th>
-                      <th className="text-capitalize">Rating</th>
-                      <th className="text-capitalize">Review</th>
-                      <th className="text-capitalize">Review Date</th>
-                      <th className="text-capitalize text-center">Status</th>
-                      <th className="text-capitalize">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody className="p-8">
-                    {productData.reviews?.length ? (
-                      productData.reviews.map((review, index) => (
-                        <tr key={index}>
-                          <td>{review.customer?.firstName}</td>
-                          <td>
-                            <div className="d-flex align-items-center">
-                              {Array.from({ length: 5 }).map((_, starIndex) => (
-                                <FaStar
-                                  key={starIndex}
-                                  className={`fs-16 ${
-                                    starIndex < review.rating
-                                      ? "text-warning"
-                                      : "text-muted"
-                                  }`}
-                                />
-                              ))}
-                            </div>
-                          </td>
-                          <td>{review.reviewText}</td>
-                          <td>
-                            {new Date(review.createdAt).toLocaleDateString()}
-                          </td>
-                          <td className="text-center flex items-center">
-                            <label className="switcher mx-auto">
-                              <input
-                                type="checkbox"
-                                className="switcher_input"
-                                checked={review.status === "Active"}
-                                onChange={() =>
-                                  handleStatusChange(review._id, review.status)
-                                }
+          <div className="row g-2 mt-3">
+            <div className="table-responsive col-md-12">
+              <table className="table text-nowrap table-borderless">
+                <thead className="thead-light">
+                  <tr>
+                    <th className="text-capitalize">Reviewer Name</th>
+                    <th className="text-capitalize">Rating</th>
+                    <th className="text-capitalize">Review</th>
+                    <th className="text-capitalize">Review Date</th>
+                    <th className="text-capitalize text-center">Status</th>
+                    <th className="text-capitalize">Actions</th>
+                  </tr>
+                </thead>
+                <tbody className="p-8">
+                  {productData.reviews?.length ? (
+                    productData.reviews.map((review, index) => (
+                      <tr key={index}>
+                        <td>{review.customer?.firstName}</td>
+                        <td>
+                          <div className="d-flex align-items-center">
+                            {Array.from({ length: 5 }).map((_, starIndex) => (
+                              <FaStar
+                                key={starIndex}
+                                className={`fs-16 ${
+                                  starIndex < review.rating
+                                    ? "text-warning"
+                                    : "text-muted"
+                                }`}
                               />
-                              <span className="switcher_control" />
-                            </label>
-                          </td>
-                          <td>
-                            <ActionButton
-                              onClick={() => handleDeleteReview(review._id)}
-                              icon={FaTrash} // Pass dynamic icon
-                              className="ml-4"
-                              label="Delete"
+                            ))}
+                          </div>
+                        </td>
+                        <td>{review.reviewText}</td>
+                        <td>
+                          {new Date(review.createdAt).toLocaleDateString()}
+                        </td>
+                        <td className="text-center flex items-center">
+                          <label className="switcher mx-auto">
+                            <input
+                              type="checkbox"
+                              className="switcher_input"
+                              checked={review.status === "Active"}
+                              onChange={() =>
+                                handleStatusChange(review._id, review.status)
+                              }
                             />
-                            {/* <button
+                            <span className="switcher_control" />
+                          </label>
+                        </td>
+                        <td>
+                          <ActionButton
+                            onClick={() => handleDeleteReview(review._id)}
+                            icon={FaTrash} // Pass dynamic icon
+                            className="ml-4"
+                            label="Delete"
+                          />
+                          {/* <button
                               className="btn  btn-sm border-red-400 hover:bg-red-400 hover:text-white "
                               onClick={() => handleDeleteReview(review._id)}
                             >
                               <FiTrash />
                             </button> */}
-                          </td>
-                        </tr>
-                      ))
-                    ) : (
-                      <tr>
-                        <td colSpan="6" className="text-center">
-                          No reviews available
                         </td>
                       </tr>
-                    )}
-                  </tbody>
-                </table>
-              </div>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan="6" className="text-center">
+                        No reviews available
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
             </div>
           </div>
+        </div>
       </div>
     </>
   );
 };
 
 export default ProductDetail;
-

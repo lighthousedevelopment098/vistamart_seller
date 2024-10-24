@@ -53,8 +53,8 @@ const VendorNewRequestProductPage = () => {
         searchValue: '',
         userId: userId,
         userType: 'vendor', // Filter for vendor
-        status: '', // No filter for status
-        vendorNew4Days: true // Filter for new vendor requests
+        status: 'pending', // No filter for status
+        // vendorNew4Days: true // Filter for new vendor requests
       }}
     />
   );
@@ -63,6 +63,7 @@ const VendorNewRequestProductPage = () => {
 const VendorApprovedProductPage = () => {
   const { user } = useSelector(state => state.auth);
   const userId = user?._id || '';
+  console.log("user id ====", userId)
   return (
     <InHouseProductList
       initialTitle="Vendor Approved Products"

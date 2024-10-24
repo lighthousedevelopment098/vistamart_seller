@@ -27,6 +27,8 @@ import categoryReducer from './categorybrandSlice';
 import refundReducer from './refundSlice';
 import vendorReducer from './vendorSlice'; // Import your vendor reducer
 import brandReducer from './brandSlice'; // Import your vendor reducer
+import couponReducer from './couponSlice'; // Import your vendor reducer
+import vendorBankReducer from './vendorBankSlice'; // Import your vendor reducer
 
 const store = configureStore({
   reducer: {
@@ -37,7 +39,9 @@ const store = configureStore({
     refund: refundReducer,
     vendor: vendorReducer, // Add your vendor reducer here
     brand: brandReducer, // Add your brand reducer here
-    
+    coupons: couponReducer, 
+    vendorBanks: vendorBankReducer,
+
   },
 });
 

@@ -1,44 +1,19 @@
 // // end
-import React, { useState } from "react";
-import { IoHome, IoPersonOutline } from "react-icons/io5";
+import { useState } from "react";
+import {
+  IoHome,
+  IoStatsChartOutline,
+  IoStatsChartSharp,
+} from "react-icons/io5";
 import { IoCartSharp } from "react-icons/io5";
-import {
-  MdGroups2,
-  MdNotificationsActive,
-  MdOutlineDiamond,
-  MdOutlineFolderZip,
-  MdShoppingBag,
-} from "react-icons/md";
-import { HiOutlineReceiptRefund } from "react-icons/hi";
-import { FaAngleDown, FaAngleUp, FaKey, FaRegStar } from "react-icons/fa";
-import { TbCategory2 } from "react-icons/tb";
-import { FiChevronDown } from "react-icons/fi"; // Importing icons
+import { LiaSignalSolid } from "react-icons/lia";
+import { MdForwardToInbox, MdHomeWork, MdOutlineDiamond } from "react-icons/md";
+import { FaAngleDown, FaAngleUp, FaSearch, FaWallet } from "react-icons/fa";
 import { FaStar } from "react-icons/fa";
-import { AiFillDatabase, AiFillPicture, AiOutlineHdd } from "react-icons/ai";
-import { FaWarehouse } from "react-icons/fa";
-import { AiOutlineSpotify } from "react-icons/ai";
-import { GrGallery } from "react-icons/gr";
-import {
-  BsCardImage,
-  BsFillPersonFill,
-  BsReverseLayoutSidebarInsetReverse,
-} from "react-icons/bs";
-import { AiOutlineUsergroupDelete } from "react-icons/ai";
-import { IoNotificationsSharp } from "react-icons/io5";
-import { PiNotification } from "react-icons/pi";
-import { TfiAnnouncement } from "react-icons/tfi";
-import { CiInboxOut } from "react-icons/ci";
-import { FaMessage } from "react-icons/fa6";
-import { FaHeadset } from "react-icons/fa";
-import { FcSalesPerformance } from "react-icons/fc";
-import { GoReport } from "react-icons/go";
-import {
-  IoIosNotifications,
-  IoMdPerson,
-  IoMdStarOutline,
-} from "react-icons/io";
-import { VscGraphLine } from "react-icons/vsc";
+import { AiFillDatabase } from "react-icons/ai";
+import { FaPersonMilitaryToPerson } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import { BsBank2 } from "react-icons/bs";
 
 // --------------------------------------------
 
@@ -197,9 +172,9 @@ const Sidebar = ({ setComponent }) => {
     setShowOfferList(false);
     setShowBrandList(false);
     setShowRefoundList(false);
-    setShowOrderList(false); // Close Orders list when Refound list is toggled
-    setShowProductList(false); // Close Product list when Refound list is toggled
-    setShowInHouseProductList(false); // Close In House Product List when Refound list is toggled
+    setShowOrderList(false);
+    setShowProductList(false);
+    setShowInHouseProductList(false);
   };
 
   //now copy the togglefunciton
@@ -212,16 +187,15 @@ const Sidebar = ({ setComponent }) => {
   return (
     // <aside className="bg-[#077422] text-white  min-h-screen p-4 flex flex-col fixed left-0  overflow-y-auto">
 
-    <aside className="bg-[#077422] text-white w-64 min-h-screen p-4 flex flex-col fixed left-0  h-full overflow-y-scroll">
-      <div className="pb-3 pt-4">
-        <div className="flex items-center">
-          {/* <button type="button" className="btn">
-             <i className="tio-search"></i>
-          </button> */}
-
+    <aside className="bg-primary pb-4 text-white top-16 bottom-0 px-1 flex flex-col gap-2 fixed left-0  max-h-screen overflow-y-auto">
+      <div className="pt-7 pb-4 px-3 bg-primary sticky top-0 z-50">
+        <div className=" border text-white border-white rounded-md focus:outline-none  placeholder-gray-400 w-full  px-2 flex items-center  bg-primary sticky top-0 z-50">
+          <div>
+            <FaSearch />
+          </div>
           <input
             type="text"
-            className="ml-2 p-2 bg-[#1f8248] rounded-md focus:outline-none w-full"
+            className="ml-2 p-2 outline-none placeholder:text-white bg-transparent"
             placeholder="Search menu..."
           />
         </div>
@@ -229,10 +203,10 @@ const Sidebar = ({ setComponent }) => {
       {/* Dashboard and POS buttons */}
       <Link
         to="/"
-        className=" flex   w-full   align-items-center text-left p-2 rounded hover:bg-[#52c970] text-white hover:text-white mb-3 "
+        className=" w-full flex gap-2  align-items-center text-left p-2 rounded hover:bg-[#52c970]  hover:text-white text-blue-700"
         style={{ color: "white" }}
       >
-        <IoHome className=" mr-2  " />
+        <IoHome className="   " />
         <span className="">Dashboard</span>
       </Link>
       {/* //POS------------------------- */}
@@ -244,16 +218,16 @@ const Sidebar = ({ setComponent }) => {
         <MdShoppingBag className="inline-block mr-2" /> POS
       </Link> */}
       {/* order management */}
-      <div className="mt-4">
-        <small className="block text-gray-400 uppercase font-serif">
+      <div className="mt-2">
+        <small className="block text uppercase font-serif mx-5">
           Order Management
         </small>
         <button
-          className="w-full text-left p-2 rounded hover:bg-[#52c970] text-white hover:text-white flex justify-between relative "
+          className="w-full text-left px-5 mt-2 p-2 rounded hover:bg-[#52c970] text-white hover:text-white flex justify-between relative "
           onClick={togglePageList}
           style={{ color: "white" }}
         >
-          <div className="flex gap-1 justify-between align-items-center">
+          <div className="flex gap-2 justify-between align-items-center">
             <IoCartSharp /> Orders
           </div>
           <span className="float-right">
@@ -265,10 +239,10 @@ const Sidebar = ({ setComponent }) => {
             <li>
               <Link
                 to="/allorders"
-                className="block w-full text-left  gap-2 p-1 pl-4 rounded hover:bg-gray-500 text-blue-700"
+                className="block w-full text-left p-1 pl-4 rounded hover:bg-gray-500 text-blue-700"
                 style={{ color: "white" }}
               >
-                <span className="text-green-700">•</span> ALL
+                • ALL
               </Link>
             </li>
             <li>
@@ -347,13 +321,13 @@ const Sidebar = ({ setComponent }) => {
         )}
       </div>
       {/* Refund request */}
-      <div className="mt-4">
+      <div className="mt-2">
         <button
-          className="w-full text-left p-2 rounded hover:bg-[#52c970] text-white hover:text-white flex justify-between relative "
+          className="w-full text-left mt-2  p-2 rounded hover:bg-[#52c970] text-white hover:text-white flex justify-between relative "
           onClick={toggleRefoundList}
           style={{ color: "white" }}
         >
-          <div className="flex gap-1 justify-between align-items-center">
+          <div className="flex gap-2 justify-between align-items-center">
             <AiFillDatabase /> Refund Requests
           </div>
           <span className="float-right">
@@ -405,11 +379,9 @@ const Sidebar = ({ setComponent }) => {
       {/* /////Product Management-------------------------- */}
       {/*  products */}
       <div className="mt-2">
-        <small className="block text-gray-400 uppercase">
-          Product Management
-        </small>
+        <small className="block mx-5 text uppercase">Product Management</small>
         <button
-          className="block w-full text-left p-2  rounded hover:bg-[#52c970] text-white hover:text-white flex justify-between text-white hover:text-[#7EC283]  relative"
+          className="block w-full text-left p-2 mt-2  rounded hover:bg-[#52c970] text-white hover:text-white flex justify-between text-white hover:text-[#7EC283]  relative"
           onClick={toggleInHouseProductList}
           style={{ color: "white" }}
         >
@@ -419,7 +391,7 @@ const Sidebar = ({ setComponent }) => {
           {/* <FiChevronDown /> */}
           {/* </span> */}
 
-          <div className="flex gap-1 justify-between align-items-center">
+          <div className="flex gap-2 justify-between align-items-center">
             <MdOutlineDiamond /> Products
           </div>
           <span className="float-right">
@@ -428,13 +400,31 @@ const Sidebar = ({ setComponent }) => {
         </button>
         {showInHouseProductList && (
           <ul className="ml-4 mt-2 space-y-1">
-            <li>
+            {/* <li>
               <Link
                 to="/inhouseproductlist"
                 className="block w-full text-left p-1 pl-4 rounded hover:bg-gray-500"
                 style={{ color: "white" }}
               >
                 • Product List
+              </Link>
+            </li> */}
+             <li>
+              <Link
+                to="inhouseaddproduct"
+                className="block w-full text-left p-1 pl-4 rounded hover:bg-gray-500"
+                style={{ color: "white" }}
+              >
+                • Add New Product
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="newproductrequest"
+                className="block w-full text-left p-1 pl-4 rounded hover:bg-gray-500"
+                style={{ color: "white" }}
+              >
+                • New Product Request
               </Link>
             </li>
             <li>
@@ -449,15 +439,6 @@ const Sidebar = ({ setComponent }) => {
 
             <li>
               <Link
-                to="newproductrequest"
-                className="block w-full text-left p-1 pl-4 rounded hover:bg-gray-500"
-                style={{ color: "white" }}
-              >
-                • New Product Request
-              </Link>
-            </li>
-            <li>
-              <Link
                 to="deniedproduct"
                 className="block w-full text-left p-1 pl-4 rounded hover:bg-gray-500"
                 style={{ color: "white" }}
@@ -465,15 +446,7 @@ const Sidebar = ({ setComponent }) => {
                 • Denied Product Request
               </Link>
             </li>
-            <li>
-              <Link
-                to="inhouseaddproduct"
-                className="block w-full text-left p-1 pl-4 rounded hover:bg-gray-500"
-                style={{ color: "white" }}
-              >
-                • Add New Product
-              </Link>
-            </li>
+           
             <li>
               <Link
                 to="productgallery"
@@ -499,94 +472,72 @@ const Sidebar = ({ setComponent }) => {
           className="block w-full flex  align-items-center text-left p-2  rounded hover:bg-[#52c970] text-white hover:text-white mb-3"
           style={{ color: "white" }}
         >
-          <FaRegStar className="inline-block mr-2" /> Product Reveiw
+          <FaStar className="inline-block mr-2" /> Product Reveiw
         </Link>
       </div>
       {/* --------------------------------------------------------- */}
       {/* ///------------------Promotion Management---------------- */}
 
-      <div className="mt-4">
-        <small className="block text-gray-400 uppercase">
+      <div className="mt-2">
+        <small className="block text mx-5 uppercase">
           Promotation managenment
         </small>
         <Link
           to="coupon"
-          className="block w-full flex  align-items-center text-left p-2  rounded hover:bg-[#52c970] text-white hover:text-white mb-3"
+          className=" w-full flex gap-2  align-items-center text-left p-2 rounded hover:bg-[#52c970]  hover:text-white text-blue-700"
           style={{ color: "white" }}
         >
-          <CiInboxOut className="inline-block mr-2" /> Coupans
+          <FaPersonMilitaryToPerson className="inline-block mr-2" /> Coupans
         </Link>
       </div>
       {/* Help and Support */}
-      <div className="mt-4">
-        <small className="block text-gray-400 uppercase">
-          HELP AND SUPPORT
-        </small>
+      <div className="mt-2">
+        <small className="block mx-5 text uppercase">HELP AND SUPPORT</small>
         <Link
           to="indexmessage"
-          className="block w-full flex  align-items-center text-left p-2  rounded hover:bg-[#52c970] text-white hover:text-white mb-3"
+          className=" w-full flex gap-2  align-items-center text-left p-2 rounded hover:bg-[#52c970]  hover:text-white text-blue-700"
           style={{ color: "white" }}
         >
-          <CiInboxOut className="inline-block mr-2" /> Inbox
+          <MdForwardToInbox className="inline-block mr-2" /> Inbox
         </Link>
-
-        {/* <Link
-          to="/messagesupport"
-          className="block w-full flex  align-items-center text-left p-2  rounded hover:bg-[#52c970] text-white hover:text-white mb-3"
-          style={{ color: "white" }}
-        >
-          <FaMessage className="inline-block mr-2" /> Messages
-        </Link> */}
-
-        {/* <Link
-          to="ticketsupport"
-          className="block w-full flex  align-items-center text-left p-2  rounded hover:bg-[#52c970] text-white hover:text-white mb-3"
-          style={{ color: "white" }}
-        >
-          <FaHeadset className="inline-block mr-2" /> Support ticket
-        </Link> */}
       </div>
 
       {/* ------------------Reports And Analysis------------------------ */}
-      <div className="mt-4">
-        <small className="block text-gray-400 uppercase">
-          REPORT & ANALYSIS
-        </small>
+      <div className="mt-2">
+        <small className="block mx-5 text uppercase">REPORT & ANALYSIS</small>
         <Link
           to="/salesandtransactionreport"
-          className="block w-full flex align-items-center text-left p-2 rounded hover:bg-[#52c970] text-white hover:text-white mb-3 text-blue-700"
+          className=" w-full flex gap-2  align-items-center text-left p-2 rounded hover:bg-[#52c970]  hover:text-white text-blue-700"
           style={{ color: "white" }}
         >
-          <MdOutlineFolderZip />
+          <LiaSignalSolid />
           Transatation Reports
-          <span className="float-right">
+          {/* <span className="float-right">
             <FiChevronDown />
-          </span>
+          </span> */}
         </Link>
       </div>
       {/*  */}
       <Link
         to="/productreport"
-        className="block w-full flex align-items-center text-left p-2 rounded hover:bg-[#52c970] text-white hover:text-white mb-3 text-blue-700"
+        className=" w-full flex gap-2  align-items-center text-left p-2 rounded hover:bg-[#52c970]  hover:text-white text-blue-700"
         style={{ color: "white" }}
       >
-        <IoHome className="inline-block mr-2" /> Product Report
+        <IoStatsChartSharp className="inline-block mr-2" /> Product Report
       </Link>
       {/*  */}
       <Link
         to="/orderreports"
-        className="block w-full flex align-items-center text-left p-2 rounded hover:bg-[#52c970] text-white hover:text-white mb-3 text-blue-700"
+        className=" w-full flex gap-2  align-items-center text-left p-2 rounded hover:bg-[#52c970]  hover:text-white text-blue-700"
         style={{ color: "white" }}
       >
-        <IoHome className="inline-block mr-2" /> Order Report
+        <IoStatsChartOutline className="inline-block mr-2" /> Order Report
       </Link>
 
       {/* **********Bussniess Section************ */}
 
-      <div className="mt-4">
-        <small className="block text-gray-400 uppercase">
-          BUSINESS SECTION
-        </small>
+      <div className="mt-2">
+        <small className="block text mx-5 uppercase">BUSINESS SECTION</small>
         {/* <Link
           to="/salesandtransactionreport"
           className="block w-full flex align-items-center text-left p-2 rounded hover:bg-[#52c970] text-white hover:text-white mb-3 text-blue-700"
@@ -602,26 +553,26 @@ const Sidebar = ({ setComponent }) => {
       {/*  */}
       <Link
         to="/withdraws"
-        className="block w-full flex align-items-center text-left p-2 rounded hover:bg-[#52c970] text-white hover:text-white mb-3 text-blue-700"
+        className=" w-full flex gap-2  align-items-center text-left p-2 rounded hover:bg-[#52c970]  hover:text-white text-blue-700"
         style={{ color: "white" }}
       >
-        <IoHome className="inline-block mr-2" /> Widthdraw
+        <FaWallet className="inline-block mr-2" /> Widthdraw
       </Link>
       <Link
         to="/bankinformation"
-        className="block w-full flex align-items-center text-left p-2 rounded hover:bg-[#52c970] text-white hover:text-white mb-3 text-blue-700"
+        className=" w-full flex gap-2  align-items-center text-left p-2 rounded hover:bg-[#52c970]  hover:text-white text-blue-700"
         style={{ color: "white" }}
       >
-        <IoHome className="inline-block mr-2" /> Bank Information
+        <BsBank2 className="inline-block mr-2" /> Bank Information
       </Link>
 
       {/*  */}
       <Link
         to="/shopsetting"
-        className="block w-full flex align-items-center text-left p-2 rounded hover:bg-[#52c970] text-white hover:text-white mb-3 text-blue-700"
+        className=" w-full flex gap-2  align-items-center text-left p-2 rounded hover:bg-[#52c970]  hover:text-white text-blue-700"
         style={{ color: "white" }}
       >
-        <IoHome className="inline-block mr-2" /> Shop Settings
+        <MdHomeWork className="inline-block mr-2" /> Shop Settings
       </Link>
 
       {/* *************** */}
@@ -630,3 +581,101 @@ const Sidebar = ({ setComponent }) => {
 };
 
 export default Sidebar;
+
+
+
+////////
+// import { useState } from "react";
+// import { Link } from "react-router-dom";
+// import { FaAngleDown, FaAngleUp } from "react-icons/fa";
+// import { sidebarItems as allSidebarItems } from "./sideBarData.jsx"; // Ensure this path is correct
+// import { BsDot } from "react-icons/bs";
+
+// const Sidebar = ({ toggleSidebar }) => {
+//   const [activeDropdown, setActiveDropdown] = useState(null);
+//   const [searchTerm, setSearchTerm] = useState("");
+//   const toggleDropdown = (index) => {
+//     setActiveDropdown(activeDropdown === index ? null : index);
+//   };
+
+//   // Filtering sidebar items based on search term
+//   const filteredSidebarItems = allSidebarItems.filter((item) => {
+//     const searchQuery = searchTerm.toLowerCase();
+//     return (
+//       (item.title && item.title.toLowerCase().includes(searchQuery)) ||
+//       (item.dropdownItems && item.dropdownItems.some((subItem) => subItem.title && subItem.title.toLowerCase().includes(searchQuery)))
+//     );
+//   });
+
+//   return (
+//     <aside className="bg-primary text-white w-64 min-h-screen top-0 p-4 flex flex-col fixed left-0 h-full overflow-y-scroll">
+//       {/* Search Box */}
+//       <div className="sticky top-0 bg-primary pt-6 pb-4 z-10">
+//         <input
+//           type="text"
+//           className="ml-2 p-2 bg-primary border mt-12 text-white border-white rounded-md focus:outline-none w-full placeholder-white"
+//           placeholder="Search menu..."
+//           value={searchTerm}
+//           onChange={(e) => setSearchTerm(e.target.value)}
+//         />
+//       </div>
+
+//       {/* Sidebar Items */}
+//       {filteredSidebarItems.map((item, index) => (
+//         <div key={index} className="mt-2">
+//           {item.hasDropdown ? (
+//             <>
+//               <h1 className="text-gray-300 mb-2 mt-3">{item.section}</h1>
+//               <button
+//                 className="w-full text-left p-2 rounded hover:bg-[#52c970] text-white flex justify-between"
+//                 onClick={() => toggleDropdown(index)}
+//               >
+//                 <div className="flex items-center gap-2 m-0">
+//                   {item.icon} {item.title}
+//                 </div>
+//                 <span>
+//                   {activeDropdown === index ? <FaAngleUp /> : <FaAngleDown />}
+//                 </span>
+//               </button>
+//               <ul
+//                 className={`ml-2 transition-all duration-300 ease-in-out overflow-hidden ${
+//                   activeDropdown === index
+//                     ? "max-h-80 opacity-100"
+//                     : "max-h-0 opacity-0"
+//                 }`}
+//               >
+//                 {item.dropdownItems && item.dropdownItems.map((subItem, subIndex) => (
+//                   <li key={subIndex}>
+//                     <Link
+//                       to={subItem.link}
+//                       className="w-full m-0 flex items-center text-left p-1 pl-4 rounded hover:bg-[#4CAF50] text-white"
+//                       onClick={toggleSidebar}
+//                     >
+//                       <span>
+//                         <BsDot className="font-bold text-[1rem]" />
+//                       </span>{" "}
+//                       {subItem.title}
+//                     </Link>
+//                   </li>
+//                 ))}
+//               </ul>
+//             </>
+//           ) : (
+//             <>
+//               <h1 className="text-gray-300">{item.section}</h1>
+//               <Link
+//                 to={item.link}
+//                 className="flex items-center gap-2 w-full text-left p-2 rounded hover:bg-[#52c970] text-white"
+//                 onClick={toggleSidebar}
+//               >
+//                 {item.icon} {item.title}
+//               </Link>
+//             </>
+//           )}
+//         </div>
+//       ))}
+//     </aside>
+//   );
+// };
+
+// export default Sidebar;
