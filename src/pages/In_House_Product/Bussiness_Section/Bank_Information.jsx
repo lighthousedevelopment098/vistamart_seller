@@ -2,12 +2,13 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BsBank } from "react-icons/bs";
-import { FaEdit, FaUser } from "react-icons/fa";
+import { FaAd, FaEdit, FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { fetchVendorBanks } from "../../../components/redux/vendorBankSlice";
 import "./Tooltip.css"; // Assuming you have some tooltips or styling
 import { getAuthData } from "../../../utils/authHelper";
 import ActionButton from "../../../components/ActionButton/Action";
+import { AiFillBank } from "react-icons/ai";
 
 const BankInformation = () => {
   const dispatch = useDispatch();
@@ -33,7 +34,7 @@ const BankInformation = () => {
 
   // Assume we fetch only one bank info, or map through multiple if needed
   const bankInfo = vendorBanks.length > 0 ? vendorBanks[0] : null;
-
+  
   return (
     <div className="bg-[#F9F9FB] md:p-8">
       <div className="row flex justify-between ">
@@ -50,9 +51,9 @@ const BankInformation = () => {
        <div className="btn">
          
        <ActionButton
-  to={`/bankinfoedit`}  
-  icon={FaEdit}  
-  label="Edit Bank"  // Set the label
+  to={`/bankinfoadd`}  
+  icon={AiFillBank}  
+  label="Add Bank"  // Set the label
 />
 
       
@@ -87,7 +88,8 @@ const BankInformation = () => {
                     </p>
                   </div>
                   <Link
-                    to="/bankinfoedit"
+                    to={`/bankinfoedit/${bankInfo._id}` }
+                   
                     className="flex items-center space-x-1 bg-primary hover:bg-primary-dark text-white p-1 rounded-md"
                   >
                     <FaEdit />

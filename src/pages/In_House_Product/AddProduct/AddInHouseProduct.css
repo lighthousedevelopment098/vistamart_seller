@@ -1,12 +1,4 @@
 
-:root { 
-    --c1: #0177cd; 
-    --title-color: #334257; 
-    --text-color: #5b6777; 
-    --font: "Inter", sans-serif;
-} 
-
-
 
 .d-flex { 
     display: -ms-flexbox !important; 

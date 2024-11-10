@@ -122,10 +122,11 @@ import {
 } from "./pages/In_House_Product/ProductManagmentComponent.jsx";// Adjust the import path as needed
 
  import OrderDetails from "./pages/Order/OrderDeatiels.jsx"
-import AddNewProduct from "./pages/seller_product/add/addProduct/addProductForm.jsx";
+import AddNewProduct from "./pages/In_House_Product/AddProduct/addProduct/addProductForm.jsx";
 import ProductDetail from "./pages/seller_product/productDetail/ProductDetail.jsx";
 import InhouseProductUpdate from "./pages/seller_product/add/updateProduct/InhouseProductUpdate.jsx";
 import Coupon from "./pages/OfferAndDeals/Coupon/Coupon.jsx";
+import UpdateBankForm from "./pages/In_House_Product/Bussiness_Section/upddateBank.jsx";
 
 function AllRoutes() {
 
@@ -182,13 +183,13 @@ function AllRoutes() {
                     element={<GenerateBarcode />}
                   />
                   <Route
-                    path="/inhouseprod  uctlistproduct"
+                    path="/inhouseproductlistproduct"
                     element={<InhouseProductBtn />}
                   />
-                  <Route
+                  {/* <Route
                     path="/inhouseaddproduct"
                     element={<AddNewProduct />}
-                  />
+                  /> */}
                   <Route path="/categories" element={<Categories />} />
                   <Route path="/categoryedit" element={<CategoryUpdate />} />
                   <Route path="/subcategories" element={<SubCateggories />} />
@@ -314,7 +315,8 @@ function AllRoutes() {
                     element={<BankInformation />}
                   />
                   <Route path="/shopsetting" element={<Shop_Setting />} />
-                  <Route path="/bankinfoedit" element={<Editbtn />} />
+                  <Route path="/bankinfoadd" element={<Editbtn />} />
+                  <Route path="bankinfoedit/:id" element={<UpdateBankForm />} />
                   <Route path="/withdraws" element={<Withdraws />} />
                   <Route path="/indexmessage" element={<IndexMessage />} />
                   <Route path="/bannersetup" element={<BannerSetup />} />

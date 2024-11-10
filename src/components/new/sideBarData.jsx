@@ -28,7 +28,7 @@ import {
       items: [
         {
           title: "Dashboard",
-          link: "/dashboard",
+          link: "/",
           icon: "IoHome", // Icon name as a string
           class: "text-white hover:bg-[#52c970] hover:text-white mb-3",
         },

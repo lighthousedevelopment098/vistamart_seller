@@ -3,8 +3,8 @@ import { useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { IoMdPerson } from "react-icons/io";
-import FormSection from "../../../../../components/FormInput/FormSection";
 import FormInput from "../../../../../components/FormInput/FormInput";
+import FormSection from "../../../../../components/FormInput/FormSection";
 import FormSelect from "../../../../../components/FormInput/FormSelect";
 
 const ProductAdditional = ({ formData = {}, handleChange }) => {

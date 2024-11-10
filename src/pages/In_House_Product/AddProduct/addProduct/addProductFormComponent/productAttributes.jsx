@@ -3,7 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   fetchAttributes,
   fetchColors,
-} from "../../../../../components/redux/categorybrandSlice";
+} from "../../../../../../redux/slices/admin/categorybrandSlice";
+import { FormSelect } from "react-bootstrap";
+import FormSection from "../../../../../../components/FormInput/FormSection";
 import { IoMdPerson } from "react-icons/io";
 
 const ProductAttributes = ({

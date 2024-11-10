@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+import { fetchVendors, } from "../../../components/redux/vendorSlice";
 
 const Shop_Setting = () => {
   const [isOpen, setIsOpen] = useState(false);
-
+  fetchVendors
   const toggleHandler = () => {
     setIsOpen(!isOpen);
   };

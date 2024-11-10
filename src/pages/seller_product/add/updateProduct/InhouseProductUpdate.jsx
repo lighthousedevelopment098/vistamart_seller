@@ -3,12 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import { getAuthData } from "../../../../utils/authHelper";
-import ProductForm from "../addProduct/addProductFormComponent/productForm";
-import ProductGeneral from "../addProduct/addProductFormComponent/productGeneral";
-import ProductAdditional from "../addProduct/addProductFormComponent/productAdditional";
-import ProductVideo from "../addProduct/addProductFormComponent/productVideo";
-import ProductImageWrapper from "../addProduct/addProductFormComponent/productImageUpload";
-import SeoSection from "../addProduct/addProductFormComponent/SeoSection";
 import {
   fetchCategories,
   fetchBrands,
@@ -22,6 +16,12 @@ import {
   updateProductStatus,
 } from '../../../../components/redux/product/productSlice';
 import apiConfig from "../../../../components/config/apiConfig";
+import ProductForm from "../../../In_House_Product/AddProduct/addProduct/addProductFormComponent/productForm";
+import ProductGeneral from "../../../In_House_Product/AddProduct/addProduct/addProductFormComponent/productGeneral";
+import ProductAdditional from "../../../In_House_Product/AddProduct/addProduct/addProductFormComponent/productAdditional";
+import ProductVideo from "../../../In_House_Product/AddProduct/addProduct/addProductFormComponent/productVideo";
+import ProductImageWrapper from "../../../In_House_Product/AddProduct/addProduct/addProductFormComponent/productImageUpload";
+import SeoSection from "../../../In_House_Product/AddProduct/addProduct/addProductFormComponent/SeoSection";
 const API_URL = `${apiConfig.seller}/products`;
 
 const InhouseProductUpdate = () => {

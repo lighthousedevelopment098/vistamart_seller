@@ -9,44 +9,44 @@ import { ErrorMessage } from '../../utils/ErrorMessage';
 const API_URL = `${apiConfig.seller}/vendorBank`;
 const { token } = getAuthData(); 
 
-// // Thunk for fetching vendor banks
-// export const fetchVendorBanks = createAsyncThunk(
-//   'vendorBanks/fetchVendorBanks',
-//   async (_, { rejectWithValue }) => {
-//     try {
-//       const response = await axiosInstance.get(API_URL, {
-//         headers: { Authorization: `Bearer ${token}` },
-//       });
-//       return response.data.doc;
-//     } catch (error) {
-//       const errorMessage = ErrorMessage(error);
-//       return rejectWithValue(errorMessage);
-//     }
-//   }
-// );
-
+// Thunk for fetching all vendor banks
 export const fetchVendorBanks = createAsyncThunk(
-    'vendorBanks/fetchVendorBanks',
-    async ({ vendor }, { rejectWithValue }) => {
-      try {
-        const response = await axiosInstance.get(API_URL, {
-          headers: { Authorization: `Bearer ${token}` },
-          params: { vendor }, // Pass vendor ID as a search param
-        });
-        return response.data.doc;
-      } catch (error) {
-        const errorMessage = ErrorMessage(error);
-        return rejectWithValue(errorMessage);
-      }
+  'vendorBanks/fetchVendorBanks',
+  async ({ vendor }, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.get(API_URL, {
+        headers: { Authorization: `Bearer ${token}` },
+        params: { vendor }, // Pass vendor ID as a search param
+      });
+      return response.data.doc;
+    } catch (error) {
+      const errorMessage = ErrorMessage(error);
+      return rejectWithValue(errorMessage);
     }
-  );
-  
+  }
+);
+
+// Thunk for fetching a specific vendor bank by its ID
+export const fetchVendorBankById = createAsyncThunk(
+  'vendorBanks/fetchVendorBankById',
+  async (bankId, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.get(`${API_URL}/${bankId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      return response.data.doc;
+    } catch (error) {
+      const errorMessage = ErrorMessage(error);
+      return rejectWithValue(errorMessage);
+    }
+  }
+);
+
 // Thunk for creating a vendor bank entry
 export const createVendorBank = createAsyncThunk(
   'vendorBanks/createVendorBank',
   async (formData, { rejectWithValue }) => {
     try {
-        console.log("form data to be submite ", formData);
       const response = await axiosInstance.post(API_URL, formData, {
         headers: {
           'Content-Type': 'application/json',
@@ -55,7 +55,6 @@ export const createVendorBank = createAsyncThunk(
       });
       return response.data.doc;
     } catch (error) {
-      console.error('Error creating vendor bank:', error.response || error);
       const errorMessage = ErrorMessage(error);
       return rejectWithValue(errorMessage);
     }
@@ -67,6 +66,8 @@ export const updateVendorBank = createAsyncThunk(
   'vendorBanks/updateVendorBank',
   async ({ bankId, bankData }, { rejectWithValue }) => {
     try {
+        console.log("bankData ", bankData)
+        console.log("bankId ", bankId)
       const response = await axiosInstance.put(
         `${API_URL}/${bankId}`,
         bankData,
@@ -102,6 +103,7 @@ const vendorBankSlice = createSlice({
   name: 'vendorBanks',
   initialState: {
     vendorBanks: [], // To store the list of vendor banks
+    vendorBank: null, // To store the single bank fetched by ID
     loading: false,
     error: null,
   },
@@ -112,6 +114,7 @@ const vendorBankSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      // Fetch all vendor banks
       .addCase(fetchVendorBanks.pending, (state) => {
         state.loading = true;
       })
@@ -123,6 +126,21 @@ const vendorBankSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
+
+      // Fetch vendor bank by ID
+      .addCase(fetchVendorBankById.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchVendorBankById.fulfilled, (state, action) => {
+        state.loading = false;
+        state.vendorBank = action.payload;
+      })
+      .addCase(fetchVendorBankById.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+
+      // Create vendor bank
       .addCase(createVendorBank.pending, (state) => {
         state.loading = true;
       })
@@ -136,6 +154,8 @@ const vendorBankSlice = createSlice({
         state.error = action.payload;
         Swal.fire('Error!', 'There was an issue adding the vendor bank.', 'error');
       })
+
+      // Update vendor bank
       .addCase(updateVendorBank.pending, (state) => {
         state.loading = true;
       })
@@ -151,6 +171,8 @@ const vendorBankSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
+
+      // Delete vendor bank
       .addCase(deleteVendorBank.pending, (state) => {
         state.loading = true;
       })

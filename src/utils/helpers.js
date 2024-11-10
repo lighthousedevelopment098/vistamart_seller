@@ -1,31 +1,44 @@
 import axios from "axios";
+import { getAuthData } from "./authHelper";
 
-const base_url = 'http://192.168.0.100:3000/api/v1/'
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
-// Function to get a pre-signed single upload URL
-// for single image 
-export const getUploadUrl = async (type) => {
+// Function to get a pre-signed upload URL
+export const getUploadUrl = async (type, folder) => {
 	try {
-		const fileType = type.split("/")[1];
-		const response = await axios.get(
-			`${base_url}image/upload?fileType=${fileType}`
-		);
+		const query = {
+			fileType: type.split("/")[1],
+			folder,
+		};
+		const response = await axios.get(`${BASE_URL}/api/v1/image/upload`, {
+			params: query,
+		});
+
 		return response.data; // Contains the URL and the key for S3 storage
 	} catch (error) {
 		console.error("Error fetching upload URL: ", error);
 		throw new Error("Failed to get upload URL");
 	}
 };
-
-
-// Function to get a pre-signed upload URL
-// add auth token with this request 
 export const getProductUploadUrl = async (type) => {
 	try {
-		const fileType = type.split("/")[1];
+		const query = {
+			fileType: type.split("/")[1],
+		};
+
+		const { token } = getAuthData();
+
 		const response = await axios.get(
-			`${base_url}image/upload/product?fileType=${fileType}`
+			`${BASE_URL}/api/v1/image/upload/`,
+			{
+				params: query,
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${token}`,
+				},
+			}
 		);
+
 		return response.data; // Contains the URL and the key for S3 storage
 	} catch (error) {
 		console.error("Error fetching upload URL: ", error);
@@ -35,23 +48,34 @@ export const getProductUploadUrl = async (type) => {
 
 // Function to upload an image to S3
 export const uploadImageToS3 = async (uploadUrl, file) => {
-	try {
+	try { 
+		console.log("upload Url=====", uploadUrl)
+		console.log("upload file=====", file)
 		await axios.put(uploadUrl, file, {
 			headers: {
 				"Content-Type": file.type,
 			},
 		});
 	} catch (error) {
-		console.error("Error uploading image to S3: ", error);
-		throw new Error("Failed to upload image to S3");
+		console.error("Error uploading image", error);
+		throw new Error("Failed to upload image");
 	}
 };
 
 export const deleteUploadedImages = async (keys) => {
 	try {
-		await axios.delete(`${base_url}image/delete-images`, { data: { keys } });
+		await axios.delete(`${BASE_URL}/api/v1/image/delete-images`, {
+			data: { keys },
+		});
 	} catch (error) {
-		console.error("Error deleting images from S3: ", error);
-		throw new Error("Failed to delete images from S3");
+		console.error("Error deleting images", error);
+		throw new Error("Failed to delete images");
 	}
+};
+
+export const formatPrice = (value) => {
+	return Number(value).toLocaleString("en-PK", {
+		minimumFractionDigits: 2,
+		maximumFractionDigits: 2,
+	});
 };
