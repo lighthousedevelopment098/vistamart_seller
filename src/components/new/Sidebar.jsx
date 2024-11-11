@@ -236,7 +236,7 @@ const Sidebar = ({ setComponent }) => {
         </button>
         {showPageList && (
           <ul className="ml-4 mt-2 space-y-1">
-            <li>
+            {/* <li>
               <Link
                 to="/allorders"
                 className="block w-full text-left p-1 pl-4 rounded hover:bg-gray-500 text-blue-700"
@@ -244,7 +244,7 @@ const Sidebar = ({ setComponent }) => {
               >
                 • ALL
               </Link>
-            </li>
+            </li> */}
             <li>
               <Link
                 to="/pendingorder"
