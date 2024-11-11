@@ -1,11 +1,15 @@
 import React from 'react';
 import InHouseProductList from './ProductManagmentPage.jsx';
 import { useSelector } from 'react-redux';
+import { getAuthData } from '../../utils/authHelper.js';
 
 const InHouseProductPage = () => {
-  const { user } = useSelector(state => state.auth);
+  // const { user } = useSelector(state => state.auth);
+  const { user } = getAuthData();
+  
+  console.log("user id in house prou ============", user)
+  
   const userId = user?._id || ''; // Fallback to an empty string if userId is undefined
-  // console.log("user id ============", userId)
   return (
     <InHouseProductList
       initialTitle="Vendor All Products"
@@ -23,8 +27,9 @@ const InHouseProductPage = () => {
 };
 
 const VendorPendingProductPage = () => {
-  const { user } = useSelector(state => state.auth);
+  const { user } = getAuthData();
   const userId = user?._id || '';
+  console.log("user id ", userId)
   return (
     <InHouseProductList
       initialTitle="Vendor Pending Products"
@@ -42,7 +47,10 @@ const VendorPendingProductPage = () => {
 };
 
 const VendorNewRequestProductPage = () => {
-  const { user } = useSelector(state => state.auth);
+  const { user } = getAuthData();
+  
+  // console.log("user id in house prou ============", user)
+  
   const userId = user?._id || '';
   return (
     <InHouseProductList
@@ -61,9 +69,9 @@ const VendorNewRequestProductPage = () => {
 };
 
 const VendorApprovedProductPage = () => {
-  const { user } = useSelector(state => state.auth);
+  const { user } = getAuthData();
   const userId = user?._id || '';
-  console.log("user id ====", userId)
+  // console.log("user id ====", userId)
   return (
     <InHouseProductList
       initialTitle="Vendor Approved Products"
@@ -81,7 +89,7 @@ const VendorApprovedProductPage = () => {
 };
 
 const VendorDeniedProductPage = () => {
-  const { user } = useSelector(state => state.auth);
+  const { user } = getAuthData();
   const userId = user?._id || '';
   return (
     <InHouseProductList

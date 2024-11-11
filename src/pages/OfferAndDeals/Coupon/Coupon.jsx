@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import CouponForm from "./couponForm";
-import CouponList from "./couponList";
+import CouponList from "./CouponList";
 
+const CouponManagement = () => {
+  const [couponAdded, setCouponAdded] = useState(false);
 
-const Coupon = () => {
+  const handleCouponAdded = () => {
+    setCouponAdded((prev) => !prev); // Toggle to trigger list refresh
+  };
   return (
     <div className="p-10">
     <div className="mb-3">
@@ -16,12 +20,17 @@ const Coupon = () => {
       </h2>
     </div>
 
-       <CouponForm />
-       <CouponList />
+      {/* <CouponForm />
+     
+      <CouponList />
+      */}
     
+      
+      <CouponForm onCouponAdded={handleCouponAdded} />
+      <CouponList couponAdded={couponAdded} />
     </div>
   );
 
 };
 
-export default Coupon;
+export default CouponManagement;

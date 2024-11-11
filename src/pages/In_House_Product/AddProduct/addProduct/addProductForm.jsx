@@ -50,7 +50,7 @@ const AddNewProduct = () => {
 		tags: [""],
 		price: "",
 		discount: "",
-		discountType: "percent",
+		discountType: "",
 		discountAmount: "",
 		taxAmount: "",
 		taxIncluded: false,
@@ -94,13 +94,15 @@ const AddNewProduct = () => {
 	  
 
 
-	const handleChange = (e) => {
+	  const handleChange = (e) => {
 		const { name, value, type, checked } = e.target;
 		setFormData((prev) => ({
 			...prev,
-			[name]: type === "checkbox" ? checked : value,
+			[name]: type === "checkbox" ? checked : 
+			       (["price", "discountAmount", "taxAmount","discount"].includes(name) ? parseInt(value, 10) || 0 : value),
 		}));
 	};
+
 
 
 	const handleDescriptionChange = (value) => {
@@ -130,7 +132,6 @@ const AddNewProduct = () => {
 			if (!userId) {
 				throw new Error("admin does not exist or is not authenticated.");
 			}
-			
 			const productData = {
 				...formData,
 				userId,

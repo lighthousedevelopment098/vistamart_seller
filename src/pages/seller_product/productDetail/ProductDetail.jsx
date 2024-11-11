@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaGlobe, FaStar, FaTrash } from "react-icons/fa";
 import { AiOutlineFile, AiOutlineShoppingCart } from "react-icons/ai";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
@@ -13,10 +13,13 @@ import {
   updateProductStatus,
 } from "../../../components/redux/product/productSlice";
 import Swal from "sweetalert2";
+import apiConfig from "../../../components/config/apiConfig";
+import LoadingSpinner from "../../../components/LoodingSpinner/LoadingSpinner";
 
 const ProductDetail = () => {
   const { productId } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { loading, error, products } = useSelector((state) => state.product);
 
@@ -24,14 +27,16 @@ const ProductDetail = () => {
     dispatch(fetchProductById(productId));
   }, [dispatch, productId]);
 
+ 
+
   const handleUpdateStatus = (id, currentStatus) => {
     let newStatus;
     if (currentStatus === "pending") {
-      newStatus = "approved"; // Change to active if current status is pending
+      newStatus = "approved";
     } else if (currentStatus === "approved") {
-      newStatus = "rejected"; // Change to rejected if current status is active
+      newStatus = "rejected";
     } else {
-      return; // No change needed if already rejected
+      return;
     }
 
     Swal.fire({
@@ -44,13 +49,31 @@ const ProductDetail = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         dispatch(updateProductStatus({ productId: id, status: newStatus }))
-          .then(() => toast.success(`Product status updated to ${newStatus}!`))
+          .then(() => {
+            toast.success(`Product status updated to ${newStatus}!`);
+
+            // Get userType from the product data
+            const userType = productData?.userType; // Assuming this is available in your product data
+
+            // Navigate based on the userType
+            if (userType === "in-house") {
+              navigate("/inhouseproductlist");
+            } else if (userType === "vendor") {
+              if (newStatus === "approved") {
+                navigate("/venderapprove");
+              } else if (newStatus === "rejected") {
+                navigate("/venderdenied");
+              }
+            }
+          })
           .catch(() => toast.error("Failed to update product status."));
       } else {
         toast.info("Status update canceled.");
       }
     });
   };
+
+
 
   const [productData, setProductData] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
@@ -97,11 +120,16 @@ const ProductDetail = () => {
   }
 
   if (!productData) {
-    return <div>Loading...</div>;
+    return <div><LoadingSpinner /></div>;
   }
 
-  const thumbnailUrl = productData.thumbnail || "/default-thumbnail.png";
-  const ImageApiUrl = productData.ImageApiUrl || "/default-thumbnail.png";
+  const thumbnailUrl = productData?.thumbnail
+    ? `${apiConfig.bucket}/${productData.thumbnail}`
+    : "/default-thumbnail.png";
+  const imageApiUrl = productData?.ImageApiUrl || "/default-thumbnail.png";
+
+  // const thumbnailUrl = productData.thumbnail || "/default-thumbnail.png";
+  // const ImageApiUrl = productData.ImageApiUrl || "/default-thumbnail.png";
 
   const {
     thumbnail = "/default-thumbnail.png",
@@ -111,13 +139,13 @@ const ProductDetail = () => {
     reviews = [],
     brand = { name: "No Brand" },
     category = { name: "No Category" },
-    totalSold = "N/A",
-    totalSoldAmount = "N/A",
+    sold = 0,
+    totalSoldAmount = 0,
     productType = "No Type",
     sku = "No SKU",
     price = "0",
     taxAmount = "0",
-    discount = "0",
+    discountAmount = "0",
     videoLink = "https://youtu.be/yC4xCS4nLRg?si=tvU2m2NCYoivkfF2",
   } = productData;
 
@@ -164,7 +192,7 @@ const ProductDetail = () => {
                 </div>
                 <div className="d-flex flex-wrap align-items-center flex-sm-nowrap justify-content-between gap-3 min-h-50">
                   <div className="d-flex flex-wrap gap-2 align-items-center">
-                    {productData.images.map((imgUrl, index) => {
+                    {productData?.images?.map((imgUrl, index) => {
                       return (
                         // Add this return statement
                         <div
@@ -180,7 +208,7 @@ const ProductDetail = () => {
                               width="50"
                               className="img-fit max-50"
                               alt={`Additional ${index}`}
-                              src={imgUrl}
+                              src={`${apiConfig.bucket}/${imgUrl}`}
                             />
                           </a>
                         </div>
@@ -188,16 +216,16 @@ const ProductDetail = () => {
                     })}
                   </div>
 
-                  <span className="text-dark">
-                    {productData.reviews?.length || 0} Reviews
+                  <span className="text-dark font-semibold">
+                    {productData?.numOfReviews || 0} Reviews
                   </span>
                   {/* <div className="div">
                     <div className="flex flex-col gap-2 mt-4 md:mt-0">
                       <button
                         className={`px-4 py-2 rounded ${
-                          productData.status === "pending"
-                            ? "bg-green-500"
-                            : productData.status === "approved"
+                          productData?.status === "pending"
+                            ? "bg-primary"
+                            : productData?.status === "approved"
                             ? "bg-red-500"
                             : "bg-gray-500"
                         }`}
@@ -217,86 +245,73 @@ const ProductDetail = () => {
                 </div>
                 <div className="d-block mt-2">
                   <div className="lang-form flex flex-col" id="en-form">
-                    <div className="d-flex">
-                      <h2 className="mb-2 pb-1 text-gulf-blue">
-                        {productData?.name}
+                    <div className="flex flex-col">
+                      <h2 className="mb-2 pb-1 text- font-semibold">
+                        {productData.name}
                       </h2>
-                      <td className="px-2 py-1">Status:</td>
-                      <td className="px-2 py-1">
-                        <span className="bg-[#00C9DB] text-white rounded-xl p-1">
-                          {productData.status}
-                        </span>
-                      </td>
-                    </div>
-                    <div>
-                      <label className="text-gulf-blue font-weight-bold">
-                        Description:
-                      </label>
-                      <div
-                        className="rich-editor-html-content"
-                        dangerouslySetInnerHTML={{ __html: description }}
-                      />
+                      <div className="flex items-center ">
+                        <td className="px-2 py-1 font-semibold text-sm">
+                          Status:
+                        </td>
+                        <td className="px-2 py-1">
+                          <span className="bg-[#00C9DB] text-white rounded-xl p-1">
+                            {productData?.status}
+                          </span>
+                        </td>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
             <hr />
-            <div className="d-flex gap-10 flex-wrap mt-6 ">
-              <div className="border p-3 mobile-w-100 w-170">
-                <div className="d-flex flex-column mb-1">
-                  <h6 className="font-weight-normal text-capitalize">
-                    Total Sold:
-                  </h6>
-                  <h3 className="mb-0">{totalSold}</h3>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-3 mt-6 ">
+              <div className="border rounded-md space-y-4 p-3 ">
+                <div className="d-flex justify-between mb-1">
+                  <h6 className="font-semibold text-capitalize">Total Sold:</h6>
+                  <h3 className="mb-0">{sold}</h3>
                 </div>
-                <div className="d-flex flex-column mb-1">
-                  <h6 className="font-weight-normal text-capitalize">
+                <div className="d-flex justify-between mb-1">
+                  <h6 className="font-semibold text-capitalize">
                     Total Sold Amount:
                   </h6>
                   <h3 className="mb-0">{totalSoldAmount}</h3>
                 </div>
               </div>
-              <div className="border p-3 mobile-w-100 w-170">
-                <div className="d-flex flex-column mb-1">
-                  <h6 className="font-weight-normal text-capitalize">Brand:</h6>
+              <div className="border rounded-md space-y-4 p-3 ">
+                <div className="d-flex justify-between mb-1">
+                  <h6 className="font-semibold text-capitalize">Brand:</h6>
                   <h3 className="mb-0">{brand?.name}</h3>
                 </div>
-                <div className="d-flex flex-column mb-1">
-                  <h6 className="font-weight-normal text-capitalize">
-                    Category:
-                  </h6>
+                <div className="d-flex justify-between mb-1">
+                  <h6 className="font-semibold text-capitalize">Category:</h6>
                   <h3 className="mb-0">{category?.name}</h3>
                 </div>
               </div>
-              <div className="border p-3 mobile-w-100 w-170">
-                <div className="d-flex flex-column mb-1">
-                  <h6 className="font-weight-normal text-capitalize">SKU:</h6>
+              <div className="border rounded-md space-y-4 p-3 ">
+                <div className="d-flex justify-between mb-1">
+                  <h6 className="font-semibold text-capitalize">SKU:</h6>
                   <h3 className="mb-0">{sku}</h3>
                 </div>
-                <div className="d-flex flex-column mb-1">
-                  <h6 className="font-weight-normal text-capitalize">
+                <div className="d-flex justify-between mb-1">
+                  <h6 className="font-semibold text-capitalize">
                     Product Type:
                   </h6>
                   <h3 className="mb-0">{productType}</h3>
                 </div>
               </div>
-              <div className="border p-3 mobile-w-100 w-170">
-                <div className="d-flex flex-column mb-1">
-                  <h6 className="font-weight-normal text-capitalize">Price:</h6>
+              <div className="border rounded-md space-y-4 p-3 ">
+                <div className="d-flex justify-between mb-1">
+                  <h6 className="font-semibold text-capitalize">Price:</h6>
                   <h3 className="mb-0">{price}</h3>
                 </div>
-                <div className="d-flex flex-column mb-1">
-                  <h6 className="font-weight-normal text-capitalize">
-                    Tax Amount:
-                  </h6>
+                <div className="d-flex justify-between mb-1">
+                  <h6 className="font-semibold text-capitalize">Tax Amount:</h6>
                   <h3 className="mb-0">{taxAmount}</h3>
                 </div>
-                <div className="d-flex flex-column mb-1">
-                  <h6 className="font-weight-normal text-capitalize">
-                    Discount:
-                  </h6>
-                  <h3 className="mb-0">{discount}</h3>
+                <div className="d-flex justify-between mb-1">
+                  <h6 className="font-semibold text-capitalize">Discount:</h6>
+                  <h3 className="mb-0">{discountAmount}</h3>
                 </div>
               </div>
             </div>
@@ -326,15 +341,13 @@ const ProductDetail = () => {
               </div>
               <div className="card-body">
                 <div>
-                  <h6 className="mb-3 text-capitalize">{productData.name}</h6>
+                  <h6 className="mb-3 text-capitalize">{productData?.metaTitle}</h6>
                 </div>
-                {/* <p className="text-capitalize">
-              <div
-                    className="rich-editor-html-content"
-                    dangerouslySetInnerHTML={{ __html: description }}
-                />
+                <p className="text-capitalize">
+                  
+                    {productData?.metaDescription}
 
-              </p> */}
+              </p>
                 <div className="d-flex flex-wrap gap-2">
                   <a
                     className="text-dark border rounded p-2 d-flex align-items-center justify-content-center gap-1"
@@ -347,7 +360,7 @@ const ProductDetail = () => {
                   {productData.videoLink && (
                     <a
                       className="text-dark border rounded p-2 d-flex align-items-center justify-content-center gap-1"
-                      href={productData.videoLink}
+                      href={productData?.videoLink}
                       target="_blank"
                       rel="noopener noreferrer"
                     >

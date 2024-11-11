@@ -88,7 +88,7 @@ const Adminwallet = () => {
                 alt=""
               />
               <h3 className="for-card-count text-xl font-bold mb-0 fz-24">
-                $39,892.00
+                PKR 0
               </h3>
               <div className=" text-md font-semibold text-gray-500">
                 Withdrawable Balance
@@ -116,7 +116,7 @@ const Adminwallet = () => {
               <div className="card card-body h-100 justify-content-center">
                 <div className="d-flex gap-2 justify-content-between align-items-center">
                   <div className="d-flex flex-column align-items-start">
-                    <h3 className="mb-1 fz-24 text-xl font-bold">$500,00</h3>
+                    <h3 className="mb-1 fz-24 text-xl font-bold">PKR 0</h3>
                     <div className="text-capitalize mb-0">Pending Withdraw</div>
                   </div>
                   <div>
@@ -133,7 +133,7 @@ const Adminwallet = () => {
               <div className="card card-body h-100 justify-content-center">
                 <div className="d-flex gap-2 justify-content-between align-items-center">
                   <div className="d-flex flex-column align-items-start">
-                    <h3 className="mb-1 fz-24 text-xl font-bold">$6,360.00</h3>
+                    <h3 className="mb-1 fz-24 text-xl font-bold">PKR 0</h3>
                     <div className="text-capitalize mb-0">
                       Total Commission Given
                     </div>
@@ -152,7 +152,7 @@ const Adminwallet = () => {
               <div className="card card-body h-100 justify-content-center">
                 <div className="d-flex gap-2 justify-content-between align-items-center">
                   <div className="d-flex flex-column align-items-start">
-                    <h3 className="mb-1 fz-24 text-xl font-bold">$600,000</h3>
+                    <h3 className="mb-1 fz-24 text-xl font-bold">PKR 0</h3>
                     <div className="text-capitalize mb-0">
                       Already Withdrawn
                     </div>
@@ -171,7 +171,7 @@ const Adminwallet = () => {
               <div className="card card-body h-100 justify-content-center">
                 <div className="d-flex gap-2 justify-content-between align-items-center">
                   <div className="d-flex flex-column align-items-start">
-                    <h3 className="mb-1 fz-24 text-xl font-bold">$8,153.00</h3>
+                    <h3 className="mb-1 fz-24 text-xl font-bold">PKR 0</h3>
                     <div className="text-capitalize mb-0">
                       Total Delivery Charge
                     </div>
@@ -191,7 +191,7 @@ const Adminwallet = () => {
               <div className="card card-body h-100 justify-content-center">
                 <div className="d-flex gap-2 justify-content-between align-items-center">
                   <div className="d-flex flex-column align-items-start">
-                    <h3 className="mb-1 fz-24 text-xl font-bold">$2,153.00</h3>
+                    <h3 className="mb-1 fz-24 text-xl font-bold">PKR 0</h3>
                     <div className="text-capitalize mb-0">Total Tax Given</div>
                   </div>
                   <div>
@@ -208,7 +208,7 @@ const Adminwallet = () => {
               <div className="card card-body h-100 justify-content-center">
                 <div className="d-flex gap-2 justify-content-between align-items-center">
                   <div className="d-flex flex-column align-items-start">
-                    <h3 className="mb-1 fz-24 text-xl font-bold">$8,153.00</h3>
+                    <h3 className="mb-1 fz-24 text-xl font-bold">PKR 0</h3>
                     <div className="text-capitalize mb-0">Collected Cash</div>
                   </div>
                   <div>

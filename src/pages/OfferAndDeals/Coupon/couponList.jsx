@@ -1,31 +1,99 @@
-import React, { lazy } from "react";
+// import React from "react";
+// import { useSelector } from "react-redux";
+// import ExportButton from "../../../../components/ActionButton/Export";
+// import LoadingSpinner from "../../../../components/LoodingSpinner/LoadingSpinner";
+
+// const CouponList = () => {
+//   const { coupons, loading, error } = useSelector((state) => state.coupons);
+
+//   return (
+//     <div>
+//       <div className="card">
+//         <div className="px-3 py-4">
+//           <div className="d-flex flex-wrap gap-3 align-items-center">
+//             <h5 className="mb-0 text-capitalize d-flex gap-2 mr-auto">
+//               Coupon list
+//               <ExportButton title="Export" />
+//             </h5>
+//           </div>
+//         </div>
+//         <div className="card-body">
+//           {loading ? (
+//             <div className="text-center">
+//               <LoadingSpinner />
+//             </div>
+//           ) : (
+//             <table className="table table-bordered">
+//               <thead>
+//                 <tr>
+//                   <th>#</th>
+//                   <th>Title</th>
+//                   <th>Code</th>
+//                   <th>Type</th>
+//                   <th>Discount Amount</th>
+//                   <th>Start Date</th>
+//                   <th>Expiration Date</th>
+//                   <th>Status</th>
+//                 </tr>
+//               </thead>
+//               <tbody>
+//                 {coupons.map((coupon, index) => (
+//                   <tr key={coupon?._id}>
+//                     <td>{index + 1}</td>
+//                     <td>{coupon?.title}</td>
+//                     <td>{coupon?.code}</td>
+//                     <td>{coupon?.type}</td>
+//                     <td>{coupon?.discountAmount}</td>
+//                     <td>{new Date(coupon?.startDate).toLocaleDateString()}</td>
+//                     <td>{new Date(coupon?.expiredDate).toLocaleDateString()}</td>
+//                     <td>{coupon?.status}</td>
+//                   </tr>
+//                 ))}
+//               </tbody>
+//             </table>
+//           )}
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default CouponList;
+
+
+
+import React, { lazy, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
 
-import { FaEdit, FaTrash } from "react-icons/fa";
-import { deleteCoupon, fetchCoupons, updateCouponStatus } from "../../../components/redux/couponSlice";
-import LoadingSpinner from "../../../components/LoodingSpinner/LoadingSpinner";
 import Switcher from "../../../components/FormInput/Switcher";
+import ConfirmationModal from "../../../components/FormInput/ConfirmationModal";
 import ActionButton from "../../../components/ActionButton/Action";
+import LoadingSpinner from "../../../components/LoodingSpinner/LoadingSpinner";
+import { FaEdit, FaTrash } from "react-icons/fa";
+import { 
+    fetchCoupons,
+  updateCouponStatus,
+  deleteCoupon, } from "../../../components/redux/couponSlice";
 
-// Lazy load TableList component
 const LazyTableList = lazy(() =>
   import("../../../components/FormInput/TableList")
 );
 
 const CouponList = () => {
   const dispatch = useDispatch();
-  const { coupons, loading } = useSelector((state) => state.coupons);
+  const { coupons: allCoupons, loading } = useSelector((state) => state.coupons);
+  const [coupons, setCoupons] = useState([]);
 
-  // Fetch coupons on component mount
-  React.useEffect(() => {
-    dispatch(fetchCoupons());
+  useEffect(() => {
+    dispatch(fetchCoupons()).then(({ payload }) => {
+      setCoupons(payload);
+    });
   }, [dispatch]);
+  
 
-  // Handle status update for coupons
   const handleUpdateStatus = (id, currentStatus) => {
     const newStatus = currentStatus ? "active" : "inactive";
-
     ConfirmationModal({
       title: "Are you sure?",
       text: `Do you want to ${newStatus} this coupon?`,
@@ -34,7 +102,11 @@ const CouponList = () => {
         dispatch(updateCouponStatus({ couponId: id, status: newStatus }))
           .then(() => {
             toast.success(`Coupon status updated to ${newStatus}!`);
-            dispatch(fetchCoupons());
+            setCoupons((prevCoupons) =>
+              prevCoupons.map((coupon) =>
+                coupon._id === id ? { ...coupon, status: newStatus } : coupon
+              )
+            );
           })
           .catch(() => toast.error("Failed to update coupon status."));
       } else {
@@ -43,7 +115,6 @@ const CouponList = () => {
     });
   };
 
-  // Handle coupon deletion
   const handleDeleteCoupon = (id) => {
     ConfirmationModal({
       title: "Are you sure?",
@@ -51,16 +122,10 @@ const CouponList = () => {
     }).then((willDelete) => {
       if (willDelete) {
         dispatch(deleteCoupon(id))
-          .then(() =>
-            {
-                toast.success(
-                  `Coupon deleted successfully! ${
-                    coupons.length - 1 === 0? "No more coupons left." : ""
-                  }`
-                );
-                dispatch(fetchCoupons());
-              } 
-            )
+          .then(() => {
+            toast.success("Coupon deleted successfully!");
+            setCoupons((prevCoupons) => prevCoupons.filter((coupon) => coupon._id !== id));
+          })
           .catch(() => toast.error("Failed to delete the coupon."));
       } else {
         toast.info("Coupon deletion canceled.");
@@ -68,46 +133,37 @@ const CouponList = () => {
     });
   };
 
-  // Define table columns
   const columns = [
-    {
-      key: "_id",
-      label: "SL",
-      render: (coupon, index, currentPage, itemsPerPage) =>
-        index + 1 + (currentPage - 1) * itemsPerPage,
-    },
-    { key: "title", label: "Title" },
-    { key: "code", label: "Code" },
-    { key: "type", label: "Type" },
-    { key: "discountAmount", label: "Discount Amount" },
+   
+    { key: "code", label: "Code", render: (coupon) => coupon?.code || "N/A" },
+    { key: "title", label: "Title", render: (coupon) => coupon?.title || "N/A" },
+    { key: "type", label: "Type", render: (coupon) => coupon?.type || "N/A" },
+    { key: "discountAmount", label: "Discount Amount", render: (coupon) => coupon?.discountAmount || "0" },
     {
       key: "startDate",
       label: "Start Date",
-      render: (coupon) => new Date(coupon.startDate).toLocaleDateString(),
+      render: (coupon) => coupon?.startDate ? new Date(coupon.startDate).toLocaleDateString() : "N/A",
     },
     {
       key: "expiredDate",
       label: "Expiration Date",
-      render: (coupon) => new Date(coupon.expiredDate).toLocaleDateString(),
+      render: (coupon) => coupon?.expiredDate ? new Date(coupon.expiredDate).toLocaleDateString() : "N/A",
     },
     {
       key: "status",
       label: "Status",
-      render: (coupon) => (
+      render: (coupon) => coupon && (
         <Switcher
-        //   checked={coupon.status}
-          checked={coupon.status === "active"} // Reflect "active" status in the switcher
-          onChange={() => handleUpdateStatus(coupon._id, coupon.status !== "active")} // Toggle status
-          />
-    
+          checked={coupon.status === "active"}
+          onChange={() => handleUpdateStatus(coupon._id, coupon.status !== "active")}
+        />
       ),
     },
     {
       key: "action",
       label: "Action",
-      render: (coupon) => (
+      render: (coupon) => coupon && (
         <div className="flex justify-center gap-2">
-          {/* <ActionButton to={`/editcouponform/${coupon._id}`} icon={FaEdit} /> */}
           <ActionButton
             onClick={() => handleDeleteCoupon(coupon._id)}
             icon={FaTrash}
@@ -120,24 +176,12 @@ const CouponList = () => {
   return (
     <div className="">
       <div className="">
-        <React.Suspense
-          fallback={
-            <div className="text-center">
-              <LoadingSpinner />
-            </div>
-          }
-        >
-          {/* <LazyTableList
-            tableTitle="Coupon List"
-            listData={coupons} // Pass the fetched coupons
-            columns={columns}
-          /> */}
+        <React.Suspense fallback={<LoadingSpinner />}>
           <LazyTableList
-  tableTitle="Coupon List"
-  listData={coupons} // Pass the fetched coupons
-  columns={columns}
-  keyExtractor={(coupon, index) => coupon._id + index} // Ensures unique keys
-/>
+            tableTitle="Coupon List"
+            listData={coupons} // Pass the locally managed coupons
+            columns={columns}
+          />
         </React.Suspense>
       </div>
       <ToastContainer />

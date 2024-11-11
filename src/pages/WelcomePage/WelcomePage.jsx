@@ -15,7 +15,7 @@ const WelcomePage = () => {
       <div className="col-span-12">
         <div className="bg-[#F9F9FB]  flex justify-between items-center  px-5 py-5 w-[100%]">
           <div>
-            <h1 className="text-[1.3rem] font-bold">Welcome Kamrujjaman Joy</h1>
+            <h1 className="text-[1.3rem] font-bold">Welcome</h1>
             <p className="text-[.9rem] text-gray-400">
               Monitor your business analytics and statistics.
             </p>
@@ -33,7 +33,7 @@ const WelcomePage = () => {
 
         {/* <TopCustomersSection /> */}
 
-        <TopProductSection />
+        {/* <TopProductSection /> */}
       </div>
     </div>
   );

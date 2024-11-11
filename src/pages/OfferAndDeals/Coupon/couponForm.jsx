@@ -3,15 +3,19 @@ import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 import { toast } from "react-toastify";
-import { fetchCustomers } from "../../../components/redux/product/user/customerSlice";
-import { createCoupon, fetchCoupons } from "../../../components/redux/couponSlice";
-import FormSelect from "../../../components/FormInput/FormSelect";
-import FormInput from "../../../components/FormInput/FormInput";
+import FormSelect from "../../../../components/FormInput/FormSelect";
+import FormInput from "../../../../components/FormInput/FormInput";
+import { createCoupon, fetchCoupons } from "../../../../redux/slices/admin/couponSlice";
+import { fetchVendors } from "../../../../redux/slices/seller/vendorSlice";
+import { fetchCustomers } from "../../../../redux/slices/user/customerSlice";
+import { getAuthData } from "../../../../utils/authHelper";
 
-const CouponForm = () => {
+const CouponForm = ({ onCouponAdded }) => {
   const dispatch = useDispatch();
   const vendors = useSelector((state) => state.vendor?.vendors || []);
   const customers = useSelector((state) => state.customers?.customers || []);
+  const { user } = getAuthData();
+  const userRoleName = user?.role?.name || "unknown";
 
   const [form, setForm] = useState({
     title: "",
@@ -28,32 +32,36 @@ const CouponForm = () => {
     status: "active",
     vendors: [],
     customers: [],
+    createdBy: userRoleName, // Ensure createdBy is set
   });
 
   useEffect(() => {
-    // dispatch(fetchVendor());
+    dispatch(fetchVendors());
     dispatch(fetchCustomers());
   }, [dispatch]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
-    if (name === "userLimit") {
-      setForm((prevForm) => ({
-        ...prevForm,
-        userLimit: { ...prevForm.userLimit, limit: value },
-      }));
-    } else {
-      setForm((prevForm) => ({ ...prevForm, [name]: value }));
-    }
+    setForm((prevForm) => {
+      if (name === "userLimit") {
+        return {
+          ...prevForm,
+          userLimit: { ...prevForm.userLimit, limit: value },
+        };
+      }
+      return { ...prevForm, [name]: value };
+    });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
-      await dispatch(createCoupon(form));
-
+      console.log("Form data before dispatch:", form);
+      const response = await dispatch(createCoupon(form)).unwrap();
+      console.log("Response after submission:", response);
+      
       Swal.fire("Success", "Coupon Created Successfully", "success");
       dispatch(fetchCoupons());
       
@@ -72,12 +80,16 @@ const CouponForm = () => {
         status: "active",
         vendors: [],
         customers: [],
+        createdBy: userRoleName, // Re-initialize createdBy to prevent loss on reset
       });
+      onCouponAdded();
+  
     } catch (error) {
-      toast.error(error.message || "Failed to create coupon. Please try again.");
-      console.error("Error creating coupon:", error);
+      console.error("Error creating coupon:", error.response?.data || error.message);
+      toast.error(error.response?.data?.message || "Failed to create coupon. Please try again.");
     }
   };
+  
 
   return (
     <form onSubmit={handleSubmit} className="bg-white shadow-lg rounded-lg p-4">
@@ -142,7 +154,7 @@ const CouponForm = () => {
             onChange={handleInputChange}
             options={[
               { value: "vendor", label: "Vendor" },
-              // { value: "admin", label: "Admin" },
+              { value: "admin", label: "Admin" },
             ]}
             required
           />
@@ -223,7 +235,7 @@ const CouponForm = () => {
           />
         </div>
 
-        {/* <div className="col-md-4">
+        <div className="col-md-4">
           <FormSelect
             label="Select Vendors"
             name="vendors"
@@ -242,7 +254,7 @@ const CouponForm = () => {
             }))}
             isMulti
           />
-        </div> */}
+        </div>
 
         <div className="col-md-4">
           <FormSelect
@@ -280,3 +292,4 @@ const CouponForm = () => {
 };
 
 export default CouponForm;
+
