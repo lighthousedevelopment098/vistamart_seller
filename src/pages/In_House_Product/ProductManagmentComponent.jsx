@@ -49,7 +49,7 @@ const VendorPendingProductPage = () => {
 const VendorNewRequestProductPage = () => {
   const { user } = getAuthData();
   
-  // console.log("user id in house prou ============", user)
+  console.log("user id in house prou ============", user)
   
   const userId = user?._id || '';
   return (

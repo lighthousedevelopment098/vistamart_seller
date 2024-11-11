@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { IoIosPrint } from "react-icons/io";
@@ -6,17 +5,21 @@ import { IoPersonSharp } from "react-icons/io5";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
 import { toast } from "react-toastify";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { updateOrderStatus, fetchOrderById }
+ from
+  "../../components/redux/orderSlice";
 import LoadingSpinner from "../../components/LoodingSpinner/LoadingSpinner";
-import { fetchOrderById } from "../../components/redux/orderSlice";
+import apiConfig from "../../components/config/apiConfig";
 
 const OrderDetails = () => {
   const { id } = useParams(); // Get the order ID from URL parameters
   const dispatch = useDispatch();
 
   const { orders, status, error } = useSelector((state) => state.vendorOrder);
- 
+  const navigate = useNavigate(); // Initialize useNavigate hook
+
     // console.log("order in component ------", orders)
   const [showModal, setShowModal] = useState(false);
   const [paymentStatus, setPaymentStatus] = useState(true);
@@ -42,6 +45,29 @@ const OrderDetails = () => {
     try {
       await dispatch(updateOrderStatus({ orderId, status })).unwrap();
       toast.success("Order status updated successfully!");
+       if (status === "confirmed") {
+        navigate("/confirmedorder");
+      }
+       else if (status === "packaging") {
+        navigate("/packagingorder");
+
+      } 
+       else if (status === "pending") {
+        navigate("/pendingorder");
+
+      } 
+      
+      else if (status === "out_for_delivery") {
+        navigate("/outfordelivery");
+      } else if (status === "delivered") {
+        navigate("/deliveredorder");
+      } else if (status === "canceled") {
+        navigate("/cancel");
+      } else if (status === "failed_to_deliver") {
+        navigate("/failedorder");
+      } else if (status === "returned") {
+        navigate("/returnedorder");
+      }
     } catch (error) {
       toast.error("Failed to update order status.");
     }
@@ -64,7 +90,7 @@ const OrderDetails = () => {
   }
  // Find the specific order based on the ID
  // Find the specific order based on the ID
- const Orders = orders.find((order) => order._id === id);
+ const Orders = orders.find((order) => order?._id === id);
  console.log("orderdtail====", Orders)
  // Check if orders exists
   if (!orders) {
@@ -75,7 +101,7 @@ const OrderDetails = () => {
     customer,
     vendors,
     products,
-    
+    orderStatus,
     totalAmount,
     paymentMethod,
     shippingAddress,
@@ -84,10 +110,10 @@ const OrderDetails = () => {
   // console.log("order status ====", Orders.orderStatus)
   return (
     <>
-      <div className="bg-[#F9F9FB] w-full px-4 py-8">
+      <div className="bg-[#F9F9FB] w-full px-10 py-8">
         <div className="flex items-center gap-2">
           <img
-            src="https://6valley.6amtech.com/public/assets/back-end/img/all-orders.png"
+            src="/all-orders.png"
             alt=""
             className="w-5 h-5"
           />
@@ -100,9 +126,9 @@ const OrderDetails = () => {
             <div className="flex justify-between items-center">
               <div>
                 <h2 className="text-[1rem] font-bold pb-5">
-                  Order ID #{Orders.orderId}
+                  Order ID #{Orders?.orderId}
                 </h2>
-                <p>{new Date(Orders.createdAt).toLocaleString()}</p>
+                <p>{new Date(Orders?.createdAt).toLocaleString()}</p>
               </div>
               <div className="flex items-center gap-2">
                 <div>
@@ -143,7 +169,7 @@ const OrderDetails = () => {
                 orders verification code :
                 <span className="font-bold ms-3">
                   {" "}
-                  {Orders.orderId}
+                  {Orders?.orderId}
                 </span>
               </h1>
             </div>
@@ -173,15 +199,17 @@ const OrderDetails = () => {
                     </tr>
                   </thead>
                   <tbody>
-                  {(products && products.length > 0) ? (
-  products.map((product, index) => (
-    <tr className="hover:bg-gray-100" key={product._id}>
+                  {(products && products?.length > 0) ? (
+  products?.map((product, index) => (
+    <tr className="hover:bg-gray-100" key={product?._id}>
       <td className="px-4 py-2 text-center">{index + 1}</td>
       <td className="px-4 py-2 w-full">
         <div className="flex items-center whitespace-nowrap">
           <img
             src={
-              product?.thumbnail || fallbackImage
+              product?.thumbnail
+                ? `{product.thumbnail}`
+                : fallbackImage
             }
             alt={product?.name}
             className="w-10 h-10 object-cover rounded mr-3"
@@ -189,10 +217,10 @@ const OrderDetails = () => {
           />
           <div>
             <div>{product?.name}</div>
-            <div>Qty: {product.qty}</div>
+            <div>Qty: {product?.qty}</div>
             <div>
               Unit price: ${product?.price} (Tax:{" "}
-              {product.taxAmount}%)
+              {product?.taxAmount}%)
             </div>
           </div>
         </div>
@@ -201,13 +229,13 @@ const OrderDetails = () => {
         ${product?.price}
       </td>
       <td className="px-4 py-2 text-center">
-        ${product.taxAmount}
+        ${product?.taxAmount}
       </td>
       <td className="px-4 py-2 text-center">
-        ${product.discountAmount}
+        ${product?.discountAmount}
       </td>
       <td className="px-4 py-2 text-center">
-        ${(product.price + product.taxAmount)}
+        ${(product?.price + product?.taxAmount)}
       </td>
     </tr>
   ))
@@ -292,7 +320,7 @@ const OrderDetails = () => {
                       <button
                         onClick={togglePaymentStatus}
                         className={`relative inline-flex items-center h-6 rounded-full w-11 focus:outline-none ${
-                          paymentStatus ? "bg-blue-600" : "bg-gray-200"
+                          paymentStatus ? "bg-green-600" : "bg-gray-200"
                         }`}
                       >
                         <span
@@ -314,14 +342,14 @@ const OrderDetails = () => {
                 <div className="flex items-center space-x-4">
                   <div>
                     <img
-                      src="https://6valley.6amtech.com/storage/app/public/profile/2022-10-12-63464cd299fc3.png"
-                      alt="Avatar"
+        src={customer?.image ? `${apiConfig.bucket}/${customer?.image}` : fallbackImage}
+        alt="Avatar"
                       className="w-16 h-16 rounded-full"
                     />
                   </div>
                   <div className="pt-5">
                     <p className="text-md font-medium">{customer?.firstName}</p>
-                    <p className="text-gray-500">17 Orders</p>
+                    {/* <p className="text-gray-500">17 Orders</p> */}
                     <p className="text-gray-500">{customer?.phoneNumber}</p>
                     <p className="text-gray-500">{customer?.email}</p>
                   </div>
@@ -334,7 +362,7 @@ const OrderDetails = () => {
                   <h2 className="text-md font-semibold flex gap-2">
                     <IoPersonSharp /> Shipping Address
                   </h2>
-                  <MdEdit className="text-[2rem] p-1 border hover:bg-primary-dark hover:text-white rounded border-primary bg-primary text-white" />
+                  {/* <MdEdit className="text-[2rem] p-1 border hover:bg-primary-dark hover:text-white rounded border-primary bg-primary text-white" /> */}
                 </div>
                 <div className="space-y-1">
                   <p className="text-md font-medium">{customer?.firstName}</p>
@@ -360,7 +388,7 @@ const OrderDetails = () => {
                   <h2 className="text-md font-semibold flex gap-2">
                     <IoPersonSharp /> Billing Address
                   </h2>
-                  <MdEdit className="text-[2rem] p-1 border hover:bg-primary-dark hover:text-white rounded border-primary text-white bg-primary" />
+                  {/* <MdEdit className="text-[2rem] p-1 border hover:bg-primary-dark hover:text-white rounded border-primary text-white bg-primary" /> */}
                 </div>
                 <div className="space-y-1">
                   <p className="text-gray-500">
@@ -377,37 +405,7 @@ const OrderDetails = () => {
               </div>
             </div>
 
-            <div className="mt-8">
-              <h2 className="text-xl font-semibold mb-4">Vendor Information</h2>
-              {vendors && vendors.length > 0 ? (
-  vendors.map((vendor, index) => (
-    <div key={index} className="mb-4 p-4 bg-white rounded shadow-md">
-      <h3 className="text-lg font-semibold">
-        Name: {vendor?.firstName || "N/A"}
-      </h3>
-      <img
-  src={vendor?.vendorImage || fallbackImage} // Use a logical OR to provide fallback
-  alt={vendor?.name || "N/A"}
-  className="w-16 h-16 object-cover rounded mb-2"
-/>
-
-
-      <div>
-        <p className="text-lg font-bold">Shop: {vendor?.shopName || "N/A"}</p>
-        <p className="text-gray-500 pt-3">Vendor Orders: 9 Orders Served</p>
-        <p className="text-gray-500">Vendor No: {vendor?.phoneNumber || "N/A"}</p>
-        <p className="text-gray-500 flex justify-center gap-2">
-          <FaMapMarkerAlt className="text-xl" />
-          {vendor?.address || "N/A"}
-        </p>
-      </div>
-    </div>
-  ))
-) : (
-  <p>No vendors available</p>
-)}
-
-            </div>
+            
           </div>
         </div>
       </div>

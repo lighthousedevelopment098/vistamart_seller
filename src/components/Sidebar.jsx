@@ -185,7 +185,7 @@ function ScrollableSection({ left }) {
 								data-bs-parent='#accordionFlushExample55'
 							>
 								<div class='accordion-body'>
-									<li className='nav-item'>
+									{/* <li className='nav-item'>
 										<Link
 											to='/allOrders'
 											className='fw-semi-bold nav-link active pt-0'
@@ -193,7 +193,7 @@ function ScrollableSection({ left }) {
 										>
 											All
 										</Link>
-									</li>
+									</li> */}
 									<li className='nav-item'>
 										<Link
 											to='/pending'

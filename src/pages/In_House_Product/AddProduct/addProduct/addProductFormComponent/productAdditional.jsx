@@ -7,50 +7,46 @@ import FormSection from "../../../../../components/FormInput/FormSection";
 import FormSelect from "../../../../../components/FormInput/FormSelect";
 
 const ProductAdditional = ({ formData = {}, handleChange }) => {
-  // Update discount or discountAmount based on discountType
   useEffect(() => {
-    if (formData.discountType === "percent" && formData.discountAmount !== 0) {
-      handleChange({
-        target: {
-          name: "discountAmount",
-          value: 0, // Reset discountAmount if switching to "percent"
-        },
-      });
-    } else if (formData.discountType === "flat" && formData.discount !== 0) {
+    // Ensure discount values don't exceed limits
+    if (formData.discountType === "percent" && formData.discount > 100) {
       handleChange({
         target: {
           name: "discount",
-          value: 0, // Reset discount if switching to "flat"
+          value: 100, // Cap at 100%
         },
       });
-    }
-  }, [formData.discountType]); // Only trigger when discountType changes
-
-  useEffect(() => {
-    // Check for discount validation
-    if (formData.discountType === "percent" && formData.discountAmount > 100) {
-      toast.error("Discount amount cannot exceed 100%.");
-    } else if (
-      formData.discountType === "flat" &&
-      formData.discountAmount > formData.price
-    ) {
-      toast.error("Discount amount cannot exceed the price.");
-    }
-  }, [formData.discountAmount, formData.discountType, formData.price]);
-
-  const handleDiscountFocus = (e) => {
-    // Reset discountAmount or discount to empty string when focused
-    if (e.target.name === "discountAmount" && formData.discountAmount === 0) {
+    } else if (formData.discountType === "flat" && formData.discountAmount > formData.price) {
       handleChange({
         target: {
           name: "discountAmount",
+          value: formData.price, // Cap at the price
+        },
+      });
+    }
+  }, [formData.discountType, formData.discountAmount, formData.discount, formData.price, handleChange]);
+
+  useEffect(() => {
+    if (formData.discountType === "percent" && formData.discount > 100) {
+      toast.error("Discount amount cannot exceed 100%.");
+    } else if (formData.discountType === "flat" && formData.discountAmount > formData.price) {
+      toast.error("Discount amount cannot exceed the price.");
+    }
+  }, [formData.discountAmount, formData.discount, formData.discountType, formData.price]);
+
+  const handleDiscountFocus = (e) => {
+    // Reset the relevant discount field when focused
+    if (e.target.name === "discount" && formData.discount === 0) {
+      handleChange({
+        target: {
+          name: "discount",
           value: "", // Clear the input field
         },
       });
-    } else if (e.target.name === "discount" && formData.discount === 0) {
+    } else if (e.target.name === "discountAmount" && formData.discountAmount === 0) {
       handleChange({
         target: {
-          name: "discount",
+          name: "discountAmount",
           value: "", // Clear the input field
         },
       });
@@ -113,23 +109,40 @@ const ProductAdditional = ({ formData = {}, handleChange }) => {
           />
         </div>
 
-        {/* Discount Amount */}
-        <div className="flex flex-col px-2">
-          <label>
-            Discount Amount {formData.discountType === "percent" ? "( % )" : "( Rs )"}
-          </label>
-          <div className="relative">
-            <FormInput
-              type="number"
-              name="discountAmount"
-              value={formData.discountAmount}
-              onChange={handleChange}
-              onFocus={handleDiscountFocus} // Clear on focus
-              placeholder={`Discount Amount`}
-              required
-            />
+        {/* Show Discount Fields based on discount type */}
+        {formData.discountType === "percent" && (
+          <div className="flex flex-col px-2">
+            <label>Discount Amount ( % )</label>
+            <div className="relative">
+              <FormInput
+                type="number"
+                name="discount"
+                value={formData.discount}
+                onChange={handleChange}
+                onFocus={handleDiscountFocus}
+                placeholder="Discount Percentage"
+                required
+              />
+            </div>
           </div>
-        </div>
+        )}
+
+        {formData.discountType === "flat" && (
+          <div className="flex flex-col px-2">
+            <label>Discount Amount ( Rs )</label>
+            <div className="relative">
+              <FormInput
+                type="number"
+                name="discountAmount"
+                value={formData.discountAmount}
+                onChange={handleChange}
+                onFocus={handleDiscountFocus}
+                placeholder="Discount Amount (Rs)"
+                required
+              />
+            </div>
+          </div>
+        )}
 
         {/* Tax Amount */}
         <div className="flex flex-col px-2">
@@ -175,6 +188,8 @@ const ProductAdditional = ({ formData = {}, handleChange }) => {
 };
 
 export default ProductAdditional;
+
+
 
 
 // import { useEffect, useState } from "react";

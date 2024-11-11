@@ -62,7 +62,6 @@ const AddNewProduct = () => {
 		metaTitle: "title",
 		metaDescription: "metadescription",
 		userType: "vendor",
-		status:"approved"
 	};
 
 	const [formData, setFormData] = useState(initialFormState);
