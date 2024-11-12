@@ -50,178 +50,178 @@ const OrderTranscation = () => {
   /////------------------------------
   //   ==========
   const data = [
-    {
-      sl: 1,
-      orderid: "100187",
-      duration: "Abc Abc",
-      inHouse: "$-250.00",
-      commission: "$0.00",
-      shipping: "$0.00",
-      incentive: "$0.00",
-      discount: "$0.00",
-      tax: "$0.00",
-      refound: "$0.00",
-      deliverd: "admin",
-      total: "$0.00",
-    },
-    {
-      sl: 2,
-      orderid: "100187",
-      duration: "Web seller",
-      inHouse: "$10.00",
-      commission: "$0.00",
-      shipping: "$0.00",
-      incentive: "$0.00",
-      discount: "$0.00",
-      tax: "$0.00",
-      refound: "$0.00",
-      deliverd: "admin",
-      total: "$0.00",
-    },
-    {
-      sl: 3,
-      orderid: "100187",
-      duration: "Digital Seller",
-      inHouse: "$0.00",
-      commission: "$0.00",
-      shipping: "$0.00",
-      incentive: "$0.00",
-      discount: "$0.00",
-      tax: "$0.00",
-      refound: "$0.00",
-      deliverd: "admin",
-      total: "$0.00",
-    },
-    {
-      sl: 4,
-      orderid: "100187",
-      duration: "App Seller",
-      inHouse: "$0.00",
-      commission: "$0.00",
-      shipping: "$0.00",
-      incentive: "$0.00",
-      discount: "$0.00",
-      tax: "$0.00",
-      refound: "$0.00",
-      deliverd: "admin",
-      total: "$0.00",
-    },
-    {
-      sl: 5,
-      orderid: "100187",
-      duration: "Marketing",
-      inHouse: "$0.00",
-      commission: "$0.00",
-      shipping: "$0.00",
-      incentive: "$0.00",
-      discount: "$0.00",
-      tax: "$0.00",
-      refound: "$0.00",
-      deliverd: "admin",
-      total: "$0.00",
-    },
-    {
-      sl: 6,
-      orderid: "100187",
-      duration: "Juneer",
-      inHouse: "$0.00",
-      deliverd: "admin",
+    // {
+    //   sl: 1,
+    //   orderid: "100187",
+    //   duration: "Abc Abc",
+    //   inHouse: "$-250.00",
+    //   commission: "$0.00",
+    //   shipping: "$0.00",
+    //   incentive: "$0.00",
+    //   discount: "$0.00",
+    //   tax: "$0.00",
+    //   refound: "$0.00",
+    //   deliverd: "admin",
+    //   total: "$0.00",
+    // },
+    // {
+    //   sl: 2,
+    //   orderid: "100187",
+    //   duration: "Web seller",
+    //   inHouse: "$10.00",
+    //   commission: "$0.00",
+    //   shipping: "$0.00",
+    //   incentive: "$0.00",
+    //   discount: "$0.00",
+    //   tax: "$0.00",
+    //   refound: "$0.00",
+    //   deliverd: "admin",
+    //   total: "$0.00",
+    // },
+    // {
+    //   sl: 3,
+    //   orderid: "100187",
+    //   duration: "Digital Seller",
+    //   inHouse: "$0.00",
+    //   commission: "$0.00",
+    //   shipping: "$0.00",
+    //   incentive: "$0.00",
+    //   discount: "$0.00",
+    //   tax: "$0.00",
+    //   refound: "$0.00",
+    //   deliverd: "admin",
+    //   total: "$0.00",
+    // },
+    // {
+    //   sl: 4,
+    //   orderid: "100187",
+    //   duration: "App Seller",
+    //   inHouse: "$0.00",
+    //   commission: "$0.00",
+    //   shipping: "$0.00",
+    //   incentive: "$0.00",
+    //   discount: "$0.00",
+    //   tax: "$0.00",
+    //   refound: "$0.00",
+    //   deliverd: "admin",
+    //   total: "$0.00",
+    // },
+    // {
+    //   sl: 5,
+    //   orderid: "100187",
+    //   duration: "Marketing",
+    //   inHouse: "$0.00",
+    //   commission: "$0.00",
+    //   shipping: "$0.00",
+    //   incentive: "$0.00",
+    //   discount: "$0.00",
+    //   tax: "$0.00",
+    //   refound: "$0.00",
+    //   deliverd: "admin",
+    //   total: "$0.00",
+    // },
+    // {
+    //   sl: 6,
+    //   orderid: "100187",
+    //   duration: "Juneer",
+    //   inHouse: "$0.00",
+    //   deliverd: "admin",
 
-      commission: "$0.00",
-      shipping: "$0.00",
-      incentive: "$0.00",
-      discount: "$0.00",
-      tax: "$0.00",
-      refound: "$0.00",
-      total: "$0.00",
-    },
-    {
-      sl: 7,
-      orderid: "100187",
-      deliverd: "admin",
-      duration: "Julyrer",
-      inHouse: "$0.00",
-      commission: "$0.00",
-      shipping: "$0.00",
-      incentive: "$0.00",
-      discount: "$0.00",
-      tax: "$0.00",
-      refound: "$0.00",
-      total: "$0.00",
-    },
-    {
-      sl: 8,
-      orderid: "100187",
-      duration: "Aguere",
-      inHouse: "$0.00",
-      commission: "$0.00",
-      shipping: "$0.00",
-      incentive: "$0.00",
-      discount: "$0.00",
-      deliverd: "admin",
-      tax: "$0.00",
-      refound: "$0.00",
-      total: "$0.00",
-    },
-    {
-      sl: 9,
-      orderid: "100187",
-      duration: "Seprer seller",
-      inHouse: "$0.00",
-      commission: "$0.00",
-      shipping: "$0.00",
-      incentive: "$0.00",
-      discount: "$0.00",
-      tax: "$0.00",
-      refound: "$0.00",
-      deliverd: "admin",
-      total: "$0.00",
-    },
-    {
-      sl: 10,
-      orderid: "100187",
-      duration: "Octa",
-      inHouse: "$0.00",
-      commission: "$0.00",
-      shipping: "$0.00",
-      incentive: "$0.00",
-      discount: "$0.00",
-      tax: "$0.00",
-      refound: "$0.00",
-      deliverd: "admin",
-      total: "$0.00",
-    },
-    {
-      sl: 11,
-      orderid: "100187",
-      duration: "News",
-      deliverd: "admin",
-      inHouse: "$0.00",
-      commission: "$0.00",
-      shipping: "$0.00",
-      incentive: "$0.00",
-      discount: "$0.00",
-      tax: "$0.00",
-      refound: "$0.00",
-      total: "$0.00",
-    },
-    {
-      sl: 12,
-      orderid: "100187",
-      deliverd: "admin",
-      duration: "Devevv",
-      inHouse: "$0.00",
-      commission: "$0.00",
-      shipping: "$0.00",
-      incentive: "$0.00",
-      discount: "$0.00",
-      tax: "$0.00",
-      refound: "$0.00",
-      total: "$0.00",
-    },
+    //   commission: "$0.00",
+    //   shipping: "$0.00",
+    //   incentive: "$0.00",
+    //   discount: "$0.00",
+    //   tax: "$0.00",
+    //   refound: "$0.00",
+    //   total: "$0.00",
+    // },
+    // {
+    //   sl: 7,
+    //   orderid: "100187",
+    //   deliverd: "admin",
+    //   duration: "Julyrer",
+    //   inHouse: "$0.00",
+    //   commission: "$0.00",
+    //   shipping: "$0.00",
+    //   incentive: "$0.00",
+    //   discount: "$0.00",
+    //   tax: "$0.00",
+    //   refound: "$0.00",
+    //   total: "$0.00",
+    // },
+    // {
+    //   sl: 8,
+    //   orderid: "100187",
+    //   duration: "Aguere",
+    //   inHouse: "$0.00",
+    //   commission: "$0.00",
+    //   shipping: "$0.00",
+    //   incentive: "$0.00",
+    //   discount: "$0.00",
+    //   deliverd: "admin",
+    //   tax: "$0.00",
+    //   refound: "$0.00",
+    //   total: "$0.00",
+    // },
+    // {
+    //   sl: 9,
+    //   orderid: "100187",
+    //   duration: "Seprer seller",
+    //   inHouse: "$0.00",
+    //   commission: "$0.00",
+    //   shipping: "$0.00",
+    //   incentive: "$0.00",
+    //   discount: "$0.00",
+    //   tax: "$0.00",
+    //   refound: "$0.00",
+    //   deliverd: "admin",
+    //   total: "$0.00",
+    // },
+    // {
+    //   sl: 10,
+    //   orderid: "100187",
+    //   duration: "Octa",
+    //   inHouse: "$0.00",
+    //   commission: "$0.00",
+    //   shipping: "$0.00",
+    //   incentive: "$0.00",
+    //   discount: "$0.00",
+    //   tax: "$0.00",
+    //   refound: "$0.00",
+    //   deliverd: "admin",
+    //   total: "$0.00",
+    // },
+    // {
+    //   sl: 11,
+    //   orderid: "100187",
+    //   duration: "News",
+    //   deliverd: "admin",
+    //   inHouse: "$0.00",
+    //   commission: "$0.00",
+    //   shipping: "$0.00",
+    //   incentive: "$0.00",
+    //   discount: "$0.00",
+    //   tax: "$0.00",
+    //   refound: "$0.00",
+    //   total: "$0.00",
+    // },
+    // {
+    //   sl: 12,
+    //   orderid: "100187",
+    //   deliverd: "admin",
+    //   duration: "Devevv",
+    //   inHouse: "$0.00",
+    //   commission: "$0.00",
+    //   shipping: "$0.00",
+    //   incentive: "$0.00",
+    //   discount: "$0.00",
+    //   tax: "$0.00",
+    //   refound: "$0.00",
+    //   total: "$0.00",
+    // },
   ];
   return (
-    <div className="bg-gray-100  flex flex-col gap-4 px-5 py-5">
+    <div className="bg-gray-100  flex flex-col gap-4 px-3 py-5">
       <div className="rounded-md border bg-white border-gray-300 shadow-md hover:shadow-md px-5 py-5">
         <h1 className="font-bold text-md">Filter Data</h1> <br />
         <div className="grid grid-cols-4 gap-3 ">
@@ -291,7 +291,7 @@ const OrderTranscation = () => {
                   className="h-10 w-10 "
                 />
                 <div>
-                  <p className="text-xl font-bold">192</p>
+                  <p className="text-xl font-bold">0</p>
                   <h2 className="font-semibold text-[.7rem] ">Total Order</h2>
                 </div>
               </div>
@@ -301,7 +301,7 @@ const OrderTranscation = () => {
                   <span className="text-gray-400 text-[.8rem]">Commission</span>
                 </div> */}
                 <div className="text-blue-500 text-[1rem] text-center font-semibold">
-                  97 <br />{" "}
+                  0 <br />{" "}
                   <span className="text-gray-400 text-[.7rem]">
                     In House Orders
                   </span>
@@ -313,7 +313,7 @@ const OrderTranscation = () => {
               </span>
             </div> */}
                 <div className="text-green-500 text-center text-[1rem] font-semibold">
-                  111 <br />{" "}
+                  0 <br />{" "}
                   <span className="text-gray-400 text-[.7rem]">
                     {" "}
                     Vendor Orders
@@ -332,13 +332,13 @@ const OrderTranscation = () => {
               </div>
               <div className=" flex justify-center items-center gap-3">
                 <div className="text-blue-500 text-[1rem] text-center font-semibold">
-                  97 <br />{" "}
+                  0 <br />{" "}
                   <span className="text-gray-400 text-[.6rem]">
                     In House Orders
                   </span>
                 </div>
                 <div className="text-green-500 text-center text-[1rem] font-semibold">
-                  111 <br />{" "}
+                  0 <br />{" "}
                   <span className="text-gray-400 text-[.6rem]">
                     {" "}
                     Vendor Orders
@@ -354,7 +354,7 @@ const OrderTranscation = () => {
                   className="w-10 h-10"
                 />
                 <div>
-                  <p className="text-xl  font-bold">10</p>
+                  <p className="text-xl  font-bold">0</p>
                   <h2 className="text-[.8rem] font-semibold">Total Vendor</h2>
                 </div>
               </div>
@@ -375,15 +375,15 @@ const OrderTranscation = () => {
               <div className="flex justify-center mt-4">
                 <div className="w-32 h-32 bg-blue-500 rounded-full relative">
                   <div className="absolute inset-0 flex items-center justify-center text-white text-2xl font-bold">
-                    $221.7K+
+                    0.00
                   </div>
                 </div>
               </div>
               <ul className="mt-4 space-y-2">
-                <li>Cash payments ($195,512.81)</li>
-                <li>Digital payments ($19,786.00)</li>
-                <li>Offline payments ($0.00)</li>
-                <li>Wallet ($6,355.00)</li>
+                <li>Cash payments (0.00)</li>
+                <li>Digital payments (0.00)</li>
+                <li>Offline payments (0.00)</li>
+                <li>Wallet (0.00)</li>
               </ul>
             </div>
           </div>
@@ -397,7 +397,7 @@ const OrderTranscation = () => {
             <h5 className="mb-0 text-capitalize d-flex gap-2 mr-auto text-[1rem] font-semibold">
               Total Transactions{" "}
               <span className="badge badge-soft-dark radius-50 fz-12 ml-1">
-                2
+                0
               </span>
             </h5>
 
