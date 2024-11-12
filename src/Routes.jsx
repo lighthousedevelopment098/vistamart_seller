@@ -66,7 +66,7 @@ import AddNewProduct from "./pages/In_House_Product/AddProduct/addProduct/addPro
 import ProductDetail from "./pages/seller_product/productDetail/ProductDetail.jsx";
 import InhouseProductUpdate from "./pages/seller_product/add/updateProduct/InhouseProductUpdate.jsx";
 import UpdateBankForm from "./pages/In_House_Product/Bussiness_Section/upddateBank.jsx";
-import CouponList from "./pages/offerAndDeals/coupon/CouponList.jsx";
+import CouponList from './pages/OfferAndDeals/Coupon/couponList.jsx'
 import TranscatioReports from "./pages/SalesAndTransaction/TransctionReports/TranscatioReports.jsx";
 import ProductReports from "./pages/SalesAndTransaction/ProductReports/ProductReports.jsx";
 import OrderReports from "./pages/SalesAndTransaction/OrderReports/OrderReports.jsx";
