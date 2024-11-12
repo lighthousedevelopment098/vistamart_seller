@@ -221,22 +221,22 @@ const AllProduct = () => {
   ];
   return (
     <div className="bg-gray-100  flex flex-col gap-4 px-5 py-5">
-      <div className="rounded-md border bg-white border-gray-300 shadow-md hover:shadow-lg px-5 py-5">
-        <h1 className="font-bold text-md">Filter Data</h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 mt-3">
+      <div className="rounded-md border bg-white border-gray-300 shadow-md hover:shadow-md px-5 py-5">
+        <h1 className="font-bold text-md">Filter Data</h1> <br />
+        <div className="grid grid-cols-4 gap-3">
           <select
             name=""
             id=""
-            className="text-md bg-white px-2 rounded py-2 border border-green-300"
+            className="text-md  bg-white px-2 rounded py-2  border border-primary outline-none"
           >
-            <option value="">All</option>
+            <option value="">All </option>
             <option value="">Hold</option>
             <option value="">Disburse</option>
           </select>
           <select
             name=""
             id=""
-            className="text-md bg-white px-2 rounded py-2 border border-green-300"
+            className="text-md  bg-white px-2 rounded py-2  border border-green-300 outline-none"
           >
             <option value="">This Year</option>
             <option value="">Inhouse</option>
@@ -244,19 +244,23 @@ const AllProduct = () => {
             <option value="">This Day</option>
             <option value="">Custom Date</option>
           </select>
-          <div className="flex justify-end md:justify-start">
-            <button className="px-6 py-2 rounded border border-green-200 bg-[#A1CB46] hover:bg-[#6a852f] text-white">
+          <div className="flex ">
+            <button
+              className="px-6  py-2 rounded border border-green-200 bg-primary hover:bg-primary-dark text-white"
+              style={{ color: "white" }}
+            >
               Filter
             </button>
           </div>
-        </div>
+        </div>{" "}
+        <br />
       </div>
       <div className="  pt-5">
         <div className="grid grid-cols-1 md:grid-cols-10 gap-5">
           {/* ////////// */}
 
           <div className="col-span-4 flex flex-col gap-5">
-            <div className="bg-white p-10  rounded-lg shadow-md">
+            <div className="bg-white p-2  rounded-lg shadow-md">
               <div className="flex items-center gap-3">
                 <img
                   src="https://6valley.6amtech.com/public/assets/back-end/img/cart.svg"
@@ -284,7 +288,7 @@ const AllProduct = () => {
               </div>
             </div>
             {/* //////////////////// */}
-            <div className="bg-white p-10  rounded-lg shadow-md ">
+            <div className="bg-white p-4  rounded-lg shadow-md ">
               <div className="flex items-center gap-5">
                 <img
                   src="https://6valley.6amtech.com/public/assets/back-end/img/products.svg"
@@ -299,7 +303,7 @@ const AllProduct = () => {
                 </div>
               </div>
             </div>
-            <div className="bg-white p-10  rounded-lg shadow-md ">
+            <div className="bg-white p-4  rounded-lg shadow-md ">
               <div className="flex items-center gap-5">
                 <img
                   src="https://6valley.6amtech.com/public/assets/back-end/img/stores.svg"
@@ -328,50 +332,61 @@ const AllProduct = () => {
       {/* ///////////// */}
       <div className="card">
         <div className="px-3 py-4">
-          <div className="flex flex-wrap justify-between gap-3 items-center">
-            <h5 className="mb-0 text-capitalize flex gap-2 mr-auto font-bold">
-              Total Transactions
-              <span className="bg-gray-700 text-white rounded-full text-sm px-2">
+          <div className="flex justify-between gap-3 align-items-center flex-col lg:flex-row">
+            <h5 className="mb-0 text-capitalize d-flex gap-2 mr-auto font-bold">
+              Total Transactions{" "}
+              <span className="badge badge-soft-dark radius-50 fz-12 ml-1">
                 2
               </span>
             </h5>
 
-            <div className="flex flex-wrap gap-3 w-full md:w-auto">
+            <div className="flex  gap-3 flex-col lg:flex-row w-40 md:w-full lg:w-[30vw]">
               <form
                 action="https://6valley.6amtech.com/admin/customer/subscriber-list"
                 method="GET"
-                className="flex w-full md:w-80"
+                className="w-80 "
               >
-                <div className="flex items-center border border-gray-300 rounded overflow-hidden w-full">
-                  <div className="p-2 bg-gray-200">
-                    <FaSearch />
+                <div className="input-group input-group-merge input-group-custom w-40 md:w-full">
+                  <div className="input-group-prepend">
+                    <div className="input-group-text">
+                      <FaSearch />
+                    </div>
                   </div>
                   <input
                     id="datatableSearch_"
                     type="search"
                     name="searchValue"
-                    className="flex-grow border-none outline-none p-2"
+                    className="form-control outline-none hover:border-primary"
                     placeholder="Search by email"
                     aria-label="Search orders"
+                    value=""
                   />
                   <button
                     type="submit"
-                    className="bg-[#A1CB46] hover:bg-[#94ba42] text-white px-4 py-2 rounded"
+                    className="btn bg-primary hover:bg-primary-dark"
+                    style={{ color: "white" }}
                   >
                     Search
                   </button>
                 </div>
               </form>
+
               <button
                 type="button"
-                className="rounded w-full md:w-auto px-3 py-2 bg-[#A1CB46] text-white hover:bg-[#7e9f37] flex items-center justify-center gap-2"
+                className="rounded w-32 px-3 py-2 bg-primary text-white hover:bg-primary-dark text-nowrap btn-block flex gap-2 "
+                style={{
+                  display: "flex",
+                  color: "white",
+                  alignItems: "center",
+                  gap: "4",
+                }}
+                //   data-toggle="dropdown"
               >
                 <FaDownload className="text-md" /> Export
               </button>
             </div>
           </div>
         </div>
-
         <div className="table-responsive">
           <table className="table overflow-y-auto table-hover table-borderless table-thead-bordered table-nowrap table-align-middle card-table text-left">
             <thead className="thead-light thead-50 text-capitalize ">
@@ -434,7 +449,7 @@ const AllProduct = () => {
             <img
               src="https://6valley.6amtech.com/public/assets/back-end/img/empty-state-icon/default.png"
               alt=""
-              className="w-52 h-52 "
+              className="w-28 h-28 md:w-52 md:h-52 "
             />{" "}
             <span>No product found</span>
           </div>

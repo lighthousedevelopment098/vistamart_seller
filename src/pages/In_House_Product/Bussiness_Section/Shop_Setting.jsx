@@ -56,7 +56,7 @@ const Shop_Setting = () => {
           </p>
           <div className="flex items-center gap-2">
             <button
-              className="rounded-full p-2 bg-gray-500 text-sm  border border-primary"
+              className="rounded-full p-2 bg-primary text-sm  border hover:bg-primary-dark"
               style={{ color: "white" }}
             >
               Go to Vacation Mode

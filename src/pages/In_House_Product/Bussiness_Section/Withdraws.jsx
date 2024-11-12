@@ -101,17 +101,19 @@ const Withdraws = () => {
 
   return (
     <>
-      <div className="w-full h-full bg-[#F9F9FB]">
+      <div className="w-full h-full p-2 ml-3 bg-[#F9F9FB]">
+        
         <div className="flex items-center">
           <img
             src="https://6valley.6amtech.com/public/assets/back-end/img/withdraw-icon.png"
-            className="h-7 w-7 mt-10 ml-10"
+            className="h-7 w-7 mt-10 "
           />
           <p className="ml-3 mt-10 text-[#334257] text-xl font-semibold">
             Withdraw
           </p>
         </div>
-        <div className="bg-white border border-slate-400 shadow rounded-lg ml-12 mr-12 h-[60vh] mt-4 w-[75vw]">
+        <div className="bg-white border border-slate-400 shadow rounded-lg p-4 h-full mt-4 w-full">
+        <div className=" flex flex-col md:flex-row justify-between items-center">
           <div className="flex items-center mt-4 ml-4">
             <p className="text-[#334257] font-semibold">
               Withdraw Request Table
@@ -120,8 +122,8 @@ const Withdraws = () => {
               3
             </p>
           </div>
-          <div className="ml-[60%]  flex items-end">
-            <select className="border border-slate-300 hover:bg-slate-300 px-4 py-2 bg-slate-50 rounded ml-32">
+          <div className="  flex flex-col md:flex-row gap-2 ">
+            <select className="border border-slate-300 hover:bg-slate-300 px-4 py-2 bg-slate-50 rounded ">
               <option value="All">All</option>
               <option value="Approved">Approved</option>
               <option value="Denied">Denied</option>
@@ -148,8 +150,9 @@ const Withdraws = () => {
                 </div>
               )}
             </div>
+            </div>
           </div>
-          <div className="table-responsive mt-10">
+          <div className="w-full mt-10">
             <div className="overflow-x-auto">
               <table className="w-full bg-white shadow-md border-collapse">
                 <thead className="bg-blue-50 h-12 border-b border-blue-500 text-blue-900">
@@ -177,11 +180,11 @@ const Withdraws = () => {
                         <span
                           className={`px-2 py-1 rounded-full text-sm font-semibold ${
                             item.status === "Denied"
-                              ? "bg-red-100 text-red-600"
+                              ? "bg-red-100 text-red-500"
                               : item.status === "Approved"
-                              ? "bg-green-100 text-green-600"
+                              ? "bg-green-100 text-green-500"
                               : item.status === "Pending"
-                              ? "bg-blue-100 text-blue-600"
+                              ? "bg-blue-100 text-blue-500"
                               : ""
                           }`}
                         >

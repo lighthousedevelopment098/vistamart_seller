@@ -194,7 +194,7 @@ const OrderReports = () => {
     },
   ];
   return (
-    <div className="bg-gray-100  flex flex-col gap-4 px-5 py-5 mx-5">
+    <div className="bg-gray-100  flex flex-col gap-4 px-2 mx-5">
       <div className="flex items-center gap-4 mt-3">
         <img
           src="https://6valley.6amtech.com/public/assets/back-end/img/order_report.png"
@@ -206,11 +206,11 @@ const OrderReports = () => {
       <div className="rounded-md border bg-white border-gray-300 shadow-md hover:shadow-md px-5 py-5">
         <h1 className="font-bold text-md">Filter Data</h1>
         <br />
-        <div className="flex flex-col md:flex-row items-center md:items-start md:gap-8">
+        <div className="flex items-center gap-4 md:gap-8 flex-col md:flex-row ">
           <select
             name=""
             id=""
-            className="text-md bg-white px-2 rounded py-2 w-full md:w-52 border border-green-300 mb-3 md:mb-0"
+            className="text-md  bg-white px-2 rounded py-2 w-40 md:w-52 border border-primary outline-none "
           >
             <option value="">All</option>
             <option value="">This Month</option>
@@ -221,7 +221,7 @@ const OrderReports = () => {
           <select
             name=""
             id=""
-            className="text-md bg-white px-2 rounded py-2 w-full md:w-52 border border-green-300 mb-3 md:mb-0"
+            className="text-md  bg-white px-2 rounded py-2 w-40 md:w-52 border border-primary outline-none"
           >
             <option value="">This Year</option>
             <option value="">This Month</option>
@@ -230,7 +230,7 @@ const OrderReports = () => {
             <option value="">Custom Date</option>
           </select>
           <button
-            className="px-6 w-full md:w-52 py-2 rounded border border-green-200 bg-[#A1CB46] hover:bg-[#6a852f] text-white"
+            className="px-6 w-40 md:w-52 py-2 rounded border border-green-200 bg-primary hover:bg-primary-dark text-white"
             style={{ color: "white" }}
           >
             Filter
@@ -267,7 +267,7 @@ const OrderReports = () => {
                   <h2 className="font-semibold text-[.7rem] ">Total Orders</h2>
                 </div>
               </div>
-              <div className="flex justify-center gap-2 mt-4">
+              <div className="flex justify-center gap-2 mt-4 flex-col lg:flex-row">
                 <div className="text-red-500 text-[1rem] font-semibold">
                   8 <br />{" "}
                   <span className="text-gray-400 text-[.8rem]">Cancel</span>
@@ -290,31 +290,38 @@ const OrderReports = () => {
               </div>
             </div>
             {/* //////////////////// */}
-            <div className="bg-white p-6 md:p-10 rounded-lg shadow-md">
-              <div className="flex items-center md:items-start gap-5">
+            <div className="bg-white p-10  rounded-lg shadow-md ">
+              <div className="flex items-center gap-4 flex-col lg:flex-row ">
                 <img
                   src="https://6valley.6amtech.com/public/assets/back-end/img/products.svg"
                   alt=""
                   className="w-10 h-10"
                 />
                 <div>
-                  <p className="text-xl font-bold">$434,444.31</p>
-                  <h2 className="text-sm md:text-base font-semibold">
+                  <p className="text-xl  font-bold">$434,444.31</p>
+                  <h2 className="text-[.8rem] font-semibold">
                     Total Order Amount
-                  </h2>
+                  </h2>{" "}
+                  <br />
                 </div>
               </div>
               <br />
-              <div className="flex flex-col md:flex-row gap-3">
-                <div className="text-red-500 text-base font-semibold">
+              <div className="flex gap-3 flex-col lg:flex-row">
+                <div className="text-red-500 text-[1rem] font-semibold">
                   $212,790.50
-                  <br />
-                  <span className="text-gray-400 text-xs">Due Amount</span>
+                  <br />{" "}
+                  <span className="text-gray-400 text-[.8rem]">
+                    {" "}
+                    Due Amount
+                  </span>
                 </div>
-                <div className="text-green-500 text-base font-semibold">
+                <div className="text-green-500 text-[1rem] font-semibold">
                   $221,653.81
-                  <br />
-                  <span className="text-gray-400 text-xs">Already Settled</span>
+                  <br />{" "}
+                  <span className="text-gray-400 text-[.7rem]">
+                    {" "}
+                    Already Settled
+                  </span>
                 </div>
               </div>
             </div>
@@ -350,21 +357,21 @@ const OrderReports = () => {
       </div>{" "}
       {/* //////////// */}
       {/* ///////////// */}
-      <div className="card">
+      <div className="card ">
         <div className="px-3 py-4">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-3">
-            <h5 className="mb-2 md:mb-0 text-capitalize flex gap-2 font-bold">
+          <div className="flex justify-between gap-3 align-items-center flex-col lg:flex-row">
+            <h5 className="mb-0 text-capitalize d-flex gap-2 mr-auto font-bold">
               Total Vendor{" "}
               <span className="badge badge-soft-dark radius-50 fz-12 ml-1">
                 2
               </span>
             </h5>
 
-            <div className="flex flex-col md:flex-row gap-3">
+            <div className="flex  gap-3 flex-col lg:flex-row">
               <form
                 action="https://6valley.6amtech.com/admin/customer/subscriber-list"
                 method="GET"
-                className="w-full max-w-sm"
+                className="w-[100%] "
               >
                 <div className="input-group input-group-merge input-group-custom">
                   <div className="input-group-prepend">
@@ -376,14 +383,15 @@ const OrderReports = () => {
                     id="datatableSearch_"
                     type="search"
                     name="searchValue"
-                    className="form-control"
+                    className="form-control outline-none hover:border-primary"
                     placeholder="Search by email"
                     aria-label="Search orders"
                     value=""
                   />
                   <button
                     type="submit"
-                    className="btn bg-[#A1CB46] hover:bg-[#94ba42]"
+                    className="btn bg-primary hover:bg-primary-dark"
+                    style={{color:"white"}}
                   >
                     Search
                   </button>
@@ -391,14 +399,20 @@ const OrderReports = () => {
               </form>
               <button
                 type="button"
-                className="rounded px-3 py-2 bg-[#A1CB46] text-white hover:bg-[#7e9f37] flex items-center gap-2 min-w-[5rem]"
+                className="rounded w-20 px-3 py-2 bg-primary text-white hover:bg-primary-dark text-nowrap btn-block flex gap-2 "
+                style={{
+                  display: "flex",
+                  color: "white",
+                  alignItems: "center",
+                  gap: "4",
+                }}
+                //   data-toggle="dropdown"
               >
                 <FaDownload /> Export
               </button>
             </div>
           </div>
         </div>
-
         <div className="table-responsive">
           <table className="table  table-hover table-borderless table-thead-bordered table-nowrap table-align-middle card-table text-left">
             <thead className="thead-light thead-50 text-capitalize ">

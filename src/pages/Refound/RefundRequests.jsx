@@ -69,7 +69,7 @@ const RefundRequests = ({ status, title }) => {
                 <input
                   type="search"
                   name="searchValue"
-                  className="form-control"
+                  className="form-control outline-none hover:border-primary"
                   placeholder="Search by Title, Code, or Customer"
                   value={searchValue}
                   onChange={handleSearchChange}
@@ -95,7 +95,7 @@ const RefundRequests = ({ status, title }) => {
               <select
                 name="refundFilter"
                 id="refundFilter"
-                className="md:w-40 lg:w-48 bg-white border-gray-500 border rounded px-3 py-2"
+                className="md:w-40 lg:w-48 bg-white border-gray-500 border outline-none rounded px-3 py-2"
               >
                 <option value="">All</option>
                 <option value="inhouse">Inhouse Request</option>

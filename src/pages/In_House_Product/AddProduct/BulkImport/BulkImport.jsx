@@ -92,7 +92,7 @@ const BulkImport = () => {
                 <a
                   href="https://6valley.6amtech.com/public/assets/product_bulk_format.xlsx"
                   download
-                  className="btn-link text-capitalize fz-16 font-weight-medium"
+                  className="btn-link  text-capitalize fz-16 font-weight-medium"
                 >
                   Download here
                 </a>
@@ -103,14 +103,14 @@ const BulkImport = () => {
                     <div className="col-auto">
                       <div className="uploadDnD">
                         <div
-                          className="form-group inputDnD input_image input_image_edit"
+                          className="form-group  inputDnD input_image input_image_edit"
                           data-title="Drag & drop file or browse file"
                         >
                           <input
                             type="file"
                             name="products_file"
                             accept=".xlsx, .xls"
-                            className="form-control-file text--primary font-weight-bold action-upload-section-dot-area"
+                            className="form-control-file  text--primary font-weight-bold action-upload-section-dot-area"
                             onChange={handleFileChange}
                           />
                         </div>
@@ -118,7 +118,7 @@ const BulkImport = () => {
                     </div>
                   </div>
                 </div>
-                <div className="d-flex flex-wrap gap-10 align-items-center justify-content-end">
+                <div className="d-flex flex-wrap gap-4 align-items-center justify-content-end">
                   <button
                     type="button"
                     className="btn btn-secondary px-4 action-onclick-reload-page"
@@ -128,7 +128,8 @@ const BulkImport = () => {
                   </button>
                   <button
                     type="submit"
-                    className="rounded-md px-4 btn   bg-[#A1CB46] text-white hover:bg-[#7e9f37] border border-gray-300"
+                    className="rounded-md px-4 btn   bg-primary text-white hover:bg-primary-dark border "
+                    style={{color:"white"}}
                   >
                     Submit
                   </button>
