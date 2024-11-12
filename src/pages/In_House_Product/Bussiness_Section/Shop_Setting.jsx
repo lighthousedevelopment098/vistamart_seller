@@ -67,7 +67,7 @@ const Shop_Setting = () => {
           </div>
         </div>
         <div className="border-b-4 border-[#F9F9FB] w-full mt-2"></div>
-        <div className="flex flex-col md:flex-row md:items-center gap-2 mt-4">
+        {/* <div className="flex flex-col md:flex-row md:items-center gap-2 mt-4">
           <img
             src="https://6valley.6amtech.com/storage/app/public/shop/2022-04-21-6260f6e190f4c.png"
             className="rounded-full h-28 w-28 md:h-40 md:w-40 "
@@ -88,7 +88,7 @@ const Shop_Setting = () => {
               </p>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

@@ -76,27 +76,27 @@ const Withdraws = () => {
   };
 
   const list = [
-    {
-      id: 1,
-      requestTime: "12 June 2022",
-      price: "500",
-      status: "Denied",
-      action: "Close",
-    },
-    {
-      id: 2,
-      price: "600",
-      requestTime: "12 June 2022",
-      status: "Approved",
-      action: "Close",
-    },
-    {
-      id: 3,
-      price: "500",
-      requestTime: "12 June 2022",
-      status: "Pending",
-      action: "Close",
-    },
+    // {
+    //   id: 1,
+    //   requestTime: "12 June 2022",
+    //   price: "500",
+    //   status: "Denied",
+    //   action: "Close",
+    // },
+    // {
+    //   id: 2,
+    //   price: "600",
+    //   requestTime: "12 June 2022",
+    //   status: "Approved",
+    //   action: "Close",
+    // },
+    // {
+    //   id: 3,
+    //   price: "500",
+    //   requestTime: "12 June 2022",
+    //   status: "Pending",
+    //   action: "Close",
+    // },
   ];
 
   return (
