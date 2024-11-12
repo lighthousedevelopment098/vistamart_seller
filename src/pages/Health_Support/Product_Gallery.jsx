@@ -14,8 +14,8 @@ const ProductCard = ({ product }) => {
         <div className="w-full h-full md:w-[15vw] md:h-[40vh] mt-10">
           <img src={product.image} alt={product.name} />
         </div>
-        <div className="w-96 md:w-full overflow-x-scroll md:overflow-hidden scroll-smooth flex flex-col gap-2 ml-6 ">
-          <button className="bg-primary  text-nowrap px-5 py-2 rounded-r  text-white w-28  md: hover:bg-primary-dark hover:text-white"
+        <div className="w-96 md:w-full overflow-x-scroll md:overflow-hidden scroll-smooth flex flex-col gap-2  ">
+          <button className="bg-primary  text-nowrap px-4 py-2 rounded-r  text-white w-28  md: hover:bg-primary-dark hover:text-white"
           style={{color:"white"}}>
             product info
           </button>
@@ -43,7 +43,7 @@ const ProductCard = ({ product }) => {
               <p>:</p>
             </div>
 
-            <div className="ml-10">
+            <div className="ml-6">
               <p>{product.brand}</p>
               <p>{product.category}</p>
               <p>{product.type}</p>
@@ -181,7 +181,7 @@ const ProductGallery = () => {
             <option value="Vendor Order">Vendor Order</option>
             <option value="POS Order">POS Order</option>
           </select>
-
+          <div className="flex flex-row w-full">
           <input
             type="text"
             name="username"
@@ -189,10 +189,11 @@ const ProductGallery = () => {
             className="border border-gray-300 rounded text-base outline-none w-full md:w-56 h-10 text-gray-700 hover:border-blue-500 hover:bg-white hover:text-black"
           />
 
-          <button className="bg-primary hover:bg-primary-dark text-white py-2 w-full md:w-auto"
+          <button className="bg-primary hover:bg-primary-dark rounded-r-md text-white py-2 px-4"
           style={{color:"white"}}>
             Search
           </button>
+          </div>
         </div>
 
         {products.map((product, index) => (

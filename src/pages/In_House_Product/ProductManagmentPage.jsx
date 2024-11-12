@@ -11,7 +11,7 @@ import LoadingSpinner from '../../components/LoodingSpinner/LoadingSpinner';
 import Switcher from '../../components/FormInput/Switcher'; // Import Switcher component
 import apiConfig from '../../components/config/apiConfig';
 
-const InHouseProductList = ({ initialTitle = 'In House Product List', initialFilters = {} }) => {
+const InHouseProductList = ({ initialTitle = 'Product List', initialFilters = {} }) => {
   const dispatch = useDispatch();
   const { loading, error, products, results } = useSelector((state) => state.product);
   const { categories, brands } = useSelector((state) => state.category);
@@ -19,8 +19,8 @@ const InHouseProductList = ({ initialTitle = 'In House Product List', initialFil
   const [sortOrder, setSortOrder] = useState('asc');
  
   const [filters, setFilters] = useState({
-    // brand: initialFilters.brand || "",
-    // category: initialFilters.category || "",
+    brand: initialFilters.brand || "",
+    category: initialFilters.category || "",
     searchValue: initialFilters.searchValue || '',
     userType: initialFilters.userType || '',
     userId : initialFilters.userId || '',

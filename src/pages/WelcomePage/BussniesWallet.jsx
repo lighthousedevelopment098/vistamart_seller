@@ -44,7 +44,7 @@ const BusinessAnalytics = () => {
               <h6 className="order-stats__subtitle">Pending</h6>
             </div>
 
-            <span className="order-stats__title">59</span>
+            <span className="order-stats__title">0</span>
           </Link>
         </div>
         <div className="col-sm-3 col-lg-2">
@@ -61,7 +61,7 @@ const BusinessAnalytics = () => {
               />
               <h6 className="order-stats__subtitle">Confirmed</h6>
             </div>
-            <span className="order-stats__title">21</span>
+            <span className="order-stats__title">0</span>
           </Link>
         </div>
         <div className="col-sm-3 col-lg-2">
@@ -78,7 +78,7 @@ const BusinessAnalytics = () => {
               />
               <h6 className="order-stats__subtitle">Packaging</h6>
             </div>
-            <span className="order-stats__title">9</span>
+            <span className="order-stats__title">0</span>
           </Link>
         </div>
         <div className="col-sm-3 col-lg-2">
@@ -95,7 +95,7 @@ const BusinessAnalytics = () => {
               />
               <h6 className="order-stats__subtitle">Out for delivery</h6>
             </div>
-            <span className="order-stats__title">8</span>
+            <span className="order-stats__title">0</span>
           </Link>
         </div>
         <div className="col-sm-3 col-lg-2">
@@ -112,7 +112,7 @@ const BusinessAnalytics = () => {
                 />
                 <h6 className="order-stats__subtitle">Delivered</h6>
               </div>
-              <span className="order-stats__title">76</span>
+              <span className="order-stats__title">0</span>
             </div>
           </Link>
         </div>
@@ -130,7 +130,7 @@ const BusinessAnalytics = () => {
                 />
                 <h6 className="order-stats__subtitle">Canceled</h6>
               </div>
-              <span className="order-stats__title">9</span>
+              <span className="order-stats__title">0</span>
             </div>
           </Link>
         </div>
@@ -148,7 +148,7 @@ const BusinessAnalytics = () => {
                 />
                 <h6 className="order-stats__subtitle">Returned</h6>
               </div>
-              <span className="order-stats__title">4</span>
+              <span className="order-stats__title">0</span>
             </div>
           </Link>
         </div>
@@ -168,7 +168,7 @@ const BusinessAnalytics = () => {
                   Failed to delivery
                 </h6>
               </div>
-              <span className="order-stats__title">5</span>
+              <span className="order-stats__title">0</span>
             </div>
           </Link>
         </div>

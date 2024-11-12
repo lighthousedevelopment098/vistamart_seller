@@ -13,7 +13,7 @@ const FilterForm = ({ filters, onInputChange, onReset, categories = [], brands =
                 <label className="title-color" htmlFor="brand">Brand</label>
                 <select
                   name="brand"
-                  className="form-control"
+                  className="form-control outline-none hover:border-primary"
                   onChange={onInputChange}
                   value={filters.brand}
                 >
@@ -31,7 +31,7 @@ const FilterForm = ({ filters, onInputChange, onReset, categories = [], brands =
                 <label className="title-color" htmlFor="category">Category</label>
                 <select
                   name="category"
-                  className="form-control"
+                  className="form-control outline-none hover:border-primary"
                   onChange={onInputChange}
                   value={filters.category}
                 >
@@ -50,7 +50,7 @@ const FilterForm = ({ filters, onInputChange, onReset, categories = [], brands =
                 <label className="title-color" htmlFor="userType">User Type</label>
                 <select
                   name="userType"
-                  className="form-control"
+                  className="form-control outline-none hover:border-primary"
                   onChange={onInputChange}
                   value={filters.userType}
                 >

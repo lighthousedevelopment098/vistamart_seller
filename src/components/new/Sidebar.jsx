@@ -447,7 +447,7 @@ const Sidebar = ({ setComponent }) => {
               </Link>
             </li>
            
-            <li>
+            {/* <li>
               <Link
                 to="productgallery"
                 className="block w-full text-left p-1 pl-4 rounded hover:bg-gray-500"
@@ -455,7 +455,7 @@ const Sidebar = ({ setComponent }) => {
               >
                 • Product Gallery
               </Link>
-            </li>
+            </li> */}
             <li>
               <Link
                 to="bulkimport"
@@ -467,13 +467,13 @@ const Sidebar = ({ setComponent }) => {
             </li>
           </ul>
         )}
-        <Link
+        {/* <Link
           to="creview"
           className="block w-full flex  align-items-center text-left p-2  rounded hover:bg-[#52c970] text-white hover:text-white mb-3"
           style={{ color: "white" }}
         >
           <FaStar className="inline-block mr-2" /> Product Reveiw
-        </Link>
+        </Link> */}
       </div>
       {/* --------------------------------------------------------- */}
       {/* ///------------------Promotion Management---------------- */}
