@@ -76,7 +76,8 @@ const RefundRequests = ({ status, title }) => {
                 />
                 <button
                   type="submit"
-                  className="btn px-4 py-2 bg-[#A1CB46] text-white hover:bg-[#7e9f37]"
+                  className="btn px-4 py-2 bg-primary text-white hover:bg-primary-dark"
+                  style={{color:"white"}}
                 >
                   Search
                 </button>
@@ -85,7 +86,8 @@ const RefundRequests = ({ status, title }) => {
             <div className="flex flex-wrap gap-3 w-full md:w-auto">
               <button
                 type="button"
-                className="flex items-center px-4 py-2 bg-[#A1CB46] rounded text-white hover:bg-[#7e9f37] gap-2 justify-center"
+                className="flex items-center px-4 py-2 bg-primary rounded text-white hover:bg-primary-dark gap-2 justify-center"
+                style={{color:"white"}}
                 data-toggle="dropdown"
               >
                 <FaDownload /> Export

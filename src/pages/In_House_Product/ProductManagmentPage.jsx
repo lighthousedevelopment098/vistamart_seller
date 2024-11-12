@@ -99,7 +99,7 @@ const InHouseProductList = ({ initialTitle = 'In House Product List', initialFil
   };
 
   return (
-    <div className="content container-fluid px-12">
+    <div className="content container-fluid ">
       <div className="mb-3">
         <h2 className="h1 mb-0 text-capitalize d-flex gap-2">
           <img src="/inhouse-product-list.png" alt="In House Product List" />

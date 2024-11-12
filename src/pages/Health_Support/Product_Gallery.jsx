@@ -10,12 +10,13 @@ const ProductCard = ({ product }) => {
 
   return (
     <div className="rounded border border-gray-200 bg-white ml-8 mt-24 w-[65vw]">
-      <div className="flex">
-        <div className="w-[15vw] h-[40vh]">
+      <div className="flex ">
+        <div className="w-full h-full md:w-[15vw] md:h-[40vh] mt-10">
           <img src={product.image} alt={product.name} />
         </div>
-        <div className="w-full">
-          <button className="bg-green-500  px-5 py-2 rounded-r ml-[84%] text-white w-28 mr-12 hover:bg-[#268ebb] hover:text-white">
+        <div className="w-96 md:w-full overflow-x-scroll md:overflow-hidden scroll-smooth flex flex-col gap-2 ml-6 ">
+          <button className="bg-primary  text-nowrap px-5 py-2 rounded-r  text-white w-28  md: hover:bg-primary-dark hover:text-white"
+          style={{color:"white"}}>
             product info
           </button>
           <p className="pt-3 text-sm font-bold">
@@ -78,7 +79,7 @@ const ProductGallery = () => {
   const products = [
     {
       image:
-        "https://6valley.6amtech.com/storage/app/public/product/thumbnail/2023-06-13-648862d93c9d7.png",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6j9RufwG5FJEyec21NWny0inl57STjZn3Xg&s",
       name: "Silicone Strap Analogue Sports Watch Rectangular Dial New Model 2023 Men Watches",
       brand: "Triangle",
       category: "Jewelry & Watches",
@@ -153,28 +154,28 @@ const ProductGallery = () => {
         </p>
       </div>
 
-      <div className="bg-white rounded-lg w-full md:w-[70vw] mt-5 ml-8 h-full hover:bg-zinc-100 shadow-lg border border-zinc-200">
+      <div className="bg-white rounded-lg w-full  mt-5  h-full hover:bg-zinc-100 shadow-lg border border-zinc-200">
         <div className="flex flex-wrap pl-4 pr-3 pt-6">
           <p className="text-gray-500 w-1/3 md:w-auto">Store</p>
           <p className="text-gray-500 w-1/3 md:w-auto md:pl-[21%]">Brand</p>
           <p className="text-gray-500 w-1/3 md:w-auto md:pl-[21%]">Category</p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-2 pl-4 pt-3 pr-4 justify-between">
-          <select className="border border-gray-300 rounded text-base w-full md:w-48 h-10 text-gray-700 hover:border-blue-500 hover:bg-white hover:text-black">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 pl-4 pt-3 pr-4 justify-between">
+          <select className="border border-gray-300  outline-none rounded text-base w-full md:w-48 h-10 text-gray-700 hover:border-blue-500 hover:bg-white hover:text-black">
             <option value="ALL">ALL Shop</option>
             <option value="In HOUSE Order">In HOUSE Order</option>
             <option value="Vendor Order">Vendor Order</option>
             <option value="POS Order">POS Order</option>
           </select>
 
-          <select className="border border-gray-300 rounded text-base w-full md:w-48 h-10 text-gray-700 hover:border-blue-500 hover:bg-white hover:text-black">
+          <select className="border border-gray-300 rounded text-base outline-none w-full md:w-48 h-10 text-gray-700 hover:border-blue-500 hover:bg-white hover:text-black">
             <option value="ALL">ALL Shop</option>
             <option value="In HOUSE Order">In HOUSE Order</option>
             <option value="Vendor Order">Vendor Order</option>
             <option value="POS Order">POS Order</option>
           </select>
 
-          <select className="border border-gray-300 rounded text-base w-full md:w-48 h-10 text-gray-700 hover:border-blue-500 hover:bg-white hover:text-black">
+          <select className="border border-gray-300 rounded text-base w-full outline-none md:w-48 h-10 text-gray-700 hover:border-blue-500 hover:bg-white hover:text-black">
             <option value="ALL">ALL Shop</option>
             <option value="In HOUSE Order">In HOUSE Order</option>
             <option value="Vendor Order">Vendor Order</option>
@@ -185,10 +186,11 @@ const ProductGallery = () => {
             type="text"
             name="username"
             placeholder="search by product"
-            className="border border-gray-300 rounded text-base w-full md:w-56 h-10 text-gray-700 hover:border-blue-500 hover:bg-white hover:text-black"
+            className="border border-gray-300 rounded text-base outline-none w-full md:w-56 h-10 text-gray-700 hover:border-blue-500 hover:bg-white hover:text-black"
           />
 
-          <button className="hover:bg-[#52c970] bg-green-500 text-white py-2 w-full md:w-auto">
+          <button className="bg-primary hover:bg-primary-dark text-white py-2 w-full md:w-auto"
+          style={{color:"white"}}>
             Search
           </button>
         </div>
