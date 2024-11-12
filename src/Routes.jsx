@@ -64,12 +64,12 @@ import {
  import OrderDetails from "./pages/Order/OrderDeatiels.jsx"
 import AddNewProduct from "./pages/In_House_Product/AddProduct/addProduct/addProductForm.jsx";
 import ProductDetail from "./pages/seller_product/productDetail/ProductDetail.jsx";
-import InhouseProductUpdate from "./pages/seller_product/add/updateProduct/InhouseProductUpdate.jsx";
 import UpdateBankForm from "./pages/In_House_Product/Bussiness_Section/upddateBank.jsx";
-import CouponList from './pages/OfferAndDeals/Coupon/couponList.jsx'
 import TranscatioReports from "./pages/SalesAndTransaction/TransctionReports/TranscatioReports.jsx";
 import ProductReports from "./pages/SalesAndTransaction/ProductReports/ProductReports.jsx";
 import OrderReports from "./pages/SalesAndTransaction/OrderReports/OrderReports.jsx";
+import CouponList from "./pages/offerAndDeals/coupon/CouponList.jsx";
+// import InhouseProductUpdate from "./pages/In_House_Product/AddProduct/updateProduct/InhouseProductUpdate.jsx";
 
 function AllRoutes() {
 
@@ -128,10 +128,10 @@ function AllRoutes() {
                     path="/inhouseaddproduct"
                     element={<AddNewProduct />}
                   />
-                  <Route path="/product/:productId" 
+                  {/* <Route path="/product/:id" 
                   element={<InhouseProductUpdate />} />
 
-               
+                */}
                 
 
 

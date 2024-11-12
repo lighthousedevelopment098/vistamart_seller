@@ -148,7 +148,7 @@ function App() {
                   ></div>
                   <Sidebar toggleSidebar={toggleSidebar} />
                 </div>
-                <main className="flex-1 lg:w-10/12 md:ml-5 overflow-hidden px-5 py-6">
+                <main className="flex-1 lg:w-10/12 md:ml-5 overflow-hidden px-8 py-6">
                   <button className="p-4 lg:hidden" onClick={toggleSidebar}>
                     {isSidebarOpen ? (
                       "Close"

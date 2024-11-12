@@ -4,6 +4,7 @@ import { fetchVendorBankById, updateVendorBank } from "../../../components/redux
 import { getAuthData } from "../../../utils/authHelper";
 import { useParams, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import LoadingSpinner from "../../../components/LoodingSpinner/LoadingSpinner";
 
 const UpdateBankForm = () => {
   const { id } = useParams();
@@ -78,7 +79,7 @@ const UpdateBankForm = () => {
       <div className="bg-white p-4 mt-2 rounded-lg shadow-md">
         <h2 className="text-xl font-bold mb-4">Update Bank Info</h2>
         {loading ? (
-          <p>Loading...</p>
+          <p><LoadingSpinner/></p>
         ) : (
           <form onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">

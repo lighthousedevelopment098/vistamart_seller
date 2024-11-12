@@ -9,6 +9,7 @@ import "./Tooltip.css"; // Assuming you have some tooltips or styling
 import { getAuthData } from "../../../utils/authHelper";
 import ActionButton from "../../../components/ActionButton/Action";
 import { AiFillBank } from "react-icons/ai";
+import LoadingSpinner from "../../../components/LoodingSpinner/LoadingSpinner";
 
 const BankInformation = () => {
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ const BankInformation = () => {
   }, [dispatch, userId]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div><LoadingSpinner /></div>;
   }
 
   if (error) {
