@@ -53,6 +53,7 @@ export const createVendorBank = createAsyncThunk(
           Authorization: `Bearer ${token}`,
         },
       });
+      console.log("addd vendor bank form ", response)
       return response.data.doc;
     } catch (error) {
       const errorMessage = ErrorMessage(error);

@@ -6,7 +6,7 @@ import { getAuthData } from "../../../utils/authHelper";
 const AddBankForm = () => {
   const dispatch = useDispatch();
   const { user } = getAuthData(); 
-   const userId = user?.id;  // Get the user ID from the user slice of the Redux store
+   const userId = user?._id;  // Get the user ID from the user slice of the Redux store
   // console.log("User ID:", userId);  // Get the user ID from the user slice of the Redux store
   const [formData, setFormData] = useState({
     holderName: "",
