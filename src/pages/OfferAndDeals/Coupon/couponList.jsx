@@ -149,16 +149,16 @@ const CouponList = () => {
       label: "Expiration Date",
       render: (coupon) => coupon?.expiredDate ? new Date(coupon.expiredDate).toLocaleDateString() : "N/A",
     },
-    {
-      key: "status",
-      label: "Status",
-      render: (coupon) => coupon && (
-        <Switcher
-          checked={coupon.status === "active"}
-          onChange={() => handleUpdateStatus(coupon._id, coupon.status !== "active")}
-        />
-      ),
-    },
+    // {
+    //   key: "status",
+    //   label: "Status",
+    //   render: (coupon) => coupon && (
+    //     <Switcher
+    //       checked={coupon.status === "active"}
+    //       onChange={() => handleUpdateStatus(coupon._id, coupon.status !== "active")}
+    //     />
+    //   ),
+    // },
     {
       key: "action",
       label: "Action",
@@ -175,7 +175,7 @@ const CouponList = () => {
 
   return (
     <div className="">
-      <div className="">
+      <div className="" style={{padding:"0rem 0rem 0rem 1rem"}}>
         <React.Suspense fallback={<LoadingSpinner />}>
           <LazyTableList
             tableTitle="Coupon List"
