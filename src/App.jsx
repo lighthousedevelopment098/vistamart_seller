@@ -96,6 +96,7 @@ import Footer from "./components/new/Footer/Footer";
 import { RiMenuUnfold3Fill } from "react-icons/ri";
 import AllRoutes from "./Routes.jsx";
 import "./App.css";
+import LoadingSpinner from "./components/LoodingSpinner/LoadingSpinner.jsx";
 
 const queryClient = new QueryClient();
 
@@ -126,7 +127,7 @@ function App() {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div><LoadingSpinner /></div>;
 
   return (
     <QueryClientProvider client={queryClient}>

@@ -34,6 +34,25 @@ const ProductAdditional = ({ formData = {}, handleChange }) => {
     }
   }, [formData.discountAmount, formData.discount, formData.discountType, formData.price]);
 
+  useEffect(() => {
+    // Reset previous discount value when switching discount type
+    if (formData.discountType === "percent") {
+      handleChange({
+        target: {
+          name: "discountAmount",
+          value: 0,
+        },
+      });
+    } else if (formData.discountType === "flat") {
+      handleChange({
+        target: {
+          name: "discount",
+          value: 0,
+        },
+      });
+    }
+  }, [formData.discountType, handleChange]);
+
   const handleDiscountFocus = (e) => {
     // Reset the relevant discount field when focused
     if (e.target.name === "discount" && formData.discount === 0) {
@@ -188,7 +207,6 @@ const ProductAdditional = ({ formData = {}, handleChange }) => {
 };
 
 export default ProductAdditional;
-
 
 
 
