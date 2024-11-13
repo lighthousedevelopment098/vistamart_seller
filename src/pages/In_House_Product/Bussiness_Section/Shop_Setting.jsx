@@ -156,10 +156,10 @@ const Shop_Setting = () => {
         <div className="border-b-4 border-[#F9F9FB] w-full mt-2"></div>
 
         {/* Display Shop Information */}
-        <div className="flex flex-col md:flex-row md:items-center gap-2 mt-4">
+        <div className="flex  flex-col md:flex-row md:items-center gap-2 mt-4">
           <img
             src={`${apiConfig.bucket}/${user?.logo || "default-shop-image.png"}`} // Fallback image if not available
-            className="rounded-full h-28 w-28 md:h-40 md:w-40"
+            className=" rounded-full border border-primary h-28 w-28 md:h-40 md:w-40"
             alt="Shop"
           />
           <div className="flex flex-col ml-2 md:ml-4">

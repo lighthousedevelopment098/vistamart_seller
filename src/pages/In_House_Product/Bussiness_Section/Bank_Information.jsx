@@ -252,7 +252,8 @@ const BankInformation = () => {
           </div>
         </div>
         <div className="flex justify-end items-center p-2 gap-3">
-          <button onClick={handleRemove} className="flex px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-md">
+          <button onClick={handleRemove} className="flex px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-md"
+          style={{color:"white"}}>
             Remove
           </button>
 

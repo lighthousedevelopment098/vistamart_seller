@@ -11,9 +11,9 @@ import { Link } from "react-router-dom";
 
 const WelcomePage = () => {
   return (
-    <div className="grid  grid-cols-12 bg-[#F9F9FB] px-4 py-2">
+    <div className="grid  grid-cols-12 bg-[#F9F9FB] px-2 md:px-5 py-2 ml-0 md:ml-6">
       <div className="col-span-12">
-        <div className="bg-[#F9F9FB]  flex flex-col md:flex-row gap-2 justify-between items-center  px-3 md:px-10 py-5 w-full">
+        <div className="bg-[#F9F9FB]  flex flex-col md:flex-row gap-2 justify-between items-center  px-3 md:px-4 py-5 w-full">
           <div>
             <h1 className="text-[1.3rem] font-bold">Welcome</h1>
             <p className="text-[.9rem] text-gray-400">

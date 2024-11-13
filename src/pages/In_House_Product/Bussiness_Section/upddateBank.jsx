@@ -92,7 +92,7 @@ const UpdateBankForm = () => {
                   name="bankName"
                   value={formData.bankName}
                   onChange={handleChange}
-                  className="w-full mt-1 border rounded p-2"
+                  className="w-full mt-1 border rounded p-2 outline-none"
                   required
                 />
               </div>
@@ -105,7 +105,7 @@ const UpdateBankForm = () => {
                   name="branch"
                   value={formData.branch}
                   onChange={handleChange}
-                  className="w-full mt-1 border rounded p-2"
+                  className="w-full mt-1 border rounded p-2 outline-none"
                   required
                 />
               </div>
@@ -121,7 +121,7 @@ const UpdateBankForm = () => {
                   name="holderName"
                   value={formData.holderName}
                   onChange={handleChange}
-                  className="w-full mt-1 border rounded p-2"
+                  className="w-full mt-1 border rounded p-2 outline-none"
                   required
                 />
               </div>
@@ -134,7 +134,7 @@ const UpdateBankForm = () => {
                   name="accountNumber"
                   value={formData.accountNumber}
                   onChange={handleChange}
-                  className="w-full mt-1 border rounded p-2"
+                  className="w-full mt-1 border rounded p-2 outline-none"
                   required
                 />
               </div>
