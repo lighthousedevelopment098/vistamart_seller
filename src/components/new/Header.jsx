@@ -47,7 +47,7 @@ const Header = ({ user, handleLogout }) => {
           <div className="right flex items-center space-x-4">
             <div className="relative" id="dropdown">
               <div className="flex items-center cursor-pointer" onClick={toggleDropdown}>
-                <img src={user?.vendorImage || "man.jpg"} alt="User" className="w-8 h-8 rounded-full" />
+                {/* <img src={user?.vendorImage || "man.jpg"} alt="User" className="w-8 h-8 rounded-full" /> */}
                 <span className="ml-2">{user?.firstName || "Seller"}</span>
               </div>
 

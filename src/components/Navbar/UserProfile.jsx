@@ -8,7 +8,7 @@ const UserProfile = () => {
                     <div className="topbar-text dropdown disable-autohide m-1 text-capitalize">
                         {/* Replace "#" with actual link and user details */}
                         <a className="topbar-link dropdown-toggle d-flex align-items-center title-color" href="#" data-toggle="dropdown">
-                            <img className="avatar avatar-sm avatar-circle" src="https://example.com/user-avatar.jpg" alt="User Avatar" />
+                            {/* <img className="avatar avatar-sm avatar-circle" src="https://example.com/user-avatar.jpg" alt="User Avatar" /> */}
                             <span className="d-none d-sm-block">John Doe</span>
                             <span className="d-sm-none">Profile</span>
                         </a>

@@ -5,10 +5,12 @@ import { IoIosLock } from "react-icons/io";
 import { IoHomeSharp, IoPerson } from "react-icons/io5";
 import { MdSettingsApplications } from "react-icons/md";
 import { Link } from "react-router-dom";
-import apiConfig from "../../../config/apiConfig";
-import { getAuthData } from "../../../../utils/authHelper";
+// import { EyeIcon, EyeSlashIcon } from '@heroicons/react/outline';
+import { FaEye , FaRegEyeSlash} from "react-icons/fa";
 
 const ProfileInformation = () => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [profileData, setProfileData] = useState({
     fullName: "",
     phoneNumber: "",
@@ -19,13 +21,16 @@ const ProfileInformation = () => {
 
   // Create a ref for the password section
   const passwordSectionRef = useRef(null);
-   const {user} =getAuthData();
+
   useEffect(() => {
-    if (user) {
+    const userData = JSON.parse(localStorage.getItem("user"));
+    if (userData) {
       setProfileData({
-        fullName: `${user.firstName} ${user.lastName}`,
-        phoneNumber: user.phoneNumber,
-        email: user.email,
+        fullName: `${userData.firstName} ${userData.lastName}`,
+        phoneNumber: userData.phoneNumber,
+        email: userData.email,
+        bannerImage: `http://localhost:3000/${userData.banner}`, // Assuming your server serves images with this path
+        vendorImage: `http://localhost:3000/${userData.vendorImage}`, // Assuming this is the correct path to the vendor image
       });
     }
   }, []);
@@ -45,7 +50,7 @@ const ProfileInformation = () => {
         </div>
         <div className="px-3 py-2 rounded bg-primary hover:bg-primary-dark text-white">
           <Link to={"/"} className="flex gap-2 md:gap-4 items-center">
-            <IoHomeSharp className="font-semibold hover:text-green-500" />
+            <IoHomeSharp className="font-semibold text-white hover:text-green-500" />
             <h1 className="text-white font-semibold">Dashboard</h1>
           </Link>
         </div>
@@ -56,7 +61,7 @@ const ProfileInformation = () => {
           <div className="mb-4">
             <div className="flex items-center mb-2 gap-3">
               <MdSettingsApplications className="text-2xl font-semibold" />
-              <span className="font-semibold text-blue-500">
+              <span className="font-semibold text-green-500">
                 <a href="/">Basic Information</a>
               </span>
             </div>
@@ -79,7 +84,7 @@ const ProfileInformation = () => {
             {/* Banner image container */}
             <div className="relative">
               <img
-                src={`${apiConfig.bucket}/${user?.profileData.banner}`}
+                src={profileData.bannerImage}
                 className="w-full h-44 rounded object-cover"
                 alt="Banner"
               />
@@ -89,19 +94,18 @@ const ProfileInformation = () => {
                   <img
                     id="viewer"
                     className="w-full h-full rounded-full border-4 border-white object-cover"
-                    src={`${apiConfig.bucket}/${user?.profileData.vendorImage}`}
-
+                    src={profileData.vendorImage} // Use the vendor image dynamically
                     alt="Vendor Image"
                   />
                   <label
-                    className="absolute bottom-0 right-0 bg-primary p-2 rounded-full cursor-pointer"
+                    className="absolute bottom-0 right-0  p-2 rounded-full cursor-pointer"
                     style={{color:"white"}}
                     htmlFor="custom-file-upload"
                   >
                     <img
                       src="https://6valley.6amtech.com/public/assets/back-end/img/add-photo.png"
                       alt="Change Icon"
-                      className="w-6 h-6"
+                      className="w-6 h-6 bg-white"
                     />
                   </label>
                 </div>
@@ -165,25 +169,49 @@ const ProfileInformation = () => {
               <h1 className="text-md font-semibold">Change Password</h1>
             </div>
             <br />
-            <form action="" className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="">
-                <label htmlFor="">New Password *</label>
-                <input
-                  id="password"
-                  type="password"
-                  placeholder="Enter New Password"
-                  className="border border-gray-300 px-3 py-2 rounded w-full outline-none"
-                />
-              </div>
-              <div className="">
-                <label htmlFor="">Confirm Password *</label>
-                <input
-                  type="password"
-                  placeholder="Confirm Password"
-                  className="border border-gray-300 px-3 py-2 rounded w-full outline-none hover:border-primary"
-                />
-              </div>
-            </form>
+            <form action="" className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="relative">
+        <label htmlFor="password">New Password *</label>
+        <input
+          id="password"
+          type={showPassword ? 'text' : 'password'}
+          placeholder="Enter New Password"
+          className="border border-gray-300 px-3 py-2 rounded w-full outline-none"
+        />
+        <button
+          type="button"
+          onClick={() => setShowPassword(!showPassword)}
+          className="absolute right-3 top-9 text-gray-500"
+        >
+          {showPassword ? (
+            <FaRegEyeSlash className="h-5 w-5" />
+          ) : (
+            <FaEye className="h-5 w-5" />
+          )}
+        </button>
+      </div>
+      
+      <div className="relative">
+        <label htmlFor="confirmPassword">Confirm Password *</label>
+        <input
+          id="confirmPassword"
+          type={showConfirmPassword ? 'text' : 'password'}
+          placeholder="Confirm Password"
+          className="border border-gray-300 px-3 py-2 rounded w-full outline-none"
+        />
+        <button
+          type="button"
+          onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+          className="absolute right-3 top-9 text-gray-500"
+        >
+          {showConfirmPassword ? (
+            <FaRegEyeSlash className="h-5 w-5" />
+          ) : (
+            <FaEye className="h-5 w-5" />
+          )}
+        </button>
+      </div>
+    </form>
             <div className="flex justify-end items-center px-2 py-3">
               <button className="px-3 py-2 border bg-primary hover:bg-primary-dark text-white rounded"
               style={{color:"white"}}>
