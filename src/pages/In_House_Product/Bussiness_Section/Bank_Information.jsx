@@ -198,6 +198,7 @@ const BankInformation = () => {
         </div>
         <div className="btn">
           <ActionButton
+
             to={`/bankinfoadd`}  
             icon={AiFillBank}  
             label="Add Bank"

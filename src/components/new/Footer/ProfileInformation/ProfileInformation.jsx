@@ -26,7 +26,7 @@ const ProfileInformation = () => {
   // useEffect(() => {
   //   if (user) {
   //     setProfileData({
-  //       fullName: ${user.firstName} ${user.lastName},
+  //       fullName: `${user.firstName} ${user.lastName}`,
   //       phoneNumber: user.phoneNumber,
   //       email: user.email,
   //     });
