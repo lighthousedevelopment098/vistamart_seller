@@ -95,7 +95,8 @@ const Adminwallet = () => {
               </div>
 
               <button
-                className="btn px-4 py-2 bg-[#A1CB46]  text-white text-md  hover:bg-[#7e9f37]"
+                className="btn px-4 py-2 bg-primary  text-white text-md  hover:bg-primary-dark"
+                style={{color:"white"}}
                 onClick={() => setShowModal(true)}
               >
                 <h1 className="text-white"> Withdraw</h1>

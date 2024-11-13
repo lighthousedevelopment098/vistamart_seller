@@ -144,6 +144,7 @@ const UpdateBankForm = () => {
               <button
                 type="submit"
                 className="bg-primary text-white px-4 py-2 rounded hover:bg-primary-dark"
+                style={{color:"white"}}
               >
                 Update Bank
               </button>
