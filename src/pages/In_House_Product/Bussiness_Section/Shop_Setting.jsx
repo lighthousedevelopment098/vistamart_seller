@@ -58,7 +58,7 @@ const Shop_Setting = () => {
         <div className="flex flex-col md:flex-row md:items-center gap-2 mt-4">
           <img
             src={`${apiConfig.bucket}/${user?.logo || "default-shop-image.png"}`} // Fallback image if not available
-            className="rounded-full h-28 w-28 md:h-40 md:w-40"
+            className="rounded-full h-28 w-28 md:h-40 md:w-40 border "
             alt="Shop"
           />
           <div className="flex flex-col ml-2 md:ml-4">
