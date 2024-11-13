@@ -566,13 +566,13 @@ const Sidebar = ({ setComponent }) => {
       </Link>
 
       {/*  */}
-      {/* <Link
+      <Link
         to="/shopsetting"
         className=" w-full flex gap-2  align-items-center text-left p-2 rounded hover:bg-[#52c970]  hover:text-white text-blue-700"
         style={{ color: "white" }}
       >
         <MdHomeWork className="inline-block mr-2" /> Shop Settings
-      </Link> */}
+      </Link>
 
       {/* *************** */}
     </aside>
