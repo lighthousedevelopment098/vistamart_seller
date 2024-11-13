@@ -208,7 +208,7 @@ const OrderManagement = ({ status, title,vendorId  }) => {
                       <td>
                         {order?.customer?.firstName} {order?.customer?.lastName}
                       </td>
-                      <td>${order?.totalAmount}</td>
+                      <td>PKR{order?.totalAmount}</td>
                       <td>
                         <span
                           className={`badge ${

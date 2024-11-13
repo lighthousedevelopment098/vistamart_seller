@@ -259,8 +259,8 @@ const AllProduct = () => {
         <div className="grid grid-cols-1 md:grid-cols-10 gap-5">
           {/* ////////// */}
 
-          <div className="col-span-4 flex flex-col gap-5">
-            <div className="bg-white p-2  rounded-lg shadow-md">
+          <div className="col-span-6 md:col-span-4 lg:col-span-3 flex flex-col gap-5">
+            <div className="bg-white p-2  rounded-lg shadow-md ">
               <div className="flex items-center gap-3">
                 <img
                   src="https://6valley.6amtech.com/public/assets/back-end/img/cart.svg"

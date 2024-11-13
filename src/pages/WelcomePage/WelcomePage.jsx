@@ -13,7 +13,7 @@ const WelcomePage = () => {
   return (
     <div className="grid  grid-cols-12 bg-[#F9F9FB] p-2">
       <div className="col-span-12">
-        <div className="bg-[#F9F9FB]  flex flex-col md:flex-row gap-2 justify-between items-center  px-5 py-5 w-full">
+        <div className="bg-[#F9F9FB]  flex flex-col md:flex-row gap-2 justify-between items-center  px-3 md:px-10 py-5 w-full">
           <div>
             <h1 className="text-[1.3rem] font-bold">Welcome</h1>
             <p className="text-[.9rem] text-gray-400">

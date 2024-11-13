@@ -69,7 +69,7 @@ import ModelWithdrow from "./OrderStatic/WithdrowModel/ModelWithdrow";
 const Adminwallet = () => {
   const [showModal, setShowModal] = useState(false);
   return (
-    <div className="card-body snipcss-KRwJd bg-white rounded-md mt-3 mx-5">
+    <div className="card-body snipcss-KRwJd bg-white rounded-md mt-3 mx-0 md:mx-5">
       <h4 className="d-flex align-items-center  text-md font-semibold  text-capitalize gap-2 mb-3">
         <img
           className="mb-1 w-7 h-7"

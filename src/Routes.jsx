@@ -68,7 +68,8 @@ import UpdateBankForm from "./pages/In_House_Product/Bussiness_Section/upddateBa
 import TranscatioReports from "./pages/SalesAndTransaction/TransctionReports/TranscatioReports.jsx";
 import ProductReports from "./pages/SalesAndTransaction/ProductReports/ProductReports.jsx";
 import OrderReports from "./pages/SalesAndTransaction/OrderReports/OrderReports.jsx";
-import CouponList from "./pages/offerAndDeals/coupon/CouponList.jsx";
+import CouponList from './pages/OfferAndDeals/Coupon/couponList.jsx'
+
 // import InhouseProductUpdate from "./pages/In_House_Product/AddProduct/updateProduct/InhouseProductUpdate.jsx";
 
 function AllRoutes() {

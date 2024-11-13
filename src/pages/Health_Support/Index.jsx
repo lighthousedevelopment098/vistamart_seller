@@ -6,8 +6,8 @@ import { FaSearch } from "react-icons/fa"
 const IndexMessage = () => {
   return (
     <>
-      <div className="bg-[#F8F8FA] w-full h-full p-5">
-        <div className="pt-6 pl-8 gap-3 flex">
+      <div className="bg-[#F8F8FA] w-full h-full p-3">
+        <div className="pt-6  gap-3 flex">
           <img
             src="https://6valley.6amtech.com/public/assets/back-end/img/support-ticket.png"
             alt="Support Ticket Icon"

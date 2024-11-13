@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const BusinessAnalytics = () => {
   return (
-    <div className="card-body snipcss-ti2xq bg-white rounded-md px-5 py-5 mx-5">
+    <div className="card-body  snipcss-ti2xq bg-white rounded-md px-5 py-5 ">
       <div className="row flex-between  align-items-center g-2 mb-3 ">
         <div className="col-sm-6   bg-[]">
           <h4 className="d-flex align-items-center text-md font-semibold text-capitalize gap-2 mb-0">
@@ -28,11 +28,11 @@ const BusinessAnalytics = () => {
         </div>
       </div>
 
-      <div className="row g-2" id="order_stats">
-        <div className="col-sm-3 col-lg-2">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 g-2  " id="order_stats">
+        <div className="w-48  ">
           <Link
             to={"/pendingorder"}
-            className="order-stats order-stats_pending"
+            className="order-stats order-stats_pending "
             href="https://6valley.6amtech.com/admin/orders/list/pending"
           >
             <div className="order-stats__content ">
@@ -44,16 +44,16 @@ const BusinessAnalytics = () => {
               <h6 className="order-stats__subtitle">Pending</h6>
             </div>
 
-            <span className="order-stats__title">0</span>
+            <span className="order-stats__title  ">0</span>
           </Link>
         </div>
-        <div className="col-sm-3 col-lg-2">
+        <div className=" w-48">
           <Link
             to={"/confirmedorder"}
             className="order-stats order-stats_confirmed"
             href="https://6valley.6amtech.com/admin/orders/list/confirmed"
           >
-            <div className="order-stats__content">
+            <div className="order-stats__content  ">
               <img
                 src="https://6valley.6amtech.com/public/assets/back-end/img/confirmed.png"
                 width="20"
@@ -61,10 +61,10 @@ const BusinessAnalytics = () => {
               />
               <h6 className="order-stats__subtitle">Confirmed</h6>
             </div>
-            <span className="order-stats__title">0</span>
+            <span className="order-stats__title ml-4">0</span>
           </Link>
         </div>
-        <div className="col-sm-3 col-lg-2">
+        <div className="w-48">
           <Link
             to={"/packagingorder"}
             className="order-stats order-stats_packaging"
@@ -81,7 +81,7 @@ const BusinessAnalytics = () => {
             <span className="order-stats__title">0</span>
           </Link>
         </div>
-        <div className="col-sm-3 col-lg-2">
+        <div className="w-48">
           <Link
             to={"/outfordelivery"}
             className="order-stats order-stats_out-for-delivery"
@@ -98,7 +98,7 @@ const BusinessAnalytics = () => {
             <span className="order-stats__title">0</span>
           </Link>
         </div>
-        <div className="col-sm-3 col-lg-2">
+        <div className="w-48">
           <Link to={"/deliveredorder"}>
             <div
               className="order-stats order-stats_delivered cursor-pointer get-view-by-onclick"
@@ -116,7 +116,7 @@ const BusinessAnalytics = () => {
             </div>
           </Link>
         </div>
-        <div className="col-sm-3 col-lg-2">
+        <div className="w-48">
           <Link to={"/cancelledorder"}>
             <div
               className="order-stats order-stats_canceled cursor-pointer get-view-by-onclick"
@@ -134,7 +134,7 @@ const BusinessAnalytics = () => {
             </div>
           </Link>
         </div>
-        <div className="col-sm-3 col-lg-2">
+        <div className="w-48">
           <Link to={"/returnedorder"}>
             <div
               className="order-stats order-stats_returned cursor-pointer get-view-by-onclick"
@@ -152,7 +152,7 @@ const BusinessAnalytics = () => {
             </div>
           </Link>
         </div>
-        <div className="col-sm-3 col-lg-2">
+        <div className="w-48">
           <Link to={"/failorder"}>
             <div
               className="order-stats order-stats_failed cursor-pointer get-view-by-onclick"

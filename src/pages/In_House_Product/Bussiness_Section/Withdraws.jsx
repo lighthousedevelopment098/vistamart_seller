@@ -101,7 +101,7 @@ const Withdraws = () => {
 
   return (
     <>
-      <div className="w-full h-full p-2 ml-3 bg-[#F9F9FB] p-3">
+      <div className="w-full h-full p-1 ml-2  bg-[#F9F9FB] ">
         
         <div className="flex items-center">
           <img
@@ -119,7 +119,7 @@ const Withdraws = () => {
               Withdraw Request Table
             </p>
             <p className="bg-slate-300 text-black px-2 py-0 rounded-full ml-2">
-              3
+              0
             </p>
           </div>
           <div className="  flex flex-col md:flex-row gap-2 ">

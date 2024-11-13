@@ -44,7 +44,7 @@ const ProfileInformation = () => {
           <IoPerson className="text-2xl font-semibold" />
           <h1 className="font-bold text-xl">Profile Information</h1>
         </div>
-        <div className="px-3 py-2 rounded bg-green-400 hover:bg-green-600 text-white">
+        <div className="px-3 py-2 rounded bg-primary hover:bg-primary-dark text-white">
           <Link to={"/"} className="flex gap-2 md:gap-4 items-center">
             <IoHomeSharp className="font-semibold hover:text-green-500" />
             <h1 className="text-white font-semibold">Dashboard</h1>
@@ -94,7 +94,8 @@ const ProfileInformation = () => {
                     alt="Vendor Image"
                   />
                   <label
-                    className="absolute bottom-0 right-0 bg-green-500 p-2 rounded-full cursor-pointer"
+                    className="absolute bottom-0 right-0 bg-primary p-2 rounded-full cursor-pointer"
+                    style={{color:"white"}}
                     htmlFor="custom-file-upload"
                   >
                     <img
@@ -113,25 +114,25 @@ const ProfileInformation = () => {
               </div>
               <form
                 action=""
-                className="grid grid-cols-1 md:grid-cols-3 gap-5 px-5"
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 "
               >
                 <div className="">
                   <label htmlFor="">Full Name</label>
                   <input
                     type="text"
                     value={profileData.fullName}
-                    className="px-3 py-2 rounded border-gray-400 border w-full"
+                    className="px-3 py-2 rounded border-gray-400 border w-full outline-none hover:border-primary"
                     readOnly
                   />
                 </div>
                 <div className="">
-                  <label htmlFor="">
+                  <label htmlFor="text-nowrap">
                     Phone Number <span>(Optional)</span>
                   </label>
                   <input
                     type="number"
                     value={profileData.phoneNumber}
-                    className="px-3 py-2 rounded border-gray-400 border w-full"
+                    className="px-3 py-2 rounded border-gray-400 border w-full outline-none"
                     readOnly
                   />
                 </div>
@@ -140,14 +141,15 @@ const ProfileInformation = () => {
                   <input
                     type="text"
                     value={profileData.email}
-                    className="px-3 py-2 rounded border-gray-400 border w-full"
+                    className="px-3 py-2 rounded border-gray-400 border w-full outline-none"
                     readOnly
                   />
                 </div>
               </form>
             </div>
             <div className="flex justify-end items-center px-5 py-3">
-              <button className="px-3 py-2 border bg-green-500 hover:bg-green-700 text-white rounded">
+              <button className="px-3 py-2 border bg-primary hover:bg-primary-dark text-nowrap text-white rounded"
+              style={{color:"white"}}>
                 Save Changes
               </button>
             </div>
@@ -170,7 +172,7 @@ const ProfileInformation = () => {
                   id="password"
                   type="password"
                   placeholder="Enter New Password"
-                  className="border border-gray-300 px-3 py-2 rounded w-full"
+                  className="border border-gray-300 px-3 py-2 rounded w-full outline-none"
                 />
               </div>
               <div className="">
@@ -178,12 +180,13 @@ const ProfileInformation = () => {
                 <input
                   type="password"
                   placeholder="Confirm Password"
-                  className="border border-gray-300 px-3 py-2 rounded w-full"
+                  className="border border-gray-300 px-3 py-2 rounded w-full outline-none hover:border-primary"
                 />
               </div>
             </form>
             <div className="flex justify-end items-center px-2 py-3">
-              <button className="px-3 py-2 border bg-green-500 hover:bg-green-700 text-white rounded">
+              <button className="px-3 py-2 border bg-primary hover:bg-primary-dark text-white rounded"
+              style={{color:"white"}}>
                 Save Changes
               </button>
             </div>

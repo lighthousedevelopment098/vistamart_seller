@@ -175,7 +175,7 @@ const CouponList = () => {
 
   return (
     <div className="">
-      <div className="" style={{padding:"0rem 0rem 0rem 1rem"}}>
+      <div className="" style={{padding:"0rem 0rem 0rem 0rem"}}>
         <React.Suspense fallback={<LoadingSpinner />}>
           <LazyTableList
             tableTitle="Coupon List"

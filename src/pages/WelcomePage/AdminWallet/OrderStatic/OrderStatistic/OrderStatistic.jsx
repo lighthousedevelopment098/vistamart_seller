@@ -742,7 +742,7 @@ const OrderStatistic = () => {
 
   return (
     <div>
-      <div className="order-statistic-summary bg-white border rounded-lg border-gray-200 py-5 px-5 mt-4 m-5">
+      <div className="order-statistic-summary bg-white border rounded-lg border-gray-200 py-5 px-5 mt-4 ">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 md:gap-0">
           <div className="flex gap-1 items-center mb-2 md:mb-0">
             <img
