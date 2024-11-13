@@ -476,6 +476,47 @@ const Sidebar = ({ setComponent }) => {
         </Link> */}
       </div>
       {/* --------------------------------------------------------- */}
+
+      <div className="mt-2">
+        <small className="block text mx-5 uppercase">BUSINESS SECTION</small>
+        {/* <Link
+          to="/salesandtransactionreport"
+          className="block w-full flex align-items-center text-left p-2 rounded hover:bg-[#52c970] text-white hover:text-white mb-3 text-blue-700"
+          style={{ color: "white" }}
+        >
+          <MdOutlineFolderZip />
+          Withdraws
+          <span className="float-right">
+          <FiChevronDown />
+          </span>
+        </Link> */}
+
+      </div>
+      {/*  */}
+     
+      <Link
+        to="/bankinformation"
+        className=" w-full flex gap-2  align-items-center text-left p-2 rounded hover:bg-[#52c970]  hover:text-white text-blue-700"
+        style={{ color: "white" }}
+      >
+        <BsBank2 className="inline-block mr-2" /> Bank Information
+      </Link>
+
+      {/*  */}
+      <Link
+        to="/shopsetting"
+        className=" w-full flex gap-2  align-items-center text-left p-2 rounded hover:bg-[#52c970]  hover:text-white text-blue-700"
+        style={{ color: "white" }}
+      >
+        <MdHomeWork className="inline-block mr-2" /> Shop Settings
+      </Link>
+      <Link
+        to="/withdraws"
+        className=" w-full flex gap-2  align-items-center text-left p-2 rounded hover:bg-[#52c970]  hover:text-white text-blue-700"
+        style={{ color: "white" }}
+      >
+        <FaWallet className="inline-block mr-2" /> Withdraw
+      </Link>
       {/* ///------------------Promotion Management---------------- */}
 
       <div className="mt-2">
@@ -534,45 +575,7 @@ const Sidebar = ({ setComponent }) => {
       </Link>
 
 
-      <div className="mt-2">
-        <small className="block text mx-5 uppercase">BUSINESS SECTION</small>
-        {/* <Link
-          to="/salesandtransactionreport"
-          className="block w-full flex align-items-center text-left p-2 rounded hover:bg-[#52c970] text-white hover:text-white mb-3 text-blue-700"
-          style={{ color: "white" }}
-        >
-          <MdOutlineFolderZip />
-          Withdraws
-          <span className="float-right">
-          <FiChevronDown />
-          </span>
-        </Link> */}
-
-      </div>
-      {/*  */}
-      <Link
-        to="/withdraws"
-        className=" w-full flex gap-2  align-items-center text-left p-2 rounded hover:bg-[#52c970]  hover:text-white text-blue-700"
-        style={{ color: "white" }}
-      >
-        <FaWallet className="inline-block mr-2" /> Widthdraw
-      </Link>
-      <Link
-        to="/bankinformation"
-        className=" w-full flex gap-2  align-items-center text-left p-2 rounded hover:bg-[#52c970]  hover:text-white text-blue-700"
-        style={{ color: "white" }}
-      >
-        <BsBank2 className="inline-block mr-2" /> Bank Information
-      </Link>
-
-      {/*  */}
-      <Link
-        to="/shopsetting"
-        className=" w-full flex gap-2  align-items-center text-left p-2 rounded hover:bg-[#52c970]  hover:text-white text-blue-700"
-        style={{ color: "white" }}
-      >
-        <MdHomeWork className="inline-block mr-2" /> Shop Settings
-      </Link>
+      
 
       {/* *************** */}
     </aside>
