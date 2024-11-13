@@ -1,97 +1,128 @@
-import React, { useState } from "react";
-import { fetchVendors, } from "../../../components/redux/vendorSlice";
 
-const Shop_Setting = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  fetchVendors
-  const toggleHandler = () => {
-    setIsOpen(!isOpen);
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { BsBank } from "react-icons/bs";
+import { FaAd, FaEdit, FaUser } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { fetchVendorBanks, deleteVendorBank } from "../../../components/redux/vendorBankSlice"; // import delete action
+import "./Tooltip.css"; // Assuming you have some tooltips or styling
+import { getAuthData } from "../../../utils/authHelper";
+import ActionButton from "../../../components/ActionButton/Action";
+import { AiFillBank } from "react-icons/ai";
+import LoadingSpinner from "../../../components/LoodingSpinner/LoadingSpinner";
+
+const BankInformation = () => {
+  const dispatch = useDispatch();
+  const { user } = getAuthData();
+  const userId = user?.id; // Get the user ID from the user slice of the Redux store
+
+  const { vendorBanks, loading, error } = useSelector((state) => state.vendorBanks);
+
+  useEffect(() => {
+    if (userId) {
+      dispatch(fetchVendorBanks({ vendor: userId }));
+    }
+  }, [dispatch, userId]);
+
+  const handleRemove = () => {
+    if (bankInfo && bankInfo._id) {
+      dispatch(deleteVendorBank(bankInfo._id));
+    }
   };
 
+  if (loading) {
+    return <div><LoadingSpinner /></div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  const bankInfo = vendorBanks.length > 0 ? vendorBanks[0] : null;
+  
   return (
-    <div className="w-full min-h-screen bg-[#F9F9FB] p-6 md:p-10">
-      <div className="flex gap-2 items-center">
-        <img
-          src="/shop-info.png"
-          className="h-7 w-7 "
-          alt="Shop Icon"
-        />
-        <p className=" text-[#334257] text-xl md:text-2xl font-semibold">
-          Shop Info
-        </p>
-      </div>
-      <p className="mt-3 mx-3  ">
-        <span className="border-b-2 pb-2  border-b-primary font-semibold text-primary">
-          {" "}
-          General
-        </span>
-      </p>
-      {/* <div className="border-b-4 border-primary mt-2"></div> */}
-      <div className="bg-white shadow-lg   mt-5 rounded-lg p-4 md:p-6">
-        <div className="border border-primary rounded-lg w-full flex items-center justify-between px-4 py-2">
-          <p className="text-primary">Temporary close</p>
-          <button
-            className={`w-10 h-5 md:w-12 md:h-6 rounded-full ${
-              isOpen ? "bg-primary" : "bg-gray-300"
-            }`}
-            onClick={toggleHandler}
-          >
-            <span
-              className={`block w-4 h-4 md:w-5 md:h-5 rounded-full ${
-                isOpen ? "transform translate-x-7" : ""
-              } bg-white shadow-md`}
-            />
-          </button>
-        </div>
-        <p className="mt-2">
-          By turning on temporary close mode, your shop will be shown as
-          temporarily off on the website and app for customers. They cannot
-          purchase or place orders from your shop during this time.
-        </p>
-      </div>
-      <div className="bg-white shadow-lg mt-5 rounded-lg p-4 md:p-6">
-        <div className="flex md:flex-row gap-4 flex-col  md:items-center  justify-between">
-          <p className="text-sm md:text-xl text-[#334257] font-semibold">
-            My Shop Info
-          </p>
-          <div className="flex items-center gap-2">
-            <button
-              className="rounded-full p-2 bg-primary text-sm  border hover:bg-primary-dark"
-              style={{ color: "white" }}
-            >
-              Go to Vacation Mode
-            </button>
-            {/* <button className="rounded-md  bg-primary text-white px-3 py-1 border-2  hover:bg-primary-dark">
-              Edit
-            </button> */}
-          </div>
-        </div>
-        <div className="border-b-4 border-[#F9F9FB] w-full mt-2"></div>
-        {/* <div className="flex flex-col md:flex-row md:items-center gap-2 mt-4">
+    <div className="bg-[#F9F9FB] md:p-8">
+      <div className="row flex justify-between ">
+        <div className="flex items-center gap-2 m-5">
           <img
-            src="https://6valley.6amtech.com/storage/app/public/shop/2022-04-21-6260f6e190f4c.png"
-            className="rounded-full h-28 w-28 md:h-40 md:w-40 "
+            src="https://6valley.6amtech.com/public/assets/back-end/img/my-bank-info.png"
+            className="h-7 w-7 "
+            alt="Bank Icon"
           />
-          <div className="flex flex-col ml-2 md:ml-4">
-            <div className="flex items-center gap-4 mt-2 md:mt-4">
-              <p className="text-[1rem] font-semibold">Name:</p>
-              <p className="text-[1rem] ">Mart Morning</p>
-            </div>
-            <div className="flex items-center gap-4 mt-2 md:mt-3">
-              <p className="text-sm md:text-base font-semibold">Phone:</p>
-              <p className="text-sm md:text-base ml-1 md:ml-2">****000</p>
-            </div>
-            <div className="flex items-center gap-4 mt-2 md:mt-3">
-              <p className="text-sm md:text-base font-semibold">Address:</p>
-              <p className="text-sm md:text-base ml-1 md:ml-2">
-                House no 60, Street no 9...
-              </p>
-            </div>
+          <p className="text-[#334257] text-lg md:text-xl font-semibold">My Bank Info</p>
+        </div>
+        <div className="btn">
+          <ActionButton
+            to='/bankinfoadd'  
+            icon={AiFillBank}  
+            label="Add Bank"
+          />
+        </div>
+      </div>
+
+      <div className="bg-white border rounded-md">
+        <div className="flex items-center gap-2 p-2 border-b-2 border-gray-100">
+          <BsBank className="w-6 h-6 text-[#334257]" />
+          <p className="ml-2 font-semibold text-base md:text-lg text-[#334257]">Account Details</p>
+        </div>
+        <div className="w-full flex justify-center items-center my-5">
+          <div
+            className="md:w-[40%] w-full mx-4 opacity-90 p-4 rounded-lg shadow-lg relative bg-[#F2F7FF] bg-cover"
+            style={{
+              backgroundImage: "url(https://6valley.6amtech.com/public/assets/back-end/img/wallet-bg.png)",
+              backgroundSize: "cover",
+              backgroundPosition: "right",
+              backgroundRepeat: "no-repeat",
+            }}
+          >
+            {bankInfo ? (
+              <>
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center space-x-2">
+                    <FaUser className="text-gray-700" />
+                    <p>
+                      Holder Name: <span className="font-bold">{bankInfo.holderName}</span>
+                    </p>
+                  </div>
+                </div>
+
+                <div className="mt-4 space-y-2">
+                  <div className="flex justify-start gap-4">
+                    <span className="font-medium">Bank Name :</span>
+                    <span className="font-semibold">{bankInfo.bankName}</span>
+                  </div>
+                  <div className="flex justify-start gap-4">
+                    <span className="font-medium">Branch Name :</span>
+                    <span className="font-semibold">{bankInfo.branch}</span>
+                  </div>
+                  <div className="flex justify-start gap-4">
+                    <span className="font-medium">Account Number :</span>
+                    <span className="font-semibold">{bankInfo.accountNumber}</span>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <p>No bank information available.</p>
+            )}
           </div>
-        </div> */}
+        </div>
+        <div className="flex justify-end items-center p-2 gap-3">
+          <button onClick={handleRemove} className="flex px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-md">
+            Remove
+          </button>
+
+          <Link
+            to={`{/bankinfoedit/${bankInfo?._id}`}
+            className="flex items-center px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded-md"
+            style={{color:"white"}}
+          >
+            <FaEdit />
+            <span>Edit</span>
+          </Link>
+        </div>
       </div>
     </div>
   );
 };
 
-export default Shop_Setting;
+export default BankInformation;
