@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import CouponForm from "./couponForm";
-import CouponList from "./CouponList";
+import CouponForm from "../offerAndDeals/coupon/couponForm";
+import CouponList from "./couponList";
 
 const CouponManagement = () => {
   const [couponAdded, setCouponAdded] = useState(false);

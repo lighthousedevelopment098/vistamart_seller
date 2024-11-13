@@ -188,7 +188,7 @@ const AddNewProduct = () => {
 	};
 
 	return (
-		<form onSubmit={handleSubmit} className="add-product-form " style={{padding:"1rem 0rem 1rem 1rem"}}>
+		<form onSubmit={handleSubmit} className="add-product-form" style={{padding:"1rem 0rem 1rem 2rem"}}>
 			<ProductForm
 				formData={formData}
 				handleChange={handleChange}

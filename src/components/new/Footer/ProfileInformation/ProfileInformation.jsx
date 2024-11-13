@@ -9,26 +9,29 @@ import apiConfig from "../../../config/apiConfig";
 import { getAuthData } from "../../../../utils/authHelper";
 
 const ProfileInformation = () => {
-  const [profileData, setProfileData] = useState({
-    fullName: "",
-    phoneNumber: "",
-    email: "",
-    bannerImage: "",
-    vendorImage: "", // New state for vendor image
-  });
+  // const [profileData, setProfileData] = useState({
+  //   fullName: "",
+  //   phoneNumber: "",
+  //   email: "",
+  //   bannerImage: "",
+  //   vendorImage: "", // New state for vendor image
+  // });
 
   // Create a ref for the password section
   const passwordSectionRef = useRef(null);
-   const {user} =getAuthData();
-  useEffect(() => {
-    if (user) {
-      setProfileData({
-        fullName: `${user.firstName} ${user.lastName}`,
-        phoneNumber: user.phoneNumber,
-        email: user.email,
-      });
-    }
-  }, []);
+   const { user } =getAuthData();
+   console.log(
+    "user data ------seller", user
+   )
+  // useEffect(() => {
+  //   if (user) {
+  //     setProfileData({
+  //       fullName: `${user.firstName} ${user.lastName}`,
+  //       phoneNumber: user.phoneNumber,
+  //       email: user.email,
+  //     });
+  //   }
+  // }, []);
 
   const handleScrollToPassword = () => {
     if (passwordSectionRef.current) {
@@ -56,7 +59,7 @@ const ProfileInformation = () => {
           <div className="mb-4">
             <div className="flex items-center mb-2 gap-3">
               <MdSettingsApplications className="text-2xl font-semibold" />
-              <span className="font-semibold text-blue-500">
+              <span className="font-semibold text-primary">
                 <a href="/">Basic Information</a>
               </span>
             </div>
@@ -79,7 +82,7 @@ const ProfileInformation = () => {
             {/* Banner image container */}
             <div className="relative">
               <img
-                src={`${apiConfig.bucket}/${user?.profileData.banner}`}
+                src={`${apiConfig.bucket}/${user?.banner}`}
                 className="w-full h-44 rounded object-cover"
                 alt="Banner"
               />
@@ -89,21 +92,22 @@ const ProfileInformation = () => {
                   <img
                     id="viewer"
                     className="w-full h-full rounded-full border-4 border-white object-cover"
-                    src={`${apiConfig.bucket}/${user?.profileData.vendorImage}`}
+                    src={`${apiConfig.bucket}/${user?.vendorImage}`}
 
                     alt="Vendor Image"
                   />
-                  <label
-                    className="absolute bottom-0 right-0 bg-primary p-2 rounded-full cursor-pointer"
-                    style={{color:"white"}}
+                  {/* <label
+                    className="absolute bottom-0 right-0  p-2 rounded-full cursor-pointer"
+                    style={{color:"white !important"}}
                     htmlFor="custom-file-upload"
                   >
                     <img
                       src="https://6valley.6amtech.com/public/assets/back-end/img/add-photo.png"
                       alt="Change Icon"
-                      className="w-6 h-6"
+                      className="w-6 h-6 "
+                      style={{color:"white !important" }}
                     />
-                  </label>
+                  </label> */}
                 </div>
               </div>
             </div>
@@ -117,30 +121,39 @@ const ProfileInformation = () => {
                 className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 "
               >
                 <div className="">
-                  <label htmlFor="">Full Name</label>
+                  <label htmlFor="">First Name</label>
                   <input
                     type="text"
-                    value={profileData.fullName}
+                    value={user.firstName}
                     className="px-3 py-2 rounded border-gray-400 border w-full outline-none hover:border-primary"
                     readOnly
                   />
                 </div>
                 <div className="">
+                  <label htmlFor="">Last Name</label>
+                  <input
+                    type="text"
+                    value={user.lastName}
+                    className="px-3 py-2 rounded border-gray-400 border w-full outline-none hover:border-primary"
+                    readOnly
+                  />
+                </div>
+                {/* <div className="">
                   <label htmlFor="text-nowrap">
                     Phone Number <span>(Optional)</span>
                   </label>
                   <input
                     type="number"
-                    value={profileData.phoneNumber}
+                    // value={user?.phoneNumber}
                     className="px-3 py-2 rounded border-gray-400 border w-full outline-none"
                     readOnly
                   />
-                </div>
+                </div> */}
                 <div className="">
                   <label htmlFor="">Email</label>
                   <input
                     type="text"
-                    value={profileData.email}
+                    value={user?.email}
                     className="px-3 py-2 rounded border-gray-400 border w-full outline-none"
                     readOnly
                   />
