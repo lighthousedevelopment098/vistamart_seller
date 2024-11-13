@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, useRef } from "react";
 import { HiEyeDropper } from "react-icons/hi2";
 import { IoIosLock } from "react-icons/io";
@@ -7,34 +6,32 @@ import { MdSettingsApplications } from "react-icons/md";
 import { Link } from "react-router-dom";
 // import { EyeIcon, EyeSlashIcon } from '@heroicons/react/outline';
 import { FaEye , FaRegEyeSlash} from "react-icons/fa";
-
+import { getAuthData } from "../../../../utils/authHelper";
+import apiConfig from "../../../config/apiConfig";
+ 
 const ProfileInformation = () => {
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [profileData, setProfileData] = useState({
-    fullName: "",
-    phoneNumber: "",
-    email: "",
-    bannerImage: "",
-    vendorImage: "", // New state for vendor image
-  });
+  const [showPassword, setShowPassword] = useState()
+  const [showConfirmPassword , setShowConfirmPassword ] = useState()
+   // const [profileData, setProfileData] = useState({
+  //   fullName: "",
+  //   phoneNumber: "",
+  //   email: "",
+  //   bannerImage: "",
+  //   vendorImage: "", // New state for vendor image
+  // });
 
   // Create a ref for the password section
   const passwordSectionRef = useRef(null);
-  
-
-  useEffect(() => {
-    const userData = JSON.parse(localStorage.getItem("user"));
-    if (userData) {
-      setProfileData({
-        fullName: `${userData.firstName} ${userData.lastName}`,
-        phoneNumber: userData.phoneNumber,
-        email: userData.email,
-        bannerImage: `http://localhost:3000/${userData.banner}`, // Assuming your server serves images with this path
-        vendorImage: `http://localhost:3000/${userData.vendorImage}`, // Assuming this is the correct path to the vendor image
-      });
-    }
-  }, []);
+   const {user} = getAuthData();
+  // useEffect(() => {
+  //   if (user) {
+  //     setProfileData({
+  //       fullName: ${user.firstName} ${user.lastName},
+  //       phoneNumber: user.phoneNumber,
+  //       email: user.email,
+  //     });
+  //   }
+  // }, []);
 
   const handleScrollToPassword = () => {
     if (passwordSectionRef.current) {
@@ -62,7 +59,7 @@ const ProfileInformation = () => {
           <div className="mb-4">
             <div className="flex items-center mb-2 gap-3">
               <MdSettingsApplications className="text-2xl font-semibold" />
-              <span className="font-semibold text-green-500">
+              <span className="font-semibold text-blue-500">
                 <a href="/">Basic Information</a>
               </span>
             </div>
@@ -85,7 +82,7 @@ const ProfileInformation = () => {
             {/* Banner image container */}
             <div className="relative">
               <img
-                src={profileData.bannerImage}
+                src={`${apiConfig.bucket}/${user?.banner}`}
                 className="w-full h-44 rounded object-cover"
                 alt="Banner"
               />
@@ -95,10 +92,11 @@ const ProfileInformation = () => {
                   <img
                     id="viewer"
                     className="w-full h-full rounded-full border-4 border-white object-cover"
-                    src={profileData.vendorImage} // Use the vendor image dynamically
+                    src={`${apiConfig.bucket}/${user?.vendorImage}`}
+
                     alt="Vendor Image"
                   />
-                  <label
+                  {/* <label
                     className="absolute bottom-0 right-0  p-2 rounded-full cursor-pointer"
                     style={{color:"white"}}
                     htmlFor="custom-file-upload"
@@ -106,9 +104,9 @@ const ProfileInformation = () => {
                     <img
                       src="https://6valley.6amtech.com/public/assets/back-end/img/add-photo.png"
                       alt="Change Icon"
-                      className="w-6 h-6 bg-white"
+                      className="w-6 h-6"
                     />
-                  </label>
+                  </label>  */}
                 </div>
               </div>
             </div>
@@ -122,30 +120,39 @@ const ProfileInformation = () => {
                 className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 "
               >
                 <div className="">
-                  <label htmlFor="">Full Name</label>
+                  <label htmlFor="">First Name</label>
                   <input
                     type="text"
-                    value={profileData.fullName}
+                    value={user?.firstName}
                     className="px-3 py-2 rounded border-gray-400 border w-full outline-none hover:border-primary"
                     readOnly
                   />
                 </div>
                 <div className="">
+                  <label htmlFor="">Last Name</label>
+                  <input
+                    type="text"
+                    value={user?.lastName}
+                    className="px-3 py-2 rounded border-gray-400 border w-full outline-none hover:border-primary"
+                    readOnly
+                  />
+                </div>
+                {/* <div className="">
                   <label htmlFor="text-nowrap">
                     Phone Number <span>(Optional)</span>
                   </label>
                   <input
                     type="number"
-                    value={profileData.phoneNumber}
+                    // value={user?.phoneNumber}
                     className="px-3 py-2 rounded border-gray-400 border w-full outline-none"
                     readOnly
                   />
-                </div>
+                </div> */}
                 <div className="">
                   <label htmlFor="">Email</label>
                   <input
                     type="text"
-                    value={profileData.email}
+                    value={user?.email}
                     className="px-3 py-2 rounded border-gray-400 border w-full outline-none"
                     readOnly
                   />

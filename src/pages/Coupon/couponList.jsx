@@ -1,83 +1,19 @@
-// import React from "react";
-// import { useSelector } from "react-redux";
-// import ExportButton from "../../../../components/ActionButton/Export";
-// import LoadingSpinner from "../../../../components/LoodingSpinner/LoadingSpinner";
-
-// const CouponList = () => {
-//   const { coupons, loading, error } = useSelector((state) => state.coupons);
-
-//   return (
-//     <div>
-//       <div className="card">
-//         <div className="px-3 py-4">
-//           <div className="d-flex flex-wrap gap-3 align-items-center">
-//             <h5 className="mb-0 text-capitalize d-flex gap-2 mr-auto">
-//               Coupon list
-//               <ExportButton title="Export" />
-//             </h5>
-//           </div>
-//         </div>
-//         <div className="card-body">
-//           {loading ? (
-//             <div className="text-center">
-//               <LoadingSpinner />
-//             </div>
-//           ) : (
-//             <table className="table table-bordered">
-//               <thead>
-//                 <tr>
-//                   <th>#</th>
-//                   <th>Title</th>
-//                   <th>Code</th>
-//                   <th>Type</th>
-//                   <th>Discount Amount</th>
-//                   <th>Start Date</th>
-//                   <th>Expiration Date</th>
-//                   <th>Status</th>
-//                 </tr>
-//               </thead>
-//               <tbody>
-//                 {coupons.map((coupon, index) => (
-//                   <tr key={coupon?._id}>
-//                     <td>{index + 1}</td>
-//                     <td>{coupon?.title}</td>
-//                     <td>{coupon?.code}</td>
-//                     <td>{coupon?.type}</td>
-//                     <td>{coupon?.discountAmount}</td>
-//                     <td>{new Date(coupon?.startDate).toLocaleDateString()}</td>
-//                     <td>{new Date(coupon?.expiredDate).toLocaleDateString()}</td>
-//                     <td>{coupon?.status}</td>
-//                   </tr>
-//                 ))}
-//               </tbody>
-//             </table>
-//           )}
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default CouponList;
-
-
-
 import React, { lazy, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
 
-import Switcher from "../../../components/FormInput/Switcher";
-import ConfirmationModal from "../../../components/FormInput/ConfirmationModal";
-import ActionButton from "../../../components/ActionButton/Action";
-import LoadingSpinner from "../../../components/LoodingSpinner/LoadingSpinner";
+import Switcher from "../../components/FormInput/Switcher";
+import ConfirmationModal from "../../components/FormInput/ConfirmationModal";
+import ActionButton from "../../components/ActionButton/Action";
+import LoadingSpinner from "../../components/LoodingSpinner/LoadingSpinner";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { 
     fetchCoupons,
   updateCouponStatus,
-  deleteCoupon, } from "../../../components/redux/couponSlice";
+  deleteCoupon, } from "../../components/redux/couponSlice";
 
 const LazyTableList = lazy(() =>
-  import("../../../components/FormInput/TableList")
+  import("../../components/FormInput/TableList")
 );
 
 const CouponList = () => {
@@ -175,7 +111,7 @@ const CouponList = () => {
 
   return (
     <div className="">
-      <div className="" style={{padding:"0rem 0rem 0rem 0rem"}}>
+      <div className="" style={{padding:"0rem 0rem 0rem 1rem"}}>
         <React.Suspense fallback={<LoadingSpinner />}>
           <LazyTableList
             tableTitle="Coupon List"

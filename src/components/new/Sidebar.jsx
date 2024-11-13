@@ -456,7 +456,7 @@ const Sidebar = ({ setComponent }) => {
                 • Product Gallery
               </Link>
             </li> */}
-            <li>
+            {/* <li>
               <Link
                 to="bulkimport"
                 className="block w-full text-left p-1 pl-4 rounded hover:bg-gray-500"
@@ -464,7 +464,7 @@ const Sidebar = ({ setComponent }) => {
               >
                 • Bulk Import
               </Link>
-            </li>
+            </li> */}
           </ul>
         )}
         {/* <Link
@@ -525,7 +525,6 @@ const Sidebar = ({ setComponent }) => {
       >
         <IoStatsChartSharp className="inline-block mr-2" /> Product Report
       </Link>
-      {/*  */}
       <Link
         to="/orderreports"
         className=" w-full flex gap-2  align-items-center text-left p-2 rounded hover:bg-[#52c970]  hover:text-white text-blue-700"
@@ -534,7 +533,6 @@ const Sidebar = ({ setComponent }) => {
         <IoStatsChartOutline className="inline-block mr-2" /> Order Report
       </Link>
 
-      {/* **********Bussniess Section************ */}
 
       <div className="mt-2">
         <small className="block text mx-5 uppercase">BUSINESS SECTION</small>
@@ -546,9 +544,10 @@ const Sidebar = ({ setComponent }) => {
           <MdOutlineFolderZip />
           Withdraws
           <span className="float-right">
-            <FiChevronDown />
+          <FiChevronDown />
           </span>
         </Link> */}
+
       </div>
       {/*  */}
       <Link
