@@ -21,6 +21,7 @@ const ProfileInformation = () => {
 
   // Create a ref for the password section
   const passwordSectionRef = useRef(null);
+  
 
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem("user"));
