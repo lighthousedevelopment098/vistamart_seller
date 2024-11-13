@@ -5,6 +5,8 @@ import { IoIosLock } from "react-icons/io";
 import { IoHomeSharp, IoPerson } from "react-icons/io5";
 import { MdSettingsApplications } from "react-icons/md";
 import { Link } from "react-router-dom";
+import apiConfig from "../../../config/apiConfig";
+import { getAuthData } from "../../../../utils/authHelper";
 
 const ProfileInformation = () => {
   const [profileData, setProfileData] = useState({
@@ -17,16 +19,13 @@ const ProfileInformation = () => {
 
   // Create a ref for the password section
   const passwordSectionRef = useRef(null);
-
+   const {user} =getAuthData();
   useEffect(() => {
-    const userData = JSON.parse(localStorage.getItem("user"));
-    if (userData) {
+    if (user) {
       setProfileData({
-        fullName: `${userData.firstName} ${userData.lastName}`,
-        phoneNumber: userData.phoneNumber,
-        email: userData.email,
-        bannerImage: `http://localhost:3000/${userData.banner}`, // Assuming your server serves images with this path
-        vendorImage: `http://localhost:3000/${userData.vendorImage}`, // Assuming this is the correct path to the vendor image
+        fullName: `${user.firstName} ${user.lastName}`,
+        phoneNumber: user.phoneNumber,
+        email: user.email,
       });
     }
   }, []);
@@ -80,7 +79,7 @@ const ProfileInformation = () => {
             {/* Banner image container */}
             <div className="relative">
               <img
-                src={profileData.bannerImage}
+                src={`${apiConfig.bucket}/${user?.profileData.banner}`}
                 className="w-full h-44 rounded object-cover"
                 alt="Banner"
               />
@@ -90,7 +89,8 @@ const ProfileInformation = () => {
                   <img
                     id="viewer"
                     className="w-full h-full rounded-full border-4 border-white object-cover"
-                    src={profileData.vendorImage} // Use the vendor image dynamically
+                    src={`${apiConfig.bucket}/${user?.profileData.vendorImage}`}
+
                     alt="Vendor Image"
                   />
                   <label
