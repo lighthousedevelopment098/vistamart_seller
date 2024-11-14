@@ -164,8 +164,8 @@ const ProductDetail = () => {
         </div>
         <div className="card card-top-bg-element">
           <div className="card-body">
-            <div className="media flex-nowrap flex-sm-row gap-8 flex-grow-1 mb-5 align-items-center align-items-md-start">
-              <div className="d-flex flex-column align-items-center __min-w-165px">
+            <div className="media flex-nowrap flex-sm-row gap-4 flex-grow-1 mb-5 align-items-center align-items-md-start">
+              <div className="d-flex flex-column align-items-center __min-w-140px ">
                 <a
                   className="aspect-1 float-left overflow-hidden"
                   href={thumbnailUrl}
@@ -174,7 +174,7 @@ const ProductDetail = () => {
                 >
                   <img
                     className="avatar avatar-170 rounded-0"
-                    style={{ width: "10rem", height: "10rem" }}
+                    style={{ width: "6rem", height: "6rem" }}
                     src={thumbnailUrl}
                     alt="Product"
                   />
@@ -265,7 +265,7 @@ const ProductDetail = () => {
               </div>
             </div>
             <hr />
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-3 mt-6 ">
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-6 ">
               <div className="border rounded-md space-y-4 p-3 ">
                 <div className="d-flex justify-between mb-1">
                   <h6 className="font-semibold text-capitalize">Total Sold:</h6>
@@ -278,7 +278,7 @@ const ProductDetail = () => {
                   <h3 className="mb-0">{totalSoldAmount}</h3>
                 </div>
               </div>
-              <div className="border rounded-md space-y-4 p-3 ">
+              <div className="border rounded-md space-y-4 p-3  ">
                 <div className="d-flex justify-between mb-1">
                   <h6 className="font-semibold text-capitalize">Brand:</h6>
                   <h3 className="mb-0">{brand?.name}</h3>
