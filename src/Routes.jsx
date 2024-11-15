@@ -69,6 +69,7 @@ import TranscatioReports from "./pages/SalesAndTransaction/TransctionReports/Tra
 import ProductReports from "./pages/SalesAndTransaction/ProductReports/ProductReports.jsx";
 import OrderReports from "./pages/SalesAndTransaction/OrderReports/OrderReports.jsx";
 import CouponList from "./pages/Coupon/couponList.jsx";
+import UpdateVendor from "./pages/Shop/UpdateVendor.jsx";
 
 // import InhouseProductUpdate from "./pages/In_House_Product/AddProduct/updateProduct/InhouseProductUpdate.jsx";
 
@@ -163,6 +164,7 @@ function AllRoutes() {
                     element={<BankInformation />}
                   />
                   <Route path="/shopsetting" element={<Shop_Setting />} />
+                  <Route path="/shopedit/:id" element={<UpdateVendor />} />
                   <Route path="/bankinfoadd" element={<Editbtn />} />
                   <Route path="bankinfoedit/:id" element={<UpdateBankForm />} />
                   <Route path="/withdraws" element={<Withdraws />} />

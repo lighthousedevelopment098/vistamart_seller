@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { getAuthData } from "../../../utils/authHelper";
 import apiConfig from "../../../components/config/apiConfig";
+import ActionButton from "../../../components/ActionButton/Action";
+import { FaEdit } from "react-icons/fa";
 
 const Shop_Setting = () => {
   const [isOpen, setIsOpen] = useState(false); // For temporary close toggle
@@ -14,7 +16,6 @@ const Shop_Setting = () => {
   };
 
     const {user} = getAuthData();
-    console.log("use da---", user)
   // if (loading) return <p>Loading shop information...</p>;
   if (error) return <p>{error}</p>;
 
@@ -50,6 +51,10 @@ const Shop_Setting = () => {
           {/* <button className="rounded-full p-2 bg-primary text-sm border hover:bg-primary-dark text-white">
             Go to Vacation Mode
           </button> */}
+            {/* <ActionButton
+            to={`/shopedit/${user?._id}`} // Dynamic link
+            icon={FaEdit} // Pass dynamic icon
+          /> */}
         </div>
 
         <div className="border-b-4 border-[#F9F9FB] w-full mt-2"></div>

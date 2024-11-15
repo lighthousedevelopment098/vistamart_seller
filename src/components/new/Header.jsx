@@ -5,12 +5,14 @@ import { toast, ToastContainer } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { logout } from "../redux/auth/authSlice";
 import apiConfig from "../config/apiConfig";
+import { getAuthData } from "../../utils/authHelper";
 
-const Header = ({ user, handleLogout }) => {
+const Header = ({ handleLogout }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const {user} = getAuthData();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+ 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
@@ -55,7 +57,7 @@ const Header = ({ user, handleLogout }) => {
                 <div className="absolute right-0 mt-2 w-56 bg-white border rounded-lg shadow-lg z-50">
                   <div className="flex gap-2 p-4">
                   <img
-  src={user?.vendorImage ? `${apiConfig.bucket}/${user.vendorImage}` : "https://cdn.vectorstock.com/i/1000x1000/23/85/courier-checks-parcels-list-boxes-for-sending-vector-13222385.webp"}
+  src={user?.vendorImage ? `${apiConfig.bucket}/${user?.vendorImage}` : "https://cdn.vectorstock.com/i/1000x1000/23/85/courier-checks-parcels-list-boxes-for-sending-vector-13222385.webp"}
   className="w-10 h-10"
   alt="seller"
 />
