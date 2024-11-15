@@ -8,7 +8,7 @@ const FilterForm = ({ filters, onInputChange, onReset, categories = [], brands =
             <div className="col-12">
               <h4 className="mb-3">Filter Products</h4>
             </div>
-            <div className="col-sm-6 col-lg-3 col-xl-3">
+            {/* <div className="col-sm-6 col-lg-3 col-xl-3">
               <div className="form-group">
                 <label className="title-color" htmlFor="brand">Brand</label>
                 <select
@@ -25,7 +25,7 @@ const FilterForm = ({ filters, onInputChange, onReset, categories = [], brands =
                   ))}
                 </select>
               </div>
-            </div>
+            </div> */}
             <div className="col-sm-6 col-lg-3 col-xl-3">
               <div className="form-group">
                 <label className="title-color" htmlFor="category">Category</label>
@@ -45,7 +45,7 @@ const FilterForm = ({ filters, onInputChange, onReset, categories = [], brands =
               </div>
             </div>
                  {/* User Type Filter */}
-                 <div className="col-sm-6 col-lg-3 col-xl-3">
+                 {/* <div className="col-sm-6 col-lg-3 col-xl-3">
               <div className="form-group">
                 <label className="title-color" htmlFor="userType">User Type</label>
                 <select
@@ -59,7 +59,7 @@ const FilterForm = ({ filters, onInputChange, onReset, categories = [], brands =
                   <option value="admin">Admin</option>
                 </select>
               </div>
-            </div>
+            </div> */}
 
 {/* 
                      <div className="col-sm-6 col-lg-3 col-xl-3">
