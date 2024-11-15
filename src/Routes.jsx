@@ -70,8 +70,8 @@ import ProductReports from "./pages/SalesAndTransaction/ProductReports/ProductRe
 import OrderReports from "./pages/SalesAndTransaction/OrderReports/OrderReports.jsx";
 import CouponList from "./pages/Coupon/couponList.jsx";
 import UpdateVendor from "./pages/Shop/UpdateVendor.jsx";
+import InhouseProductUpdate from "./pages/In_House_Product/AddProduct/updateProduct/InhouseProductUpdate.jsx";
 
-// import InhouseProductUpdate from "./pages/In_House_Product/AddProduct/updateProduct/InhouseProductUpdate.jsx";
 
 function AllRoutes() {
 
@@ -130,10 +130,10 @@ function AllRoutes() {
                     path="/inhouseaddproduct"
                     element={<AddNewProduct />}
                   />
-                  {/* <Route path="/product/:id" 
+                  <Route path="/product/:id" 
                   element={<InhouseProductUpdate />} />
 
-                */}
+               
                 
 
 

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
+import { FormSelect } from "react-bootstrap";
+import FormSection from "../../../../../components/FormInput/FormSection";
+import { IoMdPerson } from "react-icons/io";
 import {
   fetchAttributes,
   fetchColors,
-} from "../../../../../../redux/slices/admin/categorybrandSlice";
-import { FormSelect } from "react-bootstrap";
-import FormSection from "../../../../../../components/FormInput/FormSection";
-import { IoMdPerson } from "react-icons/io";
-
+} from "../../../../../redux/slices/admin/categorybrandSlice";
 const ProductAttributes = ({
   selectedColors,
   setSelectedColors,

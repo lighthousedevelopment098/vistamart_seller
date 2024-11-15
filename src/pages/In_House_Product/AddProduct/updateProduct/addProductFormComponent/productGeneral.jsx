@@ -2,14 +2,18 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AiOutlineClose, AiOutlineSync } from "react-icons/ai";
 import {
-  fetchAttributes,
-  fetchBrands,
-  fetchCategories,
-  fetchColors,
-} from "../../../../../../redux/slices/admin/categorybrandSlice";
+	fetchCategories,
+	fetchBrands,
+	fetchColors,
+	fetchAttributes,
+	fetchSubCategories,
+	fetchSubSubCategories,
+} from "../../../../../components/redux/categorybrandSlice";
+
+
 import { IoIosInformationCircleOutline, IoMdPerson } from "react-icons/io";
-import FormSection from "../../../../../../components/FormInput/FormSection";
-import FormSelect from "../../../../../../components/FormInput/FormSelect";
+import FormSelect from "../../../../../components/FormInput/FormSelect";
+import FormSection from "../../../../../components/FormInput/FormSection";
 
 const generateSKU = () => {
   return Math.floor(100000 + Math.random() * 900000).toString();
@@ -112,29 +116,56 @@ const ProductGeneral = ({ formData, handleChange, setFormData }) => {
                     value: category._id,
                     label: category.name,
                   }))
-                : [{ value: "", label: "Not Category Found" }]}
+                : []}
               required
             />
           </div>
 
           {/* Sub-Category */}
-          <div className="flex flex-col px-2">
+          {/* <div className="flex flex-col px-2">
             <FormSelect
               label="Sub-Category"
               name="subCategory"
-              value={formData.subCategory}
+              value={formData.subCategory || ""}
               onChange={(e) => setFormData({ ...formData, subCategory: e.target.value })}
               options={filteredSubCategories.length > 0
                 ? filteredSubCategories.map((subCategory) => ({
                     value: subCategory._id,
                     label: subCategory.name,
                 }))
-                : [{ value: "", label: "Not Sub-Category Found" }]}
+                : []}
             />
-          </div>
+          </div> */}
+
+
+           {/* Sub-Category */}
+<div className="flex flex-col px-2">
+  <FormSelect
+    label="Sub-Category"
+    name="subCategory"
+    value={formData.subCategory || ""}
+    onChange={(e) =>
+      setFormData({
+        ...formData,
+        subCategory: e.target.value === "" ? null : e.target.value,
+      })
+    }
+    options={[
+      ...(filteredSubCategories.length > 0
+        ? filteredSubCategories.map((subCategory) => ({
+            value: subCategory._id,
+            label: subCategory.name,
+          }))
+        : []),
+    ]}
+  />
+</div>
+
+           
+
 
           {/* Sub-Sub-Category */}
-          <div className="flex flex-col px-2">
+          {/* <div className="flex flex-col px-2">
             <FormSelect
               label="Sub-Sub-Category"
               name="subSubCategory"
@@ -147,7 +178,7 @@ const ProductGeneral = ({ formData, handleChange, setFormData }) => {
                 }))
                 : [{ value: "", label: "Not Sub-Sub-Category Found" }]}
             />
-          </div>
+          </div> */}
 
           {/* Brand */}
           <div className="flex flex-col px-2">

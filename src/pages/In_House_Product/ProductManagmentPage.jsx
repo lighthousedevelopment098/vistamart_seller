@@ -6,7 +6,7 @@ import { fetchCategories, fetchBrands } from '../../components/redux/categorybra
 import Swal from 'sweetalert2';
 import FilterForm from './FilterForm';
 import TableList from '../../components/FormInput/TableList';
-import { FiEye, FiTrash } from 'react-icons/fi';
+import { FiEdit, FiEye, FiTrash } from 'react-icons/fi';
 import LoadingSpinner from '../../components/LoodingSpinner/LoadingSpinner';
 import Switcher from '../../components/FormInput/Switcher'; // Import Switcher component
 import apiConfig from '../../components/config/apiConfig';
@@ -180,6 +180,13 @@ const InHouseProductList = ({ initialTitle = 'Product List', initialFilters = {}
                         title="View"
                       >
                         <FiEye />
+                      </Link>
+                      <Link
+                        to={`/product/${product?._id}`}
+                        className="btn border-primary text-primary"
+                        title="Edit"
+                      >
+                        <FiEdit />
                       </Link>
                       <button
                         className="btn btn-sm border-red-400 text-red-400 hover:bg-red-500 hover:text-white"

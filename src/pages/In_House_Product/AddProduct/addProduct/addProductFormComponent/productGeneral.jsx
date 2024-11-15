@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AiOutlineClose, AiOutlineSync } from "react-icons/ai";
-import {
-  fetchAttributes,
-  fetchBrands,
-  fetchCategories,
-  fetchColors,
-} from "../../../../../components/redux/categorybrandSlice";
+
 import { IoIosInformationCircleOutline, IoMdPerson } from "react-icons/io";
+import { fetchAttributes, fetchBrands, fetchCategories, fetchColors } from "../../../../../components/redux/categorybrandSlice";
 import FormSection from "../../../../../components/FormInput/FormSection";
 import FormSelect from "../../../../../components/FormInput/FormSelect";
 
@@ -134,8 +130,50 @@ const handleProductTypeChange = (e) => {
               required
             />
           </div>
+
+
+          {/* <div className="flex flex-col px-2">
+  <FormSelect
+    label="Sub-Category"
+    name="subCategory"
+    value={formData.subCategory || ""}
+    onChange={handleChange}
+    options={[
+      ...filteredSubCategories.map((subCategory) => ({
+        value: subCategory._id,
+        label: subCategory.name,
+      })),
+    ]}
+  />
+</div> */}
+
+
+<div className="flex flex-col px-2">
+  <FormSelect
+    label="Sub-Category"
+    name="subCategory"
+    value={formData.subCategory || ""}
+    onChange={(e) =>
+      setFormData({
+        ...formData,
+        subCategory: e.target.value === "" ? null : e.target.value,
+      })
+    }
+    options={[
+      ...(filteredSubCategories.length > 0
+        ? filteredSubCategories.map((subCategory) => ({
+            value: subCategory._id,
+            label: subCategory.name,
+          }))
+        : []),
+    ]}
+  />
+</div>
+
+
+
           {/* Sub-Category */}
-          <div className="flex flex-col px-2">
+          {/* <div className="flex flex-col px-2">
         
             <FormSelect
               label="Sub-Category"
@@ -154,7 +192,9 @@ const handleProductTypeChange = (e) => {
               }
             />
           </div>
-           
+            */}
+
+
  
 
           {/* Sub-Sub-Category */}
@@ -205,7 +245,7 @@ const handleProductTypeChange = (e) => {
                       value: brand._id,
                       label: brand.name,
                     }))
-                  : [{ value: "", label: "Not Brand Found" }]
+                  : []
               }
               required
             />

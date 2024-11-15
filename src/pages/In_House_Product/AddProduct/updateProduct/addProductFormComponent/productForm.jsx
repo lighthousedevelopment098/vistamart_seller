@@ -1,7 +1,8 @@
 import React from "react";
 import ReactQuill from "react-quill";
-import FormSection from "../../../../../../components/FormInput/FormSection";
-import FormInput from "../../../../../../components/FormInput/FormInput";
+import FormSection from "../../../../../components/FormInput/FormSection.jsx";
+import FormInput from   "../../../../../components/FormInput/FormInput";
+
 import "./form.css";
 const ProductForm = ({
   formData,
@@ -13,7 +14,7 @@ const ProductForm = ({
     <div>      
       {/* {errorMessage && <p className="text-red-500 mt-2">{errorMessage}</p>} */}
 
-      <FormSection title="Add Product">
+      <FormSection title="Update Product">
         <FormInput
           label="Product Name"
           name="name"

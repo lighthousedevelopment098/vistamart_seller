@@ -1,8 +1,8 @@
 import React from "react";
 import ReactQuill from "react-quill";
+import "./form.css";
 import FormSection from "../../../../../components/FormInput/FormSection";
 import FormInput from "../../../../../components/FormInput/FormInput";
-import "./form.css";
 const ProductForm = ({
   formData,
   handleChange,

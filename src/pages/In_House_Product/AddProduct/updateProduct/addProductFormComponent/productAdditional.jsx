@@ -2,9 +2,9 @@ import { useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { IoMdPerson } from "react-icons/io";
-import FormInput from "../../../../../../components/FormInput/FormInput";
-import FormSection from "../../../../../../components/FormInput/FormSection";
-import FormSelect from "../../../../../../components/FormInput/FormSelect";
+import FormInput from "../../../../../components/FormInput/FormInput";
+import FormSection from "../../../../../components/FormInput/FormSection";
+import FormSelect from "../../../../../components/FormInput/FormSelect";
 
 const ProductAdditional = ({ formData = {}, handleChange }) => {
   // Effect to cap discount based on type and price

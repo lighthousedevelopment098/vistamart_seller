@@ -1,8 +1,7 @@
 import React from "react";
 import { IoMdPerson } from "react-icons/io";
-import FormSection from "../../../../../../components/FormInput/FormSection";
-import FormInput from "../../../../../../components/FormInput/FormInput";
-
+import FormSection from "../../../../../components/FormInput/FormSection";
+import FormInput from "../../../../../components/FormInput/FormInput";
 const ProductVideo = ({ formData, handleChange }) => {
   return (
     <FormSection title={"Product video"} icon={<IoMdPerson />}>

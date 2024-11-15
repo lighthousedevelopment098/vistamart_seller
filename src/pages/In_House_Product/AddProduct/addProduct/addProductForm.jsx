@@ -24,6 +24,7 @@ import { getAuthData } from "../../../../utils/authHelper";
 
 import { toast } from "react-toastify";
 import uploadProductImagesToS3 from "./uploadImages";
+import Uploading from "../../../../components/LoodingSpinner/Uploading";
 
 const API_URL = `${apiConfig.seller}/products`;
 
@@ -71,6 +72,7 @@ const AddNewProduct = () => {
 	const [selectedAttribute, setSelectedAttribute] = useState("");
 	const [productAttributes, setProductAttributes] = useState([]);
 	const [errorMessage, setErrorMessage] = useState("");
+	const [loading, setLoading] = useState(false); // Loading state
 
 	useEffect(() => {
 		dispatch(fetchCategories());
@@ -93,15 +95,31 @@ const AddNewProduct = () => {
 	  
 
 
-	  const handleChange = (e) => {
-		const { name, value, type, checked } = e.target;
-		setFormData((prev) => ({
-			...prev,
-			[name]: type === "checkbox" ? checked : 
-			       (["price", "discountAmount", "taxAmount","discount"].includes(name) ? parseInt(value, 10) || 0 : value),
-		}));
-	};
+	//   const handleChange = (e) => {
+	// 	const { name, value, type, checked } = e.target;
+	// 	setFormData((prev) => ({
+	// 		...prev,
+	// 		[name]: type === "checkbox" ? checked : 
+	// 		       (["price", "discountAmount", "taxAmount","discount"].includes(name) ? parseInt(value, 10) || 0 : value),
+	// 	}));
+	// };
 
+	const handleChange = (e) => {
+		const { name, value, type, checked } = e.target;
+	  
+		setFormData((prev) => ({
+		  ...prev,
+		  [name]: type === "checkbox" 
+			? checked 
+			: (["price", "discountAmount", "taxAmount", "discount"].includes(name) 
+				? parseInt(value, 10) || 0 
+				: value),
+		  // Reset dependent fields if parent category changes
+		  ...(name === "category" && { subCategory: null, subSubCategory: null }),
+		  ...(name === "subCategory" && { subSubCategory: null }),
+		}));
+	  };
+	  
 
 
 	const handleDescriptionChange = (value) => {
@@ -114,6 +132,8 @@ const AddNewProduct = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		setLoading(true); // Start loading
+
 		const uploadResult = await uploadProductImagesToS3(thumbnail, images);
 
 		// Check if the uploadResult is null before destructuring
@@ -185,10 +205,15 @@ const AddNewProduct = () => {
 			});
 			setErrorMessage("Failed to create product. Please try again.");
 		}
+		finally {
+			setLoading(false); // Stop loading
+		  }
 	};
 
+	{loading && <Uploading />} {/* Show spinner when loading */}
 	return (
 		<form onSubmit={handleSubmit} className="add-product-form px-2 md:px-5 ml-0 lg:ml-6">
+
 			<ProductForm
 				formData={formData}
 				handleChange={handleChange}
@@ -228,3 +253,5 @@ const AddNewProduct = () => {
 };
 
 export default AddNewProduct;
+
+

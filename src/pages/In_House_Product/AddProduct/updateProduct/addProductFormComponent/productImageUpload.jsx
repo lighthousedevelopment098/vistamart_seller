@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "../../../../../../components/FormInput/Imagepreview.css";
+// import "../../../../../components/FormInput/Imagepreview.css";
 import FileUpload from "./imageFileUpload";
-import apiConfig from "../../../../../../config/apiConfig";
+import apiConfig from "../../../../../components/config/apiConfig";
 
 const ProductImageWrapper = ({ thumbnail, setThumbnail, images, setImages }) => {
   const [additionalImages, setAdditionalImages] = useState([]);

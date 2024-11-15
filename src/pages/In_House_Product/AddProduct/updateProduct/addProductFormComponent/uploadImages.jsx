@@ -3,7 +3,7 @@ import {
 	deleteUploadedImages,
 	getProductUploadUrl,
 	uploadImageToS3,
-} from "../../../../../../utils/helpers";
+} from "../../../../../utils/helpers";
 
 async function uploadImage(uploadConfig, file) {
 	try {
