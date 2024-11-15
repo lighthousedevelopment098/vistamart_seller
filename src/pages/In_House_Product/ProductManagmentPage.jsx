@@ -157,17 +157,17 @@ const InHouseProductList = ({ initialTitle = 'Product List', initialFilters = {}
                   onClick: () => handleSort('price'),
                   render: (product) => `PKR ${product.price}`,
                 },
-                {
-                  key: 'isFeatured',
-                  label: 'Show as Featured',
-                  textAlign: 'center',
-                  render: (product) => (
-                    <Switcher
-                      checked={product.isFeatured}
-                      onChange={() => handleToggleFeatured(product)}
-                    />
-                  ),
-                },
+                // {
+                //   key: 'isFeatured',
+                //   label: 'Show as Featured',
+                //   textAlign: 'center',
+                //   render: (product) => (
+                //     <Switcher
+                //       checked={product.isFeatured}
+                //       onChange={() => handleToggleFeatured(product)}
+                //     />
+                //   ),
+                // },
                 {
                   key: 'actions',
                   label: 'Actions',

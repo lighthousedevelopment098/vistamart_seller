@@ -228,7 +228,7 @@ const LoginPage = ({ setIsLoggedIn }) => {
               type="email"
               className="form-control form-control-lg mb-4 p-3 rounded border border-gray-300 w-full"
               id="email"
-              placeholder="abc@mail.com"
+              placeholder="Email"
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -244,7 +244,7 @@ const LoginPage = ({ setIsLoggedIn }) => {
                 type={showPassword ? "text" : "password"}
                 className="form-control form-control-lg mb-4 p-3 rounded border border-gray-300 w-full"
                 id="password"
-                placeholder="test12345"
+                placeholder="Password"
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -283,7 +283,7 @@ const LoginPage = ({ setIsLoggedIn }) => {
           ></div> */}
           <button
             type="submit"
-            className={`btn btn-block p-3 rounded bg-green-300 hover:bg-green-200 hover:text-black text-white font-semibold mt-0 ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
+            className={`btn btn-block p-3 rounded bg-primary hover:bg-green-200 hover:text-black text-white font-semibold mt-0 ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
             disabled={loading}
           >
             {loading ? "Loading..." : "Login"}

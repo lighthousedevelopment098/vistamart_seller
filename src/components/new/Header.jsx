@@ -49,6 +49,11 @@ const Header = ({ handleLogout }) => {
           <div className="right flex items-center space-x-4">
             <div className="relative" id="dropdown">
               <div className="flex items-center cursor-pointer" onClick={toggleDropdown}>
+              <img
+  src={user?.vendorImage ? `${apiConfig.bucket}/${user?.vendorImage}` : "https://cdn.vectorstock.com/i/1000x1000/23/85/courier-checks-parcels-list-boxes-for-sending-vector-13222385.webp"}
+  className="w-10 h-10"
+  alt="seller"
+/>
                 {/* <img src={user?.vendorImage || "man.jpg"} alt="User" className="w-8 h-8 rounded-full" /> */}
                 <span className="ml-2">{user?.firstName || "Seller"}</span>
               </div>
@@ -56,11 +61,7 @@ const Header = ({ handleLogout }) => {
               {isDropdownOpen && (
                 <div className="absolute right-0 mt-2 w-56 bg-white border rounded-lg shadow-lg z-50">
                   <div className="flex gap-2 p-4">
-                  <img
-  src={user?.vendorImage ? `${apiConfig.bucket}/${user?.vendorImage}` : "https://cdn.vectorstock.com/i/1000x1000/23/85/courier-checks-parcels-list-boxes-for-sending-vector-13222385.webp"}
-  className="w-10 h-10"
-  alt="seller"
-/>
+                 
 
                     <div>
                       <h1 className="font-bold">{user?.name || "Seller"}</h1>

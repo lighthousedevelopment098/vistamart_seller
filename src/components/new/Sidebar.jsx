@@ -519,7 +519,7 @@ const Sidebar = ({ setComponent }) => {
       </Link>
       {/* ///------------------Promotion Management---------------- */}
 
-      <div className="mt-2">
+      {/* <div className="mt-2">
         <small className="block text mx-5 uppercase">
           Promotation managenment
         </small>
@@ -530,7 +530,7 @@ const Sidebar = ({ setComponent }) => {
         >
           <FaPersonMilitaryToPerson className="inline-block mr-2" /> Coupans
         </Link>
-      </div>
+      </div> */}
       {/* Help and Support */}
       <div className="mt-2">
         <small className="block mx-5 text uppercase">HELP AND SUPPORT</small>

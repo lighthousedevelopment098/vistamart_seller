@@ -78,7 +78,7 @@ const ProductAdditional = ({ formData = {}, handleChange }) => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Price */}
         <div className="flex flex-col">
-          <label>Purchase Price</label>
+          <label>Unit Price</label>
           <FormInput
             type="number"
             name="price"
