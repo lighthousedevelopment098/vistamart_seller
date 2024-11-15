@@ -176,7 +176,7 @@ const handleProductTypeChange = (e) => {
           </div> */}
 
 
-<div className="flex flex-col px-2">
+{/* <div className="flex flex-col px-2">
   <FormSelect
     label="Sub-Sub-Category"
     name="subSubCategory"
@@ -191,7 +191,7 @@ const handleProductTypeChange = (e) => {
         : [] // Leave empty array if no options are available
     }
   />
-</div>
+</div> */}
           {/* Brand */}
           <div className="flex flex-col px-2">
             <FormSelect
