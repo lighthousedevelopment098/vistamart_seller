@@ -51,10 +51,10 @@ const Shop_Setting = () => {
           {/* <button className="rounded-full p-2 bg-primary text-sm border hover:bg-primary-dark text-white">
             Go to Vacation Mode
           </button> */}
-            {/* <ActionButton
+            <ActionButton
             to={`/shopedit/${user?._id}`} // Dynamic link
             icon={FaEdit} // Pass dynamic icon
-          /> */}
+          />
         </div>
 
         <div className="border-b-4 border-[#F9F9FB] w-full mt-2"></div>

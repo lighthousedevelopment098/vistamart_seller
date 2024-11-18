@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const BusinessAnalytics = () => {
   return (
-    <div className="card-body  snipcss-ti2xq bg-white rounded-md px-3 py-5 ">
+    <div className="card-body  snipcss-ti2xq bg-white rounded-md px-5 py-5 ">
       <div className="row flex-between  align-items-center g-2 mb-3 ">
         <div className="col-sm-6   bg-[]">
           <h4 className="d-flex align-items-center text-md font-semibold text-capitalize gap-2 mb-0">

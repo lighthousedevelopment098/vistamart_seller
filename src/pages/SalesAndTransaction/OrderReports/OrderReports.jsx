@@ -135,7 +135,7 @@ const OrderReports = () => {
     
   ];
   return (
-    <div className="bg-gray-100  flex flex-col gap-4 px-2 mx-5">
+    <div className="bg-gray-100  flex flex-col gap-4  mx-3 md:mx-5">
       <div className="flex items-center gap-4 mt-3">
         <img
           src="https://6valley.6amtech.com/public/assets/back-end/img/order_report.png"
