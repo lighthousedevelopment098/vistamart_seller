@@ -99,7 +99,7 @@ const OrderDetails = () => {
 
   const {
     customer,
-    vendors,
+    vendor,
     products,
     orderStatus,
     totalAmount,

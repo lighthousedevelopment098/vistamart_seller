@@ -7,7 +7,7 @@ import { IoMdPerson } from "react-icons/io";
 import {
   fetchAttributes,
   fetchColors,
-} from "../../../../../redux/slices/admin/categorybrandSlice";
+} from "../../../../categorybrandSlice";
 const ProductAttributes = ({
   selectedColors,
   setSelectedColors,
