@@ -200,7 +200,7 @@ const Sidebar = ({ setComponent }) => {
           />
         </div>
       </div>
-      {/* Dashboard and POS buttons */}
+      {/* Dashboard  */}
       <Link
         to="/"
         className=" w-full flex gap-2  align-items-center text-left p-2 rounded hover:bg-[#52c970]  hover:text-white text-blue-700"
@@ -210,13 +210,7 @@ const Sidebar = ({ setComponent }) => {
         <span className="">Dashboard</span>
       </Link>
       {/* //POS------------------------- */}
-      {/* <Link
-        to="/pos"
-        className="block w-full text-left p-2 rounded hover:bg-[#52c970] text-white hover:text-white mb-3 "
-        style={{ color: "white" }}
-      >
-        <MdShoppingBag className="inline-block mr-2" /> POS
-      </Link> */}
+
       {/* order management */}
       <div className="mt-2">
         <small className="block text uppercase font-serif mx-5">
@@ -409,7 +403,7 @@ const Sidebar = ({ setComponent }) => {
                 • Product List
               </Link>
             </li> */}
-             <li>
+            <li>
               <Link
                 to="inhouseaddproduct"
                 className="block w-full text-left p-1 pl-4 rounded hover:bg-gray-500"
@@ -446,7 +440,7 @@ const Sidebar = ({ setComponent }) => {
                 • Denied Product Request
               </Link>
             </li>
-           
+
             {/* <li>
               <Link
                 to="productgallery"
@@ -490,10 +484,9 @@ const Sidebar = ({ setComponent }) => {
           <FiChevronDown />
           </span>
         </Link> */}
-
       </div>
       {/*  */}
-     
+
       <Link
         to="/bankinformation"
         className=" w-full flex gap-2  align-items-center text-left p-2 rounded hover:bg-[#52c970]  hover:text-white text-blue-700"
@@ -552,7 +545,7 @@ const Sidebar = ({ setComponent }) => {
           style={{ color: "white" }}
         >
           <LiaSignalSolid />
-          Transatation Reports
+          Transaction Reports
           {/* <span className="float-right">
             <FiChevronDown />
           </span> */}
@@ -574,17 +567,12 @@ const Sidebar = ({ setComponent }) => {
         <IoStatsChartOutline className="inline-block mr-2" /> Order Report
       </Link>
 
-
-      
-
       {/* *************** */}
     </aside>
   );
 };
 
 export default Sidebar;
-
-
 
 ////////
 // import { useState } from "react";

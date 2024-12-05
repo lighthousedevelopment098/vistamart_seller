@@ -69,7 +69,7 @@ import ModelWithdrow from "./OrderStatic/WithdrowModel/ModelWithdrow";
 const Adminwallet = () => {
   const [showModal, setShowModal] = useState(false);
   return (
-    <div className="card-body snipcss-KRwJd bg-white rounded-md mt-3 mx-0 md:mx-5">
+    <div className="card-body snipcss-KRwJd bg-white rounded-md mt-3 mx-0">
       <h4 className="d-flex align-items-center  text-md font-semibold  text-capitalize gap-2 mb-3">
         <img
           className="mb-1 w-7 h-7"
@@ -96,7 +96,7 @@ const Adminwallet = () => {
 
               <button
                 className="btn px-4 py-2 bg-primary  text-white text-md  hover:bg-primary-dark"
-                style={{color:"white"}}
+                style={{ color: "white" }}
                 onClick={() => setShowModal(true)}
               >
                 <h1 className="text-white"> Withdraw</h1>

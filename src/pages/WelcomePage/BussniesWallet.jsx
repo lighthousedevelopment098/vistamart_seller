@@ -28,8 +28,11 @@ const BusinessAnalytics = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 g-2  " id="order_stats">
-        <div className="w-48  ">
+      <div
+        className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-2 gap-2  "
+        id="order_stats"
+      >
+        <div className="  ">
           <Link
             to={"/pendingorder"}
             className="order-stats order-stats_pending "
@@ -47,7 +50,7 @@ const BusinessAnalytics = () => {
             <span className="order-stats__title  ">0</span>
           </Link>
         </div>
-        <div className=" w-48">
+        <div className=" ">
           <Link
             to={"/confirmedorder"}
             className="order-stats order-stats_confirmed"
@@ -64,7 +67,7 @@ const BusinessAnalytics = () => {
             <span className="order-stats__title ml-4">0</span>
           </Link>
         </div>
-        <div className="w-48">
+        <div className="">
           <Link
             to={"/packagingorder"}
             className="order-stats order-stats_packaging"
@@ -81,7 +84,7 @@ const BusinessAnalytics = () => {
             <span className="order-stats__title">0</span>
           </Link>
         </div>
-        <div className="w-48">
+        <div className="">
           <Link
             to={"/outfordelivery"}
             className="order-stats order-stats_out-for-delivery"
@@ -98,7 +101,7 @@ const BusinessAnalytics = () => {
             <span className="order-stats__title">0</span>
           </Link>
         </div>
-        <div className="w-48">
+        <div className="">
           <Link to={"/deliveredorder"}>
             <div
               className="order-stats order-stats_delivered cursor-pointer get-view-by-onclick"
@@ -116,7 +119,7 @@ const BusinessAnalytics = () => {
             </div>
           </Link>
         </div>
-        <div className="w-48">
+        <div className="">
           <Link to={"/cancelledorder"}>
             <div
               className="order-stats order-stats_canceled cursor-pointer get-view-by-onclick"
@@ -134,7 +137,7 @@ const BusinessAnalytics = () => {
             </div>
           </Link>
         </div>
-        <div className="w-48">
+        <div className="">
           <Link to={"/returnedorder"}>
             <div
               className="order-stats order-stats_returned cursor-pointer get-view-by-onclick"
@@ -152,7 +155,7 @@ const BusinessAnalytics = () => {
             </div>
           </Link>
         </div>
-        <div className="w-48">
+        <div className="">
           <Link to={"/failorder"}>
             <div
               className="order-stats order-stats_failed cursor-pointer get-view-by-onclick"

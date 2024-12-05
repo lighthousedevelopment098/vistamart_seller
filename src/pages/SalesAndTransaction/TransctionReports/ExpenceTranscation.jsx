@@ -87,7 +87,7 @@ const ExpenceTranscation = () => {
           <select
             name=""
             id=""
-            className="text-md  bg-white px-2 rounded py-2 outline-none"
+            className="text-md border bg-white px-2 rounded py-2 outline-none"
           >
             <option value="">This Year</option>
             <option value="">This Month</option>

@@ -1,13 +1,23 @@
 import React, { useState, useEffect } from "react";
-import { FaChevronLeft, FaChevronRight, FaDownload, FaEye, FaSearch, FaTrashAlt } from "react-icons/fa";
+import {
+  FaChevronLeft,
+  FaChevronRight,
+  FaDownload,
+  FaEye,
+  FaSearch,
+  FaTrashAlt,
+} from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchOrder } from '../../components/redux/orderSlice';
-import { fetchCategories, fetchBrands } from '../../components/redux/categorybrandSlice';
+import { fetchOrder } from "../../components/redux/orderSlice";
+import {
+  fetchCategories,
+  fetchBrands,
+} from "../../components/redux/categorybrandSlice";
 import ExportButton from "../../components/ActionButton/Export";
 import ActionButton from "../../components/ActionButton/Action";
 
-const OrderManagement = ({ status, title,vendorId  }) => {
+const OrderManagement = ({ status, title, vendorId }) => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   const dispatch = useDispatch();
   const {
@@ -20,10 +30,10 @@ const OrderManagement = ({ status, title,vendorId  }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [sortOrder, setSortOrder] = useState("asc"); // Sorting state
   const itemsPerPage = 5;
-   console.log("vendor id======", vendorId)
+  console.log("vendor id======", vendorId);
   useEffect(() => {
     if (vendorId) {
-      dispatch(fetchOrder({ status, vendors:vendorId }));
+      dispatch(fetchOrder({ status, vendors: vendorId }));
     }
   }, [dispatch, status, vendorId]);
 
@@ -122,7 +132,6 @@ const OrderManagement = ({ status, title,vendorId  }) => {
               <div className="">
                 <h5 className="form-label text-[1rem] font-semibold space-x-2 mb-0">
                   {title} Table
-                
                 </h5>
               </div>
               <div className="flex flex-col md:flex-row items-end gap-4">
@@ -195,7 +204,7 @@ const OrderManagement = ({ status, title,vendorId  }) => {
               <tbody>
                 {paginatedOrders?.length === 0 ? (
                   <tr>
-                    <td colSpan="5" className="text-center">
+                    <td colSpan={20} className="text-center">
                       No orders found
                     </td>
                   </tr>

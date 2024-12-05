@@ -1,23 +1,24 @@
 //***********************MESSAGE OR INBOX code************* */
 import React from "react";
 
-import { FaSearch } from "react-icons/fa"
+import { FaSearch } from "react-icons/fa";
 
 const IndexMessage = () => {
   return (
     <>
-      <div className="bg-[#F8F8FA] w-full h-full p-3">
-        <div className="pt-6  gap-3 flex">
+      <div className="bg-[#F8F8FA] w-full h-full lg:px-16 md:px-10  px-0 py-3">
+        <div className="flex gap-2 ">
           <img
             src="https://6valley.6amtech.com/public/assets/back-end/img/support-ticket.png"
             alt="Support Ticket Icon"
+            className="object-contain"
           />
           <p className="text-slate-900 text-lg font-semibold">Inbox</p>
         </div>
 
-        <div className="flex flex-col md:flex-row  gap-6 pt-5">
-          <div className="bg-white h-[80vh] w-60 rounded-lg">
-            <form className="relative pt-5 pl-2 pr-2 justify-center">
+        <div className="flex flex-col md:flex-row  gap-4 pt-5">
+          <div className="bg-white h-[80vh]  w-full rounded-lg">
+            <form className="relative w-full pt-5 pl-2 pr-2 justify-center">
               {/* <input
                 type="text"
                 name="search"
@@ -26,45 +27,45 @@ const IndexMessage = () => {
                 className="w-full px-3 py-2 font-semibold bg-[#EBEDF1] placeholder-gray-500 text-black rounded-lg border-none ring-2 ring-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
               /> */}
 
-<input
-  type="text"
-  name="username"
-  placeholder="Search customers..."
-  className="border-2 border-gray-300 rounded-lg px-3 py-2 outline-none hover:border-primary focus:outline-none focus:border-blue-500"
-/>
-
+              <input
+                type="text"
+                name="username"
+                placeholder="Search customers..."
+                className="border-2 w-full border-gray-300 rounded-lg px-3 py-2 outline-none hover:border-primary focus:outline-none focus:border-primary"
+              />
             </form>
-           <div className="h-full"> {/* Ensure parent container has sufficient height */}
-           <div>
-  <p className="text-[#0177CD] pt-8 pl-6 font-semibold border-blue-500 mb-4">Customer</p>
-  <p className="border-b-4 border-blue-500 mb-6 mr-24 ml-5"></p>
-  <p className="text-gray-700 pl-5">Delivery Man</p>
-</div>
-
-</div>
-
+            <div className="h-full">
+              {" "}
+              {/* Ensure parent container has sufficient height */}
+              <div>
+                <p className="text-[#009444] pt-8 pl-6 font-semibold mb-2">
+                  Customer
+                </p>
+                <p className="h-1 bg-primary mb-6 w-20 ml-5"></p>
+                {/* <p className="text-gray-700 font-semibold pl-5">Delivery Man</p> */}
+              </div>
+            </div>
           </div>
 
           <div className="bg-white h-[80vh] w-full rounded-lg">
-          <div className="bg-white h-full w-full rounded-lg flex flex-col items-center justify-center">
-  <img
-    src="https://6valley.6amtech.com/public/assets/back-end/img/empty-message.png"
-    alt="Empty Message"
-    className="max-w-full max-h-full"
-  />
-  <p className="mt-4 text-gray-600 text-center">You haven't had any conversations yet.</p>
-</div>
-
-</div>
-
+            <div className="bg-white h-full w-full rounded-lg flex flex-col items-center justify-center">
+              <img
+                src="https://6valley.6amtech.com/public/assets/back-end/img/empty-message.png"
+                alt="Empty Message"
+                className="max-w-full max-h-full"
+              />
+              <p className="mt-4 text-gray-600 text-center">
+                You haven't had any conversations yet.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
-
     </>
   );
 };
 
-export default IndexMessage
+export default IndexMessage;
 
 /////*********************final code of Support Ticket************************************* */
 
@@ -993,14 +994,12 @@ export default IndexMessage
 //               <p className="text-sm text-[#334257] mt-5 ml-14">review</p>
 
 //             </div>
-            
 
 //             <div className=" border border-gray-300 w-40 h-40 rounded-lg  ml-6 mt-8">
 //               <img src="https://6valley.6amtech.com/public/assets/back-end/img/folder.png" className="w-32 h-32 ml-3 mt-4"/>
 //               <p className="text-sm text-[#334257] mt-5 ml-14">seller</p>
 
 //             </div>
-
 
 //             <div className=" border border-gray-300 w-40 h-40 rounded-lg  ml-6 mt-8">
 //               <img src="https://6valley.6amtech.com/public/assets/back-end/img/folder.png" className="w-32 h-32 ml-3 mt-4"/>
@@ -1018,7 +1017,6 @@ export default IndexMessage
 //               <p className="text-sm text-[#334257] mt-5 ml-14">admin</p>
 
 //             </div>
-           
 
 //           </div>
 //           <div className="flex">
@@ -1051,31 +1049,16 @@ export default IndexMessage
 
 //             </div>
 
-
-
-
-
 //           </div>
-
-
-
-
-
 
 //         </div>
 
-
-        
-      
 //       </div>
 //     </>
 //   );
 // };
 
 // export default Index;
-
-
-
 
 ///////////////////*************navbar******************///////////////
 
@@ -1218,8 +1201,6 @@ export default IndexMessage
 //         <div className="flex items-center  rounded-full px-3 py-2 hover:bg-slate-200">
 //           <p className="text-sm mr-2">Admin<br/> Master admin</p>
 //           {/* <span className="text-xs text-gray-500">Master Admin</span> */}
-      
-
 
 //           <img
 //             src="data:image/png;base64,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"
@@ -1233,5 +1214,3 @@ export default IndexMessage
 // };
 
 // export default Index;
-
-

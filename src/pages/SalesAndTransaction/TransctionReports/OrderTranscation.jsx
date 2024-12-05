@@ -126,7 +126,6 @@ const OrderTranscation = () => {
     //   duration: "Juneer",
     //   inHouse: "$0.00",
     //   deliverd: "admin",
-
     //   commission: "$0.00",
     //   shipping: "$0.00",
     //   incentive: "$0.00",
@@ -228,7 +227,7 @@ const OrderTranscation = () => {
           <select
             name=""
             id=""
-            className="text-md  bg-white px-2 rounded py-2 outline-none hover:border-primary"
+            className="text-md border bg-white px-2 rounded py-2 outline-none hover:border-primary"
           >
             <option value="">All Status</option>
             <option value="">Hold</option>
@@ -237,7 +236,7 @@ const OrderTranscation = () => {
           <select
             name=""
             id=""
-            className="text-md  bg-white px-2 rounded py-2  outline-none hover:border-primary"
+            className="text-md border bg-white px-2 rounded py-2  outline-none hover:border-primary"
           >
             <option value="">All Status</option>
             <option value="">Inhouse</option>
@@ -248,7 +247,7 @@ const OrderTranscation = () => {
           <select
             name=""
             id=""
-            className="text-md  bg-white px-2 rounded py-2  outline-none"
+            className="text-md border bg-white px-2 rounded py-2  outline-none"
           >
             <option value="">All Customer</option>
             <option value="">Jack Lop</option>
@@ -259,7 +258,7 @@ const OrderTranscation = () => {
           <select
             name=""
             id=""
-            className="text-md  bg-white px-2 rounded py-2  outline-none"
+            className="text-md border bg-white px-2 rounded py-2  outline-none"
           >
             <option value="">This Year</option>
             <option value="">This Month</option>
