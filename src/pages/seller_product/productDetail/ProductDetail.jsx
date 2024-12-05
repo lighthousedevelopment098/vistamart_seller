@@ -27,8 +27,6 @@ const ProductDetail = () => {
     dispatch(fetchProductById(productId));
   }, [dispatch, productId]);
 
- 
-
   const handleUpdateStatus = (id, currentStatus) => {
     let newStatus;
     if (currentStatus === "pending") {
@@ -72,8 +70,6 @@ const ProductDetail = () => {
       }
     });
   };
-
-
 
   const [productData, setProductData] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
@@ -142,7 +138,11 @@ const ProductDetail = () => {
   }
 
   if (!productData) {
-    return <div><LoadingSpinner /></div>;
+    return (
+      <div>
+        <LoadingSpinner />
+      </div>
+    );
   }
 
   const thumbnailUrl = productData?.thumbnail
@@ -221,77 +221,22 @@ const ProductDetail = () => {
                           key={index}
                           className="aspect-1 float-left overflow-hidden d-block border rounded-lg position-relative"
                         >
-                          <a
-                            href={imgUrl}
-                            target="_self"
-                            rel="noopener noreferrer"
-                          >
-                            <img
-                              width="50"
-                              className="img-fit max-50"
-                              alt={`Additional ${index}`}
-                              src={`${apiConfig.bucket}/${imgUrl}`}
-                            />
-                          </a>
+                          <img
+                            width="50"
+                            className="img-fit max-50"
+                            alt={`Additional ${index}`}
+                            src={`${apiConfig.bucket}/${imgUrl}`}
+                          />
                         </div>
                       );
                     })}
-                  </div> */}
-                   <div>
-      {/* Image List */}
-      <div className="flex flex-wrap gap-2 items-center">
-        {productData?.images?.map((imgUrl, index) => (
-          <div
-            key={index}
-            className="aspect-square overflow-hidden border rounded-lg relative cursor-pointer"
-            onClick={() => openModal(index)}
-          >
-            <img
-              className="object-contain max-w-[50px]"
-              alt={`Image ${index}`}
-              src={`${apiConfig.bucket}/${imgUrl}`}
-            />
-          </div>
-        ))}
-      </div>
-
-      {/* Modal */}
-      {isModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
-          <div className="relative w-96 h-96">
-            {/* Close Button */}
-            <button
-              className="absolute top-2 right-0 text-white text-2xl"
-              onClick={closeModal}
-            >
-              &times;
-            </button>
-
-            {/* Image */}
-            <img
-              className="object-contain w-full h-full"
-              alt={`Current Image`}
-              src={`${apiConfig.bucket}/${productData?.images[currentImageIndex]}`}
-            />
-
-            {/* Navigation Buttons */}
-            <button
-              className="absolute left-2 top-1/2 transform -translate-y-1/2 text-white text-3xl"
-              onClick={showPrevImage}
-            >
-              &#8249;
-            </button>
-            <button
-              className="absolute right-2 top-1/2 transform -translate-y-1/2 text-white text-3xl"
-              onClick={showNextImage}
-            >
-              &#8250;
-            </button>
-          </div>
-        </div>
-      )}
-    </div>
-
+                  </div>
+                  {/* <a
+                            href={imgUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                          </a> */}
                   <span className="text-dark font-semibold">
                     {productData?.numOfReviews || 0} Reviews
                   </span>
@@ -417,13 +362,13 @@ const ProductDetail = () => {
               </div>
               <div className="card-body">
                 <div>
-                  <h6 className="mb-3 text-capitalize">{productData?.metaTitle}</h6>
+                  <h6 className="mb-3 text-capitalize">
+                    {productData?.metaTitle}
+                  </h6>
                 </div>
                 <p className="text-capitalize">
-                  
-                    {productData?.metaDescription}
-
-              </p>
+                  {productData?.metaDescription}
+                </p>
                 <div className="d-flex flex-wrap gap-2">
                   <a
                     className="text-dark border rounded p-2 d-flex align-items-center justify-content-center gap-1"

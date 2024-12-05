@@ -10,24 +10,22 @@ import {
 import WelcomePage from "./pages/WelcomePage/WelcomePage";
 
 import BulkImport from "./pages/In_House_Product/AddProduct/BulkImport/BulkImport";
-import EarningReport from "./pages/SalesAndTransaction/EarnReport/totallcomponent";
-import InhouseSale from "./pages/SalesAndTransaction/InhouseProduct/InhouseProduct";
+
 
 import Ticket_Support from "./pages/Health_Support/Ticket_Support";
 import Message from "./pages/Health_Support/Message";
 import OrderList from "./pages/Order/OrderList";
 
 import IndexMessage from "./pages/Health_Support/Index";
-import LoginPage from "./components/LoginPage/LoginPage";
 
-import VendorList from "./pages/Vender/VenderList/VenderList";
+
 import VenderListDetail from "./pages/Vender/VendereListDetail/VenderList";
 import ShopStoreDetails from "./pages/Vender/VendereListDetail/ShopStoreDetails";
 
 import AddVendorForm from "./pages/Vender/AddVender/AddVender";
 import VenderWallet from "./pages/Vender/VenderWallet/VenderWallet";
 import VenderWalletMethod from "./pages/Vender/VenderWalletMethod/VenderWalletMethod";
-import WithdrawalMethods from "./pages/Vender/VenderWalletMethod/VenderWidrawmethod";
+
 import RefundDetails from "./pages/Refound/Details/RefoundDetail/RefoundDetail";
 import GenerateBarcode from "./pages/In_House_Product/InHouseProductList/GeneratCode/GeneratCode";
 import InhouseProductBtn from "./pages/In_House_Product/InHouseProductList/InhouseProductbutton/ProductBtn";

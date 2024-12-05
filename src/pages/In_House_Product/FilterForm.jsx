@@ -1,12 +1,18 @@
-import React from 'react';
-const FilterForm = ({ filters, onInputChange, onReset, categories = [], brands = [] }) => {
+import React from "react";
+const FilterForm = ({
+  filters,
+  onInputChange,
+  onReset,
+  categories = [],
+  brands = [],
+}) => {
   return (
     <div className="card mb-3">
       <div className="card-body">
         <form onSubmit={(e) => e.preventDefault()}>
           <div className="row gx-2">
             <div className="col-12">
-              <h4 className="mb-3">Filter Products</h4>
+              <h4 className="title-color mb-3 font-bold">Filter Products</h4>
             </div>
             {/* <div className="col-sm-6 col-lg-3 col-xl-3">
               <div className="form-group">
@@ -28,7 +34,9 @@ const FilterForm = ({ filters, onInputChange, onReset, categories = [], brands =
             </div> */}
             <div className="col-sm-6 col-lg-3 col-xl-3">
               <div className="form-group">
-                <label className="title-color" htmlFor="category">Category</label>
+                <label className="title-color " htmlFor="category">
+                  Category
+                </label>
                 <select
                   name="category"
                   className="form-control outline-none hover:border-primary"
@@ -44,8 +52,8 @@ const FilterForm = ({ filters, onInputChange, onReset, categories = [], brands =
                 </select>
               </div>
             </div>
-                 {/* User Type Filter */}
-                 {/* <div className="col-sm-6 col-lg-3 col-xl-3">
+            {/* User Type Filter */}
+            {/* <div className="col-sm-6 col-lg-3 col-xl-3">
               <div className="form-group">
                 <label className="title-color" htmlFor="userType">User Type</label>
                 <select
@@ -61,7 +69,7 @@ const FilterForm = ({ filters, onInputChange, onReset, categories = [], brands =
               </div>
             </div> */}
 
-{/* 
+            {/* 
                      <div className="col-sm-6 col-lg-3 col-xl-3">
               <div className="form-group">
                 <label className="title-color" htmlFor="minPrice">Min Price</label>
@@ -91,7 +99,12 @@ const FilterForm = ({ filters, onInputChange, onReset, categories = [], brands =
 
             <div className="col-12">
               <div className="d-flex gap-3 justify-content-end">
-                <button type="button" className="btn  px-5 bg-red-400 text-white" onClick={onReset}>
+                <button
+                  type="button"
+                  className="btn  px-5 bg-gray-300 text-white"
+                  onClick={onReset}
+                  // style={{ color: "white" }}
+                >
                   Reset
                 </button>
               </div>
