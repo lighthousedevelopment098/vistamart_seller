@@ -284,6 +284,7 @@ const LoginPage = ({ setIsLoggedIn }) => {
           <button
             type="submit"
             className={`btn btn-block p-3 rounded bg-primary hover:bg-green-200 hover:text-black text-white font-semibold mt-0 ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
+            style={{color:"white"}}
             disabled={loading}
           >
             {loading ? "Loading..." : "Login"}
