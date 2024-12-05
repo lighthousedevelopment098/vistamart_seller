@@ -8,6 +8,24 @@ import FormSelect from "../../../../../components/FormInput/FormSelect";
 
 const ProductAdditional = ({ formData = {}, handleChange }) => {
   useEffect(() => {
+    // Set default values if not selected
+    if (!formData.discountType) {
+      handleChange({
+        target: { name: "discountType", value: "percent" }, // Set default to 'percent'
+      });
+    }
+    if (formData.discountType === "percent" && formData.discount === "") {
+      handleChange({
+        target: { name: "discount", value: 0 }, // Set default discount to 10% if not already set
+      });
+    } else if (formData.discountType === "flat" && formData.discountAmount === "") {
+      handleChange({
+        target: { name: "discountAmount", value: 100 }, // Set default discount amount to 100 Rs if not set
+      });
+    }
+  }, [formData, handleChange]);
+
+  useEffect(() => {
     // Ensure discount values don't exceed limits
     if (formData.discountType === "percent" && formData.discount > 100) {
       handleChange({
@@ -33,25 +51,6 @@ const ProductAdditional = ({ formData = {}, handleChange }) => {
       toast.error("Discount amount cannot exceed the price.");
     }
   }, [formData.discountAmount, formData.discount, formData.discountType, formData.price]);
-
-  useEffect(() => {
-    // Reset previous discount value when switching discount type
-    if (formData.discountType === "percent") {
-      handleChange({
-        target: {
-          name: "discountAmount",
-          value: 0,
-        },
-      });
-    } else if (formData.discountType === "flat") {
-      handleChange({
-        target: {
-          name: "discount",
-          value: 0,
-        },
-      });
-    }
-  }, [formData.discountType, handleChange]);
 
   const handleDiscountFocus = (e) => {
     // Reset the relevant discount field when focused
@@ -105,7 +104,6 @@ const ProductAdditional = ({ formData = {}, handleChange }) => {
         {/* Stock */}
         <div className="flex flex-col px-2">
           <FormInput
-          type="number"
             label="Current Stock Qty"
             name="stock"
             placeholder="Stock"
@@ -195,7 +193,7 @@ const ProductAdditional = ({ formData = {}, handleChange }) => {
         <div className="flex flex-col px-2">
           <label>Shipping Cost (Rs.)</label>
           <FormInput
-            type="number"
+            type="text"
             name="shippingCost"
             value={formData.shippingCost}
             onChange={handleChange}
@@ -208,176 +206,3 @@ const ProductAdditional = ({ formData = {}, handleChange }) => {
 };
 
 export default ProductAdditional;
-
-
-
-// import { useEffect, useState } from "react";
-// import { ToastContainer, toast } from "react-toastify";
-// import "react-toastify/dist/ReactToastify.css";
-// import { IoMdPerson } from "react-icons/io";
-// import FormInput from "../../../../../components/FormInput/FormInput";
-// import FormSection from "../../../../../components/FormInput/FormSection";
-// import FormSelect from "../../../../../components/FormInput/FormSelect";
-
-// const ProductAdditional = ({ formData = {}, handleChange }) => {
-//   const [finalPrice, setFinalPrice] = useState(formData.price || 0);
-
-//   // Calculate final price whenever price, discount type, or discount amount changes
-//   useEffect(() => {
-//     let calculatedPrice = formData.price || 0;
-    
-//     if (formData.discountType === "percent") {
-//       if (formData.discountAmount > 100) {
-//         toast.error("Discount amount cannot exceed 100%.");
-//       } else {
-//         calculatedPrice -= (calculatedPrice * formData.discountAmount) / 100;
-//       }
-//     } else if (formData.discountType === "flat") {
-//       if (formData.discountAmount > formData.price) {
-//         toast.error("Discount amount cannot exceed the price.");
-//       } else {
-//         calculatedPrice -= formData.discountAmount;
-//       }
-//     }
-
-//     // Ensure calculatedPrice is a number
-//     setFinalPrice(isNaN(calculatedPrice) ? 0 : calculatedPrice);
-//   }, [formData.price, formData.discountType, formData.discountAmount]);
-
-
-
-  
-//   return (
-//     <FormSection title="Pricing & Others" icon={<IoMdPerson />}>
-//       <ToastContainer />
-//       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-//         {/* Price */}
-//         <div className="flex flex-col ">
-//           <label className="">Purchase Price</label>
-//           <FormInput
-//             type="number"
-//             name="price"
-//             value={formData.price}
-//             onChange={handleChange}
-//             placeholder="Price"
-//             required
-//           />
-//         </div>
-
-//         {/* Minimum Order Quantity */}
-//         <div className="flex flex-col px-2">
-//           <label className="">Minimum Order Qty</label>
-//           <FormInput
-//             type="number"
-//             name="minimumOrderQty"
-//             value={formData.minimumOrderQty}
-//             onChange={handleChange}
-//             placeholder="Minimum Order Quantity"
-//             required
-//           />
-//         </div>
-
-//         {/* Stock */}
-//         <div className="flex flex-col px-2">
-//           <FormInput
-//             label="Current Stock Qty"
-//             name="stock"
-//             placeholder="Stock"
-//             value={formData.stock}
-//             onChange={handleChange}
-//             required
-//           />
-//         </div>
-
-//         {/* Discount Type */}
-//         <div className="flex flex-col px-2">
-//           <FormSelect
-//             label="Discount Type"
-//             name="discountType"
-//             value={formData.discountType}
-//             onChange={handleChange}
-//             options={[
-//               { value: "percent", label: "Percentage" },
-//               { value: "flat", label: "Flat Amount" },
-//             ]}
-//           />
-//         </div>
-
-//         {/* Discount Amount */}
-//         <div className="flex flex-col px-2 ">
-//           <label className="">
-//             Discount Amount {formData.discountType === "percent" ? "( % )" : "( Rs )"}
-//           </label>
-//           <div className="relative">
-//             <FormInput
-//               type="number"
-//               name="discountAmount"
-//               value={formData.discountAmount}
-//               onChange={handleChange}
-//               placeholder="Discount Amount"
-//               required
-//             />
-//           </div>
-//         </div>
-
-//         {/* Tax Amount */}
-//         <div className="flex flex-col px-2">
-//           <label className="">Tax Amount ( % )</label>
-//           <FormInput
-//             type="number"
-//             name="taxAmount"
-//             value={formData.taxAmount}
-//             onChange={handleChange}
-//             placeholder="Tax Amount"
-//           />
-//         </div>
-
-//         {/* Tax Included Checkbox */}
-//         <div className="flex flex-col px-2 mt-3">
-//           <label className="">Tax Included</label>
-//           <div className="flex gap-3 items-center">
-//             <input
-//               type="checkbox"
-//               name="taxIncluded"
-//               checked={formData.taxIncluded}
-//               onChange={handleChange}
-//               className="w-5 h-5"
-//             />
-//             <span className="font-medium">Include tax in price</span>
-//           </div>
-//         </div>
-
-//         {/* Shipping Cost */}
-//         <div className="flex flex-col px-2">
-//           <label className="">Shipping Cost (Rs.)</label>
-//           <FormInput
-//             type="text"
-//             name="shippingCost"
-//             value={formData.shippingCost}
-//             onChange={handleChange}
-//             placeholder="Shipping Cost"
-//           />
-//         </div>
-
-//         {/* Display Final Price */}
-//         <div className="flex flex-col px-2">
-//           <label className="">Final Price</label>
-//           <div className="relative">
-//             <input
-//               type="text"
-//               name="finalPrice"
-//               value={Number(finalPrice).toFixed(2)}
-//               readOnly
-//               className="border border-gray-300 rounded-md p-2"
-//               placeholder="Final Price after Discount"
-//             />
-//           </div>
-//         </div>
-//       </div>
-//     </FormSection>
-//   );
-// };
-
-// export default ProductAdditional;
-
-
