@@ -6,8 +6,8 @@ import "react-toastify/dist/ReactToastify.css";
 import apiConfig from "../config/apiConfig";
 
 const ResetPassword = () => {
-  const { token } = useParams(); // Get the token from the URL
-  const navigate = useNavigate(); // Replacing `useHistory` with `useNavigate`
+  const { token } = useParams(); 
+  const navigate = useNavigate(); 
   const [passwordNew, setPasswordNew] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
 
@@ -24,7 +24,9 @@ const ResetPassword = () => {
       );
       if (response.data.status === "success") {
         toast.success("Password has been reset successfully!");
-        navigate("/login"); // Redirect to login page
+        setTimeout(() => {
+          navigate("/login");
+        }, 2000);
       } else {
         toast.error(response.data.message || "Failed to reset password");
       }
