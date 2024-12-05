@@ -77,6 +77,28 @@ const ProductDetail = () => {
 
   const [productData, setProductData] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const openModal = (index) => {
+    setCurrentImageIndex(index);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const showNextImage = () => {
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex + 1 >= productData?.images?.length ? 0 : prevIndex + 1
+    );
+  };
+
+  const showPrevImage = () => {
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex - 1 < 0 ? productData?.images?.length - 1 : prevIndex - 1
+    );
+  };
 
   useEffect(() => {
     const fetchProductData = async () => {
@@ -191,7 +213,7 @@ const ProductDetail = () => {
                   </ul>
                 </div>
                 <div className="d-flex flex-wrap align-items-center flex-sm-nowrap justify-content-between gap-3 min-h-50">
-                  <div className="d-flex flex-wrap gap-2 align-items-center">
+                  {/* <div className="d-flex flex-wrap gap-2 align-items-center">
                     {productData?.images?.map((imgUrl, index) => {
                       return (
                         // Add this return statement
@@ -201,7 +223,7 @@ const ProductDetail = () => {
                         >
                           <a
                             href={imgUrl}
-                            target="_blank"
+                            target="_self"
                             rel="noopener noreferrer"
                           >
                             <img
@@ -214,7 +236,61 @@ const ProductDetail = () => {
                         </div>
                       );
                     })}
-                  </div>
+                  </div> */}
+                   <div>
+      {/* Image List */}
+      <div className="flex flex-wrap gap-2 items-center">
+        {productData?.images?.map((imgUrl, index) => (
+          <div
+            key={index}
+            className="aspect-square overflow-hidden border rounded-lg relative cursor-pointer"
+            onClick={() => openModal(index)}
+          >
+            <img
+              className="object-contain max-w-[50px]"
+              alt={`Image ${index}`}
+              src={`${apiConfig.bucket}/${imgUrl}`}
+            />
+          </div>
+        ))}
+      </div>
+
+      {/* Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
+          <div className="relative w-96 h-96">
+            {/* Close Button */}
+            <button
+              className="absolute top-2 right-0 text-white text-2xl"
+              onClick={closeModal}
+            >
+              &times;
+            </button>
+
+            {/* Image */}
+            <img
+              className="object-contain w-full h-full"
+              alt={`Current Image`}
+              src={`${apiConfig.bucket}/${productData?.images[currentImageIndex]}`}
+            />
+
+            {/* Navigation Buttons */}
+            <button
+              className="absolute left-2 top-1/2 transform -translate-y-1/2 text-white text-3xl"
+              onClick={showPrevImage}
+            >
+              &#8249;
+            </button>
+            <button
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 text-white text-3xl"
+              onClick={showNextImage}
+            >
+              &#8250;
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
 
                   <span className="text-dark font-semibold">
                     {productData?.numOfReviews || 0} Reviews

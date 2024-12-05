@@ -428,7 +428,7 @@ const { user } = useSelector(state => state.auth);
                       <input
                         type="search"
                         name="searchValue"
-                        className="form-control"
+                        className="form-control outline-none hover:border-primary"
                         placeholder="Search by Product Name"
                         value={filters.searchValue}
                         onChange={handleInputChange}

@@ -105,6 +105,7 @@ const ProductAdditional = ({ formData = {}, handleChange }) => {
         {/* Stock */}
         <div className="flex flex-col px-2">
           <FormInput
+          type="number"
             label="Current Stock Qty"
             name="stock"
             placeholder="Stock"
@@ -194,7 +195,7 @@ const ProductAdditional = ({ formData = {}, handleChange }) => {
         <div className="flex flex-col px-2">
           <label>Shipping Cost (Rs.)</label>
           <FormInput
-            type="text"
+            type="number"
             name="shippingCost"
             value={formData.shippingCost}
             onChange={handleChange}
