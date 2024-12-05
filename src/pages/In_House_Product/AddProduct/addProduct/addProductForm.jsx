@@ -106,6 +106,10 @@ const AddNewProduct = () => {
 
 	const handleChange = (e) => {
 		const { name, value, type, checked } = e.target;
+		if (value.length > 70) {
+			toast.error(`${name.replace(/^\w/, (c) => c.toUpperCase())} is limited to 70 characters.`);
+			return;
+		  }
 	  
 		setFormData((prev) => ({
 		  ...prev,

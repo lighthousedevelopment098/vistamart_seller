@@ -73,6 +73,28 @@ const ProductDetail = () => {
 
   const [productData, setProductData] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const openModal = (index) => {
+    setCurrentImageIndex(index);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const showNextImage = () => {
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex + 1 >= productData?.images?.length ? 0 : prevIndex + 1
+    );
+  };
+
+  const showPrevImage = () => {
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex - 1 < 0 ? productData?.images?.length - 1 : prevIndex - 1
+    );
+  };
 
   useEffect(() => {
     const fetchProductData = async () => {
@@ -191,7 +213,7 @@ const ProductDetail = () => {
                   </ul>
                 </div>
                 <div className="d-flex flex-wrap align-items-center flex-sm-nowrap justify-content-between gap-3 min-h-50">
-                  <div className="d-flex flex-wrap gap-2 align-items-center">
+                  {/* <div className="d-flex flex-wrap gap-2 align-items-center">
                     {productData?.images?.map((imgUrl, index) => {
                       return (
                         // Add this return statement
