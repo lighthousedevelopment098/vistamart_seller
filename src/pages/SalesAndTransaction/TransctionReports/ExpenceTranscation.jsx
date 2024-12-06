@@ -95,7 +95,7 @@ const ExpenceTranscation = () => {
           </select>
           <div className="">
             <button
-              className="px-6  py-2 rounded border border-green-200 bg-primary hover:bg-primary-dark text-white"
+              className="px-6  py-2 rounded border border-green-200 bg-primary-500 hover:bg-primary-dark-500 text-white"
               style={{ color: "white" }}
             >
               Filter
@@ -213,7 +213,7 @@ const ExpenceTranscation = () => {
                   />
                   <button
                     type="submit"
-                    className="btn bg-primary hover:bg-primary-dark"
+                    className="btn bg-primary-500 hover:bg-primary-dark-500"
                     style={{ color: "white" }}
                   >
                     Search
@@ -238,7 +238,7 @@ const ExpenceTranscation = () => {
                 filename="ExpenceTranscation" // Optional filename for the exported file
                 icon={FaDownload} // Icon for the button
                 label="Export " // Button label
-                className="bg-primary text-white hover:bg-primary-dark w-40 " // Tailwind classes for styling
+                className="bg-primary-500 text-white hover:bg-primary-dark-500 w-40 " // Tailwind classes for styling
                 style={{ color: "white" }} // Optional inline styles
               />
             </div>
@@ -281,7 +281,7 @@ const ExpenceTranscation = () => {
                     </div>
                   </td>
 
-                  <td className="   text-green-500 ">
+                  <td className="   text-primary-500 ">
                     <IoMdDownload />
                   </td>
                 </tr>

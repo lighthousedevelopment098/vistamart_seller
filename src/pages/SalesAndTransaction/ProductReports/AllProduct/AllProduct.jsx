@@ -227,7 +227,7 @@ const AllProduct = () => {
           <select
             name=""
             id=""
-            className="text-md  bg-white px-2 rounded py-2  border border-primary outline-none"
+            className="text-md  bg-white px-2 rounded py-2  border border-primary-500 outline-none"
           >
             <option value="">All </option>
             <option value="">Hold</option>
@@ -246,7 +246,7 @@ const AllProduct = () => {
           </select>
           <div className="flex ">
             <button
-              className="px-6  py-2 rounded border border-green-200 bg-primary hover:bg-primary-dark text-white"
+              className="px-6  py-2 rounded border border-green-200 bg-primary-500 hover:bg-primary-dark-500 text-white"
               style={{ color: "white" }}
             >
               Filter
@@ -281,7 +281,7 @@ const AllProduct = () => {
                   0 <br />{" "}
                   <span className="text-gray-400 text-[.7rem]">Pending</span>
                 </div>
-                <div className="text-green-500 text-center text-[1rem] font-semibold">
+                <div className="text-primary-500 text-center text-[1rem] font-semibold">
                   0 <br />{" "}
                   <span className="text-gray-400 text-[.7rem]"> Active</span>
                 </div>
@@ -356,14 +356,14 @@ const AllProduct = () => {
                     id="datatableSearch_"
                     type="search"
                     name="searchValue"
-                    className="form-control outline-none hover:border-primary"
+                    className="form-control outline-none hover:border-primary-dark-500"
                     placeholder="Search by email"
                     aria-label="Search orders"
                     value=""
                   />
                   <button
                     type="submit"
-                    className="btn bg-primary hover:bg-primary-dark"
+                    className="btn bg-primary-500 hover:bg-primary-dark-500"
                     style={{ color: "white" }}
                   >
                     Search
@@ -373,7 +373,7 @@ const AllProduct = () => {
 
               <button
                 type="button"
-                className="rounded w-32 px-3 py-2 bg-primary text-white hover:bg-primary-dark text-nowrap btn-block flex gap-2 "
+                className="rounded w-32 px-3 py-2 bg-primary-500 text-white hover:bg-primary-dark-500 text-nowrap btn-block flex gap-2 "
                 style={{
                   display: "flex",
                   color: "white",

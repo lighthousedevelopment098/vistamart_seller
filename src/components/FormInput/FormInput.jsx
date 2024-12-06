@@ -5,7 +5,7 @@ const FormInput = ({ label, name, type, placeholder, value, onChange, required }
     <label htmlFor={name} className="title-color d-flex gap-1 align-items-center">{label}</label>
     <input
       type={type}
-      className="form-control form-control-user outline-none hover:border-primary"
+      className="form-control form-control-user outline-none hover:border-primary-500"
       id={name}
       name={name}
       placeholder={placeholder}

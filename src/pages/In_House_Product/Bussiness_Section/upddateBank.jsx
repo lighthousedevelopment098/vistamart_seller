@@ -143,7 +143,7 @@ const UpdateBankForm = () => {
             <div className="flex justify-end space-x-4 mt-6">
               <button
                 type="submit"
-                className="bg-primary text-white px-4 py-2 rounded hover:bg-primary-dark"
+                className="bg-primary-500 text-white px-4 py-2 rounded hover:bg-primary-dark-500"
                 style={{color:"white"}}
               >
                 Update Bank

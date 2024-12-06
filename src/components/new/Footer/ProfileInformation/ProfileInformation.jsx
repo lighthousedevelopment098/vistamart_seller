@@ -329,7 +329,7 @@ const ProfileInformation = () => {
           <IoPerson className="text-2xl font-semibold" />
           <h1 className="font-bold text-xl">Profile Information</h1>
         </div>
-        <div className="px-3 py-2 rounded bg-primary hover:bg-primary-dark text-white">
+        <div className="px-3 py-2 rounded bg-primary-500 hover:bg-primary-dark-500 text-white">
           <Link to="/" className="flex gap-2 items-center">
             <IoHomeSharp className="font-semibold text-white" />
             <h1 className="font-semibold text-white">Dashboard</h1>
@@ -482,7 +482,7 @@ const ProfileInformation = () => {
               <div className="col-span-1 md:col-span-2 text-right">
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded"
+                  className="px-4 py-2 bg-primary-500 hover:bg-primary-dark-500 text-white rounded"
                  style={{color:"white"}}
                 >
                   Save Changes

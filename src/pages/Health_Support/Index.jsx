@@ -31,17 +31,17 @@ const IndexMessage = () => {
                 type="text"
                 name="username"
                 placeholder="Search customers..."
-                className="border-2 w-full border-gray-300 rounded-lg px-3 py-2 outline-none hover:border-primary focus:outline-none focus:border-primary"
+                className="border-2 w-full border-gray-300 rounded-lg px-3 py-2 outline-none hover:border-primary-500 focus:outline-none focus:border-primary-500"
               />
             </form>
             <div className="h-full">
               {" "}
               {/* Ensure parent container has sufficient height */}
               <div>
-                <p className="text-[#009444] pt-8 pl-6 font-semibold mb-2">
+                <p className="text-primary-500 pt-8 pl-6 font-semibold mb-2">
                   Customer
                 </p>
-                <p className="h-1 bg-primary mb-6 w-20 ml-5"></p>
+                <p className="h-1 bg-primary-500 mb-6 w-20 ml-5"></p>
                 {/* <p className="text-gray-700 font-semibold pl-5">Delivery Man</p> */}
               </div>
             </div>

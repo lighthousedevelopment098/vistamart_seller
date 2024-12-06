@@ -268,7 +268,7 @@ const BankInformation = () => {
   {bankInfo && (
     <Link
       to={`/bankinfoedit/${bankInfo?._id}`}
-      className="flex items-center px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded-md"
+      className="flex items-center px-4 py-2 bg-primary-500 hover:bg-primary-dark-500 text-white rounded-md"
       style={{ color: "white" }}
     >
       <FaEdit />
