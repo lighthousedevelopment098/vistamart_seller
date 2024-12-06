@@ -253,20 +253,31 @@ const BankInformation = () => {
           </div>
         </div>
         <div className="flex justify-end items-center p-2 gap-3 mb-2">
-          <button onClick={handleRemove} className="flex px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-md"
-          style={{color:"white"}}>
-            Remove
-          </button>
+  {/* Conditionally render the Remove button */}
+  {bankInfo && (
+    <button
+      onClick={handleRemove}
+      className="flex px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-md"
+      style={{ color: "white" }}
+    >
+      Remove
+    </button>
+  )}
 
-          <Link
-            to={`/bankinfoedit/${bankInfo?._id}`}
-            className="flex items-center  px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded-md"
-            style={{color:"white"}}
-          >
-            <FaEdit />
-            <span>Edit</span>
-          </Link>
-        </div>
+  {/* Conditionally render the Edit button */}
+  {bankInfo && (
+    <Link
+      to={`/bankinfoedit/${bankInfo?._id}`}
+      className="flex items-center px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded-md"
+      style={{ color: "white" }}
+    >
+      <FaEdit />
+      <span>Edit</span>
+    </Link>
+  )}
+</div>
+
+
       </div>
     </div>
   );

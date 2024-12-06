@@ -614,16 +614,16 @@ const Sidebar = () => {
         { name: 'Canceled', path: '/cancelledorder' },
       ],
     },
-    {
-      name: 'Refund Requests',
-      icon: <AiFillDatabase />,
-      subItems: [
-        { name: 'Pending', path: '/pendingrefundrequests' },
-        { name: 'Approved', path: '/approverefundrequests' },
-        { name: 'Refunded', path: '/refunded' },
-        { name: 'Rejected', path: '/rejected' },
-      ],
-    },
+    // {
+    //   name: 'Refund Requests',
+    //   icon: <AiFillDatabase />,
+    //   subItems: [
+    //     { name: 'Pending', path: '/pendingrefundrequests' },
+    //     { name: 'Approved', path: '/approverefundrequests' },
+    //     { name: 'Refunded', path: '/refunded' },
+    //     { name: 'Rejected', path: '/rejected' },
+    //   ],
+    // },
     {name:"Product Management",heading:true},
     {
       name: 'Products',
@@ -691,20 +691,20 @@ const Sidebar = () => {
               style={{ color: "white" }}
               onClick={() => toggleSection(item.name)}
             >
-              <div className="flex gap-2 justify-between items-center text-ms">
+              <div className="flex gap-2 justify-between  items-center text-ms">
                 {item.icon} {item.name}
               </div>
-              <span className="float-right text-sm">
+              <span className="float-right hover:bg-[#52c970] text-sm">
                 {openSections[item.name] ? <FaAngleUp /> : <FaAngleDown />}
               </span>
             </button>
             {openSections[item.name] && (
-              <ul className="ml-4 mt-2 space-y-1">
+              <ul className="ml-4 mt-2  space-y-1">
                 {item.subItems.map((subItem) => (
                   <li key={subItem.name}>
                     <Link
                       to={subItem.path}
-                      className="block w-full text-left p-1 pl-4 rounded hover:bg-[#52c970] "
+                      className="block w-full text-left p-1 pl-4 rounded hover:bg-green-400 "
                       style={{ color: "white" }}
                     >
                       • {subItem.name}

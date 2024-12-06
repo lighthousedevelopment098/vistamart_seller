@@ -44,7 +44,7 @@ const Header = ({ handleLogout }) => {
         <div className="header flex items-center justify-between py-2 px-6 shadow fixed top-0 left-0 right-0 bg-white z-50">
           <div>
             <img
-              src="/vistalogo.png"
+              src="/logo2.png"
               alt="Logo"
               className="md:h-12 h-8 w-full object-center"
             />

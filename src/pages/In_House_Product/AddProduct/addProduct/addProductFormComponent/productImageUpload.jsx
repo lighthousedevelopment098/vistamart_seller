@@ -45,7 +45,6 @@ const ProductImageWrapper = ({
 
     if (isThumbnail) {
       setThumbnail({ preview: previewUrl, file });
-      console.log("Thumbnail updated:", { preview: previewUrl, file });
     } else {
       setAdditionalImages((prevImages) => {
         const newImages = [...prevImages];
@@ -84,14 +83,13 @@ const ProductImageWrapper = ({
 
         <div className="grid grid-cols-1  md:grid-cols-3 gap-4">
           {additionalImages.map((img, idx) => (
-          <FileUpload
-		  key={idx}
-		  label={`Additional Image ${idx + 1}`}
-		  image={img.preview}
-		  onChange={(e) => handleImageChange(e, false, idx)}
-		  onDelete={() => handleDeleteImage(idx)}
-		/>
-		
+            <FileUpload
+              key={idx}
+              label={`Additional Image ${idx + 1}`}
+              image={img.preview}
+              onChange={(e) => handleImageChange(e, false, idx)}
+              onDelete={() => handleDeleteImage(idx)}
+            />
           ))}
           <FileUpload
             label="Upload Additional Image"

@@ -131,9 +131,6 @@ function AllRoutes() {
                   <Route path="/product/:id" 
                   element={<InhouseProductUpdate />} />
 
-               
-                
-
 
                   <Route path="/pagegallery" element={<PageGallery />} />
                   <Route path="/productgallery" element={<ProductGallery />} />
