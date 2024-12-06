@@ -139,6 +139,10 @@ const InhouseProductUpdate = () => {
   const handleChange = ({ target: { name, value, type, checked } }) => {
     const isCheckbox = type === "checkbox";
     const isNumericField = ["price", "discountAmount", "taxAmount", "discount"].includes(name);
+    if (value.length > 70) {
+      toast.error(`${name.replace(/^\w/, (c) => c.toUpperCase())} is limited to 70 characters.`);
+      return;
+    }
     setFormData((prev) => ({
         ...prev,
         [name]: isCheckbox ? checked : isNumericField ? parseInt(value, 10) || 0 : value,

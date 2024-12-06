@@ -687,7 +687,7 @@ const Sidebar = () => {
         ) : item.subItems ? (
           <>
             <button
-              className="w-full text-left px-5 mt-2 p-2 rounded hover:bg-primary-dark text-white flex justify-between relative"
+              className="w-full text-left px-5 mt-2 p-2 rounded hover:bg-[#52c970] text-white flex justify-between relative"
               style={{ color: "white" }}
               onClick={() => toggleSection(item.name)}
             >
@@ -704,7 +704,7 @@ const Sidebar = () => {
                   <li key={subItem.name}>
                     <Link
                       to={subItem.path}
-                      className="block w-full text-left p-1 pl-4 rounded hover:bg-gray-500 "
+                      className="block w-full text-left p-1 pl-4 rounded hover:bg-[#52c970] "
                       style={{ color: "white" }}
                     >
                       • {subItem.name}
