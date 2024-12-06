@@ -227,7 +227,7 @@ const OrderTranscation = () => {
           <select
             name=""
             id=""
-            className="text-md border bg-white px-2 rounded py-2 outline-none hover:border-primary"
+            className="text-md border bg-white px-2 rounded py-2 outline-none hover:border-primary-dark-500"
           >
             <option value="">All Status</option>
             <option value="">Hold</option>
@@ -236,7 +236,7 @@ const OrderTranscation = () => {
           <select
             name=""
             id=""
-            className="text-md border bg-white px-2 rounded py-2  outline-none hover:border-primary"
+            className="text-md border bg-white px-2 rounded py-2  outline-none hover:border-primary-dark-500"
           >
             <option value="">All Status</option>
             <option value="">Inhouse</option>
@@ -270,7 +270,7 @@ const OrderTranscation = () => {
         <br />
         <div className="flex justify-end">
           <button
-            className="px-6  py-2 rounded border border-green-200 bg-primary hover:bg-primary-dark text-white"
+            className="px-6  py-2 rounded border border-green-200 bg-primary-500 hover:bg-primary-dark-500 text-white"
             style={{ color: "white" }}
           >
             Filter
@@ -336,7 +336,7 @@ const OrderTranscation = () => {
                     In House Orders
                   </span>
                 </div>
-                <div className="text-green-500 text-center text-[1rem] font-semibold">
+                <div className="text-primary-500 text-center text-[1rem] font-semibold">
                   0 <br />{" "}
                   <span className="text-gray-400 text-[.6rem]">
                     {" "}
@@ -423,7 +423,7 @@ const OrderTranscation = () => {
                   />
                   <button
                     type="submit"
-                    className="btn bg-primary hover:bg-primary-dark"
+                    className="btn bg-primary-500 hover:bg-primary-dark-500"
                     style={{ color: "white" }}
                   >
                     Search
@@ -448,7 +448,7 @@ const OrderTranscation = () => {
                 filename="OrderTranscation" // Optional filename for the exported file
                 icon={FaDownload} // Icon for the button
                 label="Export " // Button label
-                className="bg-primary text-white hover:bg-primary-dark" // Tailwind classes for styling
+                className="bg-primary-500 text-white hover:bg-primary-dark-500" // Tailwind classes for styling
                 style={{ color: "white" }} // Optional inline styles
               />
               {/* <button
@@ -527,8 +527,8 @@ const OrderTranscation = () => {
                   <td className="">{item.total}</td>
 
                   <td className="">Cash On Delivery</td>
-                  <td className="text-green-400  rounded  ">Dispurse</td>
-                  <td className="   text-green-500 ">
+                  <td className="text-primary-500  rounded  ">Dispurse</td>
+                  <td className="   text-primary-500 ">
                     <IoMdDownload />
                   </td>
                 </tr>

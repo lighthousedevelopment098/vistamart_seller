@@ -62,7 +62,7 @@ const VenderReview = () => {
                     value={searchValue}
                     onChange={(e) => setSearchValue(e.target.value)}
                   />
-                  <button type="submit" className="btn btn--primary bg-green-400">
+                  <button type="submit" className="btn btn--primary bg-primary-500">
                     Search
                   </button>
                 </div>

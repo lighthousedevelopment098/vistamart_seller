@@ -201,14 +201,14 @@ const InHouseProductList = ({
                     <div className="btn-group flex gap-3">
                       <Link
                         to={`/products/${product._id}`}
-                        className="btn border-[#009444] hover:bg-[#009444] hover:text-white text-[#009444]"
+                        className="btn border-primary-500 hover:bg-primary-dark-500 hover:text-white text-primary-500"
                         title="View"
                       >
                         <FaEye />
                       </Link>
                       <Link
                         to={`/product/${product?._id}`}
-                        className="btn border-[#009444] hover:bg-[#009444] hover:text-white text-[#009444]"
+                        className="btn border-primary-500 hover:bg-primary-dark-500 hover:text-white text-primary-500"
                         title="Edit"
                       >
                         <FaEdit />

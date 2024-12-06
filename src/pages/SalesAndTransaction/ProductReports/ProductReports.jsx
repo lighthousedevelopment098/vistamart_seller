@@ -28,7 +28,7 @@ const ProductReports = () => {
           <li
             className={`${
               activeSection === "allproduct"
-                ? "border-b-2 border-[#009444]"
+                ? "border-b-2 border-primary-500"
                 : ""
             }`}
           >
@@ -39,7 +39,7 @@ const ProductReports = () => {
           <li
             className={`${
               activeSection === "productstock"
-                ? "border-b-2 border-[#009444]"
+                ? "border-b-2 border-primary-500"
                 : ""
             }`}
           >

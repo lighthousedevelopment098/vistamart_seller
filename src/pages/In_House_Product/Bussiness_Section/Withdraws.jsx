@@ -182,7 +182,7 @@ const Withdraws = () => {
                             item.status === "Denied"
                               ? "bg-red-100 text-red-500"
                               : item.status === "Approved"
-                              ? "bg-green-100 text-green-500"
+                              ? "bg-green-100 text-primary-500"
                               : item.status === "Pending"
                               ? "bg-blue-100 text-blue-500"
                               : ""

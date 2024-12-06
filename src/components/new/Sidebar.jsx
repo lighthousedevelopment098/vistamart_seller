@@ -662,9 +662,9 @@ const Sidebar = () => {
  
 
   return (
-    <aside className="bg-primary pb-4 text-white top-16 bottom-0 px-1 flex flex-col gap-2 fixed left-0 max-h-screen overflow-y-auto">
-    <div className="pt-7 pb-4 px-3 bg-primary sticky top-0 z-50">
-      <div className="border text-white border-white rounded-md focus:outline-none placeholder-gray-400 w-full px-2 flex items-center bg-primary sticky top-0 z-50">
+    <aside className="bg-primary-500 pb-4 text-white top-16 bottom-0 px-1 flex flex-col gap-2 fixed left-0 max-h-screen overflow-y-auto">
+    <div className="pt-7 pb-4 px-3 bg-primary-500 sticky top-0 z-50">
+      <div className="border text-white border-white rounded-md focus:outline-none placeholder-gray-400 w-full px-2 flex items-center bg-primary-500 sticky top-0 z-50">
         <div>
           <FaSearch />
         </div>
@@ -687,14 +687,14 @@ const Sidebar = () => {
         ) : item.subItems ? (
           <>
             <button
-              className="w-full text-left px-5 mt-2 p-2 rounded hover:bg-[#52c970] text-white flex justify-between relative"
+              className="w-full text-left px-5 mt-2 p-2 rounded hover:bg-primary-dark-500 text-white flex justify-between relative"
               style={{ color: "white" }}
               onClick={() => toggleSection(item.name)}
             >
               <div className="flex gap-2 justify-between  items-center text-ms">
                 {item.icon} {item.name}
               </div>
-              <span className="float-right hover:bg-[#52c970] text-sm">
+              <span className="float-right hover:bg-primary-dark-500 text-sm">
                 {openSections[item.name] ? <FaAngleUp /> : <FaAngleDown />}
               </span>
             </button>
@@ -704,7 +704,7 @@ const Sidebar = () => {
                   <li key={subItem.name}>
                     <Link
                       to={subItem.path}
-                      className="block w-full text-left p-1 pl-4 rounded hover:bg-green-400 "
+                      className="block w-full text-left p-1 pl-4 rounded hover:bg-primary-dark-500 "
                       style={{ color: "white" }}
                     >
                       • {subItem.name}
@@ -717,7 +717,7 @@ const Sidebar = () => {
         ) : (
           <Link
             to={item.path}
-            className="w-full flex gap-2 items-center text-left p-2 rounded hover:bg-[#52c970] hover:text-white"
+            className="w-full flex gap-2 items-center text-left p-2 rounded hover:bg-primary-dark-500 hover:text-white"
             style={{ color: "white" }}
           >
             {item.icon}

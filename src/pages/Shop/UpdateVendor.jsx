@@ -366,7 +366,7 @@ const UpdateVendor = () => {
 
         <div className="d-flex flex justify-end w-full my-3">
           <button
-            className={`btn btn-success text-white px-4 py-2 bg-primary hover:bg-primary-dark ${
+            className={`btn btn-success text-white px-4 py-2 bg-primary-500 hover:bg-primary-dark-500 ${
               loading ? "loading" : ""
             }`}
             style={{ color: "white" }}

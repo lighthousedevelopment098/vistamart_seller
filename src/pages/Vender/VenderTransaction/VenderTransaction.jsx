@@ -287,7 +287,7 @@ const TransactionTable = () => {
                     value={searchValue}
                     onChange={(e) => setSearchValue(e.target.value)}
                   />
-                  <button type="submit" className="btn btn--primary bg-green-400">
+                  <button type="submit" className="btn btn--primary bg-primary-500">
                     Search
                   </button>
                 </div>
@@ -318,7 +318,7 @@ const TransactionTable = () => {
                       Delivered
                     </option>
                   </select>
-                  <button type="submit" className="btn flex justify-center align-items-center gap-2 btn-success bg-green-400">
+                  <button type="submit" className="btn flex justify-center align-items-center gap-2 btn-success bg-primary-500">
                     <FaFilter /> Filter
                   </button>
                 </div>

@@ -29,7 +29,7 @@ const Shop_Setting = () => {
       </div>
 
       <p className="mt-3 mx-3">
-        <span className="border-b-2 pb-2 border-b-[#009444] font-semibold text-[#009444]">
+        <span className="border-b-2 pb-2 border-b-primary-500 font-semibold text-primary-500">
           General
         </span>
       </p>
