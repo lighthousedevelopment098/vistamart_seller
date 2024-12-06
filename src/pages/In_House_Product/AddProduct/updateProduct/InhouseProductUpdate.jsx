@@ -139,6 +139,10 @@ const InhouseProductUpdate = () => {
   const handleChange = ({ target: { name, value, type, checked } }) => {
     const isCheckbox = type === "checkbox";
     const isNumericField = ["price", "discountAmount", "taxAmount", "discount"].includes(name);
+    if (value.length > 70) {
+      toast.error(`${name.replace(/^\w/, (c) => c.toUpperCase())} is limited to 70 characters.`);
+      return;
+    }
     setFormData((prev) => ({
         ...prev,
         [name]: isCheckbox ? checked : isNumericField ? parseInt(value, 10) || 0 : value,
@@ -264,8 +268,8 @@ const handleSubmit = async (e) => {
       <div className="flex justify-end m-5">
         <button
           type="submit"
-          className="btn mt-3 flex justify-end btn-submit bg-primary outline-none"
-          style={{ color: "white", background: "green" }}
+          className="btn mt-3 flex justify-end btn-submit bg-primary hover:bg-primary-dark outline-none"
+          style={{ color: "white"}}
         >
           Update Product
         </button>

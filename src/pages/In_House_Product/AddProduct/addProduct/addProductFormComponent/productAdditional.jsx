@@ -206,3 +206,4 @@ const ProductAdditional = ({ formData = {}, handleChange }) => {
 };
 
 export default ProductAdditional;
+

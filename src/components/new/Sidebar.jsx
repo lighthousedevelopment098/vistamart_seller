@@ -687,19 +687,19 @@ const Sidebar = () => {
         ) : item.subItems ? (
           <>
             <button
-              className="w-full text-left px-5 mt-2 p-2 rounded hover:bg-primary text-white flex justify-between relative"
+              className="w-full text-left px-5 mt-2 p-2 rounded hover:bg-[#52c970] text-white flex justify-between relative"
               style={{ color: "white" }}
               onClick={() => toggleSection(item.name)}
             >
-              <div className="flex gap-2 justify-between items-center text-ms">
+              <div className="flex gap-2 justify-between  items-center text-ms">
                 {item.icon} {item.name}
               </div>
-              <span className="float-right text-sm">
+              <span className="float-right hover:bg-[#52c970] text-sm">
                 {openSections[item.name] ? <FaAngleUp /> : <FaAngleDown />}
               </span>
             </button>
             {openSections[item.name] && (
-              <ul className="ml-4 mt-2 space-y-1">
+              <ul className="ml-4 mt-2  space-y-1">
                 {item.subItems.map((subItem) => (
                   <li key={subItem.name}>
                     <Link

@@ -217,8 +217,8 @@ const AddNewProduct = () => {
 			<div className="flex justify-end m-5">
 				<button
 					type="submit"
-					className="btn mt-3 flex justify-end btn-submit bg-primary outline-none"
-					style={{ color: "white", background: "green" }}
+					className="btn mt-3 flex justify-end btn-submit bg-primary hover:bg-primary-dark outline-none"
+					style={{color:"white"}}
 				>
 					Submit Product
 				</button>

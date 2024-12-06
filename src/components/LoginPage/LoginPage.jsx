@@ -79,7 +79,7 @@ const LoginPage = ({ setIsLoggedIn }) => {
             </label>
             <input
               type="email"
-              className="form-control form-control-lg mb-4 p-3 rounded border border-gray-300 w-full"
+              className="form-control form-control-lg mb-4 p-3 rounded border border-gray-300 w-full outline-none hover:border-primary"
               id="email"
               placeholder="Email"
               required
@@ -95,7 +95,7 @@ const LoginPage = ({ setIsLoggedIn }) => {
             <div className="relative">
               <input
                 type={showPassword ? "text" : "password"}
-                className="form-control form-control-lg mb-4 p-3 rounded border border-gray-300 w-full"
+                className="form-control form-control-lg mb-4 p-3 rounded border border-gray-300 w-full outline-none"
                 id="password"
                 placeholder="Password"
                 required
@@ -115,7 +115,7 @@ const LoginPage = ({ setIsLoggedIn }) => {
             <div className="custom-control custom-checkbox flex items-center justify-center gap-1">
               <input
                 type="checkbox"
-                className="custom-control-input"
+                className="custom-control-input outline-none hover:border-primary"
                 id="rememberMe"
                 name="remember"
                 checked={rememberMe}
