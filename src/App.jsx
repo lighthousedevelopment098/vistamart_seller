@@ -16,6 +16,7 @@ import "./App.css";
 import LoadingSpinner from "./components/LoodingSpinner/LoadingSpinner.jsx";
 import ForgotPassword from "./components/ForgetPassword/ForgetPassword.jsx";
 import ResetPassword from "./components/ForgetPassword/ResetPassword.jsx";
+import { ColorScheam } from "./utils/ColorScheam.js";
 
 const queryClient = new QueryClient();
 
@@ -24,6 +25,15 @@ function App() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  useEffect(() => {
+    const initializeColors = async () => {
+      await ColorScheam();
+      setLoading(false); // Finish loading after colors are applied
+    };
+
+    initializeColors();
+  }, []);
 
   useEffect(() => {
     const token = localStorage.getItem("token");

@@ -8,8 +8,12 @@ export default {
     extend: {
       colors: {
         'primary': '#009444',
-        'primary-500':'#009444',
-        'primary-dark-500':'#4CAF50',
+        // 'primary-500':'#009444',
+        // 'primary-dark-500':'#4CAF50',
+
+         'primary-500':"var(--primary-color)",
+         'primary-dark-500':"var(--secondary-color)",
+
         'primary-dark': '#7e9f37', // Darker shade of the primary color
         'secondary': '#F7FAFF', // Secondary color (another green shade)
         'alert': '#d33', // Red color for alerts or warnings
