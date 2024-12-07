@@ -1,16 +1,10 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
 import { Chart, registerables } from "chart.js";
+import { FaDownload, FaSearch } from "react-icons/fa";
+
 Chart.register(...registerables);
-import {
-  FaSearch,
-  FaDownload,
-  FaChevronDown,
-  FaEye,
-  FaEdit,
-  FaTrashAlt,
-} from "react-icons/fa";
-import { IoMdDownload } from "react-icons/io";
+
 const AllProduct = () => {
   const graphdata = {
     labels: [
@@ -29,19 +23,72 @@ const AllProduct = () => {
     ],
     datasets: [
       {
-        label: "Earnings",
-        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        label: "Monthly Earnings",
+        data: [0, 2000, 4000, 1000, 3000, 5000, 7000, 6500, 8000, 9000, 10000, 12000],
         backgroundColor: "rgba(54, 162, 235, 0.2)",
-        borderColor: "#A1CB46",
-        borderWidth: 4,
+        borderColor: "#009444",
+        borderWidth: 3,
+        pointBackgroundColor: "#009444",
+        pointBorderColor: "#fff",
+        pointHoverBackgroundColor: "#fff",
+        pointHoverBorderColor: "#009444",
       },
     ],
   };
 
   const options = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        display: true,
+        position: "top",
+        labels: {
+          color: "#333",
+          font: {
+            size: 14,
+            family: "Arial, sans-serif",
+          },
+        },
+      },
+      tooltip: {
+        enabled: true,
+        backgroundColor: "rgba(74, 144, 226, 0.9)",
+        titleFont: {
+          size: 14,
+        },
+        bodyFont: {
+          size: 12,
+        },
+        borderWidth: 1,
+        borderColor: "#fff",
+      },
+    },
     scales: {
+      x: {
+        grid: {
+          display: false,
+        },
+        ticks: {
+          color: "#666",
+          font: {
+            size: 12,
+            family: "Arial, sans-serif",
+          },
+        },
+      },
       y: {
-        beginAtZero: true,
+        grid: {
+          color: "rgba(200, 200, 200, 0.2)",
+        },
+        ticks: {
+          color: "#666",
+          font: {
+            size: 12,
+            family: "Arial, sans-serif",
+          },
+          stepSize: 2000,
+        },
       },
     },
   };
@@ -236,7 +283,7 @@ const AllProduct = () => {
           <select
             name=""
             id=""
-            className="text-md  bg-white px-2 rounded py-2  border border-green-300 outline-none"
+            className="text-md  bg-white px-2 rounded py-2  border border-primary-500 outline-none"
           >
             <option value="">This Year</option>
             <option value="">Inhouse</option>
@@ -319,13 +366,15 @@ const AllProduct = () => {
               </div>
             </div>
           </div>
-          <div className="col-span-6  md:col-span-6">
-            {/* -------------------- */}
-            <div className="bg-white p-6 rounded-lg shadow-md h-full  flex flex-col gap-5">
-              <h2 className="text-xl font-semibold">Product Statistics</h2>
-              <Line data={graphdata} options={options} className="" />
-            </div>
-          </div>
+          <div className="col-span-6 md:col-span-6">
+      {/* -------------------- */}
+      <div className="bg-white p-6 rounded-lg shadow-lg h-full flex flex-col gap-5">
+        <h2 className="text-2xl font-bold text-gray-800">Product Statistics</h2>
+        <div className="relative h-80 md:h-96">
+          <Line data={graphdata} options={options} />
+        </div>
+      </div>
+    </div>
         </div>
       </div>{" "}
       {/* //////////// */}

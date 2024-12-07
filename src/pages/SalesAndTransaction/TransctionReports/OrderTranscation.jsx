@@ -1,48 +1,68 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
 import { Chart, registerables } from "chart.js";
+import { FaDownload, FaSearch } from "react-icons/fa"; // If you need this icon for export
+import ExportButton from "../../../../src/components/ActionButton/Export"; // Importing the export button
+
 Chart.register(...registerables);
-import {
-  FaSearch,
-  FaDownload,
-  FaChevronDown,
-  FaEye,
-  FaEdit,
-  FaTrashAlt,
-} from "react-icons/fa";
-import { IoMdDownload } from "react-icons/io";
-import ExportButton from "../../../../src/components/ActionButton/Export";
+
 const OrderTranscation = () => {
   const graphdata = {
     labels: [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
+      "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
     ],
     datasets: [
       {
         label: "Earnings",
         data: [0, 0, 0, 0, 55000, 0, 0, 0, 0, 0, 0, 0],
         backgroundColor: "rgba(54, 162, 235, 0.2)",
-        borderColor: "#A1CB46",
+        borderColor: "#009444",
         borderWidth: 4,
+        pointBackgroundColor: "#009444",
+        pointBorderColor: "#fff",
+        pointRadius: 6, // Larger points for visibility
+        pointHoverRadius: 8, // On hover
+        tension: 0.4, // Smooth line
       },
     ],
   };
 
   const options = {
+    responsive: true,
+    maintainAspectRatio: false,
     scales: {
       y: {
         beginAtZero: true,
+        ticks: {
+          callback: function (value) {
+            return `PKR ${value}`; // Format Y-axis ticks as currency
+          },
+        },
+      },
+    },
+    plugins: {
+      tooltip: {
+        callbacks: {
+          label: function (context) {
+            let label = context.dataset.label || "";
+            if (label) {
+              label += ": ";
+            }
+            label += `PKR ${context.raw}`;
+            return label;
+          },
+        },
+      },
+      legend: {
+        position: "top",
+        labels: {
+          boxWidth: 20, // Size of the legend icon box
+          padding: 10, // Padding between the label and the box
+          font: {
+            weight: "bold",
+            size: 14, // Font size for legend
+          },
+        },
       },
     },
   };
@@ -311,7 +331,7 @@ const OrderTranscation = () => {
                 In House
               </span>
             </div> */}
-                <div className="text-green-500 text-center text-[1rem] font-semibold">
+                <div className="text-primary-500 text-center text-[1rem] font-semibold">
                   0 <br />{" "}
                   <span className="text-gray-400 text-[.7rem]">
                     {" "}
@@ -359,20 +379,25 @@ const OrderTranscation = () => {
               </div>
             </div>
           </div>
-          <div className="col-span-4  md:col-span-4">
-            {/* -------------------- */}
-            <div className="bg-white p-6 rounded-lg shadow-md h-full  flex flex-col gap-5">
-              <h2 className="text-xl font-semibold">Order Statistics</h2>
-              <Line data={graphdata} options={options} className="" />
-            </div>
-          </div>
+          <div className="col-span-4 md:col-span-4">
+      <div className="bg-white p-6 rounded-lg shadow-md h-full flex flex-col gap-5">
+        <div className="flex justify-between items-center">
+          <h2 className="text-xl font-semibold">Order Statistics</h2>
+          {/* Export Button (or any other custom action buttons) */}
+        </div>
+
+        <div className="relative h-96 ">
+          <Line data={graphdata} options={options} />
+        </div>
+      </div>
+    </div>
           <div className="col-span-3 md:col-span-3">
             {/* -------------------------------
              */}
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h2 className="text-xl font-semibold">Payment Statistics</h2>
               <div className="flex justify-center mt-4">
-                <div className="w-32 h-32 bg-blue-500 rounded-full relative">
+                <div className="w-32 h-32 bg-primary-500 rounded-full relative">
                   <div className="absolute inset-0 flex items-center justify-center text-white text-2xl font-bold">
                     0.00
                   </div>

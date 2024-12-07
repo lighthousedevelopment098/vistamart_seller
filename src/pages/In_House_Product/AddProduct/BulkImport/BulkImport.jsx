@@ -128,7 +128,7 @@ const BulkImport = () => {
                   </button>
                   <button
                     type="submit"
-                    className="rounded-md px-4 btn   bg-primary text-white hover:bg-primary-dark border "
+                    className="rounded-md px-4 btn   bg-primary-500 text-white hover:bg-primary-dark-500 border "
                     style={{color:"white"}}
                   >
                     Submit

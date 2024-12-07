@@ -163,7 +163,7 @@ const WithdrawRequest = () => {
                       <input
                         type="search"
                         name="searchValue"
-                        className="form-control"
+                        className="form-control outline-none hover:border-primary-500"
                         placeholder="Search by Product Name"
                         value={filters.searchValue}
                         onChange={handleInputChange}
@@ -236,7 +236,7 @@ const WithdrawRequest = () => {
                     <td className="px-4 py-2 text-center font-semibold">
                       ${product.priority}
                     </td>
-                    <td className="px-4 py-2 text-center font-semibold text-green-500">
+                    <td className="px-4 py-2 text-center font-semibold text-primary-500">
                       {product.img}
                     </td>
                     <td className="px-4 py-2 text-center">

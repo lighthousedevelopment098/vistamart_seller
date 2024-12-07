@@ -1,46 +1,100 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
 import { Chart, registerables } from "chart.js";
+import { FaDownload, FaSearch } from "react-icons/fa";
 Chart.register(...registerables);
-import {
-  FaSearch,
-  FaDownload,
-  FaChevronDown,
-  FaEye,
-  FaEdit,
-  FaTrashAlt,
-} from "react-icons/fa";
+
 const OrderReports = () => {
   const graphdata = {
     labels: [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
+      "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
     ],
     datasets: [
       {
-        label: "Earnings",
+        label: "Monthly Earnings",
         data: [0, 0, 0, 0, 55000, 0, 0, 0, 0, 0, 0, 0],
         backgroundColor: "rgba(54, 162, 235, 0.2)",
-        borderColor: "#A1CB46",
-        borderWidth: 4,
+        borderColor: "#009444",
+        borderWidth: 3,
+        pointBackgroundColor: "#009444",
+        pointBorderColor: "#fff",
+        pointRadius: 5,
+        pointHoverRadius: 7,
+        tension: 0.4, // Smooth curve
       },
     ],
   };
 
   const options = {
+    responsive: true,
+    maintainAspectRatio: false,
     scales: {
+      x: {
+        grid: {
+          display: false,
+        },
+        ticks: {
+          color: "#666",
+          font: {
+            size: 12,
+            family: "Arial, sans-serif",
+          },
+        },
+      },
       y: {
         beginAtZero: true,
+        grid: {
+          color: "rgba(200, 200, 200, 0.2)",
+        },
+        ticks: {
+          callback: function (value) {
+            return `PKR ${value}`;
+          },
+          color: "#666",
+          font: {
+            size: 12,
+            family: "Arial, sans-serif",
+          },
+          stepSize: 10000,
+        },
+      },
+    },
+    plugins: {
+      tooltip: {
+        enabled: true,
+        backgroundColor: "rgba(0, 148, 68, 0.9)",
+        titleFont: {
+          size: 14,
+        },
+        bodyFont: {
+          size: 12,
+        },
+        borderWidth: 1,
+        borderColor: "#fff",
+        callbacks: {
+          label: function (context) {
+            let label = context.dataset.label || "";
+            if (label) {
+              label += ": ";
+            }
+            label += `PKR ${context.raw}`;
+            return label;
+          },
+        },
+      },
+      legend: {
+        display: true,
+        position: "top",
+        labels: {
+          boxWidth: 20,
+          padding: 10,
+          font: {
+            size: 14,
+            family: "Arial, sans-serif",
+            weight: "bold",
+          },
+          color: "#333",
+        },
       },
     },
   };
@@ -267,20 +321,23 @@ const OrderReports = () => {
               </div>
             </div>
           </div>
-          <div className="col-span-4  md:col-span-4">
-            {/* -------------------- */}
-            <div className="bg-white p-6 rounded-lg shadow-md h-full  flex flex-col gap-5">
-              <h2 className="text-xl font-semibold">Earning Statistics</h2>
-              <Line data={graphdata} options={options} className="" />
-            </div>
-          </div>
+          <div className="col-span-4 md:col-span-4">
+      <div className="bg-white p-6 rounded-lg shadow-lg h-full flex flex-col gap-5">
+        <div className="flex justify-between items-center">
+          <h2 className="text-2xl font-bold text-gray-800">Earning Statistics</h2>
+        </div>
+        <div className="relative h-80 md:h-96">
+          <Line data={graphdata} options={options} />
+        </div>
+      </div>
+    </div>
           <div className="col-span-3 md:col-span-3">
             {/* -------------------------------
              */}
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h2 className="text-xl font-semibold">Payment Statistics</h2>
               <div className="flex justify-center mt-4">
-                <div className="w-32 h-32 bg-blue-500 rounded-full relative">
+                <div className="w-32 h-32 bg-primary-500 rounded-full relative">
                   <div className="absolute inset-0 flex items-center justify-center text-white text-2xl font-bold">
                     0.00
                   </div>
