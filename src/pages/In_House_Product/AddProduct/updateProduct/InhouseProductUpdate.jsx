@@ -268,7 +268,7 @@ const handleSubmit = async (e) => {
       <div className="flex justify-end m-5">
         <button
           type="submit"
-          className="btn mt-3 flex justify-end btn-submit bg-primary hover:bg-primary-dark outline-none"
+          className="btn mt-3 flex justify-end btn-submit bg-primary-500 hover:bg-primary-dark-500 outline-none"
           style={{ color: "white"}}
         >
           Update Product

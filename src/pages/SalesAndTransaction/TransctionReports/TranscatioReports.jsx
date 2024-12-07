@@ -28,7 +28,7 @@ const TranscatioReports = () => {
           <li
             className={`${
               activeSection === "ordertranscation"
-                ? "active border-b-2 border-primary-500 text-primary-500"
+                ? "active border-b-2 border-primary-500 "
                 : ""
             }`}
           >

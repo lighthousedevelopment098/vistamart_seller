@@ -330,11 +330,11 @@ const InhouseProductBtn = () => {
                 <div class="border p-3 mobile-w-100 w-170">
                     <div class="d-flex flex-column mb-1">
                         <h6 class="font-weight-normal text-capitalize">Total sold :</h6>
-                        <h3 class="text-primary fs-18">3</h3>
+                        <h3 class="text-primary-500 fs-18">3</h3>
                     </div>
                     <div class="d-flex flex-column">
                         <h6 class="font-weight-normal text-capitalize">Total sold amount :</h6>
-                        <h3 class="text-primary fs-18"> $1,764.00 </h3>
+                        <h3 class="text-primary-500 fs-18"> $1,764.00 </h3>
                     </div>
                 </div>
                 <div class="row gy-3 flex-grow-1">
@@ -423,7 +423,7 @@ const InhouseProductBtn = () => {
                     <div>
                         <h6 class="mb-3 text-capitalize"> youtube Video link </h6>
                     </div>
-                    <a href="" target="_blank" class="text-primary "> https://www.youtube.com/embed/0sus46BflpU </a>
+                    <a href="" target="_blank" class="text-primary-500 "> https://www.youtube.com/embed/0sus46BflpU </a>
                 </div>
             </div>
         </div>

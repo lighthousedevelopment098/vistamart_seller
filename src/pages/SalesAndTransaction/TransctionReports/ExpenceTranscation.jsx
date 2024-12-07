@@ -33,7 +33,7 @@ const ExpenceTranscation = () => {
         label: "Earnings",
         data: [0, 0, 0, 0, 55000, 0, 0, 0, 0, 0, 0, 0],
         backgroundColor: "rgba(54, 162, 235, 0.2)",
-        borderColor: "#A1CB46",
+        borderColor: "#009444",
         borderWidth: 4,
       },
     ],
@@ -150,13 +150,20 @@ const ExpenceTranscation = () => {
               </div>
             </div>
           </div>
-          <div className="col-span-4  md:col-span-6">
-            {/* -------------------- */}
-            <div className="bg-white p-6 rounded-lg shadow-md h-full  flex flex-col gap-5">
-              <h2 className="text-xl font-semibold">Order Statistics</h2>
-              <Line data={graphdata} options={options} className="" />
-            </div>
-          </div>
+          <div className="col-span-4 md:col-span-6">
+  {/* -------------------- */}
+  <div className="bg-white p-6 rounded-lg shadow-md h-full flex flex-col gap-5">
+    <h2 className="text-xl font-semibold">Order Statistics</h2>
+    {/* Scrollable container for the chart */}
+    <div className="w-40 md:w-80 md:overflow-x-scroll lg:w-full overflow-x-scroll lg:overflow-x-hidden scroll-smooth">
+      {/* Chart container */}
+      <div className="min-w-[600px] sm:min-w-[700px] md:min-w-[500px] h-64 sm:h-72 md:h-96">
+        <Line data={graphdata} options={options} />
+      </div>
+    </div>
+  </div>
+</div>
+
           {/* <div className="col-span-3 md:col-span-3">
            
             <div className="bg-white p-6 rounded-lg shadow-md">
