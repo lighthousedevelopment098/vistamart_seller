@@ -103,6 +103,8 @@ const ProductAdditional = ({ formData = {}, handleChange }) => {
             value={formData.discountType}
             onChange={handleChange}
             options={[
+              { value: "", label: "No Discount" },
+        
               { value: "percent", label: "Percentage" },
               { value: "flat", label: "Flat Amount" },
             ]}

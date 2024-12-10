@@ -136,9 +136,8 @@ const LoginPage = ({ setIsLoggedIn }) => {
           ></div> */}
           <button
             type="submit"
-            className={`btn btn-block p-3 rounded bg-primary hover:bg-green-200 hover:text-black text-white font-semibold mt-0 ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
-
-            style={{color:"white"}}
+            className={`btn btn-block p-3 rounded bg-primary-500 hover:bg-primary-dark-500 hover:text-black text-white font-semibold mt-0 ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
+       style={{color:"white"}}
             disabled={loading}
           >
             {loading ? "Loading..." : "Login"}
@@ -146,7 +145,7 @@ const LoginPage = ({ setIsLoggedIn }) => {
           {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
         </form>
         <div className="text-center mt-4">
-  <Link to="/forgot-password" className="text-green-500 hover:underline">
+  <Link to="/forgot-password" className="bg-primary-5 hover:underline">
     Forgot Password?
   </Link>
 </div>
