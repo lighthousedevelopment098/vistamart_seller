@@ -31,12 +31,12 @@ const LoginPage = ({ setIsLoggedIn }) => {
           setIsLoggedIn(true); // Set logged in state to true
           navigate("/");
 
-          // Save email if "Remember Me" is checked
-          if (rememberMe) {
-            localStorage.setItem("rememberedEmail", email);
-          } else {
-            localStorage.removeItem("rememberedEmail");
-          }
+          // // Save email if "Remember Me" is checked
+          // if (rememberMe) {
+          //   localStorage.setItem("rememberedEmail", email);
+          // } else {
+          //   localStorage.removeItem("rememberedEmail");
+          // }
         } else {
           toast.error("Your account is not active. Please contact support.");
         }
@@ -55,14 +55,14 @@ const LoginPage = ({ setIsLoggedIn }) => {
     setRememberMe(e.target.checked);
   };
 
-  // Automatically populate email if it was remembered
-  useEffect(() => {
-    const rememberedEmail = localStorage.getItem("rememberedEmail");
-    if (rememberedEmail) {
-      setEmail(rememberedEmail);
-      setRememberMe(true);
-    }
-  }, []);
+  // // Automatically populate email if it was remembered
+  // useEffect(() => {
+  //   const rememberedEmail = localStorage.getItem("rememberedEmail");
+  //   if (rememberedEmail) {
+  //     setEmail(rememberedEmail);
+  //     setRememberMe(true);
+  //   }
+  // }, []);
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4">
@@ -145,9 +145,11 @@ const LoginPage = ({ setIsLoggedIn }) => {
           {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
         </form>
         <div className="text-center mt-4">
-  <Link to="/forgot-password" className="bg-primary-5 hover:underline">
-    Forgot Password?
+  <Link to="/forgot-password" className=" hover:underline">
+    Forgot Password By Email?
   </Link>
+
+
 </div>
       </div>
     </div>

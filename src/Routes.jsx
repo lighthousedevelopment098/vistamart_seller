@@ -28,7 +28,6 @@ import VenderWalletMethod from "./pages/Vender/VenderWalletMethod/VenderWalletMe
 
 import RefundDetails from "./pages/Refound/Details/RefoundDetail/RefoundDetail";
 import GenerateBarcode from "./pages/In_House_Product/InHouseProductList/GeneratCode/GeneratCode";
-import InhouseProductBtn from "./pages/In_House_Product/InHouseProductList/InhouseProductbutton/ProductBtn";
 import LimitedStockProductsList from "./pages/In_House_Product/InHouseProductList/LimitedProduct/LimitedProduct";
 import ProductGallery from "./pages/Health_Support/Product_Gallery";
 import PageGallery from "./pages/Health_Support/Gallery";
@@ -117,10 +116,7 @@ function AllRoutes() {
                     path="/inhouseproductlistcode"
                     element={<GenerateBarcode />}
                   />
-                  <Route
-                    path="/inhouseproductlistproduct"
-                    element={<InhouseProductBtn />}
-                  />
+                
                   <Route path="/bulkimport" element={<BulkImport />} />
                   <Route path="/coupon" element={<CouponList />} />
                   {/* <Route path="/couponupdate" element={<CouponUpdate />} /> */}

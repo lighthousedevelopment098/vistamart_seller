@@ -104,7 +104,7 @@ const ProductAdditional = ({ formData = {}, handleChange }) => {
             onChange={handleChange}
             options={[
               { value: "", label: "No Discount" },
-        
+    
               { value: "percent", label: "Percentage" },
               { value: "flat", label: "Flat Amount" },
             ]}
@@ -192,6 +192,7 @@ const ProductAdditional = ({ formData = {}, handleChange }) => {
 };
 
 export default ProductAdditional;
+
 
 
 // import { useEffect } from "react";

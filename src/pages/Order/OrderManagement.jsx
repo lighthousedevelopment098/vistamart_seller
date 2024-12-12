@@ -25,6 +25,7 @@ const OrderManagement = ({ status, title, vendorId }) => {
     loading,
     error,
   } = useSelector((state) => state.vendorOrder || {});
+  console.log("orders====", orders)
 
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -33,7 +34,7 @@ const OrderManagement = ({ status, title, vendorId }) => {
   console.log("vendor id======", vendorId);
   useEffect(() => {
     if (vendorId) {
-      dispatch(fetchOrder({ status, vendors: vendorId }));
+      dispatch(fetchOrder({ status, vendor: vendorId }));
     }
   }, [dispatch, status, vendorId]);
 

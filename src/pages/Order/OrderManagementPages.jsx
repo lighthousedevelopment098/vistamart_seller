@@ -6,7 +6,6 @@ import { getAuthData } from '../../utils/authHelper.js';
 const PendingOrders = () => {
   const { user } = getAuthData();
   const vendorId = user?._id || '';
-  // const vendorId = '6711f3802a9e60337009682c'; // Use user ID as vendor ID
   // console.log("vendor id ============", vendorId)
 
   return <OrderManagement status="pending" title="Pending" vendorId={vendorId} />;

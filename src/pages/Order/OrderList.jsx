@@ -261,14 +261,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchOrder, updateOrderStatus, deleteOrder } from '../../components/redux/orderSlice';
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
+import { getAuthData } from "../../utils/authHelper";
 
 const OrderList = () => {
+  const {token, user} = getAuthData();
+  const userId = user?._id
   const dispatch = useDispatch();
   const { orders = [], loading, error } = useSelector((state) => state.vendorOrder || {});
 
   // Fetch all orders without search or filter parameters
   useEffect(() => {
-    dispatch(fetchOrder());
+    dispatch(fetchOrder({
+      vendor: userId
+    }));
   }, [dispatch]);
 
   
