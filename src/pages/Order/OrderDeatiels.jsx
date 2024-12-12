@@ -12,6 +12,8 @@ import { updateOrderStatus, fetchOrderById }
   "../../components/redux/orderSlice";
 import LoadingSpinner from "../../components/LoodingSpinner/LoadingSpinner";
 import apiConfig from "../../components/config/apiConfig";
+import { getAuthData } from "../../utils/authHelper";
+import axios from "axios";
 
 const OrderDetails = () => {
   const { id } = useParams(); // Get the order ID from URL parameters
@@ -20,23 +22,104 @@ const OrderDetails = () => {
   const { orders, status, error } = useSelector((state) => state.vendorOrder);
   const navigate = useNavigate(); // Initialize useNavigate hook
 
-    // console.log("order in component ------", orders)
-  const [showModal, setShowModal] = useState(false);
   const [paymentStatus, setPaymentStatus] = useState(true);
   const fallbackImage = "/image-place-holder.png"; // Replace with the path to your fallback image
-  
+  const [showModal, setShowModal] = useState(false);
+  const [weight, setWeight] = useState("");
+  const [pickupDate, setPickupDate] = useState("");
+  const [pickupId, setPickupId] = useState(null); // State to store Pickup ID
+
+  const {token, user} = getAuthData();
   useEffect(() => {
     dispatch(fetchOrderById(id)); // Fetch order details via Redux
   }, [dispatch, id]);
 
-  useEffect(() => {
-    console.log('Order details:', orders); // Check if order data is populated
-  }, [orders]);
+
   const printInvoice = () => {
     window.print();
   };
 
+  useEffect(() => {
+    const fetchPickupId = async () => {
+      try {
+        const response = await axios.get(
+          `${apiConfig.seller}/shippingInfo?vendorId=${user?._id}`,
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+  
+        // Access the first item in the `doc` array to get `pickingAddressId`
+        const pickingAddressId = response.data.doc?.[0]?.pickingAddressId || null;
+  
+        setPickupId(pickingAddressId);
+      } catch (err) {
+        console.error("Failed to fetch Pickup ID:", err.response || err.message);
+      }
+    };
+  
+    fetchPickupId();
+  }, [token, user?._id]);
+  
+  console.log("pickup ", pickupId)
+  const handleBookShipping = async () => {
+    const payload = {
+      service_type_id: 1,
+      pickup_address_id: pickupId,
+      information_display: 0,
+      consignee_city_id: order?.shippingAddress?.cityId,
+      consignee_name: order?.customer?.firstName,
+      consignee_address: order?.shippingAddress?.address,
+      consignee_phone_number_1: order?.customer?.phoneNumber,
+      consignee_email_address: order?.customer?.email,
+      order_id: order?.orderId, // Dynamic Order ID
+      item_product_type_id: 12, // category id 
+      item_description: "One black t-shirt medium",
+      item_quantity: order?.totalQty,
+      item_insurance: 0,
+      item_price: order?.totalAmount,
+      pickup_date: pickupDate, // Pickup Date from Form
+      special_instructions: "Please call before delivery",
+      estimated_weight: parseFloat(weight), // Weight from Form
+      shipping_mode_id: 1,
+      same_day_timing_id: 1,
+      amount: order?.totalAmount,
+      payment_mode_id: 1,
+      charges_mode_id: 4,
+      open_shipment: 0,
+      pieces_quantity: 1,
+      shipper_reference_number_1: "Abdullah 1122",
+    };  
+    try {
+      console.log("Data to be submitted:", payload);
+      const response = await fetch("http://app.sonic.pk/api/shipment/book", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: import.meta.env.VITE_API_KEY,
+        },
+        body: JSON.stringify(payload),
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Shipping data:", data);
+  
+        
+        const trackingId = data.tracking_number;
+        console.log("Tracking ID:", trackingId);
 
+        await dispatch(updateOrder({ orderId: order?._id, trackingId })).unwrap();
+  
+        toast.success(`Shipping booked successfully! Tracking Number: ${data.tracking_number}`);
+        setShowModal(false); // Close modal
+      } else {
+        toast.error("Failed to book shipping. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error occurred while booking shipping:", error);
+      toast.error("An error occurred while booking shipping.");
+    }
+  };
+  
 
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
@@ -89,9 +172,7 @@ const OrderDetails = () => {
     return <div>Error fetching orders details: {error}</div>;
   }
  // Find the specific order based on the ID
- // Find the specific order based on the ID
  const Orders = orders.find((order) => order?._id === id);
- console.log("orderdtail====", Orders)
  // Check if orders exists
   if (!orders) {
     return <div>No orders details found.</div>;
@@ -107,7 +188,6 @@ const OrderDetails = () => {
     shippingAddress,
     billingAddress,
   } = Orders;
-  // console.log("order status ====", Orders.orderStatus)
   return (
     <>
       <div className="bg-[#F9F9FB] w-full px-10 py-8">
@@ -132,27 +212,34 @@ const OrderDetails = () => {
               </div>
               <div className="flex items-center gap-2">
                 <div>
-                  <Button variant="primary" onClick={handleShow}>
-                    Show Product
+                  <Button  className="bg-primary-500 text-white hover:bg-primary-dark-500" onClick={handleShow}>
+                  Book Shipping
                   </Button>
                 </div>
-                <button
+                {/* <button
                   className="borders rounded px-3 py-2  bg-primary flex items-center gap-2 text-white hover:bg-primary-dark"
                   onClick={printInvoice}
                   style={{ color: "white" }}
                 >
                   <IoIosPrint className="text-white" /> Print Invoice
-                </button>
+                </button> */}
               </div>
             </div>
             <div className="text-end pt-2">
-              <h1>
+              {/* <h1>
                 Status :
                 <span
-                  className={`bg-green-100 font-bold p-1 rounded border text-primary`}
+                  className={`bg-primary-500 font-bold p-1 rounded border text-primary mb-3`}
                 >
-                  {/* {console.log("orderStatus====", orderStatus)} */}
                   {status}
+                </span>
+              </h1> */}
+              <h1 className="bg-secondary-500">
+              Tracking Id :
+                <span
+                  className={`bg-secondary-500 font-bold p-1 rounded border text-primary-500 mt-3 mb-2`}
+                >
+                  {order?.trackingId || "0"}
                 </span>
               </h1>
               <h1 className="pt-3 text-md">
@@ -409,6 +496,43 @@ const OrderDetails = () => {
           </div>
         </div>
       </div>
+
+      {showModal && (
+        <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
+          <div className="bg-white rounded-lg p-6 w-96">
+            <h2 className="text-lg font-bold mb-4">Book Shipping</h2>
+            <label className="block mb-2 text-sm font-medium">Weight (Grams)</label>
+            <input
+              type="number"
+              value={weight}
+              onChange={(e) => setWeight(e.target.value)}
+              className="w-full border rounded px-3 py-2 mb-4"
+              placeholder="Enter weight in Gram"
+            />
+            <label className="block mb-2 text-sm font-medium">Pickup Date</label>
+            <input
+              type="date"
+              value={pickupDate}
+              onChange={(e) => setPickupDate(e.target.value)}
+              className="w-full border rounded px-3 py-2 mb-4"
+            />
+            <div className="flex justify-end gap-3">
+              <button
+                onClick={handleClose}
+                className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleBookShipping}
+                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+              >
+                Submit
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };

@@ -68,6 +68,7 @@ import OrderReports from "./pages/SalesAndTransaction/OrderReports/OrderReports.
 import CouponList from "./pages/Coupon/couponList.jsx";
 import UpdateVendor from "./pages/Shop/UpdateVendor.jsx";
 import InhouseProductUpdate from "./pages/In_House_Product/AddProduct/updateProduct/InhouseProductUpdate.jsx";
+import AddPickupAddress from "./components/SonicShipping/AddPickupAddress.jsx";
 
 
 function AllRoutes() {
@@ -84,6 +85,7 @@ function AllRoutes() {
                     element={<VendorNewRequestProductPage />}
                   />
                   <Route path="/venderupdate" element={<VendorPendingProductPage />} />
+                  <Route path="/addpickupaddress" element={<AddPickupAddress />} />
                   <Route
                     path="/approvedproductlist"
                     element={<VendorApprovedProductPage />}
