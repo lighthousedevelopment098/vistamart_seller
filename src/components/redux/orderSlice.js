@@ -101,7 +101,6 @@ export const deleteOrder = createAsyncThunk(
   }
 );
 
-
 // Async thunk to update an order
 export const updateOrder = createAsyncThunk(
   'vendorOrder/updateOrder',
@@ -110,7 +109,7 @@ export const updateOrder = createAsyncThunk(
       const { token } = getAuthData();
 
       const response = await axiosInstance.put(
-        `${API_URL}/track-id/${orderId}`,
+        `${API_URL}/${orderId}`,
         { trackingId: trackingId },
         {
           headers: {

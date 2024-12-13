@@ -7,7 +7,7 @@ import { MdEdit } from "react-icons/md";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { updateOrderStatus, fetchOrderById }
+import { updateOrderStatus, fetchOrderById, updateOrder }
  from
   "../../components/redux/orderSlice";
 import LoadingSpinner from "../../components/LoodingSpinner/LoadingSpinner";
