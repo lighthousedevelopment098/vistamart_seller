@@ -18,7 +18,7 @@ const OrderList = () => {
     dispatch(fetchOrder({
       vendor: userId
     }));
-  }, [dispatch]);
+  }, [dispatch, vendor]);
 
   
   

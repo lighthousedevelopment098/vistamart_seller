@@ -7,7 +7,7 @@ import { MdEdit } from "react-icons/md";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { updateOrderStatus, fetchOrderById, updateOrder }
+import { updateOrderStatus, fetchOrderById }
  from
   "../../components/redux/orderSlice";
 import LoadingSpinner from "../../components/LoodingSpinner/LoadingSpinner";
@@ -68,7 +68,7 @@ const OrderDetails = () => {
       consignee_city_id: order?.shippingAddress?.cityId,
       consignee_name: order?.customer?.firstName,
       consignee_address: order?.shippingAddress?.address,
-      consignee_phone_number_1: order?.customer?.phoneNumber || "03455923423",
+      consignee_phone_number_1: order?.customer?.phoneNumber,
       consignee_email_address: order?.customer?.email,
       order_id: order?.orderId, // Dynamic Order ID
       item_product_type_id: 12, // category id 
@@ -188,6 +188,8 @@ const OrderDetails = () => {
     shippingAddress,
     billingAddress,
   } = Orders;
+
+  console.log("produc=====", products)
   return (
     <>
       <div className="bg-[#F9F9FB] w-full px-10 py-8">
@@ -286,54 +288,48 @@ const OrderDetails = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {products && products?.length > 0 ? (
-                      products?.map((item, index) => (
-                        <tr className="hover:bg-gray-100" key={item?._id}>
-                          <td className="px-4 py-2 text-center">{index + 1}</td>
-                          <td className="px-4 py-2 w-full">
-                            <div className="flex items-center whitespace-nowrap">
-                              <img
-                                src={
-                                  item?.thumbnail
-                                    ? `${apiConfig.bucket}/${item.thumbnail}`
-                                    : fallbackImage
-                                }
-                                alt={item?.name || "Product Image"}
-                                className="w-10 h-10 object-cover rounded mr-3"
-                                onError={(e) => (e.target.src = fallbackImage)} // Fallback image if load fails
-                              />
+                    
+                  {products && products?.length > 0 ? (
+  products?.map((item, index) => (
+    <tr className="hover:bg-gray-100" key={item?._id}>
+      <td className="px-4 py-2 text-center">{index + 1}</td>
+      <td className="px-4 py-2 w-full">
+        <div className="flex items-center whitespace-nowrap">
+          <img
+            src={
+              item?.productDetails?.thumbnail
+                ? `${apiConfig.bucket}/${item.productDetails.thumbnail}`
+                : fallbackImage
+            }
+            alt={item?.productDetails?.name || "Product Image"}
+            className="w-10 h-10 object-cover rounded mr-3"
+            onError={(e) => (e.target.src = fallbackImage)} // Fallback image if load fails
+          />
+          <div>
+            <div>{item?.productDetails?.name}</div>
+            <div>Qty: {item?.quantity}</div>
+            <div>
+              Unit price: PKR {item?.price} (Tax: {item?.taxAmount}%)
+            </div>
+          </div>
+        </div>
+      </td>
+      <td className="px-4 py-2 text-center">PKR {item?.price}</td>
+      <td className="px-4 py-2 text-center">PKR {item?.taxAmount}</td>
+      <td className="px-4 py-2 text-center">PKR {item?.discountAmount}</td>
+      <td className="px-4 py-2 text-center">
+        PKR {item?.price - item?.discountAmount + item?.taxAmount}
+      </td>
+    </tr>
+  ))
+) : (
+  <tr>
+    <td colSpan="6" className="text-center py-4">
+      No products available
+    </td>
+  </tr>
+)}
 
-                              <div>
-                                <div>{item?.name}</div>
-                                <div>Qty: {item?.quantity}</div>
-                                <div>
-                                  Unit price: PKR {item?.price} (Tax:{" "}
-                                  {item?.taxAmount}%)
-                                </div>
-                              </div>
-                            </div>
-                          </td>
-                          <td className="px-4 py-2 text-center">
-                            PKR {item?.price}
-                          </td>
-                          <td className="px-4 py-2 text-center">
-                            PKR {item?.taxAmount}
-                          </td>
-                          <td className="px-4 py-2 text-center">
-                            PKR {item?.discountAmount}
-                          </td>
-                          <td className="px-4 py-2 text-center">
-                            PKR {item?.price + item?.taxAmount}
-                          </td>
-                        </tr>
-                      ))
-                    ) : (
-                      <tr>
-                        <td colSpan="6" className="text-center py-4">
-                          No products available
-                        </td>
-                      </tr>
-                    )}
                   </tbody>
                 </table>
               </div>
