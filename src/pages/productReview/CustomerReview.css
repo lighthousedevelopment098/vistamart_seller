@@ -1,0 +1,60 @@
+/* Ensure modal is centered and displayed properly */
+.modal.show {
+    display: block;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  }
+  
+  .modal-dialog {
+    max-width: 400px;
+    margin: 1.75rem auto;
+  }
+  
+  .modal-content {
+    position: relative;
+    background-color: #fff;
+    border-radius: 0.3rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  }
+  
+  .modal-header {
+    padding: 1rem;
+    border-bottom: 1px solid #e9ecef;
+  }
+  
+  .modal-body {
+    position: relative;
+    padding: 1rem;
+
+  }
+  
+  .modal-footer {
+    padding: 1rem;
+    border-top: 1px solid #e9ecef;
+  }
+  
+  .close {
+    background: green;
+    border: none;
+    font-size: 1.5rem;
+    line-height: 1;
+    color: #fff;
+    opacity: 0.5;
+    cursor: pointer;
+  }
+  
+  .close:hover {
+    opacity: 0.75;
+  }
+  
+  .snipcss-R44ya .modal-body {
+    padding: 1.5rem;
+  }
+  
+  .snipcss-R44ya .modal-header {
+    border-bottom: none;
+  }
+  
+  .snipcss-R44ya .modal-content {
+    border-radius: 0.5rem;
+  }
+  

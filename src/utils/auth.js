@@ -1,0 +1,58 @@
+// // utils/auth.js
+// import { login } from '../components/redux/auth/authSlice';
+
+// export const checkAuth = (dispatch) => {
+//   const token = localStorage.getItem('token');
+//   const user = localStorage.getItem('user');
+//   if (token && user) {
+//     dispatch(login({ token, user: JSON.parse(user) }));
+//   }
+// };
+
+
+
+import { setAuthToken, checkAuth as checkAuthAction } from '../components/redux/auth/authSlice';
+
+export const checkAuth = (dispatch) => {
+  const token = localStorage.getItem('token');
+  const user = localStorage.getItem('user');
+
+  if (token && user) {
+    // Dispatch actions to set the token and user in Redux state
+    dispatch(setAuthToken(token));
+    dispatch(checkAuthAction(JSON.parse(user)));
+  }
+};
+
+
+
+
+// console.log('Loading jwt-decode...');
+// import {jwt_decode} from 'jwt-decode';
+// console.log('jwt_decode loaded:', jwt_decode); 
+
+// import { login, logout } from '../redux/slices/admin/authSlice';
+
+// export const checkAuth = (dispatch) => {
+//   const token = localStorage.getItem('token');
+//   const user = localStorage.getItem('user');
+
+//   if (token && user) {
+//     try {
+//       const decodedToken = jwt_decode(token);
+//       const currentTime = Date.now() / 1000; // Current time in seconds
+
+//       // If token is expired, log out the user
+//       if (decodedToken.exp < currentTime) {
+//         dispatch(logout());
+//         return;
+//       }
+
+//       // If token is valid, log the user in
+//       dispatch(login({ token, user: JSON.parse(user) }));
+//     } catch (error) {
+//       console.error('Token decoding failed:', error);
+//       dispatch(logout());
+//     }
+//   }
+// };
