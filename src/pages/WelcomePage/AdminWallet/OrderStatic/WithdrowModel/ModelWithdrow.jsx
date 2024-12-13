@@ -1,17 +1,18 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 import apiConfig from "../../../../../components/config/apiConfig";
 import { getAuthData } from "../../../../../utils/authHelper";
 
 const ApiUrl = apiConfig.transaction;
-
 const { user, token } = getAuthData();
-const id = user?._id;
+
 const ModelWithdrow = ({ onClose, withdrawableBalance }) => {
   const [cardType, setCardType] = useState("JazzCash");
   const [name, setName] = useState("");
   const [accountNumber, setAccountNumber] = useState("");
   const [amount, setAmount] = useState("");
+  const navigate = useNavigate();
 
   const MIN_WITHDRAWAL_AMOUNT = 500;
 
@@ -45,15 +46,12 @@ const ModelWithdrow = ({ onClose, withdrawableBalance }) => {
     };
 
     try {
-      console.log("width data ====",requestData )
       const response = await fetch(`${ApiUrl}/withdraws`, {
         method: "POST",
-      
-        headers: { 
+        headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`
-         },
-
+          Authorization: `Bearer ${token}`,
+        },
         body: JSON.stringify(requestData),
       });
 
@@ -61,7 +59,18 @@ const ModelWithdrow = ({ onClose, withdrawableBalance }) => {
         throw new Error("Failed to submit withdrawal request");
       }
 
-      Swal.fire("Success", "Withdrawal request submitted successfully!", "success");
+      Swal.fire({
+        title: "Success",
+        text: "Withdrawal request submitted successfully!",
+        icon: "success",
+        timer: 2000, // 2-second timer
+        showConfirmButton: false,
+      });
+
+      setTimeout(() => {
+        navigate("/withdraws"); // Navigate to /withdraw after 2 seconds
+      }, 2000);
+
       onClose(); // Close the modal
     } catch (error) {
       Swal.fire("Error", error.message, "error");

@@ -68,7 +68,7 @@ const OrderDetails = () => {
       consignee_city_id: order?.shippingAddress?.cityId,
       consignee_name: order?.customer?.firstName,
       consignee_address: order?.shippingAddress?.address,
-      consignee_phone_number_1: order?.customer?.phoneNumber,
+      consignee_phone_number_1: order?.customer?.phoneNumber || "03455923423",
       consignee_email_address: order?.customer?.email,
       order_id: order?.orderId, // Dynamic Order ID
       item_product_type_id: 12, // category id 
