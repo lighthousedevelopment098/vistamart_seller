@@ -109,7 +109,7 @@ const TableList = memo(
                 data={filteredData}
                 filename={exportFileName}
                 title="Export"
-                className="bg-primary text-white hover:bg-primary-dark px-4 py-2 rounded-md"
+                className="bg-primary-500 text-white hover:bg-primary-dark-500 px-4 py-2 rounded-md"
                 label="Export"
                 style={{color:"white"}}
               />

@@ -33,7 +33,7 @@ const ExpenceTranscation = () => {
         label: "Earnings",
         data: [0, 0, 0, 0, 55000, 0, 0, 0, 0, 0, 0, 0],
         backgroundColor: "rgba(54, 162, 235, 0.2)",
-        borderColor: "#A1CB46",
+        borderColor: "#009444",
         borderWidth: 4,
       },
     ],
@@ -95,7 +95,7 @@ const ExpenceTranscation = () => {
           </select>
           <div className="">
             <button
-              className="px-6  py-2 rounded border border-green-200 bg-primary hover:bg-primary-dark text-white"
+              className="px-6  py-2 rounded border border-green-200 bg-primary-500 hover:bg-primary-dark-500 text-white"
               style={{ color: "white" }}
             >
               Filter
@@ -150,13 +150,20 @@ const ExpenceTranscation = () => {
               </div>
             </div>
           </div>
-          <div className="col-span-4  md:col-span-6">
-            {/* -------------------- */}
-            <div className="bg-white p-6 rounded-lg shadow-md h-full  flex flex-col gap-5">
-              <h2 className="text-xl font-semibold">Order Statistics</h2>
-              <Line data={graphdata} options={options} className="" />
-            </div>
-          </div>
+          <div className="col-span-4 md:col-span-6">
+  {/* -------------------- */}
+  <div className="bg-white p-6 rounded-lg shadow-md h-full flex flex-col gap-5">
+    <h2 className="text-xl font-semibold">Order Statistics</h2>
+    {/* Scrollable container for the chart */}
+    <div className="w-40 md:w-80 md:overflow-x-scroll lg:w-full overflow-x-scroll lg:overflow-x-hidden scroll-smooth">
+      {/* Chart container */}
+      <div className="min-w-[600px] sm:min-w-[700px] md:min-w-[500px] h-64 sm:h-72 md:h-96">
+        <Line data={graphdata} options={options} />
+      </div>
+    </div>
+  </div>
+</div>
+
           {/* <div className="col-span-3 md:col-span-3">
            
             <div className="bg-white p-6 rounded-lg shadow-md">
@@ -213,7 +220,7 @@ const ExpenceTranscation = () => {
                   />
                   <button
                     type="submit"
-                    className="btn bg-primary hover:bg-primary-dark"
+                    className="btn bg-primary-500 hover:bg-primary-dark-500"
                     style={{ color: "white" }}
                   >
                     Search
@@ -238,7 +245,7 @@ const ExpenceTranscation = () => {
                 filename="ExpenceTranscation" // Optional filename for the exported file
                 icon={FaDownload} // Icon for the button
                 label="Export " // Button label
-                className="bg-primary text-white hover:bg-primary-dark w-40 " // Tailwind classes for styling
+                className="bg-primary-500 text-white hover:bg-primary-dark-500 w-40 " // Tailwind classes for styling
                 style={{ color: "white" }} // Optional inline styles
               />
             </div>
@@ -281,7 +288,7 @@ const ExpenceTranscation = () => {
                     </div>
                   </td>
 
-                  <td className="   text-green-500 ">
+                  <td className="   text-primary-500 ">
                     <IoMdDownload />
                   </td>
                 </tr>

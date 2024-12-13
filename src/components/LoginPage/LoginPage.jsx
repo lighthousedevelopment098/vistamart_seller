@@ -31,12 +31,12 @@ const LoginPage = ({ setIsLoggedIn }) => {
           setIsLoggedIn(true); // Set logged in state to true
           navigate("/");
 
-          // Save email if "Remember Me" is checked
-          if (rememberMe) {
-            localStorage.setItem("rememberedEmail", email);
-          } else {
-            localStorage.removeItem("rememberedEmail");
-          }
+          // // Save email if "Remember Me" is checked
+          // if (rememberMe) {
+          //   localStorage.setItem("rememberedEmail", email);
+          // } else {
+          //   localStorage.removeItem("rememberedEmail");
+          // }
         } else {
           toast.error("Your account is not active. Please contact support.");
         }
@@ -48,18 +48,21 @@ const LoginPage = ({ setIsLoggedIn }) => {
     }
   };
 
+
+  
+  
   const handleRememberMeChange = (e) => {
     setRememberMe(e.target.checked);
   };
 
-  // Automatically populate email if it was remembered
-  useEffect(() => {
-    const rememberedEmail = localStorage.getItem("rememberedEmail");
-    if (rememberedEmail) {
-      setEmail(rememberedEmail);
-      setRememberMe(true);
-    }
-  }, []);
+  // // Automatically populate email if it was remembered
+  // useEffect(() => {
+  //   const rememberedEmail = localStorage.getItem("rememberedEmail");
+  //   if (rememberedEmail) {
+  //     setEmail(rememberedEmail);
+  //     setRememberMe(true);
+  //   }
+  // }, []);
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4">
@@ -76,7 +79,7 @@ const LoginPage = ({ setIsLoggedIn }) => {
             </label>
             <input
               type="email"
-              className="form-control form-control-lg mb-4 p-3 rounded border border-gray-300 w-full"
+              className="form-control form-control-lg mb-4 p-3 rounded border border-gray-300 w-full outline-none hover:border-primary"
               id="email"
               placeholder="Email"
               required
@@ -92,7 +95,7 @@ const LoginPage = ({ setIsLoggedIn }) => {
             <div className="relative">
               <input
                 type={showPassword ? "text" : "password"}
-                className="form-control form-control-lg mb-4 p-3 rounded border border-gray-300 w-full"
+                className="form-control form-control-lg mb-4 p-3 rounded border border-gray-300 w-full outline-none"
                 id="password"
                 placeholder="Password"
                 required
@@ -112,7 +115,7 @@ const LoginPage = ({ setIsLoggedIn }) => {
             <div className="custom-control custom-checkbox flex items-center justify-center gap-1">
               <input
                 type="checkbox"
-                className="custom-control-input"
+                className="custom-control-input outline-none hover:border-primary"
                 id="rememberMe"
                 name="remember"
                 checked={rememberMe}
@@ -133,9 +136,8 @@ const LoginPage = ({ setIsLoggedIn }) => {
           ></div> */}
           <button
             type="submit"
-            className={`btn btn-block p-3 rounded bg-primary hover:bg-green-200 hover:text-black text-white font-semibold mt-0 ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
-
-            style={{color:"white"}}
+            className={`btn btn-block p-3 rounded bg-primary-500 hover:bg-primary-dark-500 hover:text-black text-white font-semibold mt-0 ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
+       style={{color:"white"}}
             disabled={loading}
           >
             {loading ? "Loading..." : "Login"}
@@ -143,9 +145,11 @@ const LoginPage = ({ setIsLoggedIn }) => {
           {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
         </form>
         <div className="text-center mt-4">
-  <Link to="/forgot-password" className="text-green-500 hover:underline">
-    Forgot Password?
+  <Link to="/forgot-password" className=" hover:underline">
+    Forgot Password By Email?
   </Link>
+
+
 </div>
       </div>
     </div>

@@ -9,6 +9,7 @@ import TopProductSection from "./ProductAdmin/ProductAdmin";
 import { IoDiamond } from "react-icons/io5";
 import { Link } from "react-router-dom";
 
+
 const WelcomePage = () => {
   return (
     <>
@@ -22,7 +23,7 @@ const WelcomePage = () => {
             </p>
           </div>
           <Link to={"/inhouseproductlist"}>
-            <button className="btn px-3 py-2 bg-primary text-white font-semibold flex items-center gap-2 hover:bg-primary-dark">
+            <button className="btn px-3 py-2 bg-primary-500 text-white font-semibold flex items-center gap-2 hover:bg-primary-dark-500">
               <IoDiamond className="text-white" />{" "}
               <h2 className="text-white">Products</h2>
             </button>

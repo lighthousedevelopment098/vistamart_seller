@@ -249,6 +249,8 @@ import { getAuthData } from "../../../../utils/authHelper";
 import apiConfig from "../../../config/apiConfig";
 import ActionButton from "../../../ActionButton/Action";
 
+
+
 const ProfileInformation = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -256,7 +258,12 @@ const ProfileInformation = () => {
     currentPassword: "",
     newPassword: "",
   });
-
+ 
+  const validatePassword = (password) => {
+    const passwordRegex =
+      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    return passwordRegex.test(password);
+  };
   const passwordSectionRef = useRef(null);
   const { user, token } = getAuthData();
 
@@ -266,13 +273,26 @@ const ProfileInformation = () => {
     }
   };
 
+ 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setPasswords((prevState) => ({ ...prevState, [name]: value }));
+
+   
   };
+ 
+
 
   const handlePasswordUpdate = async (e) => {
     e.preventDefault();
+  
+    if (!validatePassword(passwords.newPassword)) {
+      toast.error(
+        "New password must start with a capital letter, contain at least one special character, and be at least 8 characters long."
+      );
+      return;
+    }
+  
     try {
       const response = await axios.put(
         `${apiConfig.seller}/vendors/update-password`,
@@ -287,19 +307,19 @@ const ProfileInformation = () => {
           },
         }
       );
-      alert("Password updated successfully! please logout and then login");
-
+  
       toast.success("Password updated successfully!");
       setPasswords({ currentPassword: "", newPassword: "" });
-      
+  
       // Clear token and user data from localStorage
       localStorage.removeItem("token");
       localStorage.removeItem("user");
     } catch (error) {
       console.error("Error updating password:", error);
-      toast.error("Failed to update password. Please try again.");
+      toast.error("current password is incorrect. Please try again.");
     }
   };
+  
 
   return (
     <div>
@@ -309,7 +329,7 @@ const ProfileInformation = () => {
           <IoPerson className="text-2xl font-semibold" />
           <h1 className="font-bold text-xl">Profile Information</h1>
         </div>
-        <div className="px-3 py-2 rounded bg-primary hover:bg-primary-dark text-white">
+        <div className="px-3 py-2 rounded bg-primary-500 hover:bg-primary-dark-500 text-white">
           <Link to="/" className="flex gap-2 items-center">
             <IoHomeSharp className="font-semibold text-white" />
             <h1 className="font-semibold text-white">Dashboard</h1>
@@ -412,54 +432,57 @@ const ProfileInformation = () => {
           >
             <div className="flex items-center gap-3">
               <IoIosLock className="font-bold text-xl" />
-              <h1 className="font-semibold">Change Password</h1>
+              <h1 className="font-semibold" >Change Password</h1>
             </div>
             <form
               onSubmit={handlePasswordUpdate}
-              className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-5"
+              className=" "
             >
-              <div className="relative">
-                <label>New Password</label>
-                <input
-                  type={showPassword ? "text" : "password"}
-                  name="newPassword"
-                  value={passwords.newPassword}
-                  onChange={handleInputChange}
-                  className="border px-3 py-2 rounded w-full outline-none"
-                  placeholder="Enter new password"
-                  required
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-9 text-gray-500"
-                >
-                  {/* {showPassword ? <FaRegEyeSlash /> : <FaEye />} */}
-                </button>
-              </div>
-              <div className="relative">
-                <label>Current Password</label>
-                <input
-                  type={showConfirmPassword ? "text" : "password"}
-                  name="currentPassword"
-                  value={passwords.currentPassword}
-                  onChange={handleInputChange}
-                  className="border px-3 py-2 rounded w-full outline-none"
-                  placeholder="Enter current password"
-                  required
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  className="absolute right-3 top-9 text-gray-500"
-                >
-                  {/* {showConfirmPassword ? <FaRegEyeSlash /> : <FaEye />} */}
-                </button>
-              </div>
+           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 items-center  ">
+      <div className="relative">
+        <label>New Password</label>
+        <input
+          type={showPassword ? "text" : "password"}
+          name="newPassword"
+          value={passwords.newPassword}
+          onChange={handleInputChange}
+          className="border px-3 py-2 rounded w-full outline-none "
+          placeholder="Enter new password"
+          required
+        />
+        <button
+          type="button"
+          onClick={() => setShowPassword(!showPassword)}
+          className="absolute right-3 top-10 text-gray-500"
+        >
+          {showPassword ? <FaRegEyeSlash /> : <FaEye />}
+        </button>
+      </div>
+
+      <div className="relative mt-4">
+        <label>Current Password</label>
+        <input
+          type={showConfirmPassword ? "text" : "password"}
+          name="currentPassword"
+          value={passwords.currentPassword}
+          onChange={handleInputChange}
+          className="border px-3 py-2 rounded w-full outline-none mb-4"
+          placeholder="Enter current password"
+          required
+        />
+        <button
+          type="button"
+          onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+          className="absolute right-3 top-10 text-gray-500"
+        >
+          {showConfirmPassword ? <FaRegEyeSlash /> : <FaEye />}
+        </button>
+      </div>
+    </div>
               <div className="col-span-1 md:col-span-2 text-right">
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded"
+                  className="px-4 py-2 bg-primary-500 hover:bg-primary-dark-500 text-white rounded"
                  style={{color:"white"}}
                 >
                   Save Changes

@@ -256,7 +256,7 @@ const handleProductTypeChange = (e) => {
             <div className="flex justify-between items-center">
               <label className="">Product SKU</label>
               <button
-                className="text-primary   flex g items-center hover:text-primary-dark"
+                className="text-primary-500   flex g items-center hover:text-primary-dark-500"
                 onClick={handleGenerateSKU}
               >
                 <IoIosInformationCircleOutline className="text-[1rem]" />
@@ -275,7 +275,7 @@ const handleProductTypeChange = (e) => {
               />
               <AiOutlineSync
                 onClick={handleGenerateSKU}
-                className="cursor-pointer text-primary hover:text-primary-dark ml-2"
+                className="cursor-pointer text-primary-500 hover:text-primary-dark-500 ml-2"
                 title="Generate SKU"
                 size={24} // Set size for the icon
               />
@@ -318,7 +318,7 @@ const handleProductTypeChange = (e) => {
                 {tag}
                 <AiOutlineClose
                   onClick={() => removeTag(index)}
-                  className="cursor-pointer border border-primary font-semibold  ml-1 rounded-full text-red-500"
+                  className="cursor-pointer border border-primary-500 font-semibold  ml-1 rounded-full text-red-500"
                 />
               </span>
             ))}

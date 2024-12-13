@@ -355,7 +355,7 @@ const VenderWalletMethod = () => {
                       value={searchValue}
                       onChange={handleSearch}
                     />
-                    <button className="btn bg-green-400 text-white border-r-green-400">Search</button>
+                    <button className="btn bg-primary-500 text-white border-r-primary-500">Search</button>
                   </div>
                 </div>
               </div>

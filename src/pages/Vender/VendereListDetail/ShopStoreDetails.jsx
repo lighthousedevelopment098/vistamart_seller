@@ -301,11 +301,11 @@ const ShopStoreDetails = () => {
                         <div className="border p-3 w-170">
                             <div className="d-flex flex-column mb-1">
                                 <h6 className="font-weight-normal">Total products :</h6>
-                                <h3 className="text-primary fs-18">4</h3>
+                                <h3 className="text-primary-500 fs-18">4</h3>
                             </div>
                             <div className="d-flex flex-column">
                                 <h6 className="font-weight-normal">Total orders :</h6>
-                                <h3 className="text-primary fs-18">0</h3>
+                                <h3 className="text-primary-500 fs-18">0</h3>
                             </div>
                         </div>
                         <div className="row gy-3 flex-grow-1 w-100">

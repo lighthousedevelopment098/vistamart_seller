@@ -60,7 +60,7 @@ const RefundRequests = ({ status, title }) => {
         <div className="px-3 py-4 light-bg">
           <div className="d-flex flex-wrap justify-between gap-3 align-items-center">
             <form onSubmit={(e) => e.preventDefault()} className="w-full md:w-auto">
-              <div className="input-group input-group-merge input-group-custom border border-green-500">
+              <div className="input-group input-group-merge input-group-custom border border-primary-500">
                 <div className="input-group-prepend">
                   <div className="input-group-text">
                     <FaSearch />
@@ -69,14 +69,14 @@ const RefundRequests = ({ status, title }) => {
                 <input
                   type="search"
                   name="searchValue"
-                  className="form-control outline-none hover:border-primary"
+                  className="form-control outline-none hover:border-primary-500"
                   placeholder="Search by Title, Code, or Customer"
                   value={searchValue}
                   onChange={handleSearchChange}
                 />
                 <button
                   type="submit"
-                  className="btn px-4 py-2 bg-primary text-white hover:bg-primary-dark"
+                  className="btn px-4 py-2 bg-primary-500 text-white hover:bg-primary-dark-500"
                   style={{color:"white"}}
                 >
                   Search
@@ -86,7 +86,7 @@ const RefundRequests = ({ status, title }) => {
             <div className="flex flex-wrap gap-3 w-full md:w-auto">
               <button
                 type="button"
-                className="flex items-center px-4 py-2 bg-primary rounded text-white hover:bg-primary-dark gap-2 justify-center"
+                className="flex items-center px-4 py-2 bg-primary-500 rounded text-white hover:bg-primary-dark-500 gap-2 justify-center"
                 style={{color:"white"}}
                 data-toggle="dropdown"
               >
@@ -187,7 +187,7 @@ const RefundRequests = ({ status, title }) => {
                       <div className="d-flex justify-content-center">
                         <Link
                           to={`/refunddetail/${request._id}`}
-                          className="btn border-green-500 text-green-500 btn-sm hover:text-white hover:bg-green-400"
+                          className="btn border-primary-500 text-primary-500 btn-sm hover:text-white hover:bg-primary-dark-500"
                           title="View"
                         >
                           <FaEye />

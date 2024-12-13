@@ -39,7 +39,7 @@ const FilterForm = ({
                 </label>
                 <select
                   name="category"
-                  className="form-control outline-none hover:border-primary"
+                  className="form-control outline-none hover:border-primary-500"
                   onChange={onInputChange}
                   value={filters.category}
                 >

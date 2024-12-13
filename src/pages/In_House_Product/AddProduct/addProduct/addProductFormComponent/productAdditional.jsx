@@ -1,30 +1,12 @@
-import { useEffect } from "react";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { IoMdPerson } from "react-icons/io";
-import FormInput from "../../../../../components/FormInput/FormInput";
-import FormSection from "../../../../../components/FormInput/FormSection";
-import FormSelect from "../../../../../components/FormInput/FormSelect";
+import { useEffect, useState } from "react"; 
+import { ToastContainer, toast } from "react-toastify"; 
+import "react-toastify/dist/ReactToastify.css"; 
+import { IoMdPerson } from "react-icons/io"; 
+import FormInput from "../../../../../components/FormInput/FormInput"; 
+import FormSection from "../../../../../components/FormInput/FormSection"; 
+import FormSelect from "../../../../../components/FormInput/FormSelect"; 
 
 const ProductAdditional = ({ formData = {}, handleChange }) => {
-  useEffect(() => {
-    // Set default values if not selected
-    if (!formData.discountType) {
-      handleChange({
-        target: { name: "discountType", value: "percent" }, // Set default to 'percent'
-      });
-    }
-    if (formData.discountType === "percent" && formData.discount === "") {
-      handleChange({
-        target: { name: "discount", value: 0 }, // Set default discount to 10% if not already set
-      });
-    } else if (formData.discountType === "flat" && formData.discountAmount === "") {
-      handleChange({
-        target: { name: "discountAmount", value: 100 }, // Set default discount amount to 100 Rs if not set
-      });
-    }
-  }, [formData, handleChange]);
-
   useEffect(() => {
     // Ensure discount values don't exceed limits
     if (formData.discountType === "percent" && formData.discount > 100) {
@@ -121,6 +103,7 @@ const ProductAdditional = ({ formData = {}, handleChange }) => {
             value={formData.discountType}
             onChange={handleChange}
             options={[
+              { value: "", label: "No Discount" },
               { value: "percent", label: "Percentage" },
               { value: "flat", label: "Flat Amount" },
             ]}
@@ -206,3 +189,4 @@ const ProductAdditional = ({ formData = {}, handleChange }) => {
 };
 
 export default ProductAdditional;
+

@@ -1,48 +1,68 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
 import { Chart, registerables } from "chart.js";
+import { FaDownload, FaSearch } from "react-icons/fa"; // If you need this icon for export
+import ExportButton from "../../../../src/components/ActionButton/Export"; // Importing the export button
+
 Chart.register(...registerables);
-import {
-  FaSearch,
-  FaDownload,
-  FaChevronDown,
-  FaEye,
-  FaEdit,
-  FaTrashAlt,
-} from "react-icons/fa";
-import { IoMdDownload } from "react-icons/io";
-import ExportButton from "../../../../src/components/ActionButton/Export";
+
 const OrderTranscation = () => {
   const graphdata = {
     labels: [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
+      "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
     ],
     datasets: [
       {
         label: "Earnings",
         data: [0, 0, 0, 0, 55000, 0, 0, 0, 0, 0, 0, 0],
         backgroundColor: "rgba(54, 162, 235, 0.2)",
-        borderColor: "#A1CB46",
+        borderColor: "#009444",
         borderWidth: 4,
+        pointBackgroundColor: "#009444",
+        pointBorderColor: "#fff",
+        pointRadius: 6, // Larger points for visibility
+        pointHoverRadius: 8, // On hover
+        tension: 0.4, // Smooth line
       },
     ],
   };
 
   const options = {
+    responsive: true,
+    maintainAspectRatio: false,
     scales: {
       y: {
         beginAtZero: true,
+        ticks: {
+          callback: function (value) {
+            return `PKR ${value}`; // Format Y-axis ticks as currency
+          },
+        },
+      },
+    },
+    plugins: {
+      tooltip: {
+        callbacks: {
+          label: function (context) {
+            let label = context.dataset.label || "";
+            if (label) {
+              label += ": ";
+            }
+            label += `PKR ${context.raw}`;
+            return label;
+          },
+        },
+      },
+      legend: {
+        position: "top",
+        labels: {
+          boxWidth: 20, // Size of the legend icon box
+          padding: 10, // Padding between the label and the box
+          font: {
+            weight: "bold",
+            size: 14, // Font size for legend
+          },
+        },
       },
     },
   };
@@ -227,7 +247,7 @@ const OrderTranscation = () => {
           <select
             name=""
             id=""
-            className="text-md border bg-white px-2 rounded py-2 outline-none hover:border-primary"
+            className="text-md border bg-white px-2 rounded py-2 outline-none hover:border-primary-dark-500"
           >
             <option value="">All Status</option>
             <option value="">Hold</option>
@@ -236,7 +256,7 @@ const OrderTranscation = () => {
           <select
             name=""
             id=""
-            className="text-md border bg-white px-2 rounded py-2  outline-none hover:border-primary"
+            className="text-md border bg-white px-2 rounded py-2  outline-none hover:border-primary-dark-500"
           >
             <option value="">All Status</option>
             <option value="">Inhouse</option>
@@ -270,7 +290,7 @@ const OrderTranscation = () => {
         <br />
         <div className="flex justify-end">
           <button
-            className="px-6  py-2 rounded border border-green-200 bg-primary hover:bg-primary-dark text-white"
+            className="px-6  py-2 rounded border border-green-200 bg-primary-500 hover:bg-primary-dark-500 text-white"
             style={{ color: "white" }}
           >
             Filter
@@ -311,7 +331,7 @@ const OrderTranscation = () => {
                 In House
               </span>
             </div> */}
-                <div className="text-green-500 text-center text-[1rem] font-semibold">
+                <div className="text-primary-500 text-center text-[1rem] font-semibold">
                   0 <br />{" "}
                   <span className="text-gray-400 text-[.7rem]">
                     {" "}
@@ -336,7 +356,7 @@ const OrderTranscation = () => {
                     In House Orders
                   </span>
                 </div>
-                <div className="text-green-500 text-center text-[1rem] font-semibold">
+                <div className="text-primary-500 text-center text-[1rem] font-semibold">
                   0 <br />{" "}
                   <span className="text-gray-400 text-[.6rem]">
                     {" "}
@@ -359,20 +379,25 @@ const OrderTranscation = () => {
               </div>
             </div>
           </div>
-          <div className="col-span-4  md:col-span-4">
-            {/* -------------------- */}
-            <div className="bg-white p-6 rounded-lg shadow-md h-full  flex flex-col gap-5">
-              <h2 className="text-xl font-semibold">Order Statistics</h2>
-              <Line data={graphdata} options={options} className="" />
-            </div>
-          </div>
+          <div className="col-span-4 md:col-span-4">
+      <div className="bg-white p-6 rounded-lg shadow-md h-full flex flex-col gap-5">
+        <div className="flex justify-between items-center">
+          <h2 className="text-xl font-semibold">Order Statistics</h2>
+          {/* Export Button (or any other custom action buttons) */}
+        </div>
+
+        <div className="relative h-96 ">
+          <Line data={graphdata} options={options} />
+        </div>
+      </div>
+    </div>
           <div className="col-span-3 md:col-span-3">
             {/* -------------------------------
              */}
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h2 className="text-xl font-semibold">Payment Statistics</h2>
               <div className="flex justify-center mt-4">
-                <div className="w-32 h-32 bg-blue-500 rounded-full relative">
+                <div className="w-32 h-32 bg-primary-500 rounded-full relative">
                   <div className="absolute inset-0 flex items-center justify-center text-white text-2xl font-bold">
                     0.00
                   </div>
@@ -423,7 +448,7 @@ const OrderTranscation = () => {
                   />
                   <button
                     type="submit"
-                    className="btn bg-primary hover:bg-primary-dark"
+                    className="btn bg-primary-500 hover:bg-primary-dark-500"
                     style={{ color: "white" }}
                   >
                     Search
@@ -448,7 +473,7 @@ const OrderTranscation = () => {
                 filename="OrderTranscation" // Optional filename for the exported file
                 icon={FaDownload} // Icon for the button
                 label="Export " // Button label
-                className="bg-primary text-white hover:bg-primary-dark" // Tailwind classes for styling
+                className="bg-primary-500 text-white hover:bg-primary-dark-500" // Tailwind classes for styling
                 style={{ color: "white" }} // Optional inline styles
               />
               {/* <button
@@ -527,8 +552,8 @@ const OrderTranscation = () => {
                   <td className="">{item.total}</td>
 
                   <td className="">Cash On Delivery</td>
-                  <td className="text-green-400  rounded  ">Dispurse</td>
-                  <td className="   text-green-500 ">
+                  <td className="text-primary-500  rounded  ">Dispurse</td>
+                  <td className="   text-primary-500 ">
                     <IoMdDownload />
                   </td>
                 </tr>

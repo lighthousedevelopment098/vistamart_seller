@@ -4,7 +4,7 @@ const FormTextArea = ({ label, name, placeholder, value, onChange, required }) =
   <div className="form-group">
     <label htmlFor={name} className="title-color d-flex gap-1 align-items-center">{label}</label>
     <textarea
-      className="form-control"
+      className="form-control outline-none"
       id={name}
       name={name}
       placeholder={placeholder}

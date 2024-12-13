@@ -55,7 +55,6 @@ export const fetchOrderById = createAsyncThunk(
           Authorization: `Bearer ${token}`, // Include the token in the header
         },
       });
-      console.log("order in slice response  ====", response)
       return response.data.doc; // Assuming the response contains the order in data.doc
       
     } catch (error) {
@@ -101,6 +100,31 @@ export const deleteOrder = createAsyncThunk(
     }
   }
 );
+
+// Async thunk to update an order
+export const updateOrder = createAsyncThunk(
+  'vendorOrder/updateOrder',
+  async ({ orderId, trackingId }, { rejectWithValue }) => {
+    try {
+      const { token } = getAuthData();
+
+      const response = await axiosInstance.put(
+        `${API_URL}/${orderId}`,
+        { trackingId: trackingId },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Include the token in the header
+          },
+        }
+      );
+      console.log("response update order", response)
+      return response.data.doc; // Assuming the updated order is returned in data.doc
+    } catch (error) {
+      return rejectWithValue(ErrorMessage(error)); // Use ErrorMessage utility for error handling
+    }
+  }
+);
+
 
 const initialState = {
   orders: [],
@@ -184,7 +208,24 @@ const vendorOrderSlice = createSlice({
       .addCase(deleteOrder.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.payload; // Set error message
-      });
+      })
+
+        // Update order
+    .addCase(updateOrder.pending, (state) => {
+      state.status = 'loading';
+    })
+    .addCase(updateOrder.fulfilled, (state, action) => {
+      const updatedOrder = action.payload;
+      const index = state.orders.findIndex((order) => order._id === updatedOrder._id);
+      if (index !== -1) {
+        state.orders[index] = updatedOrder; // Update the order in the state
+      }
+      state.status = 'succeeded';
+    })
+    .addCase(updateOrder.rejected, (state, action) => {
+      state.status = 'failed';
+      state.error = action.payload; // Set error message
+    });
   },
 });
 

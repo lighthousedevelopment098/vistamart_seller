@@ -49,12 +49,12 @@ const AddNewProduct = () => {
 		unit: "",
 		tags: [""],
 		price: "",
-		discount: "",
-		discountType: "",
-		discountAmount: "",
+		discount: "0",
+		discountType: "percent",
+		discountAmount: "0",
 		taxAmount: "",
 		taxIncluded: false,
-		minimumOrderQty: "3",
+		minimumOrderQty: "1",
 		shippingCost: "",
 		stock: "",
 		isFeatured: false,
@@ -92,15 +92,18 @@ const AddNewProduct = () => {
 	  }, [dispatch, formData.subCategory]);
 	  
 
-
 	  const handleChange = (e) => {
 		const { name, value, type, checked } = e.target;
 		setFormData((prev) => ({
 			...prev,
-			[name]: type === "checkbox" ? checked : 
-			       (["price", "discountAmount", "taxAmount","discount"].includes(name) ? parseInt(value, 10) || 0 : value),
+			[name]: type === "checkbox" 
+				? checked 
+				: (["price", "discountAmount", "taxAmount", "discount"].includes(name) 
+					? parseInt(value, 10) || 0 
+					: value),
 		}));
 	};
+	
 
 
 
@@ -111,28 +114,47 @@ const AddNewProduct = () => {
 		}));
 	};
 
-
-	const handleSubmit = async (e) => {
+	const resetForm = () => {
+		setFormData({
+		  name: "",
+		  category: "",
+		  subCategory: "",
+		  subSubCategory: "",
+		  brand: "",
+		  productType: "",
+		  digitalProductType: "",
+		  sku: "",
+		  unit: "",
+		  tags: [],
+		  // Add other fields and reset them accordingly
+		});
+		// setTags([]); // Reset tags array as well
+	  };
+	  
+	  const handleSubmit = async (e) => {
 		e.preventDefault();
+	
 		const uploadResult = await uploadProductImagesToS3(thumbnail, images);
-
-		// Check if the uploadResult is null before destructuring
+	
 		if (!uploadResult) {
 			console.error("Image upload failed.");
-			return; // Exit the function if upload failed
+			return;
 		}
-
+	
 		const { thumbnailKey, imageKeys } = uploadResult;
-
+	
 		try {
 			const { token, user } = getAuthData();
 			const userId = user?._id;
-
+	
 			if (!userId) {
-				throw new Error("admin does not exist or is not authenticated.");
+				throw new Error("Admin does not exist or is not authenticated.");
 			}
+	
+			// Merge form data with defaults
 			const productData = {
 				...formData,
+				discountType: formData.discountType || "percent", // Fallback to 'percent'
 				userId,
 				thumbnail: thumbnailKey,
 				images: imageKeys,
@@ -142,11 +164,10 @@ const AddNewProduct = () => {
 				subCategory: formData.subCategory,
 				subSubCategory: formData.subSubCategory,
 				...(formData.productType !== "physical" && { digitalProductType: formData.digitalProductType }),
-
 			};
-
+	
 			console.log("Submitting Product Data:", productData);
-
+	
 			const response = await fetch(API_URL, {
 				method: "POST",
 				headers: {
@@ -155,26 +176,21 @@ const AddNewProduct = () => {
 				},
 				body: JSON.stringify(productData),
 			});
-
+	
 			const data = await response.json();
-
+	
 			if (!response.ok) {
 				throw new Error(data.message || "Something went wrong!");
 			}
-
+	
 			Swal.fire({
 				icon: "success",
 				title: "Product created successfully!",
 				showConfirmButton: false,
 				timer: 2000,
 			});
-
-			// Reset form
-			setThumbnail(null);
-			setImages([]);
-			setSelectedColors([]);
-			setProductAttributes([]);
-			setFormData({ ...initialFormState });
+	
+			resetForm();
 		} catch (error) {
 			console.error("Product creation failed:", error);
 			Swal.fire({
@@ -186,7 +202,7 @@ const AddNewProduct = () => {
 			setErrorMessage("Failed to create product. Please try again.");
 		}
 	};
-
+	
 	return (
 		<form onSubmit={handleSubmit} className="add-product-form " style={{padding:"1rem 0rem 1rem 3rem "}}>
 			<ProductForm
@@ -217,8 +233,9 @@ const AddNewProduct = () => {
 			<div className="flex justify-end m-5">
 				<button
 					type="submit"
-					className="btn mt-3 flex justify-end btn-submit bg-primary outline-none"
-					style={{ color: "white", background: "green" }}
+
+					className="btn mt-3 flex justify-end btn-submit bg-primary-500 hover:bg-primary-dark-500 outline-none"
+					style={{color:"white"}}
 				>
 					Submit Product
 				</button>

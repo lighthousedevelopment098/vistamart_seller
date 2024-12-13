@@ -156,7 +156,13 @@ const UpdateVendor = () => {
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     const name = e.target.name;
+    const allowedTypes = ["image/jpeg", "image/png", "image/jpg", "image/gif"];
+
     if (!file) return;
+    if (!allowedTypes.includes(file.type)) {
+      toast.error("Invalid file type. Only JPG, PNG, and GIF are allowed.");
+      return;
+    }
 
     const previewMap = {
       logo: setLogoPreview,
@@ -165,14 +171,40 @@ const UpdateVendor = () => {
     };
 
     const setPreview = previewMap[name];
-    if (setPreview) setPreview(URL.createObjectURL(file));
+    if (setPreview) {
+      const objectUrl = URL.createObjectURL(file);
+      setPreview(objectUrl);
+    }
 
-    setFormData({ ...formData, [name]: file });
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: file,
+    }));
   };
+
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
+  
+    if (["firstName", "lastName", "shopName"].includes(name)) {
+      // Check for non-alphabetic characters
+      const alphabetRegex = /^[a-zA-Z\s]*$/;
+      if (!alphabetRegex.test(value)) {
+        toast.error(`${name.replace(/^\w/, (c) => c.toUpperCase())} must contain only alphabetic characters.`);
+        return;
+      }
+  
+      // Limit length to 50 characters
+      if (value.length > 50) {
+        toast.error(`${name.replace(/^\w/, (c) => c.toUpperCase())} is limited to 50 characters.`);
+        return;
+      }
+    }
+  
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   };
 
   return (
@@ -334,7 +366,7 @@ const UpdateVendor = () => {
 
         <div className="d-flex flex justify-end w-full my-3">
           <button
-            className={`btn btn-success text-white px-4 py-2 bg-primary hover:bg-primary-dark ${
+            className={`btn btn-success text-white px-4 py-2 bg-primary-500 hover:bg-primary-dark-500 ${
               loading ? "loading" : ""
             }`}
             style={{ color: "white" }}
