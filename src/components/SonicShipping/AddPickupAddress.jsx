@@ -5,10 +5,8 @@ import "react-toastify/dist/ReactToastify.css"; // Import toast styles
 import { getAuthData } from "../../utils/authHelper";
 import apiConfig from "../config/apiConfig";
 
-
 const AddPickupAddress = () => {
   const { token, user } = getAuthData();
-
   console.log("user",user)
   const [formData, setFormData] = useState({
     person_of_contact: "",
@@ -24,7 +22,7 @@ const AddPickupAddress = () => {
   useEffect(() => {
     const fetchCities = async () => {
       try {
-        const result = await axios.get("http://app.sonic.pk/api/cities", {
+        const result = await axios.get("https://app.sonic.pk/api/cities", {
           headers: { Authorization: import.meta.env.VITE_API_KEY },
         });
         setCities(result.data.cities || []);
