@@ -18,7 +18,6 @@ const Adminwallet = () => {
       const response = await axiosInstance.get(`${ApiUrl}/seller-wallets/?vendor=${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      console.log("response ====", response)
       setWalletData(response.data.doc[0]); // Assuming only one document is returned
     } catch (error) {
       console.error(ErrorMessage(error));
