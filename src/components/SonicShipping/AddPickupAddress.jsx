@@ -67,7 +67,7 @@ const AddPickupAddress = () => {
     try {
       // Add Pickup Address
       const pickupResult = await axios.post(
-        "http://app.sonic.pk/api/pickup_address/add",
+        "https://app.sonic.pk/api/pickup_address/add",
         formData,
         {
           headers: { Authorization: import.meta.env.VITE_API_KEY },
