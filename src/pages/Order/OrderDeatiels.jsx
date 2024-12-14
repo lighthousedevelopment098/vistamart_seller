@@ -58,7 +58,12 @@ const OrderDetails = () => {
   
     fetchPickupId();
   }, [token, user?._id]);
-  
+  // Check if pickupId is null or empty
+  if (!pickupId) {
+    toast.error("Please add a pickup address before booking shipping.");
+    navigate("/addpickupaddress");
+    return; 
+  }
   console.log("pickup ", pickupId)
   const handleBookShipping = async () => {
     const payload = {
@@ -68,7 +73,7 @@ const OrderDetails = () => {
       consignee_city_id: order?.shippingAddress?.cityId,
       consignee_name: order?.customer?.firstName,
       consignee_address: order?.shippingAddress?.address,
-      consignee_phone_number_1: order?.customer?.phoneNumber,
+      consignee_phone_number_1: order?.shippingAddress?.phoneNumber,
       consignee_email_address: order?.customer?.email,
       order_id: order?.orderId, // Dynamic Order ID
       item_product_type_id: 12, // category id 

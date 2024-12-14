@@ -12,11 +12,11 @@ import WelcomePage from "./pages/WelcomePage/WelcomePage";
 import BulkImport from "./pages/In_House_Product/AddProduct/BulkImport/BulkImport";
 
 
-import Ticket_Support from "./pages/Health_Support/Ticket_Support";
-import Message from "./pages/Health_Support/Message";
+// import Ticket_Support from "./pages/Health_Support/Ticket_Support";
+// import Message from "./pages/Health_Support/Message";
 import OrderList from "./pages/Order/OrderList";
 
-import IndexMessage from "./pages/Health_Support/Index";
+// import IndexMessage from "./pages/Health_Support/Index";
 
 
 import VenderListDetail from "./pages/Vender/VendereListDetail/VenderList";
@@ -29,8 +29,8 @@ import VenderWalletMethod from "./pages/Vender/VenderWalletMethod/VenderWalletMe
 import RefundDetails from "./pages/Refound/Details/RefoundDetail/RefoundDetail";
 import GenerateBarcode from "./pages/In_House_Product/InHouseProductList/GeneratCode/GeneratCode";
 import LimitedStockProductsList from "./pages/In_House_Product/InHouseProductList/LimitedProduct/LimitedProduct";
-import ProductGallery from "./pages/Health_Support/Product_Gallery";
-import PageGallery from "./pages/Health_Support/Gallery";
+// import ProductGallery from "./pages/Health_Support/Product_Gallery";
+// import PageGallery from "./pages/Health_Support/Gallery";
 import BankInformation from "./pages/In_House_Product/Bussiness_Section/Bank_Information";
 import Withdraws from "./pages/In_House_Product/Bussiness_Section/Withdraws";
 import Shop_Setting from "./pages/In_House_Product/Bussiness_Section/Shop_Setting";
@@ -130,17 +130,17 @@ function AllRoutes() {
                   element={<InhouseProductUpdate />} />
 
 
-                  <Route path="/pagegallery" element={<PageGallery />} />
-                  <Route path="/productgallery" element={<ProductGallery />} />
+                  {/* <Route path="/pagegallery" element={<PageGallery />} /> */}
+                  {/* <Route path="/productgallery" element={<ProductGallery />} /> */}
                   
                   <Route
                     path="/inhouselimitedproduct"
                     element={<LimitedStockProductsList />}
                   />
 
-              
+{/*               
                   <Route path="/ticketsupport" element={<Ticket_Support />} />
-                  <Route path="/messagesupport" element={<Message />} />
+                  <Route path="/messagesupport" element={<Message />} /> */}
                   <Route path="/orderlist" element={<OrderList />} />
                   <Route path="/pendingorder" element={<PendingOrders />} />
                   <Route path="/confirmedorder" element={<ConfirmedOrders />} />
@@ -161,7 +161,7 @@ function AllRoutes() {
                   <Route path="/bankinfoadd" element={<Editbtn />} />
                   <Route path="bankinfoedit/:id" element={<UpdateBankForm />} />
                   <Route path="/withdraws" element={<Withdraws />} />
-                  <Route path="/indexmessage" element={<IndexMessage />} />
+                  {/* <Route path="/indexmessage" element={<IndexMessage />} /> */}
                  
                   <Route path="/venderdetail" element={<VenderListDetail />} />
                   <Route path="/shopview" element={<ShopStoreDetails />} />

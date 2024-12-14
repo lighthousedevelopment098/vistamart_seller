@@ -7,7 +7,6 @@ import apiConfig from "../config/apiConfig";
 
 const AddPickupAddress = () => {
   const { token, user } = getAuthData();
-  console.log("user",user)
   const [formData, setFormData] = useState({
     person_of_contact: "",
     phone_number: "",
@@ -83,7 +82,6 @@ const AddPickupAddress = () => {
         return;
       }
 
-       console.log("venodr id ===", user?._id)
       // Prepare Shipping Data
       const shippingData = {
         vendorId: user?._id,
@@ -104,7 +102,6 @@ const AddPickupAddress = () => {
         });
       } else {
         // Create new shipping info
-        console.log("shipping data ===", shippingData)
         await axios.post(`${apiConfig.seller}/shippingInfo`, shippingData, {
           headers: { Authorization: `Bearer ${token}` },
         });
