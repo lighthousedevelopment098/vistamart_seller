@@ -4,6 +4,7 @@ import { IoMdPerson } from "react-icons/io";
 import { IoHomeSharp, IoSettings } from "react-icons/io5";
 import { Link } from "react-router-dom";
 
+
 const Footer = () => {
   return (
     <>
@@ -16,7 +17,7 @@ const Footer = () => {
               className="flex items-center text-nowrap gap-2"
             >
               {/* <IoSettings /> */}
-               <FaLocationArrow />
+              <FaTruckPickup className="w-4 h-4" />
               <h1>Add Pickup Address</h1>
             </Link>
           </div>

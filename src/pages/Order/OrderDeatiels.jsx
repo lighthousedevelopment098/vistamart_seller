@@ -333,36 +333,69 @@ const OrderDetails = () => {
                   </tbody>
                 </table>
               </div>
-              <div className="mt-4">
-                <div className="flex justify-between border-t pt-2">
-                  <span>Item price</span>
-                  <span>${totalAmount}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Item Discount</span>
-                  <span>- $0.00</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Sub Total</span>
-                  <span>${totalAmount}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Coupon discount</span>
-                  <span>- $0.00</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>VAT/TAX</span>
-                  {/* <span>${order.vatTax.toFixed(2)}</span> */}
-                </div>
-                <div className="flex justify-between">
-                  <span>Delivery Fee</span>
-                  {/* <span>${order.deliveryFee.toFixed(2)}</span> */}
-                </div>
-                <div className="flex justify-between font-bold border-t pt-2">
-                  <span>Total</span>
-                  <span>${totalAmount}</span>
-                </div>
-              </div>
+              <div className="mt-4 p-2">
+    {/* {products?.map((product, index) => (
+      <div key={index} className="mb-4">
+        <div className="flex justify-between border-t pt-2">
+          <span>Item {index + 1} Price</span>
+          <span>PKR {product.price}</span>
+        </div>
+        <div className="flex justify-between">
+          <span>Item Discount</span>
+          <span>- PKR {product.discountAmount}</span>
+        </div>
+        <div className="flex justify-between">
+          <span>VAT/TAX</span>
+          <span>PKR {product.taxAmount}</span>
+        </div>
+        <div className="flex justify-between">
+          <span>Delivery Fee</span>
+          <span>PKR {product.shippingCost || 0}</span>
+        </div>
+      </div>
+    ))} */}
+
+    {/* Calculations for the overall totals */}
+    <div className="flex justify-between border-t pt-2 font-bold">
+      <span>Sub Total</span>
+      <span>
+        PKR {products?.reduce((acc, product) => acc + product.price, 0)}
+      </span>
+    </div>
+    <div className="flex justify-between">
+      <span>Total Discount</span>
+      <span>
+        - PKR {products?.reduce((acc, products) => acc + (products.discountAmount), 0)}
+      </span>
+    </div>
+    <div className="flex justify-between">
+      <span>VAT/TAX</span>
+      <span>
+        PKR {products?.reduce((acc, product) => acc + (product.tax || 0), 0)}
+      </span>
+    </div>
+    <div className="flex justify-between">
+      <span>Delivery Fee</span>
+      <span>
+        PKR {products?.reduce((acc, product) => acc + (product.shippingCost || 0), 0)}
+      </span>
+    </div>
+    <div className="flex justify-between font-bold border-t pt-2">
+      <span>Total</span>
+      <span>
+        PKR{" "}
+        {products?.reduce(
+          (acc, product) =>
+            acc +
+            product.price -
+            (product.discountAmount || 0) +
+            (product.tax || 0) +
+            (product.shippingCost || 0),
+          0
+        )}
+      </span>
+    </div>
+  </div>
             </div>
           </div>
 
@@ -448,9 +481,9 @@ const OrderDetails = () => {
                   {/* <MdEdit className="text-[2rem] p-1 border hover:bg-primary-dark hover:text-white rounded border-primary bg-primary text-white" /> */}
                 </div>
                 <div className="space-y-1">
-                  <p className="text-md font-medium">{customer?.firstName}</p>
+                  <p className="text-md font-medium">Name:{vendor?.firstName}</p>
                   <p className="text-gray-500">
-                    Contact: {customer?.phoneNumber}
+                    Contact: {vendor?.phoneNumber}
                   </p>
                   <p className="text-gray-500">
                     Country: {shippingAddress?.country}

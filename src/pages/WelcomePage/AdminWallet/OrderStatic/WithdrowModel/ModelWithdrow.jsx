@@ -77,6 +77,59 @@ const ModelWithdrow = ({ onClose, withdrawableBalance }) => {
     }
   };
 
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+  
+    // Field-specific validation
+    if (name === "name") {
+      // Allow only alphabetic characters and spaces
+      const alphabetRegex = /^[a-zA-Z\s]*$/;
+      if (!alphabetRegex.test(value)) {
+        Swal.fire("Error", "Account Name must contain only alphabetic characters.", "error");
+        return;
+      }
+  
+      // Limit length to 24 characters
+      if (value.length > 20) {
+        Swal.fire("Error", "Account Name is limited to 24 characters.", "error");
+        return;
+      }
+    }
+  
+    if (name === "accountNumber") {
+      // Allow alphanumeric characters (letters and numbers only)
+      const alphanumericRegex = /^[a-zA-Z0-9]*$/;
+      if (!alphanumericRegex.test(value)) {
+        Swal.fire("Error", "Account Number must contain only letters and numbers.", "error");
+        return;
+      }
+  
+      // Limit length to 24 characters
+      if (value.length > 24) {
+        Swal.fire("Error", "Account Number is limited to 24 characters.", "error");
+        return;
+      }
+    }
+  
+    // Update state for the corresponding input
+    switch (name) {
+      case "name":
+        setName(value);
+        break;
+      case "accountNumber":
+        setAccountNumber(value);
+        break;
+      case "amount":
+        setAmount(value);
+        break;
+      default:
+        break;
+    }
+  };
+  
+  
+  
+
   return (
     <form onSubmit={handleSubmit}>
       <div className="mb-4">
@@ -92,35 +145,39 @@ const ModelWithdrow = ({ onClose, withdrawableBalance }) => {
         </select>
       </div>
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700">Account Name</label>
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className="mt-1 block w-full px-3 py-2 rounded-md bg-white border-gray-400 shadow-sm focus:border-gray-300 focus:ring focus:ring-gray-200 focus:ring-opacity-50"
-          placeholder="John Doe"
-        />
-      </div>
-      <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700">Account Number</label>
-        <input
-          type="text"
-          value={accountNumber}
-          onChange={(e) => setAccountNumber(e.target.value)}
-          className="mt-1 block w-full px-3 py-2 rounded-md bg-white border-gray-400 shadow-sm focus:border-gray-300 focus:ring focus:ring-gray-200 focus:ring-opacity-50"
-          placeholder="123456789012"
-        />
-      </div>
-      <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700">Amount</label>
-        <input
-          type="number"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-          className="mt-1 block w-full px-3 py-2 rounded-md bg-white border-gray-400 shadow-sm focus:border-gray-300 focus:ring focus:ring-gray-200 focus:ring-opacity-50"
-          placeholder="Enter amount"
-        />
-      </div>
+  <label className="block text-sm font-medium text-gray-700">Account Name</label>
+  <input
+    type="text"
+    name="name" // Correct name for validation
+    value={name}
+    onChange={handleInputChange} // Single function for input handling
+    className="mt-1 block w-full px-3 py-2 rounded-md bg-white border-gray-400 shadow-sm focus:border-gray-300 focus:ring focus:ring-gray-200 focus:ring-opacity-50"
+    placeholder="John Doe"
+  />
+</div>
+<div className="mb-4">
+  <label className="block text-sm font-medium text-gray-700">Account Number</label>
+  <input
+    type="text"
+    name="accountNumber" // Correct name for validation
+    value={accountNumber}
+    onChange={handleInputChange} // Single function for input handling
+    className="mt-1 block w-full px-3 py-2 rounded-md bg-white border-gray-400 shadow-sm focus:border-gray-300 focus:ring focus:ring-gray-200 focus:ring-opacity-50"
+    placeholder="123456789012"
+  />
+</div>
+<div className="mb-4">
+  <label className="block text-sm font-medium text-gray-700">Amount</label>
+  <input
+    type="number"
+    name="amount" // Correct name for validation
+    value={amount}
+    onChange={handleInputChange} // Single function for input handling
+    className="mt-1 block w-full px-3 py-2 rounded-md bg-white border-gray-400 shadow-sm focus:border-gray-300 focus:ring focus:ring-gray-200 focus:ring-opacity-50"
+    placeholder="Enter amount"
+  />
+</div>
+
       <div className="mt-3 flex gap-3 items-center">
         <button
           type="submit"
