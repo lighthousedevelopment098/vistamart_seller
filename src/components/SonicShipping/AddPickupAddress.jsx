@@ -4,6 +4,7 @@ import { toast, ToastContainer } from "react-toastify"; // Import toast library
 import "react-toastify/dist/ReactToastify.css"; // Import toast styles
 import { getAuthData } from "../../utils/authHelper";
 import apiConfig from "../config/apiConfig";
+import { useNavigate } from "react-router-dom";
 
 const AddPickupAddress = () => {
   const { token, user } = getAuthData();
@@ -14,6 +15,7 @@ const AddPickupAddress = () => {
     address: "",
     city_id: "",
   });
+  const navigate = useNavigate(); // Initialize useNavigate hook
 
   const [cities, setCities] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -115,6 +117,11 @@ const AddPickupAddress = () => {
         address: "",
         city_id: "",
       });
+        // Navigate to /packagingorder after success
+    setTimeout(() => {
+      navigate("/packagingorder");
+    }, 2000); 
+    
     } catch (err) {
       const errorMessage =
         err.response?.data?.message || "Failed to complete the process.";

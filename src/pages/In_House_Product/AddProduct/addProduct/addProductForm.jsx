@@ -24,12 +24,12 @@ import { getAuthData } from "../../../../utils/authHelper";
 
 import { toast } from "react-toastify";
 import uploadProductImagesToS3 from "./uploadImages";
+import { useNavigate } from "react-router-dom";
 
 const API_URL = `${apiConfig.seller}/products`;
 
 const AddNewProduct = () => {
 	const dispatch = useDispatch();
-
 	const {
 		categories,
 		subCategories,
@@ -38,6 +38,7 @@ const AddNewProduct = () => {
 		colors,
 		attributes,
 	} = useSelector((state) => state.category);
+    const navigate = useNavigate();
 
 	const initialFormState = {
 		name: "",
@@ -189,7 +190,9 @@ const AddNewProduct = () => {
 				showConfirmButton: false,
 				timer: 2000,
 			});
-	
+			setTimeout(() => {
+				navigate("/newproductrequest"); // Navigate to /withdraw after 2 seconds
+			  }, 2000);
 			resetForm();
 		} catch (error) {
 			console.error("Product creation failed:", error);

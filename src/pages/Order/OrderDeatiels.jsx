@@ -7,13 +7,14 @@ import { MdEdit } from "react-icons/md";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { updateOrderStatus, fetchOrderById }
+import { updateOrderStatus, fetchOrderById, updateOrder }
  from
   "../../components/redux/orderSlice";
 import LoadingSpinner from "../../components/LoodingSpinner/LoadingSpinner";
 import apiConfig from "../../components/config/apiConfig";
 import { getAuthData } from "../../utils/authHelper";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const OrderDetails = () => {
   const { id } = useParams(); // Get the order ID from URL parameters
@@ -59,13 +60,17 @@ const OrderDetails = () => {
     fetchPickupId();
   }, [token, user?._id]);
   // Check if pickupId is null or empty
-  if (!pickupId) {
-    toast.error("Please add a pickup address before booking shipping.");
-    navigate("/addpickupaddress");
-    return; 
-  }
-  console.log("pickup ", pickupId)
+     
   const handleBookShipping = async () => {
+     
+    if (!pickupId) {
+      toast.error("Pickup address not found. Please add a pickup address.");
+      setTimeout(() => {
+        navigate("/addpickupaddress"); 
+      }, 2000); // Delay of 2 seconds
+      return;
+    }
+  
     const payload = {
       service_type_id: 1,
       pickup_address_id: pickupId,
@@ -95,7 +100,7 @@ const OrderDetails = () => {
     };  
     try {
       console.log("Data to be submitted:", payload);
-      const response = await fetch("http://app.sonic.pk/api/shipment/book", {
+      const response = await fetch("https://app.sonic.pk/api/shipment/book", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -114,10 +119,30 @@ const OrderDetails = () => {
 
         await dispatch(updateOrder({ orderId: order?._id, trackingId })).unwrap();
   
-        toast.success(`Shipping booked successfully! Tracking Number: ${data.tracking_number}`);
+        // toast.success(`Shipping booked successfully! Tracking Number: ${data.tracking_number}`);
+        Swal.fire({
+          title: "Success!",
+          text: `Shipping booked successfully! Tracking Number: ${data.tracking_number}`,
+          icon: "success",
+          confirmButtonText: "OK",
+        });
+        
         setShowModal(false); // Close modal
+
+        setTimeout(() => {
+          navigate("/packagingorder")
+        }, 2000); // Delay of 2 seconds
+          
+
       } else {
         toast.error("Failed to book shipping. Please try again.");
+        Swal.fire({
+          title: "Error!",
+          text: "Failed to book shipping. Please try again.",
+          icon: "error",
+          confirmButtonText: "OK",
+        });
+        
       }
     } catch (error) {
       console.error("Error occurred while booking shipping:", error);
@@ -194,7 +219,6 @@ const OrderDetails = () => {
     billingAddress,
   } = Orders;
 
-  console.log("produc=====", products)
   return (
     <>
       <div className="bg-[#F9F9FB] w-full px-10 py-8">
@@ -218,11 +242,46 @@ const OrderDetails = () => {
                 <p>{new Date(Orders?.createdAt).toLocaleString()}</p>
               </div>
               <div className="flex items-center gap-2">
-                <div>
-                  <Button  className="bg-primary-500 text-white hover:bg-primary-dark-500" onClick={handleShow}>
-                  Book Shipping
-                  </Button>
-                </div>
+               
+                {/* <div className="flex items-center gap-2">
+    {order?.trackingId ? (
+      <p 
+      className={`bg-secondary-500 font-bold p-1 rounded border text-primary-500 mt-3 mb-2`}
+      >
+        Tracking ID: {order?.trackingId}</p>
+    ) : (
+      <Button
+        variant="primary"
+        className="bg-primary-500 text-white hover:bg-primary-dark-500"
+        onClick={handleShow}
+      >
+        Book Shipping
+      </Button>
+    )}
+  </div> */}
+
+
+<div className="flex items-center gap-2">
+  {order?.trackingId ? (
+    <p 
+      className="bg-secondary-500 font-bold p-1 rounded border text-primary-500 mt-3 mb-2"
+    >
+      Tracking ID: {order?.trackingId}
+    </p>
+  ) : (
+    order?.status === "packaging" && (
+      <Button
+        variant="primary"
+        className="bg-primary-500 text-white hover:bg-primary-dark-500"
+        onClick={handleShow}
+      >
+        Book Shipping
+      </Button>
+    )
+  )}
+</div>
+
+
                 {/* <button
                   className="borders rounded px-3 py-2  bg-primary flex items-center gap-2 text-white hover:bg-primary-dark"
                   onClick={printInvoice}
@@ -241,14 +300,8 @@ const OrderDetails = () => {
                   {status}
                 </span>
               </h1> */}
-              <h1 className="bg-secondary-500">
-              Tracking Id :
-                <span
-                  className={`bg-secondary-500 font-bold p-1 rounded border text-primary-500 mt-3 mb-2`}
-                >
-                  {order?.trackingId || "0"}
-                </span>
-              </h1>
+          
+
               <h1 className="pt-3 text-md">
                 Payment Method :
                 <span className="font-bold text-md">{paymentMethod}</span>
@@ -293,49 +346,53 @@ const OrderDetails = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    
-                  {products && products?.length > 0 ? (
-  products?.map((item, index) => (
-    <tr className="hover:bg-gray-100" key={item?._id}>
-      <td className="px-4 py-2 text-center">{index + 1}</td>
-      <td className="px-4 py-2 w-full">
-        <div className="flex items-center whitespace-nowrap">
-          <img
-            src={
-              item?.productDetails?.thumbnail
-                ? `${apiConfig.bucket}/${item.productDetails.thumbnail}`
-                : fallbackImage
-            }
-            alt={item?.productDetails?.name || "Product Image"}
-            className="w-10 h-10 object-cover rounded mr-3"
-            onError={(e) => (e.target.src = fallbackImage)} // Fallback image if load fails
-          />
-          <div>
-            <div>{item?.productDetails?.name}</div>
-            <div>Qty: {item?.quantity}</div>
+  {products && products.length > 0 ? (
+    products.map((item, index) => (
+      <tr className="hover:bg-gray-100" key={item._id || index}>
+        <td className="px-4 py-2 text-center">{index + 1}</td>
+        <td className="px-4 py-2 w-full">
+          <div className="flex items-center whitespace-nowrap">
+            <img
+              src={
+                item.productDetails?.thumbnail
+                  ? `${apiConfig.bucket}/${item.productDetails.thumbnail}`
+                  : fallbackImage
+              }
+              alt={item.productDetails?.name || "Product Image"}
+              className="w-10 h-10 object-cover rounded mr-3"
+              onError={(e) => (e.target.src = fallbackImage)} // Fallback image if load fails
+            />
             <div>
-              Unit price: PKR {item?.price} (Tax: {item?.taxAmount}%)
+              <div>{item.productDetails?.name || "Unnamed Product"}</div>
+              <div>Qty: {item.quantity || 0}</div>
+              <div>
+                Unit price: PKR {item.productDetails?.price || 0} (Tax:{" "}
+                {item.taxAmount || 0}%)
+              </div>
             </div>
           </div>
-        </div>
-      </td>
-      <td className="px-4 py-2 text-center">PKR {item?.price}</td>
-      <td className="px-4 py-2 text-center">PKR {item?.taxAmount}</td>
-      <td className="px-4 py-2 text-center">PKR {item?.discountAmount}</td>
-      <td className="px-4 py-2 text-center">
-        PKR {item?.price - item?.discountAmount + item?.taxAmount}
+        </td>
+        <td className="px-4 py-2 text-center">
+          PKR {item.productDetails?.price || 0}
+        </td>
+        <td className="px-4 py-2 text-center">PKR {item.taxAmount || 0}</td>
+        <td className="px-4 py-2 text-center">
+          PKR {item.discountAmount || 0}
+        </td>
+        <td className="px-4 py-2 text-center">
+          PKR {item.productDetails?.price + (item.taxAmount || 0)}
+        </td>
+      </tr>
+    ))
+  ) : (
+    <tr>
+      <td colSpan="6" className="text-center py-4">
+        No products available
       </td>
     </tr>
-  ))
-) : (
-  <tr>
-    <td colSpan="6" className="text-center py-4">
-      No products available
-    </td>
-  </tr>
-)}
+  )}
+</tbody>
 
-                  </tbody>
                 </table>
               </div>
               <div className="mt-4">

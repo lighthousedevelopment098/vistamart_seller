@@ -25,13 +25,11 @@ const OrderManagement = ({ status, title, vendorId }) => {
     loading,
     error,
   } = useSelector((state) => state.vendorOrder || {});
-  console.log("orders====", orders)
 
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [sortOrder, setSortOrder] = useState("asc"); // Sorting state
   const itemsPerPage = 5;
-  console.log("vendor id======", vendorId);
   useEffect(() => {
     if (vendorId) {
       dispatch(fetchOrder({ status, vendor: vendorId }));
@@ -186,6 +184,7 @@ const OrderManagement = ({ status, title, vendorId }) => {
                       Order ID {sortOrder === "asc" ? "↑" : "↓"}
                     </span>
                   </th>
+                  <th className="text-center">Tracking_Id</th>
                   <th>Order Date</th>
                   <th>C_Info</th>
                   <th>
@@ -214,6 +213,7 @@ const OrderManagement = ({ status, title, vendorId }) => {
                     <tr key={order?._id}>
                       <td>{(currentPage - 1) * itemsPerPage + index + 1}</td>
                       <td className="text-center">{order?.orderId}</td>
+                      <td className="text-center text-primary-500 font-bold">{order?.trackingId || 0}</td>
                       <td>{new Date(order.createdAt).toLocaleDateString()}</td>
                       <td>
                         {order?.customer?.firstName} {order?.customer?.lastName}
