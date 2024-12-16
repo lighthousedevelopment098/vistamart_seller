@@ -25,7 +25,7 @@ export const login = createAsyncThunk(
       const { accessToken, user } = response.data;
 
       // Save token and user data using the helper
-      saveAuthData(role, accessToken, user);
+      saveAuthData(accessToken, user);
       
       return { token: accessToken, user, role }; // Return role for further usage
     } catch (error) {

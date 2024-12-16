@@ -69,6 +69,7 @@ import CouponList from "./pages/Coupon/couponList.jsx";
 import UpdateVendor from "./pages/Shop/UpdateVendor.jsx";
 import InhouseProductUpdate from "./pages/In_House_Product/AddProduct/updateProduct/InhouseProductUpdate.jsx";
 import AddPickupAddress from "./components/SonicShipping/AddPickupAddress.jsx";
+import TrackingOrder from "./pages/Order/TrackingOrder.jsx";
 
 
 function AllRoutes() {
@@ -96,7 +97,7 @@ function AllRoutes() {
                   <Route path="/" element={<WelcomePage />} />
                   <Route path="/allorders" element={<OrderList />} />
                   <Route path="/orderdetail/:id" element={<OrderDetails />} />
-                  {/* <Route path="/pendingorders" element={<PendingOrders />} /> */}
+                  <Route path="/track-order" element={<TrackingOrder />} />
                   <Route
                     path="/pendingrefundrequests"
                     element={<PendingRefunds />}

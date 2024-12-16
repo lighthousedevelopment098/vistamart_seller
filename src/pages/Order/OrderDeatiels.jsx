@@ -37,8 +37,22 @@ const OrderDetails = () => {
 
 
   const printInvoice = () => {
+    // Store the current body content to restore later
+    const originalContent = document.body.innerHTML;
+  
+    // Select only the content you want to print
+    const printContent = document.getElementById("orderDetailsForPrint").innerHTML;
+  
+    // Set the content of the page to the order details
+    document.body.innerHTML = printContent;
+  
+    // Trigger the print dialog
     window.print();
+  
+    // Restore the original content after printing
+    document.body.innerHTML = originalContent;
   };
+  
 
   useEffect(() => {
     const fetchPickupId = async () => {
@@ -149,7 +163,6 @@ const OrderDetails = () => {
       toast.error("An error occurred while booking shipping.");
     }
   };
-  
 
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
@@ -220,7 +233,7 @@ const OrderDetails = () => {
   } = Orders;
 
   return (
-    <>
+    <div id="orderDetailsForPrint">
       <div className="bg-[#F9F9FB] w-full px-10 py-8">
         <div className="flex items-center gap-2">
           <img
@@ -241,24 +254,10 @@ const OrderDetails = () => {
                 </h2>
                 <p>{new Date(Orders?.createdAt).toLocaleString()}</p>
               </div>
+              
               <div className="flex items-center gap-2">
                
-                {/* <div className="flex items-center gap-2">
-    {order?.trackingId ? (
-      <p 
-      className={`bg-secondary-500 font-bold p-1 rounded border text-primary-500 mt-3 mb-2`}
-      >
-        Tracking ID: {order?.trackingId}</p>
-    ) : (
-      <Button
-        variant="primary"
-        className="bg-primary-500 text-white hover:bg-primary-dark-500"
-        onClick={handleShow}
-      >
-        Book Shipping
-      </Button>
-    )}
-  </div> */}
+              
 
 
 <div className="flex items-center gap-2">
@@ -282,13 +281,13 @@ const OrderDetails = () => {
 </div>
 
 
-                {/* <button
-                  className="borders rounded px-3 py-2  bg-primary flex items-center gap-2 text-white hover:bg-primary-dark"
+                <button
+                  className="borders rounded px-3 py-2  bg-primary-500 flex items-center gap-2 text-white hover:bg-primary-dark-500"
                   onClick={printInvoice}
                   style={{ color: "white" }}
                 >
                   <IoIosPrint className="text-white" /> Print Invoice
-                </button> */}
+                </button>
               </div>
             </div>
             <div className="text-end pt-2">
@@ -398,31 +397,30 @@ const OrderDetails = () => {
               <div className="mt-4">
                 <div className="flex justify-between border-t pt-2">
                   <span>Item price</span>
-                  <span>${totalAmount}</span>
+                  <span>PKR{totalAmount}</span>
                 </div>
-                <div className="flex justify-between">
+                {/* <div className="flex justify-between">
                   <span>Item Discount</span>
-                  <span>- $0.00</span>
-                </div>
+                  <span>- PKR0.00</span>
+                </div> */}
                 <div className="flex justify-between">
                   <span>Sub Total</span>
-                  <span>${totalAmount}</span>
+                  <span>PKR{totalAmount}</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Coupon discount</span>
-                  <span>- $0.00</span>
+                  <span>- PKR0.00</span>
                 </div>
-                <div className="flex justify-between">
+                {/* <div className="flex justify-between">
                   <span>VAT/TAX</span>
-                  {/* <span>${order.vatTax.toFixed(2)}</span> */}
-                </div>
+                </div> */}
                 <div className="flex justify-between">
                   <span>Delivery Fee</span>
                   {/* <span>${order.deliveryFee.toFixed(2)}</span> */}
                 </div>
                 <div className="flex justify-between font-bold border-t pt-2">
                   <span>Total</span>
-                  <span>${totalAmount}</span>
+                  <span>PKR{totalAmount}</span>
                 </div>
               </div>
             </div>
@@ -591,7 +589,7 @@ const OrderDetails = () => {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 
