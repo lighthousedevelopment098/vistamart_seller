@@ -18,6 +18,7 @@ import ForgotPassword from "./components/ForgetPassword/ForgetPassword.jsx";
 import ResetPassword from "./components/ForgetPassword/ResetPassword.jsx";
 import { ColorScheam } from "./utils/ColorScheam.js";
 import ForgotPasswordViaPhone from "./components/ForgetPassword/ForgotPasswordViaPhone.jsx";
+import { getAuthData } from "./utils/authHelper.js";
 
 const queryClient = new QueryClient();
 
@@ -36,14 +37,25 @@ function App() {
     initializeColors();
   }, []);
 
+  // useEffect(() => {
+  //   const token = localStorage.getItem("token");
+  //   if (token) {
+  //     setIsLoggedIn(true);
+  //     const storedUser = JSON.parse(localStorage.getItem("user"));
+  //     setUser(storedUser); // Set user data from local storage
+  //   }
+  //   setLoading(false);
+  // }, []);
+
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    // Check for authentication on mount
+   const { token , user} = getAuthData();
+   console.log("token ", token)
     if (token) {
-      setIsLoggedIn(true);
-      const storedUser = JSON.parse(localStorage.getItem("user"));
-      setUser(storedUser); // Set user data from local storage
+      setIsLoggedIn(true); // User is logged in
+      setUser(user); // Set user data from local storage
     }
-    setLoading(false);
+    setLoading(false); // Finished loading
   }, []);
 
   const handleLogout = () => {
