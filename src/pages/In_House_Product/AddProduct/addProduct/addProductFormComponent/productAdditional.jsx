@@ -69,6 +69,17 @@ const ProductAdditional = ({ formData = {}, handleChange }) => {
             required
           />
         </div>
+        <div className="flex flex-col">
+          <label>Weight (In Grams)</label>
+          <FormInput
+            type="number"
+            name="weight"
+            value={formData.weight}
+            onChange={handleChange}
+            placeholder="Weight (Grams)"
+            required
+          />
+        </div>
 
         {/* Minimum Order Quantity */}
         <div className="flex flex-col px-2">

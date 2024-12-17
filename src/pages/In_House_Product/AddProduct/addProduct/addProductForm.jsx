@@ -42,6 +42,7 @@ const AddNewProduct = () => {
 
 	const initialFormState = {
 		name: "",
+		weight: "",
 		description: "",
 		brand: "",
 		productType: "",
@@ -118,6 +119,7 @@ const AddNewProduct = () => {
 	const resetForm = () => {
 		setFormData({
 		  name: "",
+		  weight: "",
 		  category: "",
 		  subCategory: "",
 		  subSubCategory: "",

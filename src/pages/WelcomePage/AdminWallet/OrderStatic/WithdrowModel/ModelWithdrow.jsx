@@ -115,7 +115,7 @@ const ModelWithdrow = ({ onClose, withdrawableBalance }) => {
         <select
           value={cardType}
           onChange={(e) => setCardType(e.target.value)}
-          className="mt-1 block w-full px-3 py-2 rounded-md bg-white border-gray-400 shadow-sm focus:border-gray-300 focus:ring focus:ring-gray-200 focus:ring-opacity-50"
+          className="mt-1 border block w-full px-3 py-2 rounded-md bg-white border-gray-400 shadow-sm focus:border-gray-300 focus:ring focus:ring-gray-200 focus:ring-opacity-50"
         >
           <option value="JazzCash">JazzCash</option>
           <option value="Easypaisa">Easypaisa</option>
@@ -128,7 +128,7 @@ const ModelWithdrow = ({ onClose, withdrawableBalance }) => {
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="mt-1 block w-full px-3 py-2 rounded-md bg-white border-gray-400 shadow-sm focus:border-gray-300 focus:ring focus:ring-gray-200 focus:ring-opacity-50"
+          className="mt-1 block w-full px-3 py-2 border outline-none rounded-md bg-white border-gray-400 shadow-sm focus:border-gray-300 focus:ring focus:ring-gray-200 focus:ring-opacity-50"
           placeholder="John Doe"
         />
       </div>
@@ -138,7 +138,7 @@ const ModelWithdrow = ({ onClose, withdrawableBalance }) => {
           type="text"
           value={accountNumber}
           onChange={(e) => setAccountNumber(e.target.value)}
-          className="mt-1 block w-full px-3 py-2 rounded-md bg-white border-gray-400 shadow-sm focus:border-gray-300 focus:ring focus:ring-gray-200 focus:ring-opacity-50"
+          className="mt-1 border block w-full px-3 py-2 rounded-md outline-none bg-white border-gray-400 shadow-sm focus:border-gray-300 focus:ring focus:ring-gray-200 focus:ring-opacity-50"
           placeholder="123456789012"
         />
       </div>
@@ -148,7 +148,7 @@ const ModelWithdrow = ({ onClose, withdrawableBalance }) => {
           type="number"
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
-          className="mt-1 block w-full px-3 py-2 rounded-md bg-white border-gray-400 shadow-sm focus:border-gray-300 focus:ring focus:ring-gray-200 focus:ring-opacity-50"
+          className="mt-1 border block w-full px-3 py-2 outline-none rounded-md bg-white border-gray-400 shadow-sm focus:border-gray-300 focus:ring focus:ring-gray-200 focus:ring-opacity-50"
           placeholder="Enter amount"
         />
       </div>
