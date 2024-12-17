@@ -100,7 +100,7 @@ const AddNewProduct = () => {
 			...prev,
 			[name]: type === "checkbox" 
 				? checked 
-				: (["price", "discountAmount", "taxAmount", "discount"].includes(name) 
+				: (["price", "weight","discountAmount", "taxAmount", "discount"].includes(name) 
 					? parseInt(value, 10) || 0 
 					: value),
 		}));

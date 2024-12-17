@@ -188,7 +188,7 @@ const OrderDetails = () => {
       } else if (status === "delivered") {
         navigate("/deliveredorder");
       } else if (status === "canceled") {
-        navigate("/cancel");
+        navigate("/cancelledorder");
       } else if (status === "failed_to_deliver") {
         navigate("/failedorder");
       } else if (status === "returned") {

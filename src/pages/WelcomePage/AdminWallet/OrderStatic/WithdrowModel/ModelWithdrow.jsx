@@ -14,7 +14,7 @@ const ModelWithdrow = ({ onClose, withdrawableBalance }) => {
   const [amount, setAmount] = useState("");
   const navigate = useNavigate();
 
-  const MIN_WITHDRAWAL_AMOUNT = 500;
+  const MIN_WITHDRAWAL_AMOUNT = 0;
 
   const validateFields = () => {
     if (!name || !accountNumber || !amount) {
