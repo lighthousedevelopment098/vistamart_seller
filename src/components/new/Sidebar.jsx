@@ -5,7 +5,6 @@ import { IoCartSharp } from "react-icons/io5";
 import { LiaSignalSolid } from "react-icons/lia";
 import { MdForwardToInbox, MdHomeWork, MdOutlineDiamond, MdTrackChanges } from "react-icons/md";
 import { FaAngleDown, FaAngleUp, FaSearch, FaWallet } from "react-icons/fa";
-import { AiFillDatabase } from "react-icons/ai";
 
 import { BsBank2 } from "react-icons/bs";
 

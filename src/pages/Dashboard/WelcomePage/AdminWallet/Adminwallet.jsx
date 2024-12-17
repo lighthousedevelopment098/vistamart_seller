@@ -15,7 +15,7 @@ const Adminwallet = () => {
   // Fetching Admin wallet data
   const fetchAdminWallet = async () => {
     try {
-      const response = await axiosInstance.get(`${ApiUrl}/seller-wallets/?vendor=${id}`, {
+      const response = await axiosInstance.get(`${ApiUrl}/seller-wallets/vendor/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setWalletData(response.data.doc[0]); // Assuming only one document is returned
@@ -23,7 +23,6 @@ const Adminwallet = () => {
       console.error(ErrorMessage(error));
     }
   };
-
   useEffect(() => {
     fetchAdminWallet();
   }, []);

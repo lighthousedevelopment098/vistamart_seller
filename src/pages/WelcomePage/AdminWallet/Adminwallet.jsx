@@ -16,15 +16,14 @@ const Adminwallet = () => {
   // Fetch wallet data
   const fetchWalletData = async () => {
     try {
-      const response = await fetch(`${ApiUrl}/seller-wallets/?vendor=${id}`, {
+      console.log("id=====", id)
+      const response = await fetch(`${ApiUrl}/seller-wallets/vendor/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      console.log("response=====", response)
       if (!response.ok) throw new Error("Failed to fetch wallet data");
-      const data = await response.json();
-
-      if (data.status === "success" && data.results > 0) {
-        setWallet(data.doc[0]); // Set the fetched wallet data
+      const data = await response.json();      
+      if (data.status === "success") {
+        setWallet(data.doc); // Set the fetched wallet data
       } else {
         setWallet({
           withdrawableBalance: 0,

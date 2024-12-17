@@ -37,20 +37,9 @@ function App() {
     initializeColors();
   }, []);
 
-  // useEffect(() => {
-  //   const token = localStorage.getItem("token");
-  //   if (token) {
-  //     setIsLoggedIn(true);
-  //     const storedUser = JSON.parse(localStorage.getItem("user"));
-  //     setUser(storedUser); // Set user data from local storage
-  //   }
-  //   setLoading(false);
-  // }, []);
-
   useEffect(() => {
     // Check for authentication on mount
    const { token , user} = getAuthData();
-   console.log("token ", token)
     if (token) {
       setIsLoggedIn(true); // User is logged in
       setUser(user); // Set user data from local storage
@@ -99,7 +88,7 @@ function App() {
                     )}
                   </button>
                   <AllRoutes />
-                  {/* <Footer /> */}
+                  <Footer />
                 </main>
               </div>
             </>

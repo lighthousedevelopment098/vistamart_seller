@@ -70,6 +70,7 @@ import UpdateVendor from "./pages/Shop/UpdateVendor.jsx";
 import InhouseProductUpdate from "./pages/In_House_Product/AddProduct/updateProduct/InhouseProductUpdate.jsx";
 import AddPickupAddress from "./components/SonicShipping/AddPickupAddress.jsx";
 import TrackingOrder from "./pages/Order/TrackingOrder.jsx";
+import IndexMessage from "./pages/Inbox/Index.jsx";
 
 
 function AllRoutes() {
@@ -114,6 +115,10 @@ function AllRoutes() {
                   <Route
                     path="/inhouseproductlist"
                     element={<InHouseProductPage />}
+                  />
+                  <Route
+                    path="/indexmessage"
+                    element={<IndexMessage />}
                   />
                   <Route
                     path="/inhouseproductlistcode"
