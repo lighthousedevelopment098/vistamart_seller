@@ -260,12 +260,12 @@ const OrderDetails = () => {
               
 
 
-<div className="flex items-center gap-2">
-  {order?.trackingId ? (
+              <div className="flex items-center gap-2">
+  {order?.trackingId === 0 ? (
     <p 
       className="bg-secondary-500 font-bold p-1 rounded border text-primary-500 mt-3 mb-2"
     >
-      Tracking ID: {order?.trackingId}
+      tbook
     </p>
   ) : (
     order?.status === "packaging" && (
@@ -279,6 +279,8 @@ const OrderDetails = () => {
     )
   )}
 </div>
+
+
 
 
                 <button

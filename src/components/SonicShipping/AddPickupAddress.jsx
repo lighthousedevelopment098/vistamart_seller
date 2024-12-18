@@ -56,6 +56,85 @@ const AddPickupAddress = () => {
     return null;
   };
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   const validationError = validateForm();
+  //   if (validationError) {
+  //     toast.error(validationError);
+  //     return;
+  //   }
+
+  //   setLoading(true);
+
+  //   try {
+  //     // Add Pickup Address
+  //     const pickupResult = await axios.post(
+  //       "https://app.sonic.pk/api/pickup_address/add",
+  //       formData,
+  //       {
+  //         headers: { Authorization: import.meta.env.VITE_API_KEY },
+  //       }
+  //     );
+
+  //     const { status, message, id: pickingAddressId } = pickupResult.data;
+
+  //     // Handle response status
+  //     if (status === 1) {
+  //       toast.error(message); // Show error message from API
+  //       return;
+  //     }
+  //     console.log("city id", city_id)
+  //     // Prepare Shipping Data
+  //     const shippingData = {
+  //       vendorId: user?._id,
+  //       pickingAddressId,
+  //       shippingMethod: "Trax",
+  //       originCityId: city_id
+  //     };
+  //     console.log("city id====", city_id)
+
+  //     // Check Existing Shipping Info
+  //     const shippingExists = await axios.get(
+  //       `${apiConfig.seller}/shippingInfo?vendorId=${user._id}`,
+  //       { headers: { Authorization: `Bearer ${token}` } }
+  //     );
+
+  //     if (shippingExists.data.doc.length > 0) {
+  //       // Update existing shipping info
+  //       await axios.put(`${apiConfig.seller}/shippingInfo/`, shippingData, {
+  //         headers: { Authorization: `Bearer ${token}` },
+  //       });
+  //     } else {
+  //       // Create new shipping info
+  //       await axios.post(`${apiConfig.seller}/shippingInfo`, shippingData, {
+  //         headers: { Authorization: `Bearer ${token}` },
+  //       });
+  //     }
+
+  //     toast.success("Pickup address added and shipping info updated!");
+  //     setFormData({
+  //       person_of_contact: "",
+  //       phone_number: "",
+  //       email_address: "",
+  //       address: "",
+  //       city_id: "",
+  //     });
+  //       // Navigate to /packagingorder after success
+  //   setTimeout(() => {
+  //     navigate("/packagingorder");
+  //   }, 2000); 
+    
+  //   } catch (err) {
+  //     const errorMessage =
+  //       err.response?.data?.message || "Failed to complete the process.";
+  //     toast.error(errorMessage); // Show specific error from server
+  //     console.error("Error:", err.response || err.message);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const validationError = validateForm();
@@ -63,9 +142,9 @@ const AddPickupAddress = () => {
       toast.error(validationError);
       return;
     }
-
+  
     setLoading(true);
-
+  
     try {
       // Add Pickup Address
       const pickupResult = await axios.post(
@@ -75,28 +154,33 @@ const AddPickupAddress = () => {
           headers: { Authorization: import.meta.env.VITE_API_KEY },
         }
       );
-
+  
       const { status, message, id: pickingAddressId } = pickupResult.data;
-
+  
       // Handle response status
       if (status === 1) {
         toast.error(message); // Show error message from API
         return;
       }
-
+  
+      const { city_id } = formData; // Access city_id from formData
+      console.log("city id", city_id);
+  
       // Prepare Shipping Data
       const shippingData = {
         vendorId: user?._id,
         pickingAddressId,
         shippingMethod: "Trax",
+        originCityId: city_id,
       };
-
+      console.log("city id====", city_id);
+  
       // Check Existing Shipping Info
       const shippingExists = await axios.get(
         `${apiConfig.seller}/shippingInfo?vendorId=${user._id}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
-
+  
       if (shippingExists.data.doc.length > 0) {
         // Update existing shipping info
         await axios.put(`${apiConfig.seller}/shippingInfo/`, shippingData, {
@@ -108,7 +192,7 @@ const AddPickupAddress = () => {
           headers: { Authorization: `Bearer ${token}` },
         });
       }
-
+  
       toast.success("Pickup address added and shipping info updated!");
       setFormData({
         person_of_contact: "",
@@ -117,11 +201,11 @@ const AddPickupAddress = () => {
         address: "",
         city_id: "",
       });
-        // Navigate to /packagingorder after success
-    setTimeout(() => {
-      navigate("/packagingorder");
-    }, 2000); 
-    
+  
+      // Navigate to /packagingorder after success
+      setTimeout(() => {
+        navigate("/packagingorder");
+      }, 2000);
     } catch (err) {
       const errorMessage =
         err.response?.data?.message || "Failed to complete the process.";
@@ -131,7 +215,7 @@ const AddPickupAddress = () => {
       setLoading(false);
     }
   };
-
+  
   return (
    <>
      <ToastContainer />
