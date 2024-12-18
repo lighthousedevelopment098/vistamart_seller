@@ -74,7 +74,7 @@ const Withdraws = () => {
             </select>
 
             {/* Export Options */}
-            <div className="relative">
+            {/* <div className="relative">
               <button
                 onClick={toggleExportOptions}
                 className="flex items-center gap-2 border px-4 py-2 bg-gray-50 rounded hover:bg-gray-200"
@@ -94,7 +94,7 @@ const Withdraws = () => {
                   </div>
                 </div>
               )}
-            </div>
+            </div> */}
           </div>
         </div>
 
@@ -136,18 +136,24 @@ const Withdraws = () => {
                     </span>
                   </td>
                   {/* Transaction Receipt Image */}
-                  <td className="px-4 py-2">
-                    <img
-                      src={`${apiConfig.bucket}/${item.transactionReceiptImage}`}
-                      alt="Transaction Receipt"
-                      className="h-16 w-16 object-cover cursor-pointer mx-auto rounded"
-                      onClick={() =>
-                        setSelectedImage(
-                          `${apiConfig.bucket}/${item.transactionReceiptImage}`
-                        )
-                      }
-                    />
-                  </td>
+                  {/* Transaction Receipt Image */}
+<td className="px-4 py-2">
+  <img
+    src={
+      item.transactionReceiptImage
+        ? `${apiConfig.bucket}/${item.transactionReceiptImage}`
+        : '/image-place-holder.png'
+    }
+    alt="Transaction Receipt"
+    className="h-16 w-16 object-cover cursor-pointer mx-auto rounded"
+    onClick={() =>
+      setSelectedImage(
+        `${apiConfig.bucket}/${item.transactionReceiptImage}`
+      )
+    }
+  />
+</td>
+
                   <td className="px-4 py-2">{item.note}</td>
                 </tr>
               ))}
